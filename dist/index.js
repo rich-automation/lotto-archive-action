@@ -150562,7 +150562,10 @@ function run() {
             yield runPurchase(lottoService);
         }
         catch (e) {
-            coreExports.info(`GitHub Actions 실행에 실패했습니다. ${e}`);
+            if (e instanceof Error) {
+                coreExports.info(`GitHub Actions 실행에 실패했습니다. ${e}`);
+                coreExports.setFailed(e.message);
+            }
         }
     });
 }
@@ -150624,7 +150627,11 @@ function runPurchase(service) {
             yield createPurchaseIssue(date, issueBody);
         }
         catch (e) {
-            coreExports.info(`로또 구매에 실패했습니다. ${e}`);
+            yield service.destroy();
+            if (e instanceof Error) {
+                coreExports.info(`로또 구매에 실패했습니다. ${e}`);
+                coreExports.setFailed(e.message);
+            }
         }
     });
 }

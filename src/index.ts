@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { downloadBrowser } from 'puppeteer/internal/node/install.js';
 
@@ -22,7 +23,10 @@ async function run() {
     await runWinningCheck(lottoService);
     await runPurchase(lottoService);
   } catch (e) {
-    core.info(`GitHub Actions 실행에 실패했습니다. ${e}`);
+    if (e instanceof Error) {
+      core.info(`GitHub Actions 실행에 실패했습니다. ${e}`);
+      core.setFailed(e.message);
+    }
   }
 }
 async function runActionsEnvironments() {
@@ -87,7 +91,12 @@ async function runPurchase(service: LottoServiceInterface) {
     const issueBody = bodyBuilder({ date, round, numbers, link });
     await createPurchaseIssue(date, issueBody);
   } catch (e) {
-    core.info(`로또 구매에 실패했습니다. ${e}`);
+    await service.destroy();
+
+    if (e instanceof Error) {
+      core.info(`로또 구매에 실패했습니다. ${e}`);
+      core.setFailed(e.message);
+    }
   }
 }
 

@@ -1,5 +1,7 @@
 name: 'lotto-actions'
 description: 'GitHub Actions for lotto purchase'
+icon: 'dollar-sign'
+color: 'yellow'
 author: 'bang9<gusrn1423@naver.com>'
 inputs:
   id:

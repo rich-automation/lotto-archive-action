@@ -2,7 +2,7 @@
 
 이 액션은 깃허브 액션을 통해 한국의 로또 6/45 게임을 구매하기 위해 만들어졌습니다.
 
-## Usage
+## 사용방법
 
 이 액션을 사용하기 위해서는 아래의 사항들이 필요합니다.
 
@@ -24,20 +24,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: rich-automation/lotto-actions
+      - uses: rich-automation/lotto-actions@0.0.4
         with:
           id: ${{ secrets.ID }}
           pwd: ${{ secrets.PASSWORD }}
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-Replace version with the version of the action you want to use.
-
-Make sure to set the required secret CircleCI API token in the repository settings.
-
-## Inputs
-
-The action requires the following inputs:
+## 입력값
 
 | name     | description                                                             | required |
 | -------- | ----------------------------------------------------------------------- | -------- |
@@ -46,11 +40,23 @@ The action requires the following inputs:
 | `pwd`    | 동행복권 사이트의 비밀번호.                                             | Yes      |
 | `amount` | 구매할 게임의 수량 (최대 5게임).                                        | No       |
 
+## 설명
+
+1주일에 한번 해당 액션이 실행되도록 설정하면, 1주일마다 정해진 시간에 아래 동작을 순차적으로 실행합니다.
+
+- 이슈에 등록된 지난주에 구매한 게임의 당첨번호를 확인하고, 당첨되지 않으면 이슈를 닫습니다.
+- 당첨이 된 경우에는 저장소의 소유자를 코멘트에 멘션하여 당첨 사실을 알려주고, 당첨 등수 라벨을 달아줍니다.
+- 당첨 확인이 끝나면, 로또를 구매하고 저장소의 이슈에 등록합니다.
+
+### 주의사항
+
+- 인터넷 로또는 1주일에 최대 5게임까지 구매가 가능합니다.
+- 인터넷 로또는 구매 가능한 시간대가 정해져있습니다.
+  > 추첨일(토요일)에는 오후 8시에 판매 마감합니다. 추첨일 오후 8시부터 다음날(일요일) 오전 6시까지는 판매가 정지됩니다.
+- 레포는 Public/Private 모두 가능하지만, Public 의 경우 무료로 사용할 수 있습니다. Private 레포의 경우 일정량의 무료 사용량에서 차감됩니다.
+  > https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions
+
 ## 예제
-
-레포는 Public/Private 모두 가능하지만, Public 의 경우 무료로 사용할 수 있습니다. Private 레포의 경우 일정량의 무료 사용량에서 차감됩니다.
-
-- https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions
 
 다음의 저장소 설정을 참고하세요.
 

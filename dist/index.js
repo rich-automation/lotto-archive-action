@@ -9854,7 +9854,9 @@ const tryCreateLabel = ([description, name]) => __awaiter(void 0, void 0, void 0
     try {
         yield octokit().rest.issues.createLabel(Object.assign({ name, description }, context().repo));
     }
-    catch (_a) { }
+    catch (_a) {
+        // noop
+    }
 });
 
 ;// CONCATENATED MODULE: ./src/index.ts

@@ -41,5 +41,7 @@ export const initLabels = async () => {
 const tryCreateLabel = async ([description, name]: [string, string]) => {
   try {
     await octokit().rest.issues.createLabel({ name, description, ...context().repo });
-  } catch {}
+  } catch {
+    // noop
+  }
 };

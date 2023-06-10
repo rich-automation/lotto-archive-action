@@ -1,5 +1,4 @@
 import { context, octokit } from './github';
-import dayjs from 'dayjs';
 import { labels } from './constants';
 
 export const getOpenedIssues = async () => {
@@ -12,23 +11,44 @@ export const getOpenedIssues = async () => {
   return issues.data;
 };
 
-export const findLastPurchaseIssue = async () => {
+export const findWaitingIssues = async () => {
   const issues = await getOpenedIssues();
 
-  return issues
-    .filter(issue => {
-      console.log(issue.labels);
-
-      return true;
-    })
-    .at(0);
+  return issues.filter(issue => {
+    return issue.labels.some(label => {
+      if (typeof label !== 'string') {
+        return label.name === labels.waiting;
+      } else {
+        return label === labels.waiting;
+      }
+    });
+  });
 };
 
-export const createPurchaseIssue = async () => {
+export const markIssueAs = async (issueNumber: number, updatedLabels: string[]) => {
+  const shouldClosed = updatedLabels.length === 1 && updatedLabels[0] === labels.losing;
+
+  if (!shouldClosed) {
+    await octokit().rest.issues.createComment({
+      issue_number: issueNumber,
+      body: `@${context().repo.owner} ${updatedLabels.length}게임에 당첨됐습니다!`,
+      ...context().repo
+    });
+  }
+
+  return octokit().rest.issues.update({
+    ...context().repo,
+    state: shouldClosed ? 'closed' : 'open',
+    issue_number: issueNumber,
+    labels: updatedLabels
+  });
+};
+
+export const createPurchaseIssue = async (date: string, body: string) => {
   return octokit().rest.issues.create({
     labels: [labels.waiting],
-    title: `${dayjs().format('YYYY-MM-DD')}`,
-    body: 'date: 2023-06-10\n' + 'numbers: [[1,2,3,4,5,6], [1,2,3,4,5,6]]\n' + 'link: https://www.naver.com',
+    title: date,
+    body: body,
     ...context().repo
   });
 };
@@ -49,4 +69,12 @@ export const initLabels = async () => {
 
 const tryCreateLabel = async ([description, name]: [string, string]) => {
   return octokit().rest.issues.createLabel({ name, description, ...context().repo });
+};
+
+export const rankToLabel = (rank: number): string => {
+  return (
+    [labels.losing, labels.winning_1st, labels.winning_2nd, labels.winning_3rd, labels.winning_4th, labels.winning_5th][
+      rank
+    ] ?? labels.losing
+  );
 };

@@ -1,31 +1,87 @@
 import * as core from '@actions/core';
-import { createPurchaseIssue, findLastPurchaseIssue, initLabels } from './internal/issues';
+import { createPurchaseIssue, findWaitingIssues, initLabels, markIssueAs, rankToLabel } from './internal/issues';
+import { getCurrentLottoRound, LottoService } from '@rich-automation/lotto';
+import { inputKeys } from './internal/constants';
+import type { LottoServiceInterface } from '@rich-automation/lotto/lib/typescript/types';
+import { bodyBuilder, bodyParser } from './internal/bodyHandlers';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 async function run() {
-  // const id = core.getInput(inputKeys.lottoId);
-  // const pwd = core.getInput(inputKeys.lottoPassword);
-
-  // const lottoService = new LottoService({ headless: true });
-  // await lottoService.signIn(id, pwd);
-  // const numbers = await lottoService.purchase(5);
-
-  // 지난주에 구매한 이슈 확인 > 당첨여부 확인 후 이슈 업데이트 > 당첨금액 확인
-  // findLastPurchaseIssue
-
-  await initLabels();
-
-  const createdIssue = await createPurchaseIssue();
-  console.log('createdIssue:', JSON.stringify(createdIssue));
-
-  const lastIssue = await findLastPurchaseIssue();
-  console.log('lastIssue:', JSON.stringify(lastIssue));
-
   try {
-    // 구매 시도
-    // const numbers = await lottoService.purchase(5);
-    // 구매 성공하면 이슈 생성, 링크 포함
-    // const nextRound = getCurrentLottoRound() + 1;
-    // const link = lottoService.getCheckWinningLink(nextRound, numbers);
+    await runInitRepo();
+
+    const lottoService = await runActionsEnvironments();
+    await runWinningCheck(lottoService);
+
+    await runPurchase(lottoService);
+  } catch (e) {
+    core.info(`GitHub Actions 실행에 실패했습니다. ${e}`);
+  }
+}
+async function runActionsEnvironments() {
+  const id = core.getInput(inputKeys.lottoId);
+  const pwd = core.getInput(inputKeys.lottoPassword);
+
+  const lottoService = new LottoService({ headless: true });
+
+  if (id !== '' && pwd !== '') {
+    await lottoService.signIn(id, pwd);
+  }
+
+  return lottoService;
+}
+
+async function runInitRepo() {
+  await initLabels();
+}
+
+async function runWinningCheck(service: LottoServiceInterface) {
+  const waitingIssues = await findWaitingIssues();
+  if (waitingIssues.length > 0) {
+    core.info(`총 ${waitingIssues.length}개의 구매 내역에 대해서 당첨 발표를 확인합니다.`);
+
+    const promises = waitingIssues.map(async issue => {
+      if (issue.body) {
+        const { numbers, round } = bodyParser(issue.body);
+
+        const checkPromises = numbers.map(async number => {
+          const { rank } = await service.check(number, round);
+          return rank;
+        });
+        const ranks = await Promise.all(checkPromises);
+
+        const rankLabels = ranks.map(it => rankToLabel(it));
+        await markIssueAs(issue.number, rankLabels);
+      }
+    });
+
+    const result = await Promise.allSettled(promises);
+    const rejectedIssues = result.filter(it => it.status === 'rejected');
+    if (rejectedIssues.length > 0) {
+      core.info(`${rejectedIssues.length}개의 당첨 발표를 확인하는 중 오류가 발생했습니다.`);
+    }
+  } else {
+    core.info('당첨 발표를 확인 할 구매 내역이 없습니다.');
+  }
+}
+
+async function runPurchase(service: LottoServiceInterface) {
+  try {
+    const amountInput = Number(core.getInput(inputKeys.lottoPurchaseAmount)) || 5;
+    const amount = Math.max(1, Math.min(amountInput, 5));
+
+    const date = dayjs.tz(dayjs(), 'Asia/Seoul').format('YYYY-MM-DD');
+    const numbers = await service.purchase(amount);
+    const round = getCurrentLottoRound() + 1;
+    const link = service.getCheckWinningLink(round, numbers);
+
+    const issueBody = bodyBuilder({ date, round, numbers, link });
+    await createPurchaseIssue(date, issueBody);
   } catch (e) {
     core.info(`로또 구매에 실패했습니다. ${e}`);
   }

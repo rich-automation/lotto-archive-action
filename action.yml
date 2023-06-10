@@ -14,6 +14,10 @@ inputs:
     required: true
     description: 'Input github token'
     default: ''
+  amount:
+    required: false
+    description: 'Input amount of lotto game(max: 5)'
+    default: '5'
 runs:
   using: 'node16'
   main: 'dist/index.js'

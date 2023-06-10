@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "bang9 <gusrn1423@naver.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",

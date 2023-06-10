@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import { createPurchaseIssue, findLastPurchaseIssue } from './internal/issues';
+import { createPurchaseIssue, findLastPurchaseIssue, initLabels } from './internal/issues';
 
 async function run() {
   // const id = core.getInput(inputKeys.lottoId);
@@ -11,6 +11,8 @@ async function run() {
 
   // 지난주에 구매한 이슈 확인 > 당첨여부 확인 후 이슈 업데이트 > 당첨금액 확인
   // findLastPurchaseIssue
+
+  await initLabels();
 
   const createdIssue = await createPurchaseIssue();
   console.log('createdIssue:', JSON.stringify(createdIssue));

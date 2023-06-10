@@ -9771,6 +9771,32 @@ const inputKeys = {
     lottoPassword: 'pwd',
     githubToken: 'token'
 };
+const emojis = {
+    // waiting
+    hourglass: ':hourglass:',
+    // winning
+    tada: ':tada:',
+    confetti_ball: ':confetti_ball:',
+    medal_1st: ':1st_place_medal:',
+    medal_2nd: ':2nd_place_medal:',
+    medal_3rd: ':3rd_place_medal:',
+    one: ':one:',
+    two: ':two:',
+    three: ':three:',
+    four: ':four:',
+    five: ':five:',
+    // losing
+    skull: ':skull_and_crossbones:'
+};
+const labels = {
+    waiting: `${emojis.hourglass}`,
+    losing: `${emojis.skull}`,
+    winning_1st: `${emojis.confetti_ball} ${emojis.medal_1st}`,
+    winning_2nd: `${emojis.confetti_ball} ${emojis.medal_2nd}`,
+    winning_3rd: `${emojis.confetti_ball} ${emojis.medal_3rd}`,
+    winning_4th: `${emojis.tada} ${emojis.four}`,
+    winning_5th: `${emojis.tada} ${emojis.five}`
+};
 
 ;// CONCATENATED MODULE: ./src/internal/github.ts
 
@@ -9803,6 +9829,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 };
 
 
+
 const getOpenedIssues = () => __awaiter(void 0, void 0, void 0, function* () {
     const issues = yield octokit().rest.issues.listForRepo(Object.assign({ state: 'open', per_page: 100 }, context().repo));
     return issues.data;
@@ -9817,7 +9844,17 @@ const findLastPurchaseIssue = () => __awaiter(void 0, void 0, void 0, function* 
         .at(0);
 });
 const createPurchaseIssue = () => __awaiter(void 0, void 0, void 0, function* () {
-    return octokit().rest.issues.create(Object.assign({ labels: ['LABEL'], title: `${dayjs_min_default()().format('YYYY-MM-DD')}`, body: 'date: 2023-06-10\n' + 'numbers: [[1,2,3,4,5,6], [1,2,3,4,5,6]]\n' + 'link: https://www.naver.com' }, context().repo));
+    return octokit().rest.issues.create(Object.assign({ labels: [labels.waiting], title: `${dayjs_min_default()().format('YYYY-MM-DD')}`, body: 'date: 2023-06-10\n' + 'numbers: [[1,2,3,4,5,6], [1,2,3,4,5,6]]\n' + 'link: https://www.naver.com' }, context().repo));
+});
+const initLabels = () => __awaiter(void 0, void 0, void 0, function* () {
+    const promises = Object.entries(labels).map(tryCreateLabel);
+    yield Promise.all(promises);
+});
+const tryCreateLabel = ([description, name]) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield octokit().rest.issues.createLabel(Object.assign({ name, description }, context().repo));
+    }
+    catch (_a) { }
 });
 
 ;// CONCATENATED MODULE: ./src/index.ts
@@ -9841,6 +9878,7 @@ function run() {
         // const numbers = await lottoService.purchase(5);
         // 지난주에 구매한 이슈 확인 > 당첨여부 확인 후 이슈 업데이트 > 당첨금액 확인
         // findLastPurchaseIssue
+        yield initLabels();
         const createdIssue = yield createPurchaseIssue();
         console.log('createdIssue:', JSON.stringify(createdIssue));
         const lastIssue = yield findLastPurchaseIssue();

@@ -8,7 +8,14 @@
   "scripts": {
     "build": "yarn build:ts && yarn build:actions",
     "build:ts": "tsc",
-    "build:actions": "ncc build lib/index.js --source-map"
+    "build:actions": "ncc build lib/index.js --source-map",
+    "fix": "yarn fix:eslint && yarn fix:prettier",
+    "fix:eslint": "eslint --fix src --ext js,jsx,ts,tsx ",
+    "fix:prettier": "prettier --write \"src/**/*.{ts,tsx,js}\"",
+    "lint": "yarn lint:ts && yarn lint:eslint && yarn lint:prettier",
+    "lint:ts": "tsc --noEmit",
+    "lint:eslint": "eslint src --ext js,jsx,ts,tsx ",
+    "lint:prettier": "prettier --check \"src/**/*.{ts,tsx,js}\""
   },
   "dependencies": {
     "@actions/core": "^1.10.0",

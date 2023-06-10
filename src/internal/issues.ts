@@ -40,11 +40,11 @@ export const initLabels = async () => {
   if (allLabels.length !== labelInformation.length) {
     // Clear all labels
     await Promise.all(allLabels.map(it => octokit().rest.issues.deleteLabel({ name: it.name, ...context().repo })));
-  }
 
-  // Create labels
-  const promises = labelInformation.map(tryCreateLabel);
-  await Promise.allSettled(promises);
+    // Create labels
+    const promises = labelInformation.map(tryCreateLabel);
+    await Promise.allSettled(promises);
+  }
 };
 
 const tryCreateLabel = async ([description, name]: [string, string]) => {

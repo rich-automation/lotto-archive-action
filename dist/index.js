@@ -9852,10 +9852,10 @@ const initLabels = () => __awaiter(void 0, void 0, void 0, function* () {
     if (allLabels.length !== labelInformation.length) {
         // Clear all labels
         yield Promise.all(allLabels.map(it => octokit().rest.issues.deleteLabel(Object.assign({ name: it.name }, context().repo))));
+        // Create labels
+        const promises = labelInformation.map(tryCreateLabel);
+        yield Promise.allSettled(promises);
     }
-    // Create labels
-    const promises = labelInformation.map(tryCreateLabel);
-    yield Promise.allSettled(promises);
 });
 const tryCreateLabel = ([description, name]) => __awaiter(void 0, void 0, void 0, function* () {
     return octokit().rest.issues.createLabel(Object.assign({ name, description }, context().repo));

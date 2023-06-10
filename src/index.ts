@@ -59,7 +59,7 @@ async function runWinningCheck(service: LottoServiceInterface) {
         });
         const ranks = await Promise.all(checkPromises);
 
-        const rankLabels = ranks.map(it => rankToLabel(it));
+        const rankLabels = [...new Set(ranks.map(it => rankToLabel(it)))];
         await markIssueAs(issue.number, rankLabels);
       }
     });

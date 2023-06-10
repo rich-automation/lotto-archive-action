@@ -150596,7 +150596,7 @@ function runWinningCheck(service) {
                         return rank;
                     }));
                     const ranks = yield Promise.all(checkPromises);
-                    const rankLabels = ranks.map(it => rankToLabel(it));
+                    const rankLabels = [...new Set(ranks.map(it => rankToLabel(it)))];
                     yield markIssueAs(issue.number, rankLabels);
                 }
             }));

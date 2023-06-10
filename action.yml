@@ -1,0 +1,13 @@
+name: 'lotto-actions'
+description: 'GitHub Actions for lotto purchase'
+author: 'bang9<gusrn1423@naver.com>'
+inputs:
+  lotto_id:
+    required: true
+    description: 'Input dhlottery id'
+  lotto_pwd:
+    required: true
+    description: 'Input dhlottery password'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

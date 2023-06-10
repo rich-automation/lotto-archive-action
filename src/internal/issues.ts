@@ -28,19 +28,22 @@ export const findWaitingIssues = async () => {
 export const markIssueAs = async (issueNumber: number, updatedLabels: string[]) => {
   const shouldClosed = updatedLabels.length === 1 && updatedLabels[0] === labels.losing;
 
+  const nextState = shouldClosed ? 'closed' : 'open';
+  const nextLabels = shouldClosed ? updatedLabels : updatedLabels.filter(it => it !== labels.losing);
+
   if (!shouldClosed) {
     await octokit().rest.issues.createComment({
       issue_number: issueNumber,
-      body: `@${context().repo.owner} ${updatedLabels.length}게임에 당첨됐습니다!`,
+      body: `@${context().repo.owner} ${nextLabels.length}게임에 당첨됐습니다!`,
       ...context().repo
     });
   }
 
   return octokit().rest.issues.update({
     ...context().repo,
-    state: shouldClosed ? 'closed' : 'open',
+    state: nextState,
     issue_number: issueNumber,
-    labels: shouldClosed ? updatedLabels : updatedLabels.filter(it => it !== labels.losing)
+    labels: nextLabels
   });
 };
 

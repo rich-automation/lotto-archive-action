@@ -87809,10 +87809,12 @@ const findWaitingIssues = () => __awaiter$7(void 0, void 0, void 0, function* ()
 });
 const markIssueAs = (issueNumber, updatedLabels) => __awaiter$7(void 0, void 0, void 0, function* () {
     const shouldClosed = updatedLabels.length === 1 && updatedLabels[0] === labels.losing;
+    const nextState = shouldClosed ? 'closed' : 'open';
+    const nextLabels = shouldClosed ? updatedLabels : updatedLabels.filter(it => it !== labels.losing);
     if (!shouldClosed) {
-        yield octokit().rest.issues.createComment(Object.assign({ issue_number: issueNumber, body: `@${context().repo.owner} ${updatedLabels.length}게임에 당첨됐습니다!` }, context().repo));
+        yield octokit().rest.issues.createComment(Object.assign({ issue_number: issueNumber, body: `@${context().repo.owner} ${nextLabels.length}게임에 당첨됐습니다!` }, context().repo));
     }
-    return octokit().rest.issues.update(Object.assign(Object.assign({}, context().repo), { state: shouldClosed ? 'closed' : 'open', issue_number: issueNumber, labels: shouldClosed ? updatedLabels : updatedLabels.filter(it => it !== labels.losing) }));
+    return octokit().rest.issues.update(Object.assign(Object.assign({}, context().repo), { state: nextState, issue_number: issueNumber, labels: nextLabels }));
 });
 const createPurchaseIssue = (date, body) => __awaiter$7(void 0, void 0, void 0, function* () {
     return octokit().rest.issues.create(Object.assign({ labels: [labels.waiting], title: date, body: body }, context().repo));

@@ -9731,9 +9731,9 @@ var core = __nccwpck_require__(2186);
 var github = __nccwpck_require__(5438);
 ;// CONCATENATED MODULE: ./src/internal/constants.ts
 const inputKeys = {
-    lottoId: 'lotto_id',
-    lottoPassword: 'lotto_pwd',
-    githubToken: 'github_token'
+    lottoId: 'id',
+    lottoPassword: 'pwd',
+    githubToken: 'token'
 };
 
 ;// CONCATENATED MODULE: ./src/internal/github.ts

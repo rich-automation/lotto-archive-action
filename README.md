@@ -1,4 +1,4 @@
-# lotto-actions
+# lotto-action
 
 이 액션은 깃허브 액션을 통해 한국의 로또 6/45 게임을 구매하기 위해 만들어졌습니다.
 
@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: rich-automation/lotto-actions@0.0.4
+      - uses: rich-automation/lotto-action@0.0.5
         with:
           id: ${{ secrets.ID }}
           pwd: ${{ secrets.PASSWORD }}

@@ -1,5 +1,5 @@
-name: 'lotto-actions'
-description: 'GitHub Actions for lotto purchase'
+name: 'lotto-action'
+description: 'GitHub Action for lotto purchase'
 branding:
   icon: 'dollar-sign'
   color: 'yellow'

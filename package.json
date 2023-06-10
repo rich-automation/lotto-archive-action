@@ -6,9 +6,7 @@
   "author": "bang9 <gusrn1423@naver.com>",
   "license": "MIT",
   "scripts": {
-    "build": "yarn build:ts && yarn build:actions",
-    "build:ts": "tsc",
-    "build:actions": "ncc build lib/index.js --source-map",
+    "build": "ncc build src/index.ts --source-map --license licenses.txt",
     "fix": "yarn fix:eslint && yarn fix:prettier",
     "fix:eslint": "eslint --fix src --ext js,jsx,ts,tsx ",
     "fix:prettier": "prettier --write \"src/**/*.{ts,tsx,js}\"",

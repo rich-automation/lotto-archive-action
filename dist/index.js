@@ -25,6 +25,27 @@ var readline = require('readline');
 require('process');
 var require$$1$4 = require('module');
 
+function _interopNamespaceDefault(e) {
+    var n = Object.create(null);
+    if (e) {
+        Object.keys(e).forEach(function (k) {
+            if (k !== 'default') {
+                var d = Object.getOwnPropertyDescriptor(e, k);
+                Object.defineProperty(n, k, d.get ? d : {
+                    enumerable: true,
+                    get: function () { return e[k]; }
+                });
+            }
+        });
+    }
+    n.default = e;
+    return Object.freeze(n);
+}
+
+var path__namespace = /*#__PURE__*/_interopNamespaceDefault(path$5);
+var http__namespace = /*#__PURE__*/_interopNamespaceDefault(http$4);
+var https__namespace = /*#__PURE__*/_interopNamespaceDefault(https$4);
+
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -88748,7 +88769,7 @@ let JSHandle$1 = class JSHandle {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$J = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$K = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -89023,9 +89044,9 @@ let ElementHandle$1 = class ElementHandle extends JSHandle$1 {
     async isIntersectingViewport(options) {
         await this.assertConnectedElement();
         const { threshold = 0 } = options !== null && options !== void 0 ? options : {};
-        const svgHandle = await __classPrivateFieldGet$J(this, _ElementHandle_instances, "m", _ElementHandle_asSVGElementHandle).call(this, this);
+        const svgHandle = await __classPrivateFieldGet$K(this, _ElementHandle_instances, "m", _ElementHandle_asSVGElementHandle).call(this, this);
         const intersectionTarget = svgHandle
-            ? await __classPrivateFieldGet$J(this, _ElementHandle_instances, "m", _ElementHandle_getOwnerSVGElement).call(this, svgHandle)
+            ? await __classPrivateFieldGet$K(this, _ElementHandle_instances, "m", _ElementHandle_getOwnerSVGElement).call(this, svgHandle)
             : this;
         try {
             return await intersectionTarget.evaluate(async (element, threshold) => {
@@ -89200,13 +89221,13 @@ const interpolateFunction = (fn, replacements) => {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$F = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$G = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$I = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$J = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -89262,24 +89283,24 @@ class ProtocolError extends CustomError {
         _ProtocolError_originalMessage.set(this, '');
     }
     set code(code) {
-        __classPrivateFieldSet$F(this, _ProtocolError_code, code, "f");
+        __classPrivateFieldSet$G(this, _ProtocolError_code, code, "f");
     }
     /**
      * @readonly
      * @public
      */
     get code() {
-        return __classPrivateFieldGet$I(this, _ProtocolError_code, "f");
+        return __classPrivateFieldGet$J(this, _ProtocolError_code, "f");
     }
     set originalMessage(originalMessage) {
-        __classPrivateFieldSet$F(this, _ProtocolError_originalMessage, originalMessage, "f");
+        __classPrivateFieldSet$G(this, _ProtocolError_originalMessage, originalMessage, "f");
     }
     /**
      * @readonly
      * @public
      */
     get originalMessage() {
-        return __classPrivateFieldGet$I(this, _ProtocolError_originalMessage, "f");
+        return __classPrivateFieldGet$J(this, _ProtocolError_originalMessage, "f");
     }
 }
 _ProtocolError_code = new WeakMap(), _ProtocolError_originalMessage = new WeakMap();
@@ -89395,13 +89416,13 @@ const PUPPETEER_WORLD = Symbol('puppeteerWorld');
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$E = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$F = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$H = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$I = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -89413,10 +89434,10 @@ var _LazyArg_get;
 class LazyArg {
     constructor(get) {
         _LazyArg_get.set(this, void 0);
-        __classPrivateFieldSet$E(this, _LazyArg_get, get, "f");
+        __classPrivateFieldSet$F(this, _LazyArg_get, get, "f");
     }
     async get(context) {
-        return __classPrivateFieldGet$H(this, _LazyArg_get, "f").call(this, context);
+        return __classPrivateFieldGet$I(this, _LazyArg_get, "f").call(this, context);
     }
 }
 _LazyArg_get = new WeakMap();
@@ -89659,12 +89680,12 @@ ARIAQueryHandler.queryOne = async (element, selector) => {
  */
 const source = "\"use strict\";var C=Object.defineProperty;var ne=Object.getOwnPropertyDescriptor;var oe=Object.getOwnPropertyNames;var se=Object.prototype.hasOwnProperty;var u=(e,t)=>{for(var n in t)C(e,n,{get:t[n],enumerable:!0})},ie=(e,t,n,r)=>{if(t&&typeof t==\"object\"||typeof t==\"function\")for(let o of oe(t))!se.call(e,o)&&o!==n&&C(e,o,{get:()=>t[o],enumerable:!(r=ne(t,o))||r.enumerable});return e};var le=e=>ie(C({},\"__esModule\",{value:!0}),e);var Oe={};u(Oe,{default:()=>Re});module.exports=le(Oe);var P=class extends Error{constructor(t){super(t),this.name=this.constructor.name,Error.captureStackTrace(this,this.constructor)}},S=class extends P{};var I=class extends P{#e;#r=\"\";set code(t){this.#e=t}get code(){return this.#e}set originalMessage(t){this.#r=t}get originalMessage(){return this.#r}},De=Object.freeze({TimeoutError:S,ProtocolError:I});function p(e){let t=!1,n=!1,r,o,i=new Promise((l,a)=>{r=l,o=a}),s=e&&e.timeout>0?setTimeout(()=>{n=!0,o(new S(e.message))},e.timeout):void 0;return Object.assign(i,{resolved:()=>t,finished:()=>t||n,resolve:l=>{s&&clearTimeout(s),t=!0,r(l)},reject:l=>{clearTimeout(s),n=!0,o(l)}})}var G=new Map,X=e=>{let t=G.get(e);return t||(t=new Function(`return ${e}`)(),G.set(e,t),t)};var R={};u(R,{ariaQuerySelector:()=>ae,ariaQuerySelectorAll:()=>k});var ae=(e,t)=>window.__ariaQuerySelector(e,t),k=async function*(e,t){yield*await window.__ariaQuerySelectorAll(e,t)};var D={};u(D,{customQuerySelectors:()=>_});var O=class{#e=new Map;register(t,n){if(!n.queryOne&&n.queryAll){let r=n.queryAll;n.queryOne=(o,i)=>{for(let s of r(o,i))return s;return null}}else if(n.queryOne&&!n.queryAll){let r=n.queryOne;n.queryAll=(o,i)=>{let s=r(o,i);return s?[s]:[]}}else if(!n.queryOne||!n.queryAll)throw new Error(\"At least one query method must be defined.\");this.#e.set(t,{querySelector:n.queryOne,querySelectorAll:n.queryAll})}unregister(t){this.#e.delete(t)}get(t){return this.#e.get(t)}clear(){this.#e.clear()}},_=new O;var M={};u(M,{pierceQuerySelector:()=>ce,pierceQuerySelectorAll:()=>ue});var ce=(e,t)=>{let n=null,r=o=>{let i=document.createTreeWalker(o,NodeFilter.SHOW_ELEMENT);do{let s=i.currentNode;s.shadowRoot&&r(s.shadowRoot),!(s instanceof ShadowRoot)&&s!==o&&!n&&s.matches(t)&&(n=s)}while(!n&&i.nextNode())};return e instanceof Document&&(e=e.documentElement),r(e),n},ue=(e,t)=>{let n=[],r=o=>{let i=document.createTreeWalker(o,NodeFilter.SHOW_ELEMENT);do{let s=i.currentNode;s.shadowRoot&&r(s.shadowRoot),!(s instanceof ShadowRoot)&&s!==o&&s.matches(t)&&n.push(s)}while(i.nextNode())};return e instanceof Document&&(e=e.documentElement),r(e),n};var m=(e,t)=>{if(!e)throw new Error(t)};var T=class{#e;#r;#n;#t;constructor(t,n){this.#e=t,this.#r=n}async start(){let t=this.#t=p(),n=await this.#e();if(n){t.resolve(n);return}this.#n=new MutationObserver(async()=>{let r=await this.#e();r&&(t.resolve(r),await this.stop())}),this.#n.observe(this.#r,{childList:!0,subtree:!0,attributes:!0})}async stop(){m(this.#t,\"Polling never started.\"),this.#t.finished()||this.#t.reject(new Error(\"Polling stopped\")),this.#n&&(this.#n.disconnect(),this.#n=void 0)}result(){return m(this.#t,\"Polling never started.\"),this.#t}},x=class{#e;#r;constructor(t){this.#e=t}async start(){let t=this.#r=p(),n=await this.#e();if(n){t.resolve(n);return}let r=async()=>{if(t.finished())return;let o=await this.#e();if(!o){window.requestAnimationFrame(r);return}t.resolve(o),await this.stop()};window.requestAnimationFrame(r)}async stop(){m(this.#r,\"Polling never started.\"),this.#r.finished()||this.#r.reject(new Error(\"Polling stopped\"))}result(){return m(this.#r,\"Polling never started.\"),this.#r}},E=class{#e;#r;#n;#t;constructor(t,n){this.#e=t,this.#r=n}async start(){let t=this.#t=p(),n=await this.#e();if(n){t.resolve(n);return}this.#n=setInterval(async()=>{let r=await this.#e();r&&(t.resolve(r),await this.stop())},this.#r)}async stop(){m(this.#t,\"Polling never started.\"),this.#t.finished()||this.#t.reject(new Error(\"Polling stopped\")),this.#n&&(clearInterval(this.#n),this.#n=void 0)}result(){return m(this.#t,\"Polling never started.\"),this.#t}};var H={};u(H,{pQuerySelector:()=>Ie,pQuerySelectorAll:()=>re});var c=class{static async*map(t,n){for await(let r of t)yield await n(r)}static async*flatMap(t,n){for await(let r of t)yield*n(r)}static async collect(t){let n=[];for await(let r of t)n.push(r);return n}static async first(t){for await(let n of t)return n}};var h={attribute:/\\[\\s*(?:(?<namespace>\\*|[-\\w\\P{ASCII}]*)\\|)?(?<name>[-\\w\\P{ASCII}]+)\\s*(?:(?<operator>\\W?=)\\s*(?<value>.+?)\\s*(\\s(?<caseSensitive>[iIsS]))?\\s*)?\\]/gu,id:/#(?<name>[-\\w\\P{ASCII}]+)/gu,class:/\\.(?<name>[-\\w\\P{ASCII}]+)/gu,comma:/\\s*,\\s*/g,combinator:/\\s*[\\s>+~]\\s*/g,\"pseudo-element\":/::(?<name>[-\\w\\P{ASCII}]+)(?:\\((?<argument>¶+)\\))?/gu,\"pseudo-class\":/:(?<name>[-\\w\\P{ASCII}]+)(?:\\((?<argument>¶+)\\))?/gu,universal:/(?:(?<namespace>\\*|[-\\w\\P{ASCII}]*)\\|)?\\*/gu,type:/(?:(?<namespace>\\*|[-\\w\\P{ASCII}]*)\\|)?(?<name>[-\\w\\P{ASCII}]+)/gu},fe=new Set([\"combinator\",\"comma\"]);var me=e=>{switch(e){case\"pseudo-element\":case\"pseudo-class\":return new RegExp(h[e].source.replace(\"(?<argument>\\xB6+)\",\"(?<argument>.+)\"),\"gu\");default:return h[e]}};function de(e,t){let n=0,r=\"\";for(;t<e.length;t++){let o=e[t];switch(o){case\"(\":++n;break;case\")\":--n;break}if(r+=o,n===0)return r}return r}function pe(e,t=h){if(!e)return[];let n=[e];for(let[o,i]of Object.entries(t))for(let s=0;s<n.length;s++){let l=n[s];if(typeof l!=\"string\")continue;i.lastIndex=0;let a=i.exec(l);if(!a)continue;let d=a.index-1,f=[],V=a[0],B=l.slice(0,d+1);B&&f.push(B),f.push({...a.groups,type:o,content:V});let z=l.slice(d+V.length+1);z&&f.push(z),n.splice(s,1,...f)}let r=0;for(let o of n)switch(typeof o){case\"string\":throw new Error(`Unexpected sequence ${o} found at index ${r}`);case\"object\":r+=o.content.length,o.pos=[r-o.content.length,r],fe.has(o.type)&&(o.content=o.content.trim()||\" \");break}return n}var he=/(['\"])([^\\\\\\n]+?)\\1/g,ge=/\\\\./g;function K(e,t=h){if(e=e.trim(),e===\"\")return[];let n=[];e=e.replace(ge,(i,s)=>(n.push({value:i,offset:s}),\"\\uE000\".repeat(i.length))),e=e.replace(he,(i,s,l,a)=>(n.push({value:i,offset:a}),`${s}${\"\\uE001\".repeat(l.length)}${s}`));{let i=0,s;for(;(s=e.indexOf(\"(\",i))>-1;){let l=de(e,s);n.push({value:l,offset:s}),e=`${e.substring(0,s)}(${\"\\xB6\".repeat(l.length-2)})${e.substring(s+l.length)}`,i=s+l.length}}let r=pe(e,t),o=new Set;for(let i of n.reverse())for(let s of r){let{offset:l,value:a}=i;if(!(s.pos[0]<=l&&l+a.length<=s.pos[1]))continue;let{content:d}=s,f=l-s.pos[0];s.content=d.slice(0,f)+a+d.slice(f+a.length),s.content!==d&&o.add(s)}for(let i of o){let s=me(i.type);if(!s)throw new Error(`Unknown token type: ${i.type}`);s.lastIndex=0;let l=s.exec(i.content);if(!l)throw new Error(`Unable to parse content for ${i.type}: ${i.content}`);Object.assign(i,l.groups)}return r}function*N(e,t){switch(e.type){case\"list\":for(let n of e.list)yield*N(n,e);break;case\"complex\":yield*N(e.left,e),yield*N(e.right,e);break;case\"compound\":yield*e.list.map(n=>[n,e]);break;default:yield[e,t]}}function g(e){let t;return Array.isArray(e)?t=e:t=[...N(e)].map(([n])=>n),t.map(n=>n.content).join(\"\")}h.combinator=/\\s*(>>>>?|[\\s>+~])\\s*/g;var ye=/\\\\[\\s\\S]/g,we=e=>{if(e.length>1){for(let t of['\"',\"'\"])if(!(!e.startsWith(t)||!e.endsWith(t)))return e.slice(t.length,-t.length).replace(ye,n=>n.slice(1))}return e};function Y(e){let t=!0,n=K(e);if(n.length===0)return[[],t];let r=[],o=[r],i=[o],s=[];for(let l of n){switch(l.type){case\"combinator\":switch(l.content){case\">>>\":t=!1,s.length&&(r.push(g(s)),s.splice(0)),r=[],o.push(\">>>\"),o.push(r);continue;case\">>>>\":t=!1,s.length&&(r.push(g(s)),s.splice(0)),r=[],o.push(\">>>>\"),o.push(r);continue}break;case\"pseudo-element\":if(!l.name.startsWith(\"-p-\"))break;t=!1,s.length&&(r.push(g(s)),s.splice(0)),r.push({name:l.name.slice(3),value:we(l.argument??\"\")});continue;case\"comma\":s.length&&(r.push(g(s)),s.splice(0)),r=[],o=[r],i.push(o);continue}s.push(l)}return s.length&&r.push(g(s)),[i,t]}var Q={};u(Q,{textQuerySelectorAll:()=>b});var Se=new Set([\"checkbox\",\"image\",\"radio\"]),be=e=>e instanceof HTMLSelectElement||e instanceof HTMLTextAreaElement||e instanceof HTMLInputElement&&!Se.has(e.type),Pe=new Set([\"SCRIPT\",\"STYLE\"]),w=e=>!Pe.has(e.nodeName)&&!document.head?.contains(e),q=new WeakMap,Z=e=>{for(;e;)q.delete(e),e instanceof ShadowRoot?e=e.host:e=e.parentNode},J=new WeakSet,Te=new MutationObserver(e=>{for(let t of e)Z(t.target)}),y=e=>{let t=q.get(e);if(t||(t={full:\"\",immediate:[]},!w(e)))return t;let n=\"\";if(be(e))t.full=e.value,t.immediate.push(e.value),e.addEventListener(\"input\",r=>{Z(r.target)},{once:!0,capture:!0});else{for(let r=e.firstChild;r;r=r.nextSibling){if(r.nodeType===Node.TEXT_NODE){t.full+=r.nodeValue??\"\",n+=r.nodeValue??\"\";continue}n&&t.immediate.push(n),n=\"\",r.nodeType===Node.ELEMENT_NODE&&(t.full+=y(r).full)}n&&t.immediate.push(n),e instanceof Element&&e.shadowRoot&&(t.full+=y(e.shadowRoot).full),J.has(e)||(Te.observe(e,{childList:!0,characterData:!0}),J.add(e))}return q.set(e,t),t};var b=function*(e,t){let n=!1;for(let r of e.childNodes)if(r instanceof Element&&w(r)){let o;r.shadowRoot?o=b(r.shadowRoot,t):o=b(r,t);for(let i of o)yield i,n=!0}n||e instanceof Element&&w(e)&&y(e).full.includes(t)&&(yield e)};var $={};u($,{checkVisibility:()=>Ee,pierce:()=>A,pierceAll:()=>L});var xe=[\"hidden\",\"collapse\"],Ee=(e,t)=>{if(!e)return t===!1;if(t===void 0)return e;let n=e.nodeType===Node.TEXT_NODE?e.parentElement:e,r=window.getComputedStyle(n),o=r&&!xe.includes(r.visibility)&&!Ne(n);return t===o?e:!1};function Ne(e){let t=e.getBoundingClientRect();return t.width===0||t.height===0}var Ae=e=>\"shadowRoot\"in e&&e.shadowRoot instanceof ShadowRoot;function*A(e){Ae(e)?yield e.shadowRoot:yield e}function*L(e){e=A(e).next().value,yield e;let t=[document.createTreeWalker(e,NodeFilter.SHOW_ELEMENT)];for(let n of t){let r;for(;r=n.nextNode();)r.shadowRoot&&(yield r.shadowRoot,t.push(document.createTreeWalker(r.shadowRoot,NodeFilter.SHOW_ELEMENT)))}}var U={};u(U,{xpathQuerySelectorAll:()=>j});var j=function*(e,t){let r=(e.ownerDocument||document).evaluate(t,e,null,XPathResult.ORDERED_NODE_ITERATOR_TYPE),o;for(;o=r.iterateNext();)yield o};var ve=/[-\\w\\P{ASCII}*]/,ee=e=>\"querySelectorAll\"in e,v=class extends Error{constructor(t,n){super(`${t} is not a valid selector: ${n}`)}},F=class{#e;#r;#n=[];#t=void 0;elements;constructor(t,n,r){this.elements=[t],this.#e=n,this.#r=r,this.#o()}async run(){if(typeof this.#t==\"string\")switch(this.#t.trimStart()){case\":scope\":this.#o();break}for(;this.#t!==void 0;this.#o()){let t=this.#t,n=this.#e;typeof t==\"string\"?t[0]&&ve.test(t[0])?this.elements=c.flatMap(this.elements,async function*(r){ee(r)&&(yield*r.querySelectorAll(t))}):this.elements=c.flatMap(this.elements,async function*(r){if(!r.parentElement){if(!ee(r))return;yield*r.querySelectorAll(t);return}let o=0;for(let i of r.parentElement.children)if(++o,i===r)break;yield*r.parentElement.querySelectorAll(`:scope>:nth-child(${o})${t}`)}):this.elements=c.flatMap(this.elements,async function*(r){switch(t.name){case\"text\":yield*b(r,t.value);break;case\"xpath\":yield*j(r,t.value);break;case\"aria\":yield*k(r,t.value);break;default:let o=_.get(t.name);if(!o)throw new v(n,`Unknown selector type: ${t.name}`);yield*o.querySelectorAll(r,t.value)}})}}#o(){if(this.#n.length!==0){this.#t=this.#n.shift();return}if(this.#r.length===0){this.#t=void 0;return}let t=this.#r.shift();switch(t){case\">>>>\":{this.elements=c.flatMap(this.elements,A),this.#o();break}case\">>>\":{this.elements=c.flatMap(this.elements,L),this.#o();break}default:this.#n=t,this.#o();break}}},W=class{#e=new WeakMap;calculate(t,n=[]){if(t===null)return n;t instanceof ShadowRoot&&(t=t.host);let r=this.#e.get(t);if(r)return[...r,...n];let o=0;for(let s=t.previousSibling;s;s=s.previousSibling)++o;let i=this.calculate(t.parentNode,[o]);return this.#e.set(t,i),[...i,...n]}},te=(e,t)=>{if(e.length+t.length===0)return 0;let[n=-1,...r]=e,[o=-1,...i]=t;return n===o?te(r,i):n<o?-1:1},Ce=async function*(e){let t=new Set;for await(let r of e)t.add(r);let n=new W;yield*[...t.values()].map(r=>[r,n.calculate(r)]).sort(([,r],[,o])=>te(r,o)).map(([r])=>r)},re=function(e,t){let n,r;try{[n,r]=Y(t)}catch{return e.querySelectorAll(t)}if(r)return e.querySelectorAll(t);if(n.some(o=>{let i=0;return o.some(s=>(typeof s==\"string\"?++i:i=0,i>1))}))throw new v(t,\"Multiple deep combinators found in sequence.\");return Ce(c.flatMap(n,o=>{let i=new F(e,t,o);return i.run(),i.elements}))},Ie=async function(e,t){for await(let n of re(e,t))return n;return null};var ke=Object.freeze({...R,...D,...M,...H,...Q,...$,...U,createDeferredPromise:p,createFunction:X,createTextContent:y,IntervalPoller:E,isSuitableNodeForTextMatching:w,MutationPoller:T,RAFPoller:x}),Re=ke;\n";
 
-var __classPrivateFieldGet$G = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$H = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$D = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$E = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -89679,30 +89700,30 @@ class ScriptInjector {
     }
     // Appends a statement of the form `(PuppeteerUtil) => {...}`.
     append(statement) {
-        __classPrivateFieldGet$G(this, _ScriptInjector_instances, "m", _ScriptInjector_update).call(this, () => {
-            __classPrivateFieldGet$G(this, _ScriptInjector_amendments, "f").add(statement);
+        __classPrivateFieldGet$H(this, _ScriptInjector_instances, "m", _ScriptInjector_update).call(this, () => {
+            __classPrivateFieldGet$H(this, _ScriptInjector_amendments, "f").add(statement);
         });
     }
     pop(statement) {
-        __classPrivateFieldGet$G(this, _ScriptInjector_instances, "m", _ScriptInjector_update).call(this, () => {
-            __classPrivateFieldGet$G(this, _ScriptInjector_amendments, "f").delete(statement);
+        __classPrivateFieldGet$H(this, _ScriptInjector_instances, "m", _ScriptInjector_update).call(this, () => {
+            __classPrivateFieldGet$H(this, _ScriptInjector_amendments, "f").delete(statement);
         });
     }
     inject(inject, force = false) {
-        if (__classPrivateFieldGet$G(this, _ScriptInjector_updated, "f") || force) {
-            inject(__classPrivateFieldGet$G(this, _ScriptInjector_instances, "m", _ScriptInjector_get).call(this));
+        if (__classPrivateFieldGet$H(this, _ScriptInjector_updated, "f") || force) {
+            inject(__classPrivateFieldGet$H(this, _ScriptInjector_instances, "m", _ScriptInjector_get).call(this));
         }
-        __classPrivateFieldSet$D(this, _ScriptInjector_updated, false, "f");
+        __classPrivateFieldSet$E(this, _ScriptInjector_updated, false, "f");
     }
 }
 _ScriptInjector_updated = new WeakMap(), _ScriptInjector_amendments = new WeakMap(), _ScriptInjector_instances = new WeakSet(), _ScriptInjector_update = function _ScriptInjector_update(callback) {
     callback();
-    __classPrivateFieldSet$D(this, _ScriptInjector_updated, true, "f");
+    __classPrivateFieldSet$E(this, _ScriptInjector_updated, true, "f");
 }, _ScriptInjector_get = function _ScriptInjector_get() {
     return `(() => {
       const module = {};
       ${source}
-      ${[...__classPrivateFieldGet$G(this, _ScriptInjector_amendments, "f")]
+      ${[...__classPrivateFieldGet$H(this, _ScriptInjector_amendments, "f")]
         .map(statement => {
         return `(${statement})(module.exports.default);`;
     })
@@ -89730,7 +89751,7 @@ const scriptInjector = new ScriptInjector();
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$F = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$G = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -89756,7 +89777,7 @@ class CustomQueryHandlerRegistry {
      * @internal
      */
     get(name) {
-        const handler = __classPrivateFieldGet$F(this, _CustomQueryHandlerRegistry_handlers, "f").get(name);
+        const handler = __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").get(name);
         return handler ? handler[1] : undefined;
     }
     /**
@@ -89782,10 +89803,10 @@ class CustomQueryHandlerRegistry {
      */
     register(name, handler) {
         var _a;
-        if (__classPrivateFieldGet$F(this, _CustomQueryHandlerRegistry_handlers, "f").has(name)) {
+        if (__classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").has(name)) {
             throw new Error(`Cannot register over existing handler: ${name}`);
         }
-        assert$1(!__classPrivateFieldGet$F(this, _CustomQueryHandlerRegistry_handlers, "f").has(name), `Cannot register over existing handler: ${name}`);
+        assert$1(!__classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").has(name), `Cannot register over existing handler: ${name}`);
         assert$1(/^[a-zA-Z]+$/.test(name), `Custom query handler names may only contain [a-zA-Z]`);
         assert$1(handler.queryAll || handler.queryOne, `At least one query method must be implemented.`);
         const Handler = (_a = class extends QueryHandler {
@@ -89815,7 +89836,7 @@ class CustomQueryHandlerRegistry {
                 ? stringifyFunction(handler.queryOne)
                 : String(undefined),
         }).toString();
-        __classPrivateFieldGet$F(this, _CustomQueryHandlerRegistry_handlers, "f").set(name, [registerScript, Handler]);
+        __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").set(name, [registerScript, Handler]);
         scriptInjector.append(registerScript);
     }
     /**
@@ -89827,12 +89848,12 @@ class CustomQueryHandlerRegistry {
      * @internal
      */
     unregister(name) {
-        const handler = __classPrivateFieldGet$F(this, _CustomQueryHandlerRegistry_handlers, "f").get(name);
+        const handler = __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").get(name);
         if (!handler) {
             throw new Error(`Cannot unregister unknown handler: ${name}`);
         }
         scriptInjector.pop(handler[0]);
-        __classPrivateFieldGet$F(this, _CustomQueryHandlerRegistry_handlers, "f").delete(name);
+        __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").delete(name);
     }
     /**
      * Gets the names of all {@link CustomQueryHandler | custom query handlers}.
@@ -89840,7 +89861,7 @@ class CustomQueryHandlerRegistry {
      * @internal
      */
     names() {
-        return [...__classPrivateFieldGet$F(this, _CustomQueryHandlerRegistry_handlers, "f").keys()];
+        return [...__classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").keys()];
     }
     /**
      * Unregisters all custom query handlers.
@@ -89848,10 +89869,10 @@ class CustomQueryHandlerRegistry {
      * @internal
      */
     clear() {
-        for (const [registerScript] of __classPrivateFieldGet$F(this, _CustomQueryHandlerRegistry_handlers, "f")) {
+        for (const [registerScript] of __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f")) {
             scriptInjector.pop(registerScript);
         }
-        __classPrivateFieldGet$F(this, _CustomQueryHandlerRegistry_handlers, "f").clear();
+        __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").clear();
     }
 }
 _CustomQueryHandlerRegistry_handlers = new WeakMap();
@@ -90022,12 +90043,12 @@ function getQueryHandlerAndSelector(selector) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$E = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$F = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$C = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$D = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -90039,21 +90060,21 @@ var _CDPJSHandle_disposed, _CDPJSHandle_context, _CDPJSHandle_remoteObject;
  */
 class CDPJSHandle extends JSHandle$1 {
     get disposed() {
-        return __classPrivateFieldGet$E(this, _CDPJSHandle_disposed, "f");
+        return __classPrivateFieldGet$F(this, _CDPJSHandle_disposed, "f");
     }
     constructor(context, remoteObject) {
         super();
         _CDPJSHandle_disposed.set(this, false);
         _CDPJSHandle_context.set(this, void 0);
         _CDPJSHandle_remoteObject.set(this, void 0);
-        __classPrivateFieldSet$C(this, _CDPJSHandle_context, context, "f");
-        __classPrivateFieldSet$C(this, _CDPJSHandle_remoteObject, remoteObject, "f");
+        __classPrivateFieldSet$D(this, _CDPJSHandle_context, context, "f");
+        __classPrivateFieldSet$D(this, _CDPJSHandle_remoteObject, remoteObject, "f");
     }
     executionContext() {
-        return __classPrivateFieldGet$E(this, _CDPJSHandle_context, "f");
+        return __classPrivateFieldGet$F(this, _CDPJSHandle_context, "f");
     }
     get client() {
-        return __classPrivateFieldGet$E(this, _CDPJSHandle_context, "f")._client;
+        return __classPrivateFieldGet$F(this, _CDPJSHandle_context, "f")._client;
     }
     /**
      * @see {@link ExecutionContext.evaluate} for more details.
@@ -90073,11 +90094,11 @@ class CDPJSHandle extends JSHandle$1 {
         }, propertyName);
     }
     async getProperties() {
-        assert$1(__classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f").objectId);
+        assert$1(__classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").objectId);
         // We use Runtime.getProperties rather than iterative building because the
         // iterative approach might create a distorted snapshot.
         const response = await this.client.send('Runtime.getProperties', {
-            objectId: __classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f").objectId,
+            objectId: __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").objectId,
             ownProperties: true,
         });
         const result = new Map();
@@ -90085,13 +90106,13 @@ class CDPJSHandle extends JSHandle$1 {
             if (!property.enumerable || !property.value) {
                 continue;
             }
-            result.set(property.name, createJSHandle(__classPrivateFieldGet$E(this, _CDPJSHandle_context, "f"), property.value));
+            result.set(property.name, createJSHandle(__classPrivateFieldGet$F(this, _CDPJSHandle_context, "f"), property.value));
         }
         return result;
     }
     async jsonValue() {
-        if (!__classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f").objectId) {
-            return valueFromRemoteObject(__classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f"));
+        if (!__classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").objectId) {
+            return valueFromRemoteObject(__classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f"));
         }
         const value = await this.evaluate(object => {
             return object;
@@ -90109,24 +90130,24 @@ class CDPJSHandle extends JSHandle$1 {
         return null;
     }
     async dispose() {
-        if (__classPrivateFieldGet$E(this, _CDPJSHandle_disposed, "f")) {
+        if (__classPrivateFieldGet$F(this, _CDPJSHandle_disposed, "f")) {
             return;
         }
-        __classPrivateFieldSet$C(this, _CDPJSHandle_disposed, true, "f");
-        await releaseObject(this.client, __classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f"));
+        __classPrivateFieldSet$D(this, _CDPJSHandle_disposed, true, "f");
+        await releaseObject(this.client, __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f"));
     }
     toString() {
-        if (!__classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f").objectId) {
-            return 'JSHandle:' + valueFromRemoteObject(__classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f"));
+        if (!__classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").objectId) {
+            return 'JSHandle:' + valueFromRemoteObject(__classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f"));
         }
-        const type = __classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f").subtype || __classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f").type;
+        const type = __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").subtype || __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").type;
         return 'JSHandle@' + type;
     }
     get id() {
-        return __classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f").objectId;
+        return __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").objectId;
     }
     remoteObject() {
-        return __classPrivateFieldGet$E(this, _CDPJSHandle_remoteObject, "f");
+        return __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f");
     }
 }
 _CDPJSHandle_disposed = new WeakMap(), _CDPJSHandle_context = new WeakMap(), _CDPJSHandle_remoteObject = new WeakMap();
@@ -90146,13 +90167,13 @@ _CDPJSHandle_disposed = new WeakMap(), _CDPJSHandle_context = new WeakMap(), _CD
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$B = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$C = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$D = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$E = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -90175,7 +90196,7 @@ class CDPElementHandle extends ElementHandle$1 {
         super(new CDPJSHandle(context, remoteObject));
         _CDPElementHandle_instances.add(this);
         _CDPElementHandle_frame.set(this, void 0);
-        __classPrivateFieldSet$B(this, _CDPElementHandle_frame, frame, "f");
+        __classPrivateFieldSet$C(this, _CDPElementHandle_frame, frame, "f");
     }
     /**
      * @internal
@@ -90193,7 +90214,7 @@ class CDPElementHandle extends ElementHandle$1 {
         return this.handle.remoteObject();
     }
     get frame() {
-        return __classPrivateFieldGet$D(this, _CDPElementHandle_frame, "f");
+        return __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f");
     }
     async $(selector) {
         const { updatedSelector, QueryHandler } = getQueryHandlerAndSelector(selector);
@@ -90243,10 +90264,10 @@ class CDPElementHandle extends ElementHandle$1 {
         return this.waitForSelector(`xpath/${xpath}`, options);
     }
     async isVisible() {
-        return __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_checkVisibility).call(this, true);
+        return __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_checkVisibility).call(this, true);
     }
     async isHidden() {
-        return __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_checkVisibility).call(this, false);
+        return __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_checkVisibility).call(this, false);
     }
     async toElement(tagName) {
         const isMatchingTagName = await this.evaluate((node, tagName) => {
@@ -90264,7 +90285,7 @@ class CDPElementHandle extends ElementHandle$1 {
         if (typeof nodeInfo.node.frameId !== 'string') {
             return null;
         }
-        return __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_frameManager_get).frame(nodeInfo.node.frameId);
+        return __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_frameManager_get).frame(nodeInfo.node.frameId);
     }
     async scrollIntoView() {
         await this.assertConnectedElement();
@@ -90295,7 +90316,7 @@ class CDPElementHandle extends ElementHandle$1 {
                 objectId: this.remoteObject().objectId,
             })
                 .catch(debugError),
-            __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get)._client().send('Page.getLayoutMetrics'),
+            __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get)._client().send('Page.getLayoutMetrics'),
         ]);
         if (!result || !result.quads.length) {
             throw new Error('Node is either not clickable or not an HTMLElement');
@@ -90303,16 +90324,16 @@ class CDPElementHandle extends ElementHandle$1 {
         // Filter out quads that have too small area to click into.
         // Fallback to `layoutViewport` in case of using Firefox.
         const { clientWidth, clientHeight } = layoutMetrics.cssLayoutViewport || layoutMetrics.layoutViewport;
-        const { offsetX, offsetY } = await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$D(this, _CDPElementHandle_frame, "f"));
+        const { offsetX, offsetY } = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f"));
         const quads = result.quads
             .map(quad => {
-            return __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, quad);
+            return __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, quad);
         })
             .map(quad => {
             return applyOffsetsToQuad(quad, offsetX, offsetY);
         })
             .map(quad => {
-            return __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_intersectQuadWithViewport).call(this, quad, clientWidth, clientHeight);
+            return __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_intersectQuadWithViewport).call(this, quad, clientWidth, clientHeight);
         })
             .filter(quad => {
             return computeQuadArea(quad) > 1;
@@ -90359,9 +90380,9 @@ class CDPElementHandle extends ElementHandle$1 {
      * If the element is detached from DOM, the method throws an error.
      */
     async hover() {
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const { x, y } = await this.clickablePoint();
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.move(x, y);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.move(x, y);
     }
     /**
      * This method scrolls element into view if needed, and then
@@ -90369,39 +90390,39 @@ class CDPElementHandle extends ElementHandle$1 {
      * If the element is detached from DOM, the method throws an error.
      */
     async click(options = {}) {
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const { x, y } = await this.clickablePoint(options.offset);
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.click(x, y, options);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.click(x, y, options);
     }
     /**
      * This method creates and captures a dragevent from the element.
      */
     async drag(target) {
-        assert$1(__classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).isDragInterceptionEnabled(), 'Drag Interception is not enabled!');
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        assert$1(__classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).isDragInterceptionEnabled(), 'Drag Interception is not enabled!');
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const start = await this.clickablePoint();
-        return await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.drag(start, target);
+        return await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.drag(start, target);
     }
     async dragEnter(data = { items: [], dragOperationsMask: 1 }) {
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const target = await this.clickablePoint();
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragEnter(target, data);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragEnter(target, data);
     }
     async dragOver(data = { items: [], dragOperationsMask: 1 }) {
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const target = await this.clickablePoint();
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragOver(target, data);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragOver(target, data);
     }
     async drop(data = { items: [], dragOperationsMask: 1 }) {
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const destination = await this.clickablePoint();
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.drop(destination, data);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.drop(destination, data);
     }
     async dragAndDrop(target, options) {
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const startPoint = await this.clickablePoint();
         const targetPoint = await target.clickablePoint();
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragAndDrop(startPoint, targetPoint, options);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragAndDrop(startPoint, targetPoint, options);
     }
     async select(...values) {
         for (const value of values) {
@@ -90492,24 +90513,24 @@ class CDPElementHandle extends ElementHandle$1 {
         }
     }
     async tap() {
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const { x, y } = await this.clickablePoint();
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchStart(x, y);
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchEnd();
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchStart(x, y);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchEnd();
     }
     async touchStart() {
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const { x, y } = await this.clickablePoint();
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchStart(x, y);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchStart(x, y);
     }
     async touchMove() {
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const { x, y } = await this.clickablePoint();
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchMove(x, y);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchMove(x, y);
     }
     async touchEnd() {
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchEnd();
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchEnd();
     }
     async focus() {
         await this.evaluate(element => {
@@ -90521,18 +90542,18 @@ class CDPElementHandle extends ElementHandle$1 {
     }
     async type(text, options) {
         await this.focus();
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).keyboard.type(text, options);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).keyboard.type(text, options);
     }
     async press(key, options) {
         await this.focus();
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).keyboard.press(key, options);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).keyboard.press(key, options);
     }
     async boundingBox() {
-        const result = await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getBoxModel).call(this);
+        const result = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getBoxModel).call(this);
         if (!result) {
             return null;
         }
-        const { offsetX, offsetY } = await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$D(this, _CDPElementHandle_frame, "f"));
+        const { offsetX, offsetY } = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f"));
         const quad = result.model.border;
         const x = Math.min(quad[0], quad[2], quad[4], quad[6]);
         const y = Math.min(quad[1], quad[3], quad[5], quad[7]);
@@ -90541,17 +90562,17 @@ class CDPElementHandle extends ElementHandle$1 {
         return { x: x + offsetX, y: y + offsetY, width, height };
     }
     async boxModel() {
-        const result = await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getBoxModel).call(this);
+        const result = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getBoxModel).call(this);
         if (!result) {
             return null;
         }
-        const { offsetX, offsetY } = await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$D(this, _CDPElementHandle_frame, "f"));
+        const { offsetX, offsetY } = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f"));
         const { content, padding, border, margin, width, height } = result.model;
         return {
-            content: applyOffsetsToQuad(__classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, content), offsetX, offsetY),
-            padding: applyOffsetsToQuad(__classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, padding), offsetX, offsetY),
-            border: applyOffsetsToQuad(__classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, border), offsetX, offsetY),
-            margin: applyOffsetsToQuad(__classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, margin), offsetX, offsetY),
+            content: applyOffsetsToQuad(__classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, content), offsetX, offsetY),
+            padding: applyOffsetsToQuad(__classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, padding), offsetX, offsetY),
+            border: applyOffsetsToQuad(__classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, border), offsetX, offsetY),
+            margin: applyOffsetsToQuad(__classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, margin), offsetX, offsetY),
             width,
             height,
         };
@@ -90560,7 +90581,7 @@ class CDPElementHandle extends ElementHandle$1 {
         let needsViewportReset = false;
         let boundingBox = await this.boundingBox();
         assert$1(boundingBox, 'Node is either not visible or not an HTMLElement');
-        const viewport = __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).viewport();
+        const viewport = __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).viewport();
         if (viewport &&
             (boundingBox.width > viewport.width ||
                 boundingBox.height > viewport.height)) {
@@ -90568,10 +90589,10 @@ class CDPElementHandle extends ElementHandle$1 {
                 width: Math.max(viewport.width, Math.ceil(boundingBox.width)),
                 height: Math.max(viewport.height, Math.ceil(boundingBox.height)),
             };
-            await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).setViewport(Object.assign({}, viewport, newViewport));
+            await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).setViewport(Object.assign({}, viewport, newViewport));
             needsViewportReset = true;
         }
-        await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         boundingBox = await this.boundingBox();
         assert$1(boundingBox, 'Node is either not visible or not an HTMLElement');
         assert$1(boundingBox.width !== 0, 'Node has 0 width.');
@@ -90582,19 +90603,19 @@ class CDPElementHandle extends ElementHandle$1 {
         const clip = Object.assign({}, boundingBox);
         clip.x += pageX;
         clip.y += pageY;
-        const imageData = await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).screenshot(Object.assign({}, {
+        const imageData = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).screenshot(Object.assign({}, {
             clip,
         }, options));
         if (needsViewportReset && viewport) {
-            await __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).setViewport(viewport);
+            await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).setViewport(viewport);
         }
         return imageData;
     }
 }
 _CDPElementHandle_frame = new WeakMap(), _CDPElementHandle_instances = new WeakSet(), _CDPElementHandle_frameManager_get = function _CDPElementHandle_frameManager_get() {
-    return __classPrivateFieldGet$D(this, _CDPElementHandle_frame, "f")._frameManager;
+    return __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f")._frameManager;
 }, _CDPElementHandle_page_get = function _CDPElementHandle_page_get() {
-    return __classPrivateFieldGet$D(this, _CDPElementHandle_frame, "f").page();
+    return __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f").page();
 }, _CDPElementHandle_checkVisibility = async function _CDPElementHandle_checkVisibility(visibility) {
     const element = await this.frame.worlds[PUPPETEER_WORLD].adoptHandle(this);
     try {
@@ -90634,7 +90655,7 @@ _CDPElementHandle_frame = new WeakMap(), _CDPElementHandle_instances = new WeakS
             break;
         }
         const contentBoxQuad = result.model.content;
-        const topLeftCorner = __classPrivateFieldGet$D(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, contentBoxQuad)[0];
+        const topLeftCorner = __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, contentBoxQuad)[0];
         offsetX += topLeftCorner.x;
         offsetY += topLeftCorner.y;
         currentFrame = parent;
@@ -91038,7 +91059,7 @@ async function setPageContent(page, content) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$C = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$D = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -91126,13 +91147,13 @@ let Page$1 = class Page extends EventEmitter$3 {
      */
     on(eventName, handler) {
         if (eventName === 'request') {
-            const wrap = __classPrivateFieldGet$C(this, _Page_handlerMap, "f").get(handler) ||
+            const wrap = __classPrivateFieldGet$D(this, _Page_handlerMap, "f").get(handler) ||
                 ((event) => {
                     event.enqueueInterceptAction(() => {
                         return handler(event);
                     });
                 });
-            __classPrivateFieldGet$C(this, _Page_handlerMap, "f").set(handler, wrap);
+            __classPrivateFieldGet$D(this, _Page_handlerMap, "f").set(handler, wrap);
             return super.on(eventName, wrap);
         }
         return super.on(eventName, handler);
@@ -91144,7 +91165,7 @@ let Page$1 = class Page extends EventEmitter$3 {
     }
     off(eventName, handler) {
         if (eventName === 'request') {
-            handler = __classPrivateFieldGet$C(this, _Page_handlerMap, "f").get(handler) || handler;
+            handler = __classPrivateFieldGet$D(this, _Page_handlerMap, "f").get(handler) || handler;
         }
         return super.off(eventName, handler);
     }
@@ -92146,13 +92167,13 @@ const STATUS_TEXTS = {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$A = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$B = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$B = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$C = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -92186,7 +92207,7 @@ class Accessibility {
      */
     constructor(client) {
         _Accessibility_client.set(this, void 0);
-        __classPrivateFieldSet$A(this, _Accessibility_client, client, "f");
+        __classPrivateFieldSet$B(this, _Accessibility_client, client, "f");
     }
     /**
      * Captures the current state of the accessibility tree.
@@ -92230,10 +92251,10 @@ class Accessibility {
     async snapshot(options = {}) {
         var _a, _b;
         const { interestingOnly = true, root = null } = options;
-        const { nodes } = await __classPrivateFieldGet$B(this, _Accessibility_client, "f").send('Accessibility.getFullAXTree');
+        const { nodes } = await __classPrivateFieldGet$C(this, _Accessibility_client, "f").send('Accessibility.getFullAXTree');
         let backendNodeId;
         if (root) {
-            const { node } = await __classPrivateFieldGet$B(this, _Accessibility_client, "f").send('DOM.describeNode', {
+            const { node } = await __classPrivateFieldGet$C(this, _Accessibility_client, "f").send('DOM.describeNode', {
                 objectId: root.id,
             });
             backendNodeId = node.backendNodeId;
@@ -92299,19 +92320,19 @@ class AXNode {
         _AXNode_ignored.set(this, void 0);
         _AXNode_cachedHasFocusableChild.set(this, void 0);
         this.payload = payload;
-        __classPrivateFieldSet$A(this, _AXNode_name, this.payload.name ? this.payload.name.value : '', "f");
-        __classPrivateFieldSet$A(this, _AXNode_role, this.payload.role ? this.payload.role.value : 'Unknown', "f");
-        __classPrivateFieldSet$A(this, _AXNode_ignored, this.payload.ignored, "f");
+        __classPrivateFieldSet$B(this, _AXNode_name, this.payload.name ? this.payload.name.value : '', "f");
+        __classPrivateFieldSet$B(this, _AXNode_role, this.payload.role ? this.payload.role.value : 'Unknown', "f");
+        __classPrivateFieldSet$B(this, _AXNode_ignored, this.payload.ignored, "f");
         for (const property of this.payload.properties || []) {
             if (property.name === 'editable') {
-                __classPrivateFieldSet$A(this, _AXNode_richlyEditable, property.value.value === 'richtext', "f");
-                __classPrivateFieldSet$A(this, _AXNode_editable, true, "f");
+                __classPrivateFieldSet$B(this, _AXNode_richlyEditable, property.value.value === 'richtext', "f");
+                __classPrivateFieldSet$B(this, _AXNode_editable, true, "f");
             }
             if (property.name === 'focusable') {
-                __classPrivateFieldSet$A(this, _AXNode_focusable, property.value.value, "f");
+                __classPrivateFieldSet$B(this, _AXNode_focusable, property.value.value, "f");
             }
             if (property.name === 'hidden') {
-                __classPrivateFieldSet$A(this, _AXNode_hidden, property.value.value, "f");
+                __classPrivateFieldSet$B(this, _AXNode_hidden, property.value.value, "f");
             }
         }
     }
@@ -92335,14 +92356,14 @@ class AXNode {
         // implementation details, but we want to expose them as leaves to platform
         // accessibility APIs because screen readers might be confused if they find
         // any children.
-        if (__classPrivateFieldGet$B(this, _AXNode_instances, "m", _AXNode_isPlainTextField).call(this) || __classPrivateFieldGet$B(this, _AXNode_instances, "m", _AXNode_isTextOnlyObject).call(this)) {
+        if (__classPrivateFieldGet$C(this, _AXNode_instances, "m", _AXNode_isPlainTextField).call(this) || __classPrivateFieldGet$C(this, _AXNode_instances, "m", _AXNode_isTextOnlyObject).call(this)) {
             return true;
         }
         // Roles whose children are only presentational according to the ARIA and
         // HTML5 Specs should be hidden from screen readers.
         // (Note that whilst ARIA buttons can have only presentational children, HTML5
         // buttons are allowed to have content.)
-        switch (__classPrivateFieldGet$B(this, _AXNode_role, "f")) {
+        switch (__classPrivateFieldGet$C(this, _AXNode_role, "f")) {
             case 'doc-cover':
             case 'graphics-symbol':
             case 'img':
@@ -92354,19 +92375,19 @@ class AXNode {
                 return true;
         }
         // Here and below: Android heuristics
-        if (__classPrivateFieldGet$B(this, _AXNode_instances, "m", _AXNode_hasFocusableChild).call(this)) {
+        if (__classPrivateFieldGet$C(this, _AXNode_instances, "m", _AXNode_hasFocusableChild).call(this)) {
             return false;
         }
-        if (__classPrivateFieldGet$B(this, _AXNode_focusable, "f") && __classPrivateFieldGet$B(this, _AXNode_name, "f")) {
+        if (__classPrivateFieldGet$C(this, _AXNode_focusable, "f") && __classPrivateFieldGet$C(this, _AXNode_name, "f")) {
             return true;
         }
-        if (__classPrivateFieldGet$B(this, _AXNode_role, "f") === 'heading' && __classPrivateFieldGet$B(this, _AXNode_name, "f")) {
+        if (__classPrivateFieldGet$C(this, _AXNode_role, "f") === 'heading' && __classPrivateFieldGet$C(this, _AXNode_name, "f")) {
             return true;
         }
         return false;
     }
     isControl() {
-        switch (__classPrivateFieldGet$B(this, _AXNode_role, "f")) {
+        switch (__classPrivateFieldGet$C(this, _AXNode_role, "f")) {
             case 'button':
             case 'checkbox':
             case 'ColorWell':
@@ -92394,11 +92415,11 @@ class AXNode {
         }
     }
     isInteresting(insideControl) {
-        const role = __classPrivateFieldGet$B(this, _AXNode_role, "f");
-        if (role === 'Ignored' || __classPrivateFieldGet$B(this, _AXNode_hidden, "f") || __classPrivateFieldGet$B(this, _AXNode_ignored, "f")) {
+        const role = __classPrivateFieldGet$C(this, _AXNode_role, "f");
+        if (role === 'Ignored' || __classPrivateFieldGet$C(this, _AXNode_hidden, "f") || __classPrivateFieldGet$C(this, _AXNode_ignored, "f")) {
             return false;
         }
-        if (__classPrivateFieldGet$B(this, _AXNode_focusable, "f") || __classPrivateFieldGet$B(this, _AXNode_richlyEditable, "f")) {
+        if (__classPrivateFieldGet$C(this, _AXNode_focusable, "f") || __classPrivateFieldGet$C(this, _AXNode_richlyEditable, "f")) {
             return true;
         }
         // If it's not focusable but has a control role, then it's interesting.
@@ -92409,7 +92430,7 @@ class AXNode {
         if (insideControl) {
             return false;
         }
-        return this.isLeafNode() && !!__classPrivateFieldGet$B(this, _AXNode_name, "f");
+        return this.isLeafNode() && !!__classPrivateFieldGet$C(this, _AXNode_name, "f");
     }
     serialize() {
         const properties = new Map();
@@ -92426,7 +92447,7 @@ class AXNode {
             properties.set('description', this.payload.description.value);
         }
         const node = {
-            role: __classPrivateFieldGet$B(this, _AXNode_role, "f"),
+            role: __classPrivateFieldGet$C(this, _AXNode_role, "f"),
         };
         const userStringProperties = [
             'name',
@@ -92463,7 +92484,7 @@ class AXNode {
             // RootWebArea's treat focus differently than other nodes. They report whether
             // their frame  has focus, not whether focus is specifically on the root
             // node.
-            if (booleanProperty === 'focused' && __classPrivateFieldGet$B(this, _AXNode_role, "f") === 'RootWebArea') {
+            if (booleanProperty === 'focused' && __classPrivateFieldGet$C(this, _AXNode_role, "f") === 'RootWebArea') {
                 continue;
             }
             const value = getBooleanPropertyValue(booleanProperty);
@@ -92530,27 +92551,27 @@ class AXNode {
     }
 }
 _AXNode_richlyEditable = new WeakMap(), _AXNode_editable = new WeakMap(), _AXNode_focusable = new WeakMap(), _AXNode_hidden = new WeakMap(), _AXNode_name = new WeakMap(), _AXNode_role = new WeakMap(), _AXNode_ignored = new WeakMap(), _AXNode_cachedHasFocusableChild = new WeakMap(), _AXNode_instances = new WeakSet(), _AXNode_isPlainTextField = function _AXNode_isPlainTextField() {
-    if (__classPrivateFieldGet$B(this, _AXNode_richlyEditable, "f")) {
+    if (__classPrivateFieldGet$C(this, _AXNode_richlyEditable, "f")) {
         return false;
     }
-    if (__classPrivateFieldGet$B(this, _AXNode_editable, "f")) {
+    if (__classPrivateFieldGet$C(this, _AXNode_editable, "f")) {
         return true;
     }
-    return __classPrivateFieldGet$B(this, _AXNode_role, "f") === 'textbox' || __classPrivateFieldGet$B(this, _AXNode_role, "f") === 'searchbox';
+    return __classPrivateFieldGet$C(this, _AXNode_role, "f") === 'textbox' || __classPrivateFieldGet$C(this, _AXNode_role, "f") === 'searchbox';
 }, _AXNode_isTextOnlyObject = function _AXNode_isTextOnlyObject() {
-    const role = __classPrivateFieldGet$B(this, _AXNode_role, "f");
+    const role = __classPrivateFieldGet$C(this, _AXNode_role, "f");
     return role === 'LineBreak' || role === 'text' || role === 'InlineTextBox';
 }, _AXNode_hasFocusableChild = function _AXNode_hasFocusableChild() {
-    if (__classPrivateFieldGet$B(this, _AXNode_cachedHasFocusableChild, "f") === undefined) {
-        __classPrivateFieldSet$A(this, _AXNode_cachedHasFocusableChild, false, "f");
+    if (__classPrivateFieldGet$C(this, _AXNode_cachedHasFocusableChild, "f") === undefined) {
+        __classPrivateFieldSet$B(this, _AXNode_cachedHasFocusableChild, false, "f");
         for (const child of this.children) {
-            if (__classPrivateFieldGet$B(child, _AXNode_focusable, "f") || __classPrivateFieldGet$B(child, _AXNode_instances, "m", _AXNode_hasFocusableChild).call(child)) {
-                __classPrivateFieldSet$A(this, _AXNode_cachedHasFocusableChild, true, "f");
+            if (__classPrivateFieldGet$C(child, _AXNode_focusable, "f") || __classPrivateFieldGet$C(child, _AXNode_instances, "m", _AXNode_hasFocusableChild).call(child)) {
+                __classPrivateFieldSet$B(this, _AXNode_cachedHasFocusableChild, true, "f");
                 break;
             }
         }
     }
-    return __classPrivateFieldGet$B(this, _AXNode_cachedHasFocusableChild, "f");
+    return __classPrivateFieldGet$C(this, _AXNode_cachedHasFocusableChild, "f");
 };
 
 /**
@@ -92630,13 +92651,13 @@ function createDebuggableDeferredPromise(message) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$z = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$A = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$A = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$B = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -92671,33 +92692,33 @@ class Callback {
         _Callback_promise.set(this, createDeferredPromise());
         _Callback_timer.set(this, void 0);
         _Callback_label.set(this, void 0);
-        __classPrivateFieldSet$z(this, _Callback_id, id, "f");
-        __classPrivateFieldSet$z(this, _Callback_label, label, "f");
+        __classPrivateFieldSet$A(this, _Callback_id, id, "f");
+        __classPrivateFieldSet$A(this, _Callback_label, label, "f");
         if (timeout) {
-            __classPrivateFieldSet$z(this, _Callback_timer, setTimeout(() => {
-                __classPrivateFieldGet$A(this, _Callback_promise, "f").reject(rewriteError$1(__classPrivateFieldGet$A(this, _Callback_error, "f"), `${label} timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed.`));
+            __classPrivateFieldSet$A(this, _Callback_timer, setTimeout(() => {
+                __classPrivateFieldGet$B(this, _Callback_promise, "f").reject(rewriteError$1(__classPrivateFieldGet$B(this, _Callback_error, "f"), `${label} timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed.`));
             }, timeout), "f");
         }
     }
     resolve(value) {
-        clearTimeout(__classPrivateFieldGet$A(this, _Callback_timer, "f"));
-        __classPrivateFieldGet$A(this, _Callback_promise, "f").resolve(value);
+        clearTimeout(__classPrivateFieldGet$B(this, _Callback_timer, "f"));
+        __classPrivateFieldGet$B(this, _Callback_promise, "f").resolve(value);
     }
     reject(error) {
-        clearTimeout(__classPrivateFieldGet$A(this, _Callback_timer, "f"));
-        __classPrivateFieldGet$A(this, _Callback_promise, "f").reject(error);
+        clearTimeout(__classPrivateFieldGet$B(this, _Callback_timer, "f"));
+        __classPrivateFieldGet$B(this, _Callback_promise, "f").reject(error);
     }
     get id() {
-        return __classPrivateFieldGet$A(this, _Callback_id, "f");
+        return __classPrivateFieldGet$B(this, _Callback_id, "f");
     }
     get promise() {
-        return __classPrivateFieldGet$A(this, _Callback_promise, "f");
+        return __classPrivateFieldGet$B(this, _Callback_promise, "f");
     }
     get error() {
-        return __classPrivateFieldGet$A(this, _Callback_error, "f");
+        return __classPrivateFieldGet$B(this, _Callback_error, "f");
     }
     get label() {
-        return __classPrivateFieldGet$A(this, _Callback_label, "f");
+        return __classPrivateFieldGet$B(this, _Callback_label, "f");
     }
 }
 _Callback_id = new WeakMap(), _Callback_error = new WeakMap(), _Callback_promise = new WeakMap(), _Callback_timer = new WeakMap(), _Callback_label = new WeakMap();
@@ -92712,8 +92733,8 @@ class CallbackRegistry {
         _CallbackRegistry_idGenerator.set(this, createIncrementalIdGenerator());
     }
     create(label, timeout, request) {
-        const callback = new Callback(__classPrivateFieldGet$A(this, _CallbackRegistry_idGenerator, "f").call(this), label, timeout);
-        __classPrivateFieldGet$A(this, _CallbackRegistry_callbacks, "f").set(callback.id, callback);
+        const callback = new Callback(__classPrivateFieldGet$B(this, _CallbackRegistry_idGenerator, "f").call(this), label, timeout);
+        __classPrivateFieldGet$B(this, _CallbackRegistry_callbacks, "f").set(callback.id, callback);
         try {
             request(callback.id);
         }
@@ -92721,18 +92742,18 @@ class CallbackRegistry {
             // We still throw sync errors synchronously and clean up the scheduled
             // callback.
             callback.promise.catch(() => {
-                __classPrivateFieldGet$A(this, _CallbackRegistry_callbacks, "f").delete(callback.id);
+                __classPrivateFieldGet$B(this, _CallbackRegistry_callbacks, "f").delete(callback.id);
             });
             callback.reject(error);
             throw error;
         }
         // Must only have sync code up until here.
         return callback.promise.finally(() => {
-            __classPrivateFieldGet$A(this, _CallbackRegistry_callbacks, "f").delete(callback.id);
+            __classPrivateFieldGet$B(this, _CallbackRegistry_callbacks, "f").delete(callback.id);
         });
     }
     reject(id, message, originalMessage) {
-        const callback = __classPrivateFieldGet$A(this, _CallbackRegistry_callbacks, "f").get(id);
+        const callback = __classPrivateFieldGet$B(this, _CallbackRegistry_callbacks, "f").get(id);
         if (!callback) {
             return;
         }
@@ -92742,18 +92763,18 @@ class CallbackRegistry {
         callback.reject(rewriteError$1(callback.error, `Protocol error (${callback.label}): ${message}`, originalMessage));
     }
     resolve(id, value) {
-        const callback = __classPrivateFieldGet$A(this, _CallbackRegistry_callbacks, "f").get(id);
+        const callback = __classPrivateFieldGet$B(this, _CallbackRegistry_callbacks, "f").get(id);
         if (!callback) {
             return;
         }
         callback.resolve(value);
     }
     clear() {
-        for (const callback of __classPrivateFieldGet$A(this, _CallbackRegistry_callbacks, "f").values()) {
+        for (const callback of __classPrivateFieldGet$B(this, _CallbackRegistry_callbacks, "f").values()) {
             // TODO: probably we can accept error messages as params.
             this._reject(callback, 'Target closed');
         }
-        __classPrivateFieldGet$A(this, _CallbackRegistry_callbacks, "f").clear();
+        __classPrivateFieldGet$B(this, _CallbackRegistry_callbacks, "f").clear();
     }
 }
 _CallbackRegistry_callbacks = new WeakMap(), _CallbackRegistry_idGenerator = new WeakMap();
@@ -92772,40 +92793,40 @@ class Connection extends EventEmitter$3 {
         _Connection_closed.set(this, false);
         _Connection_manuallyAttached.set(this, new Set());
         _Connection_callbacks.set(this, new CallbackRegistry());
-        __classPrivateFieldSet$z(this, _Connection_url, url, "f");
-        __classPrivateFieldSet$z(this, _Connection_delay, delay, "f");
-        __classPrivateFieldSet$z(this, _Connection_timeout, timeout !== null && timeout !== void 0 ? timeout : 180000, "f");
-        __classPrivateFieldSet$z(this, _Connection_transport, transport, "f");
-        __classPrivateFieldGet$A(this, _Connection_transport, "f").onmessage = this.onMessage.bind(this);
-        __classPrivateFieldGet$A(this, _Connection_transport, "f").onclose = __classPrivateFieldGet$A(this, _Connection_instances, "m", _Connection_onClose).bind(this);
+        __classPrivateFieldSet$A(this, _Connection_url, url, "f");
+        __classPrivateFieldSet$A(this, _Connection_delay, delay, "f");
+        __classPrivateFieldSet$A(this, _Connection_timeout, timeout !== null && timeout !== void 0 ? timeout : 180000, "f");
+        __classPrivateFieldSet$A(this, _Connection_transport, transport, "f");
+        __classPrivateFieldGet$B(this, _Connection_transport, "f").onmessage = this.onMessage.bind(this);
+        __classPrivateFieldGet$B(this, _Connection_transport, "f").onclose = __classPrivateFieldGet$B(this, _Connection_instances, "m", _Connection_onClose).bind(this);
     }
     static fromSession(session) {
         return session.connection();
     }
     get timeout() {
-        return __classPrivateFieldGet$A(this, _Connection_timeout, "f");
+        return __classPrivateFieldGet$B(this, _Connection_timeout, "f");
     }
     /**
      * @internal
      */
     get _closed() {
-        return __classPrivateFieldGet$A(this, _Connection_closed, "f");
+        return __classPrivateFieldGet$B(this, _Connection_closed, "f");
     }
     /**
      * @internal
      */
     get _sessions() {
-        return __classPrivateFieldGet$A(this, _Connection_sessions, "f");
+        return __classPrivateFieldGet$B(this, _Connection_sessions, "f");
     }
     /**
      * @param sessionId - The session id
      * @returns The current CDP session if it exists
      */
     session(sessionId) {
-        return __classPrivateFieldGet$A(this, _Connection_sessions, "f").get(sessionId) || null;
+        return __classPrivateFieldGet$B(this, _Connection_sessions, "f").get(sessionId) || null;
     }
     url() {
-        return __classPrivateFieldGet$A(this, _Connection_url, "f");
+        return __classPrivateFieldGet$B(this, _Connection_url, "f");
     }
     send(method, ...paramArgs) {
         // There is only ever 1 param arg passed, but the Protocol defines it as an
@@ -92815,13 +92836,13 @@ class Connection extends EventEmitter$3 {
         // type-inference.
         // So now we check if there are any params or not and deal with them accordingly.
         const params = paramArgs.length ? paramArgs[0] : undefined;
-        return this._rawSend(__classPrivateFieldGet$A(this, _Connection_callbacks, "f"), method, params);
+        return this._rawSend(__classPrivateFieldGet$B(this, _Connection_callbacks, "f"), method, params);
     }
     /**
      * @internal
      */
     _rawSend(callbacks, method, params, sessionId) {
-        return callbacks.create(method, __classPrivateFieldGet$A(this, _Connection_timeout, "f"), id => {
+        return callbacks.create(method, __classPrivateFieldGet$B(this, _Connection_timeout, "f"), id => {
             const stringifiedMessage = JSON.stringify({
                 method,
                 params,
@@ -92829,7 +92850,7 @@ class Connection extends EventEmitter$3 {
                 sessionId,
             });
             debugProtocolSend(stringifiedMessage);
-            __classPrivateFieldGet$A(this, _Connection_transport, "f").send(stringifiedMessage);
+            __classPrivateFieldGet$B(this, _Connection_transport, "f").send(stringifiedMessage);
         });
     }
     /**
@@ -92842,9 +92863,9 @@ class Connection extends EventEmitter$3 {
      * @internal
      */
     async onMessage(message) {
-        if (__classPrivateFieldGet$A(this, _Connection_delay, "f")) {
+        if (__classPrivateFieldGet$B(this, _Connection_delay, "f")) {
             await new Promise(f => {
-                return setTimeout(f, __classPrivateFieldGet$A(this, _Connection_delay, "f"));
+                return setTimeout(f, __classPrivateFieldGet$B(this, _Connection_delay, "f"));
             });
         }
         debugProtocolReceive(message);
@@ -92852,37 +92873,37 @@ class Connection extends EventEmitter$3 {
         if (object.method === 'Target.attachedToTarget') {
             const sessionId = object.params.sessionId;
             const session = new CDPSessionImpl(this, object.params.targetInfo.type, sessionId);
-            __classPrivateFieldGet$A(this, _Connection_sessions, "f").set(sessionId, session);
+            __classPrivateFieldGet$B(this, _Connection_sessions, "f").set(sessionId, session);
             this.emit('sessionattached', session);
-            const parentSession = __classPrivateFieldGet$A(this, _Connection_sessions, "f").get(object.sessionId);
+            const parentSession = __classPrivateFieldGet$B(this, _Connection_sessions, "f").get(object.sessionId);
             if (parentSession) {
                 parentSession.emit('sessionattached', session);
             }
         }
         else if (object.method === 'Target.detachedFromTarget') {
-            const session = __classPrivateFieldGet$A(this, _Connection_sessions, "f").get(object.params.sessionId);
+            const session = __classPrivateFieldGet$B(this, _Connection_sessions, "f").get(object.params.sessionId);
             if (session) {
                 session._onClosed();
-                __classPrivateFieldGet$A(this, _Connection_sessions, "f").delete(object.params.sessionId);
+                __classPrivateFieldGet$B(this, _Connection_sessions, "f").delete(object.params.sessionId);
                 this.emit('sessiondetached', session);
-                const parentSession = __classPrivateFieldGet$A(this, _Connection_sessions, "f").get(object.sessionId);
+                const parentSession = __classPrivateFieldGet$B(this, _Connection_sessions, "f").get(object.sessionId);
                 if (parentSession) {
                     parentSession.emit('sessiondetached', session);
                 }
             }
         }
         if (object.sessionId) {
-            const session = __classPrivateFieldGet$A(this, _Connection_sessions, "f").get(object.sessionId);
+            const session = __classPrivateFieldGet$B(this, _Connection_sessions, "f").get(object.sessionId);
             if (session) {
                 session._onMessage(object);
             }
         }
         else if (object.id) {
             if (object.error) {
-                __classPrivateFieldGet$A(this, _Connection_callbacks, "f").reject(object.id, createProtocolErrorMessage(object), object.error.message);
+                __classPrivateFieldGet$B(this, _Connection_callbacks, "f").reject(object.id, createProtocolErrorMessage(object), object.error.message);
             }
             else {
-                __classPrivateFieldGet$A(this, _Connection_callbacks, "f").resolve(object.id, object.result);
+                __classPrivateFieldGet$B(this, _Connection_callbacks, "f").resolve(object.id, object.result);
             }
         }
         else {
@@ -92890,28 +92911,28 @@ class Connection extends EventEmitter$3 {
         }
     }
     dispose() {
-        __classPrivateFieldGet$A(this, _Connection_instances, "m", _Connection_onClose).call(this);
-        __classPrivateFieldGet$A(this, _Connection_transport, "f").close();
+        __classPrivateFieldGet$B(this, _Connection_instances, "m", _Connection_onClose).call(this);
+        __classPrivateFieldGet$B(this, _Connection_transport, "f").close();
     }
     /**
      * @internal
      */
     isAutoAttached(targetId) {
-        return !__classPrivateFieldGet$A(this, _Connection_manuallyAttached, "f").has(targetId);
+        return !__classPrivateFieldGet$B(this, _Connection_manuallyAttached, "f").has(targetId);
     }
     /**
      * @internal
      */
     async _createSession(targetInfo, isAutoAttachEmulated = true) {
         if (!isAutoAttachEmulated) {
-            __classPrivateFieldGet$A(this, _Connection_manuallyAttached, "f").add(targetInfo.targetId);
+            __classPrivateFieldGet$B(this, _Connection_manuallyAttached, "f").add(targetInfo.targetId);
         }
         const { sessionId } = await this.send('Target.attachToTarget', {
             targetId: targetInfo.targetId,
             flatten: true,
         });
-        __classPrivateFieldGet$A(this, _Connection_manuallyAttached, "f").delete(targetInfo.targetId);
-        const session = __classPrivateFieldGet$A(this, _Connection_sessions, "f").get(sessionId);
+        __classPrivateFieldGet$B(this, _Connection_manuallyAttached, "f").delete(targetInfo.targetId);
+        const session = __classPrivateFieldGet$B(this, _Connection_sessions, "f").get(sessionId);
         if (!session) {
             throw new Error('CDPSession creation failed.');
         }
@@ -92926,17 +92947,17 @@ class Connection extends EventEmitter$3 {
     }
 }
 _Connection_url = new WeakMap(), _Connection_transport = new WeakMap(), _Connection_delay = new WeakMap(), _Connection_timeout = new WeakMap(), _Connection_sessions = new WeakMap(), _Connection_closed = new WeakMap(), _Connection_manuallyAttached = new WeakMap(), _Connection_callbacks = new WeakMap(), _Connection_instances = new WeakSet(), _Connection_onClose = function _Connection_onClose() {
-    if (__classPrivateFieldGet$A(this, _Connection_closed, "f")) {
+    if (__classPrivateFieldGet$B(this, _Connection_closed, "f")) {
         return;
     }
-    __classPrivateFieldSet$z(this, _Connection_closed, true, "f");
-    __classPrivateFieldGet$A(this, _Connection_transport, "f").onmessage = undefined;
-    __classPrivateFieldGet$A(this, _Connection_transport, "f").onclose = undefined;
-    __classPrivateFieldGet$A(this, _Connection_callbacks, "f").clear();
-    for (const session of __classPrivateFieldGet$A(this, _Connection_sessions, "f").values()) {
+    __classPrivateFieldSet$A(this, _Connection_closed, true, "f");
+    __classPrivateFieldGet$B(this, _Connection_transport, "f").onmessage = undefined;
+    __classPrivateFieldGet$B(this, _Connection_transport, "f").onclose = undefined;
+    __classPrivateFieldGet$B(this, _Connection_callbacks, "f").clear();
+    for (const session of __classPrivateFieldGet$B(this, _Connection_sessions, "f").values()) {
         session._onClosed();
     }
-    __classPrivateFieldGet$A(this, _Connection_sessions, "f").clear();
+    __classPrivateFieldGet$B(this, _Connection_sessions, "f").clear();
     this.emit(ConnectionEmittedEvents.Disconnected);
 };
 /**
@@ -93015,20 +93036,20 @@ class CDPSessionImpl extends CDPSession {
         _CDPSessionImpl_targetType.set(this, void 0);
         _CDPSessionImpl_callbacks.set(this, new CallbackRegistry());
         _CDPSessionImpl_connection.set(this, void 0);
-        __classPrivateFieldSet$z(this, _CDPSessionImpl_connection, connection, "f");
-        __classPrivateFieldSet$z(this, _CDPSessionImpl_targetType, targetType, "f");
-        __classPrivateFieldSet$z(this, _CDPSessionImpl_sessionId, sessionId, "f");
+        __classPrivateFieldSet$A(this, _CDPSessionImpl_connection, connection, "f");
+        __classPrivateFieldSet$A(this, _CDPSessionImpl_targetType, targetType, "f");
+        __classPrivateFieldSet$A(this, _CDPSessionImpl_sessionId, sessionId, "f");
     }
     connection() {
-        return __classPrivateFieldGet$A(this, _CDPSessionImpl_connection, "f");
+        return __classPrivateFieldGet$B(this, _CDPSessionImpl_connection, "f");
     }
     send(method, ...paramArgs) {
-        if (!__classPrivateFieldGet$A(this, _CDPSessionImpl_connection, "f")) {
-            return Promise.reject(new Error(`Protocol error (${method}): Session closed. Most likely the ${__classPrivateFieldGet$A(this, _CDPSessionImpl_targetType, "f")} has been closed.`));
+        if (!__classPrivateFieldGet$B(this, _CDPSessionImpl_connection, "f")) {
+            return Promise.reject(new Error(`Protocol error (${method}): Session closed. Most likely the ${__classPrivateFieldGet$B(this, _CDPSessionImpl_targetType, "f")} has been closed.`));
         }
         // See the comment in Connection#send explaining why we do this.
         const params = paramArgs.length ? paramArgs[0] : undefined;
-        return __classPrivateFieldGet$A(this, _CDPSessionImpl_connection, "f")._rawSend(__classPrivateFieldGet$A(this, _CDPSessionImpl_callbacks, "f"), method, params, __classPrivateFieldGet$A(this, _CDPSessionImpl_sessionId, "f"));
+        return __classPrivateFieldGet$B(this, _CDPSessionImpl_connection, "f")._rawSend(__classPrivateFieldGet$B(this, _CDPSessionImpl_callbacks, "f"), method, params, __classPrivateFieldGet$B(this, _CDPSessionImpl_sessionId, "f"));
     }
     /**
      * @internal
@@ -93036,10 +93057,10 @@ class CDPSessionImpl extends CDPSession {
     _onMessage(object) {
         if (object.id) {
             if (object.error) {
-                __classPrivateFieldGet$A(this, _CDPSessionImpl_callbacks, "f").reject(object.id, createProtocolErrorMessage(object), object.error.message);
+                __classPrivateFieldGet$B(this, _CDPSessionImpl_callbacks, "f").reject(object.id, createProtocolErrorMessage(object), object.error.message);
             }
             else {
-                __classPrivateFieldGet$A(this, _CDPSessionImpl_callbacks, "f").resolve(object.id, object.result);
+                __classPrivateFieldGet$B(this, _CDPSessionImpl_callbacks, "f").resolve(object.id, object.result);
             }
         }
         else {
@@ -93052,26 +93073,26 @@ class CDPSessionImpl extends CDPSession {
      * won't emit any events and can't be used to send messages.
      */
     async detach() {
-        if (!__classPrivateFieldGet$A(this, _CDPSessionImpl_connection, "f")) {
-            throw new Error(`Session already detached. Most likely the ${__classPrivateFieldGet$A(this, _CDPSessionImpl_targetType, "f")} has been closed.`);
+        if (!__classPrivateFieldGet$B(this, _CDPSessionImpl_connection, "f")) {
+            throw new Error(`Session already detached. Most likely the ${__classPrivateFieldGet$B(this, _CDPSessionImpl_targetType, "f")} has been closed.`);
         }
-        await __classPrivateFieldGet$A(this, _CDPSessionImpl_connection, "f").send('Target.detachFromTarget', {
-            sessionId: __classPrivateFieldGet$A(this, _CDPSessionImpl_sessionId, "f"),
+        await __classPrivateFieldGet$B(this, _CDPSessionImpl_connection, "f").send('Target.detachFromTarget', {
+            sessionId: __classPrivateFieldGet$B(this, _CDPSessionImpl_sessionId, "f"),
         });
     }
     /**
      * @internal
      */
     _onClosed() {
-        __classPrivateFieldGet$A(this, _CDPSessionImpl_callbacks, "f").clear();
-        __classPrivateFieldSet$z(this, _CDPSessionImpl_connection, undefined, "f");
+        __classPrivateFieldGet$B(this, _CDPSessionImpl_callbacks, "f").clear();
+        __classPrivateFieldSet$A(this, _CDPSessionImpl_connection, undefined, "f");
         this.emit(CDPSessionEmittedEvents.Disconnected);
     }
     /**
      * Returns the session's id.
      */
     id() {
-        return __classPrivateFieldGet$A(this, _CDPSessionImpl_sessionId, "f");
+        return __classPrivateFieldGet$B(this, _CDPSessionImpl_sessionId, "f");
     }
 }
 _CDPSessionImpl_sessionId = new WeakMap(), _CDPSessionImpl_targetType = new WeakMap(), _CDPSessionImpl_callbacks = new WeakMap(), _CDPSessionImpl_connection = new WeakMap();
@@ -93110,13 +93131,13 @@ function isTargetClosedError(err) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$y = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$z = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$z = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$A = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -93167,53 +93188,53 @@ class ChromeTargetManager extends EventEmitter$3 {
         _ChromeTargetManager_initializePromise.set(this, createDeferredPromise());
         _ChromeTargetManager_targetsIdsForInit.set(this, new Set());
         _ChromeTargetManager_storeExistingTargetsForInit.set(this, () => {
-            for (const [targetId, targetInfo,] of __classPrivateFieldGet$z(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").entries()) {
-                if ((!__classPrivateFieldGet$z(this, _ChromeTargetManager_targetFilterCallback, "f") ||
-                    __classPrivateFieldGet$z(this, _ChromeTargetManager_targetFilterCallback, "f").call(this, targetInfo)) &&
+            for (const [targetId, targetInfo,] of __classPrivateFieldGet$A(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").entries()) {
+                if ((!__classPrivateFieldGet$A(this, _ChromeTargetManager_targetFilterCallback, "f") ||
+                    __classPrivateFieldGet$A(this, _ChromeTargetManager_targetFilterCallback, "f").call(this, targetInfo)) &&
                     targetInfo.type !== 'browser') {
-                    __classPrivateFieldGet$z(this, _ChromeTargetManager_targetsIdsForInit, "f").add(targetId);
+                    __classPrivateFieldGet$A(this, _ChromeTargetManager_targetsIdsForInit, "f").add(targetId);
                 }
             }
         });
         _ChromeTargetManager_onSessionDetached.set(this, (session) => {
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_removeAttachmentListeners).call(this, session);
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_targetInterceptors, "f").delete(session);
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_removeAttachmentListeners).call(this, session);
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_targetInterceptors, "f").delete(session);
         });
         _ChromeTargetManager_onTargetCreated.set(this, async (event) => {
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").set(event.targetInfo.targetId, event.targetInfo);
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").set(event.targetInfo.targetId, event.targetInfo);
             this.emit("targetDiscovered" /* TargetManagerEmittedEvents.TargetDiscovered */, event.targetInfo);
             // The connection is already attached to the browser target implicitly,
             // therefore, no new CDPSession is created and we have special handling
             // here.
             if (event.targetInfo.type === 'browser' && event.targetInfo.attached) {
-                if (__classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").has(event.targetInfo.targetId)) {
+                if (__classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").has(event.targetInfo.targetId)) {
                     return;
                 }
-                const target = __classPrivateFieldGet$z(this, _ChromeTargetManager_targetFactory, "f").call(this, event.targetInfo, undefined);
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").set(event.targetInfo.targetId, target);
+                const target = __classPrivateFieldGet$A(this, _ChromeTargetManager_targetFactory, "f").call(this, event.targetInfo, undefined);
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").set(event.targetInfo.targetId, target);
             }
         });
         _ChromeTargetManager_onTargetDestroyed.set(this, (event) => {
-            const targetInfo = __classPrivateFieldGet$z(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").get(event.targetId);
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").delete(event.targetId);
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_finishInitializationIfReady).call(this, event.targetId);
+            const targetInfo = __classPrivateFieldGet$A(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").get(event.targetId);
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").delete(event.targetId);
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_finishInitializationIfReady).call(this, event.targetId);
             if ((targetInfo === null || targetInfo === void 0 ? void 0 : targetInfo.type) === 'service_worker' &&
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").has(event.targetId)) {
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").has(event.targetId)) {
                 // Special case for service workers: report TargetGone event when
                 // the worker is destroyed.
-                const target = __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").get(event.targetId);
+                const target = __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").get(event.targetId);
                 this.emit("targetGone" /* TargetManagerEmittedEvents.TargetGone */, target);
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").delete(event.targetId);
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").delete(event.targetId);
             }
         });
         _ChromeTargetManager_onTargetInfoChanged.set(this, (event) => {
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").set(event.targetInfo.targetId, event.targetInfo);
-            if (__classPrivateFieldGet$z(this, _ChromeTargetManager_ignoredTargets, "f").has(event.targetInfo.targetId) ||
-                !__classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").has(event.targetInfo.targetId) ||
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").set(event.targetInfo.targetId, event.targetInfo);
+            if (__classPrivateFieldGet$A(this, _ChromeTargetManager_ignoredTargets, "f").has(event.targetInfo.targetId) ||
+                !__classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").has(event.targetInfo.targetId) ||
                 !event.targetInfo.attached) {
                 return;
             }
-            const target = __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").get(event.targetInfo.targetId);
+            const target = __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").get(event.targetInfo.targetId);
             this.emit("targetChanged" /* TargetManagerEmittedEvents.TargetChanged */, {
                 target: target,
                 targetInfo: event.targetInfo,
@@ -93221,7 +93242,7 @@ class ChromeTargetManager extends EventEmitter$3 {
         });
         _ChromeTargetManager_onAttachedToTarget.set(this, async (parentSession, event) => {
             const targetInfo = event.targetInfo;
-            const session = __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").session(event.sessionId);
+            const session = __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").session(event.sessionId);
             if (!session) {
                 throw new Error(`Session ${event.sessionId} was not created.`);
             }
@@ -93235,7 +93256,7 @@ class ChromeTargetManager extends EventEmitter$3 {
                 })
                     .catch(debugError);
             };
-            if (!__classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").isAutoAttached(targetInfo.targetId)) {
+            if (!__classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").isAutoAttached(targetInfo.targetId)) {
                 return;
             }
             // Special case for service workers: being attached to service workers will
@@ -93246,51 +93267,51 @@ class ChromeTargetManager extends EventEmitter$3 {
             // should determine if a target is auto-attached or not with the help of
             // CDP.
             if (targetInfo.type === 'service_worker' &&
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").isAutoAttached(targetInfo.targetId)) {
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_finishInitializationIfReady).call(this, targetInfo.targetId);
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").isAutoAttached(targetInfo.targetId)) {
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_finishInitializationIfReady).call(this, targetInfo.targetId);
                 await silentDetach();
-                if (__classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").has(targetInfo.targetId)) {
+                if (__classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").has(targetInfo.targetId)) {
                     return;
                 }
-                const target = __classPrivateFieldGet$z(this, _ChromeTargetManager_targetFactory, "f").call(this, targetInfo);
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").set(targetInfo.targetId, target);
+                const target = __classPrivateFieldGet$A(this, _ChromeTargetManager_targetFactory, "f").call(this, targetInfo);
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").set(targetInfo.targetId, target);
                 this.emit("targetAvailable" /* TargetManagerEmittedEvents.TargetAvailable */, target);
                 return;
             }
-            if (__classPrivateFieldGet$z(this, _ChromeTargetManager_targetFilterCallback, "f") && !__classPrivateFieldGet$z(this, _ChromeTargetManager_targetFilterCallback, "f").call(this, targetInfo)) {
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_ignoredTargets, "f").add(targetInfo.targetId);
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_finishInitializationIfReady).call(this, targetInfo.targetId);
+            if (__classPrivateFieldGet$A(this, _ChromeTargetManager_targetFilterCallback, "f") && !__classPrivateFieldGet$A(this, _ChromeTargetManager_targetFilterCallback, "f").call(this, targetInfo)) {
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_ignoredTargets, "f").add(targetInfo.targetId);
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_finishInitializationIfReady).call(this, targetInfo.targetId);
                 await silentDetach();
                 return;
             }
-            const existingTarget = __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").has(targetInfo.targetId);
+            const existingTarget = __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").has(targetInfo.targetId);
             const target = existingTarget
-                ? __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").get(targetInfo.targetId)
-                : __classPrivateFieldGet$z(this, _ChromeTargetManager_targetFactory, "f").call(this, targetInfo, session);
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_setupAttachmentListeners).call(this, session);
+                ? __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").get(targetInfo.targetId)
+                : __classPrivateFieldGet$A(this, _ChromeTargetManager_targetFactory, "f").call(this, targetInfo, session);
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_setupAttachmentListeners).call(this, session);
             if (existingTarget) {
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").set(session.id(), __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").get(targetInfo.targetId));
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").set(session.id(), __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").get(targetInfo.targetId));
             }
             else {
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").set(targetInfo.targetId, target);
-                __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").set(session.id(), target);
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").set(targetInfo.targetId, target);
+                __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").set(session.id(), target);
             }
-            for (const interceptor of __classPrivateFieldGet$z(this, _ChromeTargetManager_targetInterceptors, "f").get(parentSession) ||
+            for (const interceptor of __classPrivateFieldGet$A(this, _ChromeTargetManager_targetInterceptors, "f").get(parentSession) ||
                 []) {
                 if (!(parentSession instanceof Connection)) {
                     // Sanity check: if parent session is not a connection, it should be
                     // present in #attachedTargetsBySessionId.
-                    assert$1(__classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").has(parentSession.id()));
+                    assert$1(__classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").has(parentSession.id()));
                 }
                 interceptor(target, parentSession instanceof Connection
                     ? null
-                    : __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").get(parentSession.id()));
+                    : __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").get(parentSession.id()));
             }
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_targetsIdsForInit, "f").delete(target._targetId);
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_targetsIdsForInit, "f").delete(target._targetId);
             if (!existingTarget) {
                 this.emit("targetAvailable" /* TargetManagerEmittedEvents.TargetAvailable */, target);
             }
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_finishInitializationIfReady).call(this);
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_finishInitializationIfReady).call(this);
             // TODO: the browser might be shutting down here. What do we do with the
             // error?
             await Promise.all([
@@ -93303,87 +93324,87 @@ class ChromeTargetManager extends EventEmitter$3 {
             ]).catch(debugError);
         });
         _ChromeTargetManager_onDetachedFromTarget.set(this, (_parentSession, event) => {
-            const target = __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").get(event.sessionId);
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").delete(event.sessionId);
+            const target = __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").get(event.sessionId);
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsBySessionId, "f").delete(event.sessionId);
             if (!target) {
                 return;
             }
-            __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").delete(target._targetId);
+            __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f").delete(target._targetId);
             this.emit("targetGone" /* TargetManagerEmittedEvents.TargetGone */, target);
         });
-        __classPrivateFieldSet$y(this, _ChromeTargetManager_connection, connection, "f");
-        __classPrivateFieldSet$y(this, _ChromeTargetManager_targetFilterCallback, targetFilterCallback, "f");
-        __classPrivateFieldSet$y(this, _ChromeTargetManager_targetFactory, targetFactory, "f");
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").on('Target.targetCreated', __classPrivateFieldGet$z(this, _ChromeTargetManager_onTargetCreated, "f"));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").on('Target.targetDestroyed', __classPrivateFieldGet$z(this, _ChromeTargetManager_onTargetDestroyed, "f"));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").on('Target.targetInfoChanged', __classPrivateFieldGet$z(this, _ChromeTargetManager_onTargetInfoChanged, "f"));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").on('sessiondetached', __classPrivateFieldGet$z(this, _ChromeTargetManager_onSessionDetached, "f"));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_setupAttachmentListeners).call(this, __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f"));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f")
+        __classPrivateFieldSet$z(this, _ChromeTargetManager_connection, connection, "f");
+        __classPrivateFieldSet$z(this, _ChromeTargetManager_targetFilterCallback, targetFilterCallback, "f");
+        __classPrivateFieldSet$z(this, _ChromeTargetManager_targetFactory, targetFactory, "f");
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").on('Target.targetCreated', __classPrivateFieldGet$A(this, _ChromeTargetManager_onTargetCreated, "f"));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").on('Target.targetDestroyed', __classPrivateFieldGet$A(this, _ChromeTargetManager_onTargetDestroyed, "f"));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").on('Target.targetInfoChanged', __classPrivateFieldGet$A(this, _ChromeTargetManager_onTargetInfoChanged, "f"));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").on('sessiondetached', __classPrivateFieldGet$A(this, _ChromeTargetManager_onSessionDetached, "f"));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_setupAttachmentListeners).call(this, __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f"));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f")
             .send('Target.setDiscoverTargets', {
             discover: true,
             filter: [{ type: 'tab', exclude: true }, {}],
         })
-            .then(__classPrivateFieldGet$z(this, _ChromeTargetManager_storeExistingTargetsForInit, "f"))
+            .then(__classPrivateFieldGet$A(this, _ChromeTargetManager_storeExistingTargetsForInit, "f"))
             .catch(debugError);
     }
     async initialize() {
-        await __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").send('Target.setAutoAttach', {
+        await __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").send('Target.setAutoAttach', {
             waitForDebuggerOnStart: true,
             flatten: true,
             autoAttach: true,
         });
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_finishInitializationIfReady).call(this);
-        await __classPrivateFieldGet$z(this, _ChromeTargetManager_initializePromise, "f");
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_finishInitializationIfReady).call(this);
+        await __classPrivateFieldGet$A(this, _ChromeTargetManager_initializePromise, "f");
     }
     dispose() {
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").off('Target.targetCreated', __classPrivateFieldGet$z(this, _ChromeTargetManager_onTargetCreated, "f"));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").off('Target.targetDestroyed', __classPrivateFieldGet$z(this, _ChromeTargetManager_onTargetDestroyed, "f"));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").off('Target.targetInfoChanged', __classPrivateFieldGet$z(this, _ChromeTargetManager_onTargetInfoChanged, "f"));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f").off('sessiondetached', __classPrivateFieldGet$z(this, _ChromeTargetManager_onSessionDetached, "f"));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_removeAttachmentListeners).call(this, __classPrivateFieldGet$z(this, _ChromeTargetManager_connection, "f"));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").off('Target.targetCreated', __classPrivateFieldGet$A(this, _ChromeTargetManager_onTargetCreated, "f"));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").off('Target.targetDestroyed', __classPrivateFieldGet$A(this, _ChromeTargetManager_onTargetDestroyed, "f"));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").off('Target.targetInfoChanged', __classPrivateFieldGet$A(this, _ChromeTargetManager_onTargetInfoChanged, "f"));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f").off('sessiondetached', __classPrivateFieldGet$A(this, _ChromeTargetManager_onSessionDetached, "f"));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_instances, "m", _ChromeTargetManager_removeAttachmentListeners).call(this, __classPrivateFieldGet$A(this, _ChromeTargetManager_connection, "f"));
     }
     getAvailableTargets() {
-        return __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedTargetsByTargetId, "f");
+        return __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedTargetsByTargetId, "f");
     }
     addTargetInterceptor(session, interceptor) {
-        const interceptors = __classPrivateFieldGet$z(this, _ChromeTargetManager_targetInterceptors, "f").get(session) || [];
+        const interceptors = __classPrivateFieldGet$A(this, _ChromeTargetManager_targetInterceptors, "f").get(session) || [];
         interceptors.push(interceptor);
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_targetInterceptors, "f").set(session, interceptors);
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_targetInterceptors, "f").set(session, interceptors);
     }
     removeTargetInterceptor(client, interceptor) {
-        const interceptors = __classPrivateFieldGet$z(this, _ChromeTargetManager_targetInterceptors, "f").get(client) || [];
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_targetInterceptors, "f").set(client, interceptors.filter(currentInterceptor => {
+        const interceptors = __classPrivateFieldGet$A(this, _ChromeTargetManager_targetInterceptors, "f").get(client) || [];
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_targetInterceptors, "f").set(client, interceptors.filter(currentInterceptor => {
             return currentInterceptor !== interceptor;
         }));
     }
 }
 _ChromeTargetManager_connection = new WeakMap(), _ChromeTargetManager_discoveredTargetsByTargetId = new WeakMap(), _ChromeTargetManager_attachedTargetsByTargetId = new WeakMap(), _ChromeTargetManager_attachedTargetsBySessionId = new WeakMap(), _ChromeTargetManager_ignoredTargets = new WeakMap(), _ChromeTargetManager_targetFilterCallback = new WeakMap(), _ChromeTargetManager_targetFactory = new WeakMap(), _ChromeTargetManager_targetInterceptors = new WeakMap(), _ChromeTargetManager_attachedToTargetListenersBySession = new WeakMap(), _ChromeTargetManager_detachedFromTargetListenersBySession = new WeakMap(), _ChromeTargetManager_initializePromise = new WeakMap(), _ChromeTargetManager_targetsIdsForInit = new WeakMap(), _ChromeTargetManager_storeExistingTargetsForInit = new WeakMap(), _ChromeTargetManager_onSessionDetached = new WeakMap(), _ChromeTargetManager_onTargetCreated = new WeakMap(), _ChromeTargetManager_onTargetDestroyed = new WeakMap(), _ChromeTargetManager_onTargetInfoChanged = new WeakMap(), _ChromeTargetManager_onAttachedToTarget = new WeakMap(), _ChromeTargetManager_onDetachedFromTarget = new WeakMap(), _ChromeTargetManager_instances = new WeakSet(), _ChromeTargetManager_setupAttachmentListeners = function _ChromeTargetManager_setupAttachmentListeners(session) {
     const listener = (event) => {
-        return __classPrivateFieldGet$z(this, _ChromeTargetManager_onAttachedToTarget, "f").call(this, session, event);
+        return __classPrivateFieldGet$A(this, _ChromeTargetManager_onAttachedToTarget, "f").call(this, session, event);
     };
-    assert$1(!__classPrivateFieldGet$z(this, _ChromeTargetManager_attachedToTargetListenersBySession, "f").has(session));
-    __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedToTargetListenersBySession, "f").set(session, listener);
+    assert$1(!__classPrivateFieldGet$A(this, _ChromeTargetManager_attachedToTargetListenersBySession, "f").has(session));
+    __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedToTargetListenersBySession, "f").set(session, listener);
     session.on('Target.attachedToTarget', listener);
     const detachedListener = (event) => {
-        return __classPrivateFieldGet$z(this, _ChromeTargetManager_onDetachedFromTarget, "f").call(this, session, event);
+        return __classPrivateFieldGet$A(this, _ChromeTargetManager_onDetachedFromTarget, "f").call(this, session, event);
     };
-    assert$1(!__classPrivateFieldGet$z(this, _ChromeTargetManager_detachedFromTargetListenersBySession, "f").has(session));
-    __classPrivateFieldGet$z(this, _ChromeTargetManager_detachedFromTargetListenersBySession, "f").set(session, detachedListener);
+    assert$1(!__classPrivateFieldGet$A(this, _ChromeTargetManager_detachedFromTargetListenersBySession, "f").has(session));
+    __classPrivateFieldGet$A(this, _ChromeTargetManager_detachedFromTargetListenersBySession, "f").set(session, detachedListener);
     session.on('Target.detachedFromTarget', detachedListener);
 }, _ChromeTargetManager_removeAttachmentListeners = function _ChromeTargetManager_removeAttachmentListeners(session) {
-    if (__classPrivateFieldGet$z(this, _ChromeTargetManager_attachedToTargetListenersBySession, "f").has(session)) {
-        session.off('Target.attachedToTarget', __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedToTargetListenersBySession, "f").get(session));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_attachedToTargetListenersBySession, "f").delete(session);
+    if (__classPrivateFieldGet$A(this, _ChromeTargetManager_attachedToTargetListenersBySession, "f").has(session)) {
+        session.off('Target.attachedToTarget', __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedToTargetListenersBySession, "f").get(session));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_attachedToTargetListenersBySession, "f").delete(session);
     }
-    if (__classPrivateFieldGet$z(this, _ChromeTargetManager_detachedFromTargetListenersBySession, "f").has(session)) {
-        session.off('Target.detachedFromTarget', __classPrivateFieldGet$z(this, _ChromeTargetManager_detachedFromTargetListenersBySession, "f").get(session));
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_detachedFromTargetListenersBySession, "f").delete(session);
+    if (__classPrivateFieldGet$A(this, _ChromeTargetManager_detachedFromTargetListenersBySession, "f").has(session)) {
+        session.off('Target.detachedFromTarget', __classPrivateFieldGet$A(this, _ChromeTargetManager_detachedFromTargetListenersBySession, "f").get(session));
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_detachedFromTargetListenersBySession, "f").delete(session);
     }
 }, _ChromeTargetManager_finishInitializationIfReady = function _ChromeTargetManager_finishInitializationIfReady(targetId) {
-    targetId !== undefined && __classPrivateFieldGet$z(this, _ChromeTargetManager_targetsIdsForInit, "f").delete(targetId);
-    if (__classPrivateFieldGet$z(this, _ChromeTargetManager_targetsIdsForInit, "f").size === 0) {
-        __classPrivateFieldGet$z(this, _ChromeTargetManager_initializePromise, "f").resolve();
+    targetId !== undefined && __classPrivateFieldGet$A(this, _ChromeTargetManager_targetsIdsForInit, "f").delete(targetId);
+    if (__classPrivateFieldGet$A(this, _ChromeTargetManager_targetsIdsForInit, "f").size === 0) {
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_initializePromise, "f").resolve();
     }
 };
 
@@ -93402,13 +93423,13 @@ _ChromeTargetManager_connection = new WeakMap(), _ChromeTargetManager_discovered
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$x = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$y = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$y = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$z = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -93468,122 +93489,122 @@ class FirefoxTargetManager extends EventEmitter$3 {
         _FirefoxTargetManager_targetsIdsForInit.set(this, new Set());
         _FirefoxTargetManager_onSessionDetached.set(this, (session) => {
             this.removeSessionListeners(session);
-            __classPrivateFieldGet$y(this, _FirefoxTargetManager_targetInterceptors, "f").delete(session);
-            __classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsBySessionId, "f").delete(session.id());
+            __classPrivateFieldGet$z(this, _FirefoxTargetManager_targetInterceptors, "f").delete(session);
+            __classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsBySessionId, "f").delete(session.id());
         });
         _FirefoxTargetManager_onTargetCreated.set(this, async (event) => {
-            if (__classPrivateFieldGet$y(this, _FirefoxTargetManager_discoveredTargetsByTargetId, "f").has(event.targetInfo.targetId)) {
+            if (__classPrivateFieldGet$z(this, _FirefoxTargetManager_discoveredTargetsByTargetId, "f").has(event.targetInfo.targetId)) {
                 return;
             }
-            __classPrivateFieldGet$y(this, _FirefoxTargetManager_discoveredTargetsByTargetId, "f").set(event.targetInfo.targetId, event.targetInfo);
+            __classPrivateFieldGet$z(this, _FirefoxTargetManager_discoveredTargetsByTargetId, "f").set(event.targetInfo.targetId, event.targetInfo);
             if (event.targetInfo.type === 'browser' && event.targetInfo.attached) {
-                const target = __classPrivateFieldGet$y(this, _FirefoxTargetManager_targetFactory, "f").call(this, event.targetInfo, undefined);
-                __classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").set(event.targetInfo.targetId, target);
-                __classPrivateFieldGet$y(this, _FirefoxTargetManager_instances, "m", _FirefoxTargetManager_finishInitializationIfReady).call(this, target._targetId);
+                const target = __classPrivateFieldGet$z(this, _FirefoxTargetManager_targetFactory, "f").call(this, event.targetInfo, undefined);
+                __classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").set(event.targetInfo.targetId, target);
+                __classPrivateFieldGet$z(this, _FirefoxTargetManager_instances, "m", _FirefoxTargetManager_finishInitializationIfReady).call(this, target._targetId);
                 return;
             }
-            if (__classPrivateFieldGet$y(this, _FirefoxTargetManager_targetFilterCallback, "f") &&
-                !__classPrivateFieldGet$y(this, _FirefoxTargetManager_targetFilterCallback, "f").call(this, event.targetInfo)) {
-                __classPrivateFieldGet$y(this, _FirefoxTargetManager_ignoredTargets, "f").add(event.targetInfo.targetId);
-                __classPrivateFieldGet$y(this, _FirefoxTargetManager_instances, "m", _FirefoxTargetManager_finishInitializationIfReady).call(this, event.targetInfo.targetId);
+            if (__classPrivateFieldGet$z(this, _FirefoxTargetManager_targetFilterCallback, "f") &&
+                !__classPrivateFieldGet$z(this, _FirefoxTargetManager_targetFilterCallback, "f").call(this, event.targetInfo)) {
+                __classPrivateFieldGet$z(this, _FirefoxTargetManager_ignoredTargets, "f").add(event.targetInfo.targetId);
+                __classPrivateFieldGet$z(this, _FirefoxTargetManager_instances, "m", _FirefoxTargetManager_finishInitializationIfReady).call(this, event.targetInfo.targetId);
                 return;
             }
-            const target = __classPrivateFieldGet$y(this, _FirefoxTargetManager_targetFactory, "f").call(this, event.targetInfo, undefined);
-            __classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").set(event.targetInfo.targetId, target);
+            const target = __classPrivateFieldGet$z(this, _FirefoxTargetManager_targetFactory, "f").call(this, event.targetInfo, undefined);
+            __classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").set(event.targetInfo.targetId, target);
             this.emit("targetAvailable" /* TargetManagerEmittedEvents.TargetAvailable */, target);
-            __classPrivateFieldGet$y(this, _FirefoxTargetManager_instances, "m", _FirefoxTargetManager_finishInitializationIfReady).call(this, target._targetId);
+            __classPrivateFieldGet$z(this, _FirefoxTargetManager_instances, "m", _FirefoxTargetManager_finishInitializationIfReady).call(this, target._targetId);
         });
         _FirefoxTargetManager_onTargetDestroyed.set(this, (event) => {
-            __classPrivateFieldGet$y(this, _FirefoxTargetManager_discoveredTargetsByTargetId, "f").delete(event.targetId);
-            __classPrivateFieldGet$y(this, _FirefoxTargetManager_instances, "m", _FirefoxTargetManager_finishInitializationIfReady).call(this, event.targetId);
-            const target = __classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").get(event.targetId);
+            __classPrivateFieldGet$z(this, _FirefoxTargetManager_discoveredTargetsByTargetId, "f").delete(event.targetId);
+            __classPrivateFieldGet$z(this, _FirefoxTargetManager_instances, "m", _FirefoxTargetManager_finishInitializationIfReady).call(this, event.targetId);
+            const target = __classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").get(event.targetId);
             if (target) {
                 this.emit("targetGone" /* TargetManagerEmittedEvents.TargetGone */, target);
-                __classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").delete(event.targetId);
+                __classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").delete(event.targetId);
             }
         });
         _FirefoxTargetManager_onAttachedToTarget.set(this, async (parentSession, event) => {
             const targetInfo = event.targetInfo;
-            const session = __classPrivateFieldGet$y(this, _FirefoxTargetManager_connection, "f").session(event.sessionId);
+            const session = __classPrivateFieldGet$z(this, _FirefoxTargetManager_connection, "f").session(event.sessionId);
             if (!session) {
                 throw new Error(`Session ${event.sessionId} was not created.`);
             }
-            const target = __classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").get(targetInfo.targetId);
+            const target = __classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").get(targetInfo.targetId);
             assert$1(target, `Target ${targetInfo.targetId} is missing`);
             this.setupAttachmentListeners(session);
-            __classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsBySessionId, "f").set(session.id(), __classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").get(targetInfo.targetId));
-            for (const hook of __classPrivateFieldGet$y(this, _FirefoxTargetManager_targetInterceptors, "f").get(parentSession) || []) {
+            __classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsBySessionId, "f").set(session.id(), __classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsByTargetId, "f").get(targetInfo.targetId));
+            for (const hook of __classPrivateFieldGet$z(this, _FirefoxTargetManager_targetInterceptors, "f").get(parentSession) || []) {
                 if (!(parentSession instanceof Connection)) {
-                    assert$1(__classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsBySessionId, "f").has(parentSession.id()));
+                    assert$1(__classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsBySessionId, "f").has(parentSession.id()));
                 }
                 await hook(target, parentSession instanceof Connection
                     ? null
-                    : __classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsBySessionId, "f").get(parentSession.id()));
+                    : __classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsBySessionId, "f").get(parentSession.id()));
             }
         });
-        __classPrivateFieldSet$x(this, _FirefoxTargetManager_connection, connection, "f");
-        __classPrivateFieldSet$x(this, _FirefoxTargetManager_targetFilterCallback, targetFilterCallback, "f");
-        __classPrivateFieldSet$x(this, _FirefoxTargetManager_targetFactory, targetFactory, "f");
-        __classPrivateFieldGet$y(this, _FirefoxTargetManager_connection, "f").on('Target.targetCreated', __classPrivateFieldGet$y(this, _FirefoxTargetManager_onTargetCreated, "f"));
-        __classPrivateFieldGet$y(this, _FirefoxTargetManager_connection, "f").on('Target.targetDestroyed', __classPrivateFieldGet$y(this, _FirefoxTargetManager_onTargetDestroyed, "f"));
-        __classPrivateFieldGet$y(this, _FirefoxTargetManager_connection, "f").on('sessiondetached', __classPrivateFieldGet$y(this, _FirefoxTargetManager_onSessionDetached, "f"));
-        this.setupAttachmentListeners(__classPrivateFieldGet$y(this, _FirefoxTargetManager_connection, "f"));
+        __classPrivateFieldSet$y(this, _FirefoxTargetManager_connection, connection, "f");
+        __classPrivateFieldSet$y(this, _FirefoxTargetManager_targetFilterCallback, targetFilterCallback, "f");
+        __classPrivateFieldSet$y(this, _FirefoxTargetManager_targetFactory, targetFactory, "f");
+        __classPrivateFieldGet$z(this, _FirefoxTargetManager_connection, "f").on('Target.targetCreated', __classPrivateFieldGet$z(this, _FirefoxTargetManager_onTargetCreated, "f"));
+        __classPrivateFieldGet$z(this, _FirefoxTargetManager_connection, "f").on('Target.targetDestroyed', __classPrivateFieldGet$z(this, _FirefoxTargetManager_onTargetDestroyed, "f"));
+        __classPrivateFieldGet$z(this, _FirefoxTargetManager_connection, "f").on('sessiondetached', __classPrivateFieldGet$z(this, _FirefoxTargetManager_onSessionDetached, "f"));
+        this.setupAttachmentListeners(__classPrivateFieldGet$z(this, _FirefoxTargetManager_connection, "f"));
     }
     addTargetInterceptor(client, interceptor) {
-        const interceptors = __classPrivateFieldGet$y(this, _FirefoxTargetManager_targetInterceptors, "f").get(client) || [];
+        const interceptors = __classPrivateFieldGet$z(this, _FirefoxTargetManager_targetInterceptors, "f").get(client) || [];
         interceptors.push(interceptor);
-        __classPrivateFieldGet$y(this, _FirefoxTargetManager_targetInterceptors, "f").set(client, interceptors);
+        __classPrivateFieldGet$z(this, _FirefoxTargetManager_targetInterceptors, "f").set(client, interceptors);
     }
     removeTargetInterceptor(client, interceptor) {
-        const interceptors = __classPrivateFieldGet$y(this, _FirefoxTargetManager_targetInterceptors, "f").get(client) || [];
-        __classPrivateFieldGet$y(this, _FirefoxTargetManager_targetInterceptors, "f").set(client, interceptors.filter(currentInterceptor => {
+        const interceptors = __classPrivateFieldGet$z(this, _FirefoxTargetManager_targetInterceptors, "f").get(client) || [];
+        __classPrivateFieldGet$z(this, _FirefoxTargetManager_targetInterceptors, "f").set(client, interceptors.filter(currentInterceptor => {
             return currentInterceptor !== interceptor;
         }));
     }
     setupAttachmentListeners(session) {
         const listener = (event) => {
-            return __classPrivateFieldGet$y(this, _FirefoxTargetManager_onAttachedToTarget, "f").call(this, session, event);
+            return __classPrivateFieldGet$z(this, _FirefoxTargetManager_onAttachedToTarget, "f").call(this, session, event);
         };
-        assert$1(!__classPrivateFieldGet$y(this, _FirefoxTargetManager_attachedToTargetListenersBySession, "f").has(session));
-        __classPrivateFieldGet$y(this, _FirefoxTargetManager_attachedToTargetListenersBySession, "f").set(session, listener);
+        assert$1(!__classPrivateFieldGet$z(this, _FirefoxTargetManager_attachedToTargetListenersBySession, "f").has(session));
+        __classPrivateFieldGet$z(this, _FirefoxTargetManager_attachedToTargetListenersBySession, "f").set(session, listener);
         session.on('Target.attachedToTarget', listener);
     }
     removeSessionListeners(session) {
-        if (__classPrivateFieldGet$y(this, _FirefoxTargetManager_attachedToTargetListenersBySession, "f").has(session)) {
-            session.off('Target.attachedToTarget', __classPrivateFieldGet$y(this, _FirefoxTargetManager_attachedToTargetListenersBySession, "f").get(session));
-            __classPrivateFieldGet$y(this, _FirefoxTargetManager_attachedToTargetListenersBySession, "f").delete(session);
+        if (__classPrivateFieldGet$z(this, _FirefoxTargetManager_attachedToTargetListenersBySession, "f").has(session)) {
+            session.off('Target.attachedToTarget', __classPrivateFieldGet$z(this, _FirefoxTargetManager_attachedToTargetListenersBySession, "f").get(session));
+            __classPrivateFieldGet$z(this, _FirefoxTargetManager_attachedToTargetListenersBySession, "f").delete(session);
         }
     }
     getAvailableTargets() {
-        return __classPrivateFieldGet$y(this, _FirefoxTargetManager_availableTargetsByTargetId, "f");
+        return __classPrivateFieldGet$z(this, _FirefoxTargetManager_availableTargetsByTargetId, "f");
     }
     dispose() {
-        __classPrivateFieldGet$y(this, _FirefoxTargetManager_connection, "f").off('Target.targetCreated', __classPrivateFieldGet$y(this, _FirefoxTargetManager_onTargetCreated, "f"));
-        __classPrivateFieldGet$y(this, _FirefoxTargetManager_connection, "f").off('Target.targetDestroyed', __classPrivateFieldGet$y(this, _FirefoxTargetManager_onTargetDestroyed, "f"));
+        __classPrivateFieldGet$z(this, _FirefoxTargetManager_connection, "f").off('Target.targetCreated', __classPrivateFieldGet$z(this, _FirefoxTargetManager_onTargetCreated, "f"));
+        __classPrivateFieldGet$z(this, _FirefoxTargetManager_connection, "f").off('Target.targetDestroyed', __classPrivateFieldGet$z(this, _FirefoxTargetManager_onTargetDestroyed, "f"));
     }
     async initialize() {
-        await __classPrivateFieldGet$y(this, _FirefoxTargetManager_connection, "f").send('Target.setDiscoverTargets', {
+        await __classPrivateFieldGet$z(this, _FirefoxTargetManager_connection, "f").send('Target.setDiscoverTargets', {
             discover: true,
             filter: [{}],
         });
-        __classPrivateFieldSet$x(this, _FirefoxTargetManager_targetsIdsForInit, new Set(__classPrivateFieldGet$y(this, _FirefoxTargetManager_discoveredTargetsByTargetId, "f").keys()), "f");
-        await __classPrivateFieldGet$y(this, _FirefoxTargetManager_initializePromise, "f");
+        __classPrivateFieldSet$y(this, _FirefoxTargetManager_targetsIdsForInit, new Set(__classPrivateFieldGet$z(this, _FirefoxTargetManager_discoveredTargetsByTargetId, "f").keys()), "f");
+        await __classPrivateFieldGet$z(this, _FirefoxTargetManager_initializePromise, "f");
     }
 }
 _FirefoxTargetManager_connection = new WeakMap(), _FirefoxTargetManager_discoveredTargetsByTargetId = new WeakMap(), _FirefoxTargetManager_availableTargetsByTargetId = new WeakMap(), _FirefoxTargetManager_availableTargetsBySessionId = new WeakMap(), _FirefoxTargetManager_ignoredTargets = new WeakMap(), _FirefoxTargetManager_targetFilterCallback = new WeakMap(), _FirefoxTargetManager_targetFactory = new WeakMap(), _FirefoxTargetManager_targetInterceptors = new WeakMap(), _FirefoxTargetManager_attachedToTargetListenersBySession = new WeakMap(), _FirefoxTargetManager_initializePromise = new WeakMap(), _FirefoxTargetManager_targetsIdsForInit = new WeakMap(), _FirefoxTargetManager_onSessionDetached = new WeakMap(), _FirefoxTargetManager_onTargetCreated = new WeakMap(), _FirefoxTargetManager_onTargetDestroyed = new WeakMap(), _FirefoxTargetManager_onAttachedToTarget = new WeakMap(), _FirefoxTargetManager_instances = new WeakSet(), _FirefoxTargetManager_finishInitializationIfReady = function _FirefoxTargetManager_finishInitializationIfReady(targetId) {
-    __classPrivateFieldGet$y(this, _FirefoxTargetManager_targetsIdsForInit, "f").delete(targetId);
-    if (__classPrivateFieldGet$y(this, _FirefoxTargetManager_targetsIdsForInit, "f").size === 0) {
-        __classPrivateFieldGet$y(this, _FirefoxTargetManager_initializePromise, "f").resolve();
+    __classPrivateFieldGet$z(this, _FirefoxTargetManager_targetsIdsForInit, "f").delete(targetId);
+    if (__classPrivateFieldGet$z(this, _FirefoxTargetManager_targetsIdsForInit, "f").size === 0) {
+        __classPrivateFieldGet$z(this, _FirefoxTargetManager_initializePromise, "f").resolve();
     }
 };
 
-var __classPrivateFieldSet$w = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$x = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$x = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$y = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -93596,11 +93617,11 @@ class Binding {
     constructor(name, fn) {
         _Binding_name.set(this, void 0);
         _Binding_fn.set(this, void 0);
-        __classPrivateFieldSet$w(this, _Binding_name, name, "f");
-        __classPrivateFieldSet$w(this, _Binding_fn, fn, "f");
+        __classPrivateFieldSet$x(this, _Binding_name, name, "f");
+        __classPrivateFieldSet$x(this, _Binding_fn, fn, "f");
     }
     get name() {
-        return __classPrivateFieldGet$x(this, _Binding_name, "f");
+        return __classPrivateFieldGet$y(this, _Binding_name, "f");
     }
     /**
      * @param context - Context to run the binding in; the context should have
@@ -93617,7 +93638,7 @@ class Binding {
                 const handles = await context.evaluateHandle((name, seq) => {
                     // @ts-expect-error Code is evaluated in a different context.
                     return globalThis[name].args.get(seq);
-                }, __classPrivateFieldGet$x(this, _Binding_name, "f"), id);
+                }, __classPrivateFieldGet$y(this, _Binding_name, "f"), id);
                 try {
                     const properties = await handles.getProperties();
                     for (const [index, handle] of properties) {
@@ -93646,7 +93667,7 @@ class Binding {
                 const callbacks = globalThis[name].callbacks;
                 callbacks.get(seq).resolve(result);
                 callbacks.delete(seq);
-            }, __classPrivateFieldGet$x(this, _Binding_name, "f"), id, await __classPrivateFieldGet$x(this, _Binding_fn, "f").call(this, ...args));
+            }, __classPrivateFieldGet$y(this, _Binding_name, "f"), id, await __classPrivateFieldGet$y(this, _Binding_fn, "f").call(this, ...args));
             for (const arg of args) {
                 if (arg instanceof JSHandle$1) {
                     garbage.push(arg.dispose());
@@ -93663,7 +93684,7 @@ class Binding {
                     const callbacks = globalThis[name].callbacks;
                     callbacks.get(seq).reject(error);
                     callbacks.delete(seq);
-                }, __classPrivateFieldGet$x(this, _Binding_name, "f"), id, error.message, error.stack)
+                }, __classPrivateFieldGet$y(this, _Binding_name, "f"), id, error.message, error.stack)
                     .catch(debugError);
             }
             else {
@@ -93673,7 +93694,7 @@ class Binding {
                     const callbacks = globalThis[name].callbacks;
                     callbacks.get(seq).reject(error);
                     callbacks.delete(seq);
-                }, __classPrivateFieldGet$x(this, _Binding_name, "f"), id, error)
+                }, __classPrivateFieldGet$y(this, _Binding_name, "f"), id, error)
                     .catch(debugError);
             }
         }
@@ -93699,13 +93720,13 @@ _Binding_name = new WeakMap(), _Binding_fn = new WeakMap();
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$v = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$w = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$w = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$x = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -93724,41 +93745,41 @@ class ConsoleMessage {
         _ConsoleMessage_text.set(this, void 0);
         _ConsoleMessage_args.set(this, void 0);
         _ConsoleMessage_stackTraceLocations.set(this, void 0);
-        __classPrivateFieldSet$v(this, _ConsoleMessage_type, type, "f");
-        __classPrivateFieldSet$v(this, _ConsoleMessage_text, text, "f");
-        __classPrivateFieldSet$v(this, _ConsoleMessage_args, args, "f");
-        __classPrivateFieldSet$v(this, _ConsoleMessage_stackTraceLocations, stackTraceLocations, "f");
+        __classPrivateFieldSet$w(this, _ConsoleMessage_type, type, "f");
+        __classPrivateFieldSet$w(this, _ConsoleMessage_text, text, "f");
+        __classPrivateFieldSet$w(this, _ConsoleMessage_args, args, "f");
+        __classPrivateFieldSet$w(this, _ConsoleMessage_stackTraceLocations, stackTraceLocations, "f");
     }
     /**
      * The type of the console message.
      */
     type() {
-        return __classPrivateFieldGet$w(this, _ConsoleMessage_type, "f");
+        return __classPrivateFieldGet$x(this, _ConsoleMessage_type, "f");
     }
     /**
      * The text of the console message.
      */
     text() {
-        return __classPrivateFieldGet$w(this, _ConsoleMessage_text, "f");
+        return __classPrivateFieldGet$x(this, _ConsoleMessage_text, "f");
     }
     /**
      * An array of arguments passed to the console.
      */
     args() {
-        return __classPrivateFieldGet$w(this, _ConsoleMessage_args, "f");
+        return __classPrivateFieldGet$x(this, _ConsoleMessage_args, "f");
     }
     /**
      * The location of the console message.
      */
     location() {
         var _a;
-        return (_a = __classPrivateFieldGet$w(this, _ConsoleMessage_stackTraceLocations, "f")[0]) !== null && _a !== void 0 ? _a : {};
+        return (_a = __classPrivateFieldGet$x(this, _ConsoleMessage_stackTraceLocations, "f")[0]) !== null && _a !== void 0 ? _a : {};
     }
     /**
      * The array of locations on the stack of the console message.
      */
     stackTrace() {
-        return __classPrivateFieldGet$w(this, _ConsoleMessage_stackTraceLocations, "f");
+        return __classPrivateFieldGet$x(this, _ConsoleMessage_stackTraceLocations, "f");
     }
 }
 _ConsoleMessage_type = new WeakMap(), _ConsoleMessage_text = new WeakMap(), _ConsoleMessage_args = new WeakMap(), _ConsoleMessage_stackTraceLocations = new WeakMap();
@@ -93778,12 +93799,12 @@ _ConsoleMessage_type = new WeakMap(), _ConsoleMessage_text = new WeakMap(), _Con
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$v = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$w = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$u = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$v = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -93831,29 +93852,29 @@ class ExecutionContext {
     }
     get puppeteerUtil() {
         let promise = Promise.resolve();
-        if (!__classPrivateFieldGet$v(this, _ExecutionContext_bindingsInstalled, "f")) {
+        if (!__classPrivateFieldGet$w(this, _ExecutionContext_bindingsInstalled, "f")) {
             promise = Promise.all([
-                __classPrivateFieldGet$v(this, _ExecutionContext_instances, "m", _ExecutionContext_installGlobalBinding).call(this, new Binding('__ariaQuerySelector', ARIAQueryHandler.queryOne)),
-                __classPrivateFieldGet$v(this, _ExecutionContext_instances, "m", _ExecutionContext_installGlobalBinding).call(this, new Binding('__ariaQuerySelectorAll', (async (element, selector) => {
+                __classPrivateFieldGet$w(this, _ExecutionContext_instances, "m", _ExecutionContext_installGlobalBinding).call(this, new Binding('__ariaQuerySelector', ARIAQueryHandler.queryOne)),
+                __classPrivateFieldGet$w(this, _ExecutionContext_instances, "m", _ExecutionContext_installGlobalBinding).call(this, new Binding('__ariaQuerySelectorAll', (async (element, selector) => {
                     const results = ARIAQueryHandler.queryAll(element, selector);
                     return element.executionContext().evaluateHandle((...elements) => {
                         return elements;
                     }, ...(await AsyncIterableUtil.collect(results)));
                 }))),
             ]);
-            __classPrivateFieldSet$u(this, _ExecutionContext_bindingsInstalled, true, "f");
+            __classPrivateFieldSet$v(this, _ExecutionContext_bindingsInstalled, true, "f");
         }
         scriptInjector.inject(script => {
-            if (__classPrivateFieldGet$v(this, _ExecutionContext_puppeteerUtil, "f")) {
-                __classPrivateFieldGet$v(this, _ExecutionContext_puppeteerUtil, "f").then(handle => {
+            if (__classPrivateFieldGet$w(this, _ExecutionContext_puppeteerUtil, "f")) {
+                __classPrivateFieldGet$w(this, _ExecutionContext_puppeteerUtil, "f").then(handle => {
                     handle.dispose();
                 });
             }
-            __classPrivateFieldSet$u(this, _ExecutionContext_puppeteerUtil, promise.then(() => {
+            __classPrivateFieldSet$v(this, _ExecutionContext_puppeteerUtil, promise.then(() => {
                 return this.evaluateHandle(script);
             }), "f");
-        }, !__classPrivateFieldGet$v(this, _ExecutionContext_puppeteerUtil, "f"));
-        return __classPrivateFieldGet$v(this, _ExecutionContext_puppeteerUtil, "f");
+        }, !__classPrivateFieldGet$w(this, _ExecutionContext_puppeteerUtil, "f"));
+        return __classPrivateFieldGet$w(this, _ExecutionContext_puppeteerUtil, "f");
     }
     /**
      * Evaluates the given function.
@@ -93896,7 +93917,7 @@ class ExecutionContext {
      * returned.
      */
     async evaluate(pageFunction, ...args) {
-        return await __classPrivateFieldGet$v(this, _ExecutionContext_instances, "m", _ExecutionContext_evaluate).call(this, true, pageFunction, ...args);
+        return await __classPrivateFieldGet$w(this, _ExecutionContext_instances, "m", _ExecutionContext_evaluate).call(this, true, pageFunction, ...args);
     }
     /**
      * Evaluates the given function.
@@ -93948,7 +93969,7 @@ class ExecutionContext {
      * {@link ElementHandle | element handle}.
      */
     async evaluateHandle(pageFunction, ...args) {
-        return __classPrivateFieldGet$v(this, _ExecutionContext_instances, "m", _ExecutionContext_evaluate).call(this, false, pageFunction, ...args);
+        return __classPrivateFieldGet$w(this, _ExecutionContext_instances, "m", _ExecutionContext_evaluate).call(this, false, pageFunction, ...args);
     }
 }
 _ExecutionContext_bindingsInstalled = new WeakMap(), _ExecutionContext_puppeteerUtil = new WeakMap(), _ExecutionContext_instances = new WeakSet(), _ExecutionContext_installGlobalBinding = async function _ExecutionContext_installGlobalBinding(binding) {
@@ -94084,13 +94105,13 @@ const rewriteError = (error) => {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$t = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$u = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$u = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$v = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -94137,8 +94158,8 @@ class Coverage {
     constructor(client) {
         _Coverage_jsCoverage.set(this, void 0);
         _Coverage_cssCoverage.set(this, void 0);
-        __classPrivateFieldSet$t(this, _Coverage_jsCoverage, new JSCoverage(client), "f");
-        __classPrivateFieldSet$t(this, _Coverage_cssCoverage, new CSSCoverage(client), "f");
+        __classPrivateFieldSet$u(this, _Coverage_jsCoverage, new JSCoverage(client), "f");
+        __classPrivateFieldSet$u(this, _Coverage_cssCoverage, new CSSCoverage(client), "f");
     }
     /**
      * @param options - Set of configurable options for coverage defaults to
@@ -94154,7 +94175,7 @@ class Coverage {
      * comment is present, in which case that will the be URL).
      */
     async startJSCoverage(options = {}) {
-        return await __classPrivateFieldGet$u(this, _Coverage_jsCoverage, "f").start(options);
+        return await __classPrivateFieldGet$v(this, _Coverage_jsCoverage, "f").start(options);
     }
     /**
      * Promise that resolves to the array of coverage reports for
@@ -94165,7 +94186,7 @@ class Coverage {
      * However, scripts with sourceURLs are reported.
      */
     async stopJSCoverage() {
-        return await __classPrivateFieldGet$u(this, _Coverage_jsCoverage, "f").stop();
+        return await __classPrivateFieldGet$v(this, _Coverage_jsCoverage, "f").stop();
     }
     /**
      * @param options - Set of configurable options for coverage, defaults to
@@ -94173,7 +94194,7 @@ class Coverage {
      * @returns Promise that resolves when coverage is started.
      */
     async startCSSCoverage(options = {}) {
-        return await __classPrivateFieldGet$u(this, _Coverage_cssCoverage, "f").start(options);
+        return await __classPrivateFieldGet$v(this, _Coverage_cssCoverage, "f").start(options);
     }
     /**
      * Promise that resolves to the array of coverage reports
@@ -94184,7 +94205,7 @@ class Coverage {
      * without sourceURLs.
      */
     async stopCSSCoverage() {
-        return await __classPrivateFieldGet$u(this, _Coverage_cssCoverage, "f").stop();
+        return await __classPrivateFieldGet$v(this, _Coverage_cssCoverage, "f").stop();
     }
 }
 _Coverage_jsCoverage = new WeakMap(), _Coverage_cssCoverage = new WeakMap();
@@ -94202,49 +94223,49 @@ class JSCoverage {
         _JSCoverage_resetOnNavigation.set(this, false);
         _JSCoverage_reportAnonymousScripts.set(this, false);
         _JSCoverage_includeRawScriptCoverage.set(this, false);
-        __classPrivateFieldSet$t(this, _JSCoverage_client, client, "f");
+        __classPrivateFieldSet$u(this, _JSCoverage_client, client, "f");
     }
     async start(options = {}) {
-        assert$1(!__classPrivateFieldGet$u(this, _JSCoverage_enabled, "f"), 'JSCoverage is already enabled');
+        assert$1(!__classPrivateFieldGet$v(this, _JSCoverage_enabled, "f"), 'JSCoverage is already enabled');
         const { resetOnNavigation = true, reportAnonymousScripts = false, includeRawScriptCoverage = false, useBlockCoverage = true, } = options;
-        __classPrivateFieldSet$t(this, _JSCoverage_resetOnNavigation, resetOnNavigation, "f");
-        __classPrivateFieldSet$t(this, _JSCoverage_reportAnonymousScripts, reportAnonymousScripts, "f");
-        __classPrivateFieldSet$t(this, _JSCoverage_includeRawScriptCoverage, includeRawScriptCoverage, "f");
-        __classPrivateFieldSet$t(this, _JSCoverage_enabled, true, "f");
-        __classPrivateFieldGet$u(this, _JSCoverage_scriptURLs, "f").clear();
-        __classPrivateFieldGet$u(this, _JSCoverage_scriptSources, "f").clear();
-        __classPrivateFieldSet$t(this, _JSCoverage_eventListeners, [
-            addEventListener$1(__classPrivateFieldGet$u(this, _JSCoverage_client, "f"), 'Debugger.scriptParsed', __classPrivateFieldGet$u(this, _JSCoverage_instances, "m", _JSCoverage_onScriptParsed).bind(this)),
-            addEventListener$1(__classPrivateFieldGet$u(this, _JSCoverage_client, "f"), 'Runtime.executionContextsCleared', __classPrivateFieldGet$u(this, _JSCoverage_instances, "m", _JSCoverage_onExecutionContextsCleared).bind(this)),
+        __classPrivateFieldSet$u(this, _JSCoverage_resetOnNavigation, resetOnNavigation, "f");
+        __classPrivateFieldSet$u(this, _JSCoverage_reportAnonymousScripts, reportAnonymousScripts, "f");
+        __classPrivateFieldSet$u(this, _JSCoverage_includeRawScriptCoverage, includeRawScriptCoverage, "f");
+        __classPrivateFieldSet$u(this, _JSCoverage_enabled, true, "f");
+        __classPrivateFieldGet$v(this, _JSCoverage_scriptURLs, "f").clear();
+        __classPrivateFieldGet$v(this, _JSCoverage_scriptSources, "f").clear();
+        __classPrivateFieldSet$u(this, _JSCoverage_eventListeners, [
+            addEventListener$1(__classPrivateFieldGet$v(this, _JSCoverage_client, "f"), 'Debugger.scriptParsed', __classPrivateFieldGet$v(this, _JSCoverage_instances, "m", _JSCoverage_onScriptParsed).bind(this)),
+            addEventListener$1(__classPrivateFieldGet$v(this, _JSCoverage_client, "f"), 'Runtime.executionContextsCleared', __classPrivateFieldGet$v(this, _JSCoverage_instances, "m", _JSCoverage_onExecutionContextsCleared).bind(this)),
         ], "f");
         await Promise.all([
-            __classPrivateFieldGet$u(this, _JSCoverage_client, "f").send('Profiler.enable'),
-            __classPrivateFieldGet$u(this, _JSCoverage_client, "f").send('Profiler.startPreciseCoverage', {
-                callCount: __classPrivateFieldGet$u(this, _JSCoverage_includeRawScriptCoverage, "f"),
+            __classPrivateFieldGet$v(this, _JSCoverage_client, "f").send('Profiler.enable'),
+            __classPrivateFieldGet$v(this, _JSCoverage_client, "f").send('Profiler.startPreciseCoverage', {
+                callCount: __classPrivateFieldGet$v(this, _JSCoverage_includeRawScriptCoverage, "f"),
                 detailed: useBlockCoverage,
             }),
-            __classPrivateFieldGet$u(this, _JSCoverage_client, "f").send('Debugger.enable'),
-            __classPrivateFieldGet$u(this, _JSCoverage_client, "f").send('Debugger.setSkipAllPauses', { skip: true }),
+            __classPrivateFieldGet$v(this, _JSCoverage_client, "f").send('Debugger.enable'),
+            __classPrivateFieldGet$v(this, _JSCoverage_client, "f").send('Debugger.setSkipAllPauses', { skip: true }),
         ]);
     }
     async stop() {
-        assert$1(__classPrivateFieldGet$u(this, _JSCoverage_enabled, "f"), 'JSCoverage is not enabled');
-        __classPrivateFieldSet$t(this, _JSCoverage_enabled, false, "f");
+        assert$1(__classPrivateFieldGet$v(this, _JSCoverage_enabled, "f"), 'JSCoverage is not enabled');
+        __classPrivateFieldSet$u(this, _JSCoverage_enabled, false, "f");
         const result = await Promise.all([
-            __classPrivateFieldGet$u(this, _JSCoverage_client, "f").send('Profiler.takePreciseCoverage'),
-            __classPrivateFieldGet$u(this, _JSCoverage_client, "f").send('Profiler.stopPreciseCoverage'),
-            __classPrivateFieldGet$u(this, _JSCoverage_client, "f").send('Profiler.disable'),
-            __classPrivateFieldGet$u(this, _JSCoverage_client, "f").send('Debugger.disable'),
+            __classPrivateFieldGet$v(this, _JSCoverage_client, "f").send('Profiler.takePreciseCoverage'),
+            __classPrivateFieldGet$v(this, _JSCoverage_client, "f").send('Profiler.stopPreciseCoverage'),
+            __classPrivateFieldGet$v(this, _JSCoverage_client, "f").send('Profiler.disable'),
+            __classPrivateFieldGet$v(this, _JSCoverage_client, "f").send('Debugger.disable'),
         ]);
-        removeEventListeners(__classPrivateFieldGet$u(this, _JSCoverage_eventListeners, "f"));
+        removeEventListeners(__classPrivateFieldGet$v(this, _JSCoverage_eventListeners, "f"));
         const coverage = [];
         const profileResponse = result[0];
         for (const entry of profileResponse.result) {
-            let url = __classPrivateFieldGet$u(this, _JSCoverage_scriptURLs, "f").get(entry.scriptId);
-            if (!url && __classPrivateFieldGet$u(this, _JSCoverage_reportAnonymousScripts, "f")) {
+            let url = __classPrivateFieldGet$v(this, _JSCoverage_scriptURLs, "f").get(entry.scriptId);
+            if (!url && __classPrivateFieldGet$v(this, _JSCoverage_reportAnonymousScripts, "f")) {
                 url = 'debugger://VM' + entry.scriptId;
             }
-            const text = __classPrivateFieldGet$u(this, _JSCoverage_scriptSources, "f").get(entry.scriptId);
+            const text = __classPrivateFieldGet$v(this, _JSCoverage_scriptSources, "f").get(entry.scriptId);
             if (text === undefined || url === undefined) {
                 continue;
             }
@@ -94253,7 +94274,7 @@ class JSCoverage {
                 flattenRanges.push(...func.ranges);
             }
             const ranges = convertToDisjointRanges(flattenRanges);
-            if (!__classPrivateFieldGet$u(this, _JSCoverage_includeRawScriptCoverage, "f")) {
+            if (!__classPrivateFieldGet$v(this, _JSCoverage_includeRawScriptCoverage, "f")) {
                 coverage.push({ url, ranges, text });
             }
             else {
@@ -94264,26 +94285,26 @@ class JSCoverage {
     }
 }
 _JSCoverage_client = new WeakMap(), _JSCoverage_enabled = new WeakMap(), _JSCoverage_scriptURLs = new WeakMap(), _JSCoverage_scriptSources = new WeakMap(), _JSCoverage_eventListeners = new WeakMap(), _JSCoverage_resetOnNavigation = new WeakMap(), _JSCoverage_reportAnonymousScripts = new WeakMap(), _JSCoverage_includeRawScriptCoverage = new WeakMap(), _JSCoverage_instances = new WeakSet(), _JSCoverage_onExecutionContextsCleared = function _JSCoverage_onExecutionContextsCleared() {
-    if (!__classPrivateFieldGet$u(this, _JSCoverage_resetOnNavigation, "f")) {
+    if (!__classPrivateFieldGet$v(this, _JSCoverage_resetOnNavigation, "f")) {
         return;
     }
-    __classPrivateFieldGet$u(this, _JSCoverage_scriptURLs, "f").clear();
-    __classPrivateFieldGet$u(this, _JSCoverage_scriptSources, "f").clear();
+    __classPrivateFieldGet$v(this, _JSCoverage_scriptURLs, "f").clear();
+    __classPrivateFieldGet$v(this, _JSCoverage_scriptSources, "f").clear();
 }, _JSCoverage_onScriptParsed = async function _JSCoverage_onScriptParsed(event) {
     // Ignore puppeteer-injected scripts
     if (event.url === EVALUATION_SCRIPT_URL) {
         return;
     }
     // Ignore other anonymous scripts unless the reportAnonymousScripts option is true.
-    if (!event.url && !__classPrivateFieldGet$u(this, _JSCoverage_reportAnonymousScripts, "f")) {
+    if (!event.url && !__classPrivateFieldGet$v(this, _JSCoverage_reportAnonymousScripts, "f")) {
         return;
     }
     try {
-        const response = await __classPrivateFieldGet$u(this, _JSCoverage_client, "f").send('Debugger.getScriptSource', {
+        const response = await __classPrivateFieldGet$v(this, _JSCoverage_client, "f").send('Debugger.getScriptSource', {
             scriptId: event.scriptId,
         });
-        __classPrivateFieldGet$u(this, _JSCoverage_scriptURLs, "f").set(event.scriptId, event.url);
-        __classPrivateFieldGet$u(this, _JSCoverage_scriptSources, "f").set(event.scriptId, response.scriptSource);
+        __classPrivateFieldGet$v(this, _JSCoverage_scriptURLs, "f").set(event.scriptId, event.url);
+        __classPrivateFieldGet$v(this, _JSCoverage_scriptSources, "f").set(event.scriptId, response.scriptSource);
     }
     catch (error) {
         // This might happen if the page has already navigated away.
@@ -94302,34 +94323,34 @@ class CSSCoverage {
         _CSSCoverage_stylesheetSources.set(this, new Map());
         _CSSCoverage_eventListeners.set(this, []);
         _CSSCoverage_resetOnNavigation.set(this, false);
-        __classPrivateFieldSet$t(this, _CSSCoverage_client, client, "f");
+        __classPrivateFieldSet$u(this, _CSSCoverage_client, client, "f");
     }
     async start(options = {}) {
-        assert$1(!__classPrivateFieldGet$u(this, _CSSCoverage_enabled, "f"), 'CSSCoverage is already enabled');
+        assert$1(!__classPrivateFieldGet$v(this, _CSSCoverage_enabled, "f"), 'CSSCoverage is already enabled');
         const { resetOnNavigation = true } = options;
-        __classPrivateFieldSet$t(this, _CSSCoverage_resetOnNavigation, resetOnNavigation, "f");
-        __classPrivateFieldSet$t(this, _CSSCoverage_enabled, true, "f");
-        __classPrivateFieldGet$u(this, _CSSCoverage_stylesheetURLs, "f").clear();
-        __classPrivateFieldGet$u(this, _CSSCoverage_stylesheetSources, "f").clear();
-        __classPrivateFieldSet$t(this, _CSSCoverage_eventListeners, [
-            addEventListener$1(__classPrivateFieldGet$u(this, _CSSCoverage_client, "f"), 'CSS.styleSheetAdded', __classPrivateFieldGet$u(this, _CSSCoverage_instances, "m", _CSSCoverage_onStyleSheet).bind(this)),
-            addEventListener$1(__classPrivateFieldGet$u(this, _CSSCoverage_client, "f"), 'Runtime.executionContextsCleared', __classPrivateFieldGet$u(this, _CSSCoverage_instances, "m", _CSSCoverage_onExecutionContextsCleared).bind(this)),
+        __classPrivateFieldSet$u(this, _CSSCoverage_resetOnNavigation, resetOnNavigation, "f");
+        __classPrivateFieldSet$u(this, _CSSCoverage_enabled, true, "f");
+        __classPrivateFieldGet$v(this, _CSSCoverage_stylesheetURLs, "f").clear();
+        __classPrivateFieldGet$v(this, _CSSCoverage_stylesheetSources, "f").clear();
+        __classPrivateFieldSet$u(this, _CSSCoverage_eventListeners, [
+            addEventListener$1(__classPrivateFieldGet$v(this, _CSSCoverage_client, "f"), 'CSS.styleSheetAdded', __classPrivateFieldGet$v(this, _CSSCoverage_instances, "m", _CSSCoverage_onStyleSheet).bind(this)),
+            addEventListener$1(__classPrivateFieldGet$v(this, _CSSCoverage_client, "f"), 'Runtime.executionContextsCleared', __classPrivateFieldGet$v(this, _CSSCoverage_instances, "m", _CSSCoverage_onExecutionContextsCleared).bind(this)),
         ], "f");
         await Promise.all([
-            __classPrivateFieldGet$u(this, _CSSCoverage_client, "f").send('DOM.enable'),
-            __classPrivateFieldGet$u(this, _CSSCoverage_client, "f").send('CSS.enable'),
-            __classPrivateFieldGet$u(this, _CSSCoverage_client, "f").send('CSS.startRuleUsageTracking'),
+            __classPrivateFieldGet$v(this, _CSSCoverage_client, "f").send('DOM.enable'),
+            __classPrivateFieldGet$v(this, _CSSCoverage_client, "f").send('CSS.enable'),
+            __classPrivateFieldGet$v(this, _CSSCoverage_client, "f").send('CSS.startRuleUsageTracking'),
         ]);
     }
     async stop() {
-        assert$1(__classPrivateFieldGet$u(this, _CSSCoverage_enabled, "f"), 'CSSCoverage is not enabled');
-        __classPrivateFieldSet$t(this, _CSSCoverage_enabled, false, "f");
-        const ruleTrackingResponse = await __classPrivateFieldGet$u(this, _CSSCoverage_client, "f").send('CSS.stopRuleUsageTracking');
+        assert$1(__classPrivateFieldGet$v(this, _CSSCoverage_enabled, "f"), 'CSSCoverage is not enabled');
+        __classPrivateFieldSet$u(this, _CSSCoverage_enabled, false, "f");
+        const ruleTrackingResponse = await __classPrivateFieldGet$v(this, _CSSCoverage_client, "f").send('CSS.stopRuleUsageTracking');
         await Promise.all([
-            __classPrivateFieldGet$u(this, _CSSCoverage_client, "f").send('CSS.disable'),
-            __classPrivateFieldGet$u(this, _CSSCoverage_client, "f").send('DOM.disable'),
+            __classPrivateFieldGet$v(this, _CSSCoverage_client, "f").send('CSS.disable'),
+            __classPrivateFieldGet$v(this, _CSSCoverage_client, "f").send('DOM.disable'),
         ]);
-        removeEventListeners(__classPrivateFieldGet$u(this, _CSSCoverage_eventListeners, "f"));
+        removeEventListeners(__classPrivateFieldGet$v(this, _CSSCoverage_eventListeners, "f"));
         // aggregate by styleSheetId
         const styleSheetIdToCoverage = new Map();
         for (const entry of ruleTrackingResponse.ruleUsage) {
@@ -94345,10 +94366,10 @@ class CSSCoverage {
             });
         }
         const coverage = [];
-        for (const styleSheetId of __classPrivateFieldGet$u(this, _CSSCoverage_stylesheetURLs, "f").keys()) {
-            const url = __classPrivateFieldGet$u(this, _CSSCoverage_stylesheetURLs, "f").get(styleSheetId);
+        for (const styleSheetId of __classPrivateFieldGet$v(this, _CSSCoverage_stylesheetURLs, "f").keys()) {
+            const url = __classPrivateFieldGet$v(this, _CSSCoverage_stylesheetURLs, "f").get(styleSheetId);
             assert$1(typeof url !== 'undefined', `Stylesheet URL is undefined (styleSheetId=${styleSheetId})`);
-            const text = __classPrivateFieldGet$u(this, _CSSCoverage_stylesheetSources, "f").get(styleSheetId);
+            const text = __classPrivateFieldGet$v(this, _CSSCoverage_stylesheetSources, "f").get(styleSheetId);
             assert$1(typeof text !== 'undefined', `Stylesheet text is undefined (styleSheetId=${styleSheetId})`);
             const ranges = convertToDisjointRanges(styleSheetIdToCoverage.get(styleSheetId) || []);
             coverage.push({ url, ranges, text });
@@ -94357,11 +94378,11 @@ class CSSCoverage {
     }
 }
 _CSSCoverage_client = new WeakMap(), _CSSCoverage_enabled = new WeakMap(), _CSSCoverage_stylesheetURLs = new WeakMap(), _CSSCoverage_stylesheetSources = new WeakMap(), _CSSCoverage_eventListeners = new WeakMap(), _CSSCoverage_resetOnNavigation = new WeakMap(), _CSSCoverage_instances = new WeakSet(), _CSSCoverage_onExecutionContextsCleared = function _CSSCoverage_onExecutionContextsCleared() {
-    if (!__classPrivateFieldGet$u(this, _CSSCoverage_resetOnNavigation, "f")) {
+    if (!__classPrivateFieldGet$v(this, _CSSCoverage_resetOnNavigation, "f")) {
         return;
     }
-    __classPrivateFieldGet$u(this, _CSSCoverage_stylesheetURLs, "f").clear();
-    __classPrivateFieldGet$u(this, _CSSCoverage_stylesheetSources, "f").clear();
+    __classPrivateFieldGet$v(this, _CSSCoverage_stylesheetURLs, "f").clear();
+    __classPrivateFieldGet$v(this, _CSSCoverage_stylesheetSources, "f").clear();
 }, _CSSCoverage_onStyleSheet = async function _CSSCoverage_onStyleSheet(event) {
     const header = event.header;
     // Ignore anonymous scripts
@@ -94369,11 +94390,11 @@ _CSSCoverage_client = new WeakMap(), _CSSCoverage_enabled = new WeakMap(), _CSSC
         return;
     }
     try {
-        const response = await __classPrivateFieldGet$u(this, _CSSCoverage_client, "f").send('CSS.getStyleSheetText', {
+        const response = await __classPrivateFieldGet$v(this, _CSSCoverage_client, "f").send('CSS.getStyleSheetText', {
             styleSheetId: header.styleSheetId,
         });
-        __classPrivateFieldGet$u(this, _CSSCoverage_stylesheetURLs, "f").set(header.styleSheetId, header.sourceURL);
-        __classPrivateFieldGet$u(this, _CSSCoverage_stylesheetSources, "f").set(header.styleSheetId, response.text);
+        __classPrivateFieldGet$v(this, _CSSCoverage_stylesheetURLs, "f").set(header.styleSheetId, header.sourceURL);
+        __classPrivateFieldGet$v(this, _CSSCoverage_stylesheetSources, "f").set(header.styleSheetId, response.text);
     }
     catch (error) {
         // This might happen if the page has already navigated away.
@@ -94450,13 +94471,13 @@ function convertToDisjointRanges(nestedRanges) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$s = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$t = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$t = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$u = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -94496,29 +94517,29 @@ class Dialog {
         _Dialog_message.set(this, void 0);
         _Dialog_defaultValue.set(this, void 0);
         _Dialog_handled.set(this, false);
-        __classPrivateFieldSet$s(this, _Dialog_client, client, "f");
-        __classPrivateFieldSet$s(this, _Dialog_type, type, "f");
-        __classPrivateFieldSet$s(this, _Dialog_message, message, "f");
-        __classPrivateFieldSet$s(this, _Dialog_defaultValue, defaultValue, "f");
+        __classPrivateFieldSet$t(this, _Dialog_client, client, "f");
+        __classPrivateFieldSet$t(this, _Dialog_type, type, "f");
+        __classPrivateFieldSet$t(this, _Dialog_message, message, "f");
+        __classPrivateFieldSet$t(this, _Dialog_defaultValue, defaultValue, "f");
     }
     /**
      * The type of the dialog.
      */
     type() {
-        return __classPrivateFieldGet$t(this, _Dialog_type, "f");
+        return __classPrivateFieldGet$u(this, _Dialog_type, "f");
     }
     /**
      * The message displayed in the dialog.
      */
     message() {
-        return __classPrivateFieldGet$t(this, _Dialog_message, "f");
+        return __classPrivateFieldGet$u(this, _Dialog_message, "f");
     }
     /**
      * The default value of the prompt, or an empty string if the dialog
      * is not a `prompt`.
      */
     defaultValue() {
-        return __classPrivateFieldGet$t(this, _Dialog_defaultValue, "f");
+        return __classPrivateFieldGet$u(this, _Dialog_defaultValue, "f");
     }
     /**
      * A promise that resolves when the dialog has been accepted.
@@ -94528,9 +94549,9 @@ class Dialog {
      *
      */
     async accept(promptText) {
-        assert$1(!__classPrivateFieldGet$t(this, _Dialog_handled, "f"), 'Cannot accept dialog which is already handled!');
-        __classPrivateFieldSet$s(this, _Dialog_handled, true, "f");
-        await __classPrivateFieldGet$t(this, _Dialog_client, "f").send('Page.handleJavaScriptDialog', {
+        assert$1(!__classPrivateFieldGet$u(this, _Dialog_handled, "f"), 'Cannot accept dialog which is already handled!');
+        __classPrivateFieldSet$t(this, _Dialog_handled, true, "f");
+        await __classPrivateFieldGet$u(this, _Dialog_client, "f").send('Page.handleJavaScriptDialog', {
             accept: true,
             promptText: promptText,
         });
@@ -94539,22 +94560,22 @@ class Dialog {
      * A promise which will resolve once the dialog has been dismissed
      */
     async dismiss() {
-        assert$1(!__classPrivateFieldGet$t(this, _Dialog_handled, "f"), 'Cannot dismiss dialog which is already handled!');
-        __classPrivateFieldSet$s(this, _Dialog_handled, true, "f");
-        await __classPrivateFieldGet$t(this, _Dialog_client, "f").send('Page.handleJavaScriptDialog', {
+        assert$1(!__classPrivateFieldGet$u(this, _Dialog_handled, "f"), 'Cannot dismiss dialog which is already handled!');
+        __classPrivateFieldSet$t(this, _Dialog_handled, true, "f");
+        await __classPrivateFieldGet$u(this, _Dialog_client, "f").send('Page.handleJavaScriptDialog', {
             accept: false,
         });
     }
 }
 _Dialog_client = new WeakMap(), _Dialog_type = new WeakMap(), _Dialog_message = new WeakMap(), _Dialog_defaultValue = new WeakMap(), _Dialog_handled = new WeakMap();
 
-var __classPrivateFieldSet$r = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$s = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$s = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$t = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -94568,7 +94589,7 @@ class EmulationManager {
         _EmulationManager_client.set(this, void 0);
         _EmulationManager_emulatingMobile.set(this, false);
         _EmulationManager_hasTouch.set(this, false);
-        __classPrivateFieldSet$r(this, _EmulationManager_client, client, "f");
+        __classPrivateFieldSet$s(this, _EmulationManager_client, client, "f");
     }
     async emulateViewport(viewport) {
         var _a;
@@ -94581,20 +94602,20 @@ class EmulationManager {
             : { angle: 0, type: 'portraitPrimary' };
         const hasTouch = viewport.hasTouch || false;
         await Promise.all([
-            __classPrivateFieldGet$s(this, _EmulationManager_client, "f").send('Emulation.setDeviceMetricsOverride', {
+            __classPrivateFieldGet$t(this, _EmulationManager_client, "f").send('Emulation.setDeviceMetricsOverride', {
                 mobile,
                 width,
                 height,
                 deviceScaleFactor,
                 screenOrientation,
             }),
-            __classPrivateFieldGet$s(this, _EmulationManager_client, "f").send('Emulation.setTouchEmulationEnabled', {
+            __classPrivateFieldGet$t(this, _EmulationManager_client, "f").send('Emulation.setTouchEmulationEnabled', {
                 enabled: hasTouch,
             }),
         ]);
-        const reloadNeeded = __classPrivateFieldGet$s(this, _EmulationManager_emulatingMobile, "f") !== mobile || __classPrivateFieldGet$s(this, _EmulationManager_hasTouch, "f") !== hasTouch;
-        __classPrivateFieldSet$r(this, _EmulationManager_emulatingMobile, mobile, "f");
-        __classPrivateFieldSet$r(this, _EmulationManager_hasTouch, hasTouch, "f");
+        const reloadNeeded = __classPrivateFieldGet$t(this, _EmulationManager_emulatingMobile, "f") !== mobile || __classPrivateFieldGet$t(this, _EmulationManager_hasTouch, "f") !== hasTouch;
+        __classPrivateFieldSet$s(this, _EmulationManager_emulatingMobile, mobile, "f");
+        __classPrivateFieldSet$s(this, _EmulationManager_hasTouch, hasTouch, "f");
         return reloadNeeded;
     }
 }
@@ -94615,13 +94636,13 @@ _EmulationManager_client = new WeakMap(), _EmulationManager_emulatingMobile = ne
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$q = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$r = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$r = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$s = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -94657,8 +94678,8 @@ class FileChooser {
         _FileChooser_element.set(this, void 0);
         _FileChooser_multiple.set(this, void 0);
         _FileChooser_handled.set(this, false);
-        __classPrivateFieldSet$q(this, _FileChooser_element, element, "f");
-        __classPrivateFieldSet$q(this, _FileChooser_multiple, event.mode !== 'selectSingle', "f");
+        __classPrivateFieldSet$r(this, _FileChooser_element, element, "f");
+        __classPrivateFieldSet$r(this, _FileChooser_multiple, event.mode !== 'selectSingle', "f");
     }
     /**
      * Whether file chooser allow for
@@ -94666,7 +94687,7 @@ class FileChooser {
      * file selection.
      */
     isMultiple() {
-        return __classPrivateFieldGet$r(this, _FileChooser_multiple, "f");
+        return __classPrivateFieldGet$s(this, _FileChooser_multiple, "f");
     }
     /**
      * Accept the file chooser request with the given file paths.
@@ -94678,16 +94699,16 @@ class FileChooser {
      * absolute.
      */
     async accept(paths) {
-        assert$1(!__classPrivateFieldGet$r(this, _FileChooser_handled, "f"), 'Cannot accept FileChooser which is already handled!');
-        __classPrivateFieldSet$q(this, _FileChooser_handled, true, "f");
-        await __classPrivateFieldGet$r(this, _FileChooser_element, "f").uploadFile(...paths);
+        assert$1(!__classPrivateFieldGet$s(this, _FileChooser_handled, "f"), 'Cannot accept FileChooser which is already handled!');
+        __classPrivateFieldSet$r(this, _FileChooser_handled, true, "f");
+        await __classPrivateFieldGet$s(this, _FileChooser_element, "f").uploadFile(...paths);
     }
     /**
      * Closes the file chooser without selecting any files.
      */
     cancel() {
-        assert$1(!__classPrivateFieldGet$r(this, _FileChooser_handled, "f"), 'Cannot cancel FileChooser which is already handled!');
-        __classPrivateFieldSet$q(this, _FileChooser_handled, true, "f");
+        assert$1(!__classPrivateFieldGet$s(this, _FileChooser_handled, "f"), 'Cannot cancel FileChooser which is already handled!');
+        __classPrivateFieldSet$r(this, _FileChooser_handled, true, "f");
     }
 }
 _FileChooser_element = new WeakMap(), _FileChooser_multiple = new WeakMap(), _FileChooser_handled = new WeakMap();
@@ -94707,13 +94728,13 @@ _FileChooser_element = new WeakMap(), _FileChooser_multiple = new WeakMap(), _Fi
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$p = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$q = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$q = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$r = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -94765,20 +94786,20 @@ class DeviceRequestPrompt {
         _DeviceRequestPrompt_timeoutSettings.set(this, void 0);
         _DeviceRequestPrompt_id.set(this, void 0);
         _DeviceRequestPrompt_handled.set(this, false);
-        _DeviceRequestPrompt_updateDevicesHandle.set(this, __classPrivateFieldGet$q(this, _DeviceRequestPrompt_instances, "m", _DeviceRequestPrompt_updateDevices).bind(this));
+        _DeviceRequestPrompt_updateDevicesHandle.set(this, __classPrivateFieldGet$r(this, _DeviceRequestPrompt_instances, "m", _DeviceRequestPrompt_updateDevices).bind(this));
         _DeviceRequestPrompt_waitForDevicePromises.set(this, new Set());
         /**
          * Current list of selectable devices.
          */
         this.devices = [];
-        __classPrivateFieldSet$p(this, _DeviceRequestPrompt_client, client, "f");
-        __classPrivateFieldSet$p(this, _DeviceRequestPrompt_timeoutSettings, timeoutSettings, "f");
-        __classPrivateFieldSet$p(this, _DeviceRequestPrompt_id, firstEvent.id, "f");
-        __classPrivateFieldGet$q(this, _DeviceRequestPrompt_client, "f").on('DeviceAccess.deviceRequestPrompted', __classPrivateFieldGet$q(this, _DeviceRequestPrompt_updateDevicesHandle, "f"));
-        __classPrivateFieldGet$q(this, _DeviceRequestPrompt_client, "f").on('Target.detachedFromTarget', () => {
-            __classPrivateFieldSet$p(this, _DeviceRequestPrompt_client, null, "f");
+        __classPrivateFieldSet$q(this, _DeviceRequestPrompt_client, client, "f");
+        __classPrivateFieldSet$q(this, _DeviceRequestPrompt_timeoutSettings, timeoutSettings, "f");
+        __classPrivateFieldSet$q(this, _DeviceRequestPrompt_id, firstEvent.id, "f");
+        __classPrivateFieldGet$r(this, _DeviceRequestPrompt_client, "f").on('DeviceAccess.deviceRequestPrompted', __classPrivateFieldGet$r(this, _DeviceRequestPrompt_updateDevicesHandle, "f"));
+        __classPrivateFieldGet$r(this, _DeviceRequestPrompt_client, "f").on('Target.detachedFromTarget', () => {
+            __classPrivateFieldSet$q(this, _DeviceRequestPrompt_client, null, "f");
         });
-        __classPrivateFieldGet$q(this, _DeviceRequestPrompt_instances, "m", _DeviceRequestPrompt_updateDevices).call(this, firstEvent);
+        __classPrivateFieldGet$r(this, _DeviceRequestPrompt_instances, "m", _DeviceRequestPrompt_updateDevices).call(this, firstEvent);
     }
     /**
      * Resolve to the first device in the prompt matching a filter.
@@ -94789,31 +94810,31 @@ class DeviceRequestPrompt {
                 return device;
             }
         }
-        const { timeout = __classPrivateFieldGet$q(this, _DeviceRequestPrompt_timeoutSettings, "f").timeout() } = options;
+        const { timeout = __classPrivateFieldGet$r(this, _DeviceRequestPrompt_timeoutSettings, "f").timeout() } = options;
         const promise = createDeferredPromise({
             message: `Waiting for \`DeviceRequestPromptDevice\` failed: ${timeout}ms exceeded`,
             timeout,
         });
         const handle = { filter, promise };
-        __classPrivateFieldGet$q(this, _DeviceRequestPrompt_waitForDevicePromises, "f").add(handle);
+        __classPrivateFieldGet$r(this, _DeviceRequestPrompt_waitForDevicePromises, "f").add(handle);
         try {
             return await promise;
         }
         finally {
-            __classPrivateFieldGet$q(this, _DeviceRequestPrompt_waitForDevicePromises, "f").delete(handle);
+            __classPrivateFieldGet$r(this, _DeviceRequestPrompt_waitForDevicePromises, "f").delete(handle);
         }
     }
     /**
      * Select a device in the prompt's list.
      */
     async select(device) {
-        assert$1(__classPrivateFieldGet$q(this, _DeviceRequestPrompt_client, "f") !== null, 'Cannot select device through detached session!');
+        assert$1(__classPrivateFieldGet$r(this, _DeviceRequestPrompt_client, "f") !== null, 'Cannot select device through detached session!');
         assert$1(this.devices.includes(device), 'Cannot select unknown device!');
-        assert$1(!__classPrivateFieldGet$q(this, _DeviceRequestPrompt_handled, "f"), 'Cannot select DeviceRequestPrompt which is already handled!');
-        __classPrivateFieldGet$q(this, _DeviceRequestPrompt_client, "f").off('DeviceAccess.deviceRequestPrompted', __classPrivateFieldGet$q(this, _DeviceRequestPrompt_updateDevicesHandle, "f"));
-        __classPrivateFieldSet$p(this, _DeviceRequestPrompt_handled, true, "f");
-        return __classPrivateFieldGet$q(this, _DeviceRequestPrompt_client, "f").send('DeviceAccess.selectPrompt', {
-            id: __classPrivateFieldGet$q(this, _DeviceRequestPrompt_id, "f"),
+        assert$1(!__classPrivateFieldGet$r(this, _DeviceRequestPrompt_handled, "f"), 'Cannot select DeviceRequestPrompt which is already handled!');
+        __classPrivateFieldGet$r(this, _DeviceRequestPrompt_client, "f").off('DeviceAccess.deviceRequestPrompted', __classPrivateFieldGet$r(this, _DeviceRequestPrompt_updateDevicesHandle, "f"));
+        __classPrivateFieldSet$q(this, _DeviceRequestPrompt_handled, true, "f");
+        return __classPrivateFieldGet$r(this, _DeviceRequestPrompt_client, "f").send('DeviceAccess.selectPrompt', {
+            id: __classPrivateFieldGet$r(this, _DeviceRequestPrompt_id, "f"),
             deviceId: device.id,
         });
     }
@@ -94821,15 +94842,15 @@ class DeviceRequestPrompt {
      * Cancel the prompt.
      */
     async cancel() {
-        assert$1(__classPrivateFieldGet$q(this, _DeviceRequestPrompt_client, "f") !== null, 'Cannot cancel prompt through detached session!');
-        assert$1(!__classPrivateFieldGet$q(this, _DeviceRequestPrompt_handled, "f"), 'Cannot cancel DeviceRequestPrompt which is already handled!');
-        __classPrivateFieldGet$q(this, _DeviceRequestPrompt_client, "f").off('DeviceAccess.deviceRequestPrompted', __classPrivateFieldGet$q(this, _DeviceRequestPrompt_updateDevicesHandle, "f"));
-        __classPrivateFieldSet$p(this, _DeviceRequestPrompt_handled, true, "f");
-        return __classPrivateFieldGet$q(this, _DeviceRequestPrompt_client, "f").send('DeviceAccess.cancelPrompt', { id: __classPrivateFieldGet$q(this, _DeviceRequestPrompt_id, "f") });
+        assert$1(__classPrivateFieldGet$r(this, _DeviceRequestPrompt_client, "f") !== null, 'Cannot cancel prompt through detached session!');
+        assert$1(!__classPrivateFieldGet$r(this, _DeviceRequestPrompt_handled, "f"), 'Cannot cancel DeviceRequestPrompt which is already handled!');
+        __classPrivateFieldGet$r(this, _DeviceRequestPrompt_client, "f").off('DeviceAccess.deviceRequestPrompted', __classPrivateFieldGet$r(this, _DeviceRequestPrompt_updateDevicesHandle, "f"));
+        __classPrivateFieldSet$q(this, _DeviceRequestPrompt_handled, true, "f");
+        return __classPrivateFieldGet$r(this, _DeviceRequestPrompt_client, "f").send('DeviceAccess.cancelPrompt', { id: __classPrivateFieldGet$r(this, _DeviceRequestPrompt_id, "f") });
     }
 }
 _DeviceRequestPrompt_client = new WeakMap(), _DeviceRequestPrompt_timeoutSettings = new WeakMap(), _DeviceRequestPrompt_id = new WeakMap(), _DeviceRequestPrompt_handled = new WeakMap(), _DeviceRequestPrompt_updateDevicesHandle = new WeakMap(), _DeviceRequestPrompt_waitForDevicePromises = new WeakMap(), _DeviceRequestPrompt_instances = new WeakSet(), _DeviceRequestPrompt_updateDevices = function _DeviceRequestPrompt_updateDevices(event) {
-    if (event.id !== __classPrivateFieldGet$q(this, _DeviceRequestPrompt_id, "f")) {
+    if (event.id !== __classPrivateFieldGet$r(this, _DeviceRequestPrompt_id, "f")) {
         return;
     }
     for (const rawDevice of event.devices) {
@@ -94840,7 +94861,7 @@ _DeviceRequestPrompt_client = new WeakMap(), _DeviceRequestPrompt_timeoutSetting
         }
         const newDevice = new DeviceRequestPromptDevice(rawDevice.id, rawDevice.name);
         this.devices.push(newDevice);
-        for (const waitForDevicePromise of __classPrivateFieldGet$q(this, _DeviceRequestPrompt_waitForDevicePromises, "f")) {
+        for (const waitForDevicePromise of __classPrivateFieldGet$r(this, _DeviceRequestPrompt_waitForDevicePromises, "f")) {
             if (waitForDevicePromise.filter(newDevice)) {
                 waitForDevicePromise.promise.resolve(newDevice);
             }
@@ -94859,13 +94880,13 @@ class DeviceRequestPromptManager {
         _DeviceRequestPromptManager_client.set(this, void 0);
         _DeviceRequestPromptManager_timeoutSettings.set(this, void 0);
         _DeviceRequestPromptManager_deviceRequestPromptPromises.set(this, new Set());
-        __classPrivateFieldSet$p(this, _DeviceRequestPromptManager_client, client, "f");
-        __classPrivateFieldSet$p(this, _DeviceRequestPromptManager_timeoutSettings, timeoutSettings, "f");
-        __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_client, "f").on('DeviceAccess.deviceRequestPrompted', event => {
-            __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_instances, "m", _DeviceRequestPromptManager_onDeviceRequestPrompted).call(this, event);
+        __classPrivateFieldSet$q(this, _DeviceRequestPromptManager_client, client, "f");
+        __classPrivateFieldSet$q(this, _DeviceRequestPromptManager_timeoutSettings, timeoutSettings, "f");
+        __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_client, "f").on('DeviceAccess.deviceRequestPrompted', event => {
+            __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_instances, "m", _DeviceRequestPromptManager_onDeviceRequestPrompted).call(this, event);
         });
-        __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_client, "f").on('Target.detachedFromTarget', () => {
-            __classPrivateFieldSet$p(this, _DeviceRequestPromptManager_client, null, "f");
+        __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_client, "f").on('Target.detachedFromTarget', () => {
+            __classPrivateFieldSet$q(this, _DeviceRequestPromptManager_client, null, "f");
         });
     }
     /**
@@ -94873,45 +94894,45 @@ class DeviceRequestPromptManager {
      * requestDevice.
      */
     async waitForDevicePrompt(options = {}) {
-        assert$1(__classPrivateFieldGet$q(this, _DeviceRequestPromptManager_client, "f") !== null, 'Cannot wait for device prompt through detached session!');
-        const needsEnable = __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f").size === 0;
+        assert$1(__classPrivateFieldGet$r(this, _DeviceRequestPromptManager_client, "f") !== null, 'Cannot wait for device prompt through detached session!');
+        const needsEnable = __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f").size === 0;
         let enablePromise;
         if (needsEnable) {
-            enablePromise = __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_client, "f").send('DeviceAccess.enable');
+            enablePromise = __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_client, "f").send('DeviceAccess.enable');
         }
-        const { timeout = __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_timeoutSettings, "f").timeout() } = options;
+        const { timeout = __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_timeoutSettings, "f").timeout() } = options;
         const promise = createDeferredPromise({
             message: `Waiting for \`DeviceRequestPrompt\` failed: ${timeout}ms exceeded`,
             timeout,
         });
-        __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f").add(promise);
+        __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f").add(promise);
         try {
             const [result] = await Promise.all([promise, enablePromise]);
             return result;
         }
         finally {
-            __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f").delete(promise);
+            __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f").delete(promise);
         }
     }
 }
 _DeviceRequestPromptManager_client = new WeakMap(), _DeviceRequestPromptManager_timeoutSettings = new WeakMap(), _DeviceRequestPromptManager_deviceRequestPromptPromises = new WeakMap(), _DeviceRequestPromptManager_instances = new WeakSet(), _DeviceRequestPromptManager_onDeviceRequestPrompted = function _DeviceRequestPromptManager_onDeviceRequestPrompted(event) {
-    if (!__classPrivateFieldGet$q(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f").size) {
+    if (!__classPrivateFieldGet$r(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f").size) {
         return;
     }
-    assert$1(__classPrivateFieldGet$q(this, _DeviceRequestPromptManager_client, "f") !== null);
-    const devicePrompt = new DeviceRequestPrompt(__classPrivateFieldGet$q(this, _DeviceRequestPromptManager_client, "f"), __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_timeoutSettings, "f"), event);
-    for (const promise of __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f")) {
+    assert$1(__classPrivateFieldGet$r(this, _DeviceRequestPromptManager_client, "f") !== null);
+    const devicePrompt = new DeviceRequestPrompt(__classPrivateFieldGet$r(this, _DeviceRequestPromptManager_client, "f"), __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_timeoutSettings, "f"), event);
+    for (const promise of __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f")) {
         promise.resolve(devicePrompt);
     }
-    __classPrivateFieldGet$q(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f").clear();
+    __classPrivateFieldGet$r(this, _DeviceRequestPromptManager_deviceRequestPromptPromises, "f").clear();
 };
 
-var __classPrivateFieldGet$p = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$q = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$o = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$p = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -94923,7 +94944,7 @@ var _HTTPRequest_instances, _HTTPRequest_client, _HTTPRequest_isNavigationReques
  */
 class HTTPRequest extends HTTPRequest$1 {
     get client() {
-        return __classPrivateFieldGet$p(this, _HTTPRequest_client, "f");
+        return __classPrivateFieldGet$q(this, _HTTPRequest_client, "f");
     }
     constructor(client, frame, interceptionId, allowInterception, data, redirectChain) {
         super();
@@ -94949,94 +94970,94 @@ class HTTPRequest extends HTTPRequest$1 {
         });
         _HTTPRequest_interceptHandlers.set(this, void 0);
         _HTTPRequest_initiator.set(this, void 0);
-        __classPrivateFieldSet$o(this, _HTTPRequest_client, client, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_client, client, "f");
         this._requestId = data.requestId;
-        __classPrivateFieldSet$o(this, _HTTPRequest_isNavigationRequest, data.requestId === data.loaderId && data.type === 'Document', "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_isNavigationRequest, data.requestId === data.loaderId && data.type === 'Document', "f");
         this._interceptionId = interceptionId;
-        __classPrivateFieldSet$o(this, _HTTPRequest_allowInterception, allowInterception, "f");
-        __classPrivateFieldSet$o(this, _HTTPRequest_url, data.request.url, "f");
-        __classPrivateFieldSet$o(this, _HTTPRequest_resourceType, (data.type || 'other').toLowerCase(), "f");
-        __classPrivateFieldSet$o(this, _HTTPRequest_method, data.request.method, "f");
-        __classPrivateFieldSet$o(this, _HTTPRequest_postData, data.request.postData, "f");
-        __classPrivateFieldSet$o(this, _HTTPRequest_frame, frame, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_allowInterception, allowInterception, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_url, data.request.url, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_resourceType, (data.type || 'other').toLowerCase(), "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_method, data.request.method, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_postData, data.request.postData, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_frame, frame, "f");
         this._redirectChain = redirectChain;
-        __classPrivateFieldSet$o(this, _HTTPRequest_continueRequestOverrides, {}, "f");
-        __classPrivateFieldSet$o(this, _HTTPRequest_interceptHandlers, [], "f");
-        __classPrivateFieldSet$o(this, _HTTPRequest_initiator, data.initiator, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_continueRequestOverrides, {}, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_interceptHandlers, [], "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_initiator, data.initiator, "f");
         for (const [key, value] of Object.entries(data.request.headers)) {
-            __classPrivateFieldGet$p(this, _HTTPRequest_headers, "f")[key.toLowerCase()] = value;
+            __classPrivateFieldGet$q(this, _HTTPRequest_headers, "f")[key.toLowerCase()] = value;
         }
     }
     url() {
-        return __classPrivateFieldGet$p(this, _HTTPRequest_url, "f");
+        return __classPrivateFieldGet$q(this, _HTTPRequest_url, "f");
     }
     continueRequestOverrides() {
-        assert$1(__classPrivateFieldGet$p(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
-        return __classPrivateFieldGet$p(this, _HTTPRequest_continueRequestOverrides, "f");
+        assert$1(__classPrivateFieldGet$q(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
+        return __classPrivateFieldGet$q(this, _HTTPRequest_continueRequestOverrides, "f");
     }
     responseForRequest() {
-        assert$1(__classPrivateFieldGet$p(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
-        return __classPrivateFieldGet$p(this, _HTTPRequest_responseForRequest, "f");
+        assert$1(__classPrivateFieldGet$q(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
+        return __classPrivateFieldGet$q(this, _HTTPRequest_responseForRequest, "f");
     }
     abortErrorReason() {
-        assert$1(__classPrivateFieldGet$p(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
-        return __classPrivateFieldGet$p(this, _HTTPRequest_abortErrorReason, "f");
+        assert$1(__classPrivateFieldGet$q(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
+        return __classPrivateFieldGet$q(this, _HTTPRequest_abortErrorReason, "f");
     }
     interceptResolutionState() {
-        if (!__classPrivateFieldGet$p(this, _HTTPRequest_allowInterception, "f")) {
+        if (!__classPrivateFieldGet$q(this, _HTTPRequest_allowInterception, "f")) {
             return { action: InterceptResolutionAction.Disabled };
         }
-        if (__classPrivateFieldGet$p(this, _HTTPRequest_interceptionHandled, "f")) {
+        if (__classPrivateFieldGet$q(this, _HTTPRequest_interceptionHandled, "f")) {
             return { action: InterceptResolutionAction.AlreadyHandled };
         }
-        return { ...__classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f") };
+        return { ...__classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f") };
     }
     isInterceptResolutionHandled() {
-        return __classPrivateFieldGet$p(this, _HTTPRequest_interceptionHandled, "f");
+        return __classPrivateFieldGet$q(this, _HTTPRequest_interceptionHandled, "f");
     }
     enqueueInterceptAction(pendingHandler) {
-        __classPrivateFieldGet$p(this, _HTTPRequest_interceptHandlers, "f").push(pendingHandler);
+        __classPrivateFieldGet$q(this, _HTTPRequest_interceptHandlers, "f").push(pendingHandler);
     }
     async finalizeInterceptions() {
-        await __classPrivateFieldGet$p(this, _HTTPRequest_interceptHandlers, "f").reduce((promiseChain, interceptAction) => {
+        await __classPrivateFieldGet$q(this, _HTTPRequest_interceptHandlers, "f").reduce((promiseChain, interceptAction) => {
             return promiseChain.then(interceptAction);
         }, Promise.resolve());
         const { action } = this.interceptResolutionState();
         switch (action) {
             case 'abort':
-                return __classPrivateFieldGet$p(this, _HTTPRequest_instances, "m", _HTTPRequest_abort).call(this, __classPrivateFieldGet$p(this, _HTTPRequest_abortErrorReason, "f"));
+                return __classPrivateFieldGet$q(this, _HTTPRequest_instances, "m", _HTTPRequest_abort).call(this, __classPrivateFieldGet$q(this, _HTTPRequest_abortErrorReason, "f"));
             case 'respond':
-                if (__classPrivateFieldGet$p(this, _HTTPRequest_responseForRequest, "f") === null) {
+                if (__classPrivateFieldGet$q(this, _HTTPRequest_responseForRequest, "f") === null) {
                     throw new Error('Response is missing for the interception');
                 }
-                return __classPrivateFieldGet$p(this, _HTTPRequest_instances, "m", _HTTPRequest_respond).call(this, __classPrivateFieldGet$p(this, _HTTPRequest_responseForRequest, "f"));
+                return __classPrivateFieldGet$q(this, _HTTPRequest_instances, "m", _HTTPRequest_respond).call(this, __classPrivateFieldGet$q(this, _HTTPRequest_responseForRequest, "f"));
             case 'continue':
-                return __classPrivateFieldGet$p(this, _HTTPRequest_instances, "m", _HTTPRequest_continue).call(this, __classPrivateFieldGet$p(this, _HTTPRequest_continueRequestOverrides, "f"));
+                return __classPrivateFieldGet$q(this, _HTTPRequest_instances, "m", _HTTPRequest_continue).call(this, __classPrivateFieldGet$q(this, _HTTPRequest_continueRequestOverrides, "f"));
         }
     }
     resourceType() {
-        return __classPrivateFieldGet$p(this, _HTTPRequest_resourceType, "f");
+        return __classPrivateFieldGet$q(this, _HTTPRequest_resourceType, "f");
     }
     method() {
-        return __classPrivateFieldGet$p(this, _HTTPRequest_method, "f");
+        return __classPrivateFieldGet$q(this, _HTTPRequest_method, "f");
     }
     postData() {
-        return __classPrivateFieldGet$p(this, _HTTPRequest_postData, "f");
+        return __classPrivateFieldGet$q(this, _HTTPRequest_postData, "f");
     }
     headers() {
-        return __classPrivateFieldGet$p(this, _HTTPRequest_headers, "f");
+        return __classPrivateFieldGet$q(this, _HTTPRequest_headers, "f");
     }
     response() {
         return this._response;
     }
     frame() {
-        return __classPrivateFieldGet$p(this, _HTTPRequest_frame, "f");
+        return __classPrivateFieldGet$q(this, _HTTPRequest_frame, "f");
     }
     isNavigationRequest() {
-        return __classPrivateFieldGet$p(this, _HTTPRequest_isNavigationRequest, "f");
+        return __classPrivateFieldGet$q(this, _HTTPRequest_isNavigationRequest, "f");
     }
     initiator() {
-        return __classPrivateFieldGet$p(this, _HTTPRequest_initiator, "f");
+        return __classPrivateFieldGet$q(this, _HTTPRequest_initiator, "f");
     }
     redirectChain() {
         return this._redirectChain.slice();
@@ -95051,75 +95072,75 @@ class HTTPRequest extends HTTPRequest$1 {
     }
     async continue(overrides = {}, priority) {
         // Request interception is not supported for data: urls.
-        if (__classPrivateFieldGet$p(this, _HTTPRequest_url, "f").startsWith('data:')) {
+        if (__classPrivateFieldGet$q(this, _HTTPRequest_url, "f").startsWith('data:')) {
             return;
         }
-        assert$1(__classPrivateFieldGet$p(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
-        assert$1(!__classPrivateFieldGet$p(this, _HTTPRequest_interceptionHandled, "f"), 'Request is already handled!');
+        assert$1(__classPrivateFieldGet$q(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
+        assert$1(!__classPrivateFieldGet$q(this, _HTTPRequest_interceptionHandled, "f"), 'Request is already handled!');
         if (priority === undefined) {
-            return __classPrivateFieldGet$p(this, _HTTPRequest_instances, "m", _HTTPRequest_continue).call(this, overrides);
+            return __classPrivateFieldGet$q(this, _HTTPRequest_instances, "m", _HTTPRequest_continue).call(this, overrides);
         }
-        __classPrivateFieldSet$o(this, _HTTPRequest_continueRequestOverrides, overrides, "f");
-        if (__classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").priority === undefined ||
-            priority > __classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").priority) {
-            __classPrivateFieldSet$o(this, _HTTPRequest_interceptResolutionState, {
+        __classPrivateFieldSet$p(this, _HTTPRequest_continueRequestOverrides, overrides, "f");
+        if (__classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").priority === undefined ||
+            priority > __classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").priority) {
+            __classPrivateFieldSet$p(this, _HTTPRequest_interceptResolutionState, {
                 action: InterceptResolutionAction.Continue,
                 priority,
             }, "f");
             return;
         }
-        if (priority === __classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").priority) {
-            if (__classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").action === 'abort' ||
-                __classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").action === 'respond') {
+        if (priority === __classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").priority) {
+            if (__classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").action === 'abort' ||
+                __classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").action === 'respond') {
                 return;
             }
-            __classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").action =
+            __classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").action =
                 InterceptResolutionAction.Continue;
         }
         return;
     }
     async respond(response, priority) {
         // Mocking responses for dataURL requests is not currently supported.
-        if (__classPrivateFieldGet$p(this, _HTTPRequest_url, "f").startsWith('data:')) {
+        if (__classPrivateFieldGet$q(this, _HTTPRequest_url, "f").startsWith('data:')) {
             return;
         }
-        assert$1(__classPrivateFieldGet$p(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
-        assert$1(!__classPrivateFieldGet$p(this, _HTTPRequest_interceptionHandled, "f"), 'Request is already handled!');
+        assert$1(__classPrivateFieldGet$q(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
+        assert$1(!__classPrivateFieldGet$q(this, _HTTPRequest_interceptionHandled, "f"), 'Request is already handled!');
         if (priority === undefined) {
-            return __classPrivateFieldGet$p(this, _HTTPRequest_instances, "m", _HTTPRequest_respond).call(this, response);
+            return __classPrivateFieldGet$q(this, _HTTPRequest_instances, "m", _HTTPRequest_respond).call(this, response);
         }
-        __classPrivateFieldSet$o(this, _HTTPRequest_responseForRequest, response, "f");
-        if (__classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").priority === undefined ||
-            priority > __classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").priority) {
-            __classPrivateFieldSet$o(this, _HTTPRequest_interceptResolutionState, {
+        __classPrivateFieldSet$p(this, _HTTPRequest_responseForRequest, response, "f");
+        if (__classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").priority === undefined ||
+            priority > __classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").priority) {
+            __classPrivateFieldSet$p(this, _HTTPRequest_interceptResolutionState, {
                 action: InterceptResolutionAction.Respond,
                 priority,
             }, "f");
             return;
         }
-        if (priority === __classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").priority) {
-            if (__classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").action === 'abort') {
+        if (priority === __classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").priority) {
+            if (__classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").action === 'abort') {
                 return;
             }
-            __classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").action = InterceptResolutionAction.Respond;
+            __classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").action = InterceptResolutionAction.Respond;
         }
     }
     async abort(errorCode = 'failed', priority) {
         // Request interception is not supported for data: urls.
-        if (__classPrivateFieldGet$p(this, _HTTPRequest_url, "f").startsWith('data:')) {
+        if (__classPrivateFieldGet$q(this, _HTTPRequest_url, "f").startsWith('data:')) {
             return;
         }
         const errorReason = errorReasons[errorCode];
         assert$1(errorReason, 'Unknown error code: ' + errorCode);
-        assert$1(__classPrivateFieldGet$p(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
-        assert$1(!__classPrivateFieldGet$p(this, _HTTPRequest_interceptionHandled, "f"), 'Request is already handled!');
+        assert$1(__classPrivateFieldGet$q(this, _HTTPRequest_allowInterception, "f"), 'Request Interception is not enabled!');
+        assert$1(!__classPrivateFieldGet$q(this, _HTTPRequest_interceptionHandled, "f"), 'Request is already handled!');
         if (priority === undefined) {
-            return __classPrivateFieldGet$p(this, _HTTPRequest_instances, "m", _HTTPRequest_abort).call(this, errorReason);
+            return __classPrivateFieldGet$q(this, _HTTPRequest_instances, "m", _HTTPRequest_abort).call(this, errorReason);
         }
-        __classPrivateFieldSet$o(this, _HTTPRequest_abortErrorReason, errorReason, "f");
-        if (__classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").priority === undefined ||
-            priority >= __classPrivateFieldGet$p(this, _HTTPRequest_interceptResolutionState, "f").priority) {
-            __classPrivateFieldSet$o(this, _HTTPRequest_interceptResolutionState, {
+        __classPrivateFieldSet$p(this, _HTTPRequest_abortErrorReason, errorReason, "f");
+        if (__classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").priority === undefined ||
+            priority >= __classPrivateFieldGet$q(this, _HTTPRequest_interceptResolutionState, "f").priority) {
+            __classPrivateFieldSet$p(this, _HTTPRequest_interceptResolutionState, {
                 action: InterceptResolutionAction.Abort,
                 priority,
             }, "f");
@@ -95129,14 +95150,14 @@ class HTTPRequest extends HTTPRequest$1 {
 }
 _HTTPRequest_client = new WeakMap(), _HTTPRequest_isNavigationRequest = new WeakMap(), _HTTPRequest_allowInterception = new WeakMap(), _HTTPRequest_interceptionHandled = new WeakMap(), _HTTPRequest_url = new WeakMap(), _HTTPRequest_resourceType = new WeakMap(), _HTTPRequest_method = new WeakMap(), _HTTPRequest_postData = new WeakMap(), _HTTPRequest_headers = new WeakMap(), _HTTPRequest_frame = new WeakMap(), _HTTPRequest_continueRequestOverrides = new WeakMap(), _HTTPRequest_responseForRequest = new WeakMap(), _HTTPRequest_abortErrorReason = new WeakMap(), _HTTPRequest_interceptResolutionState = new WeakMap(), _HTTPRequest_interceptHandlers = new WeakMap(), _HTTPRequest_initiator = new WeakMap(), _HTTPRequest_instances = new WeakSet(), _HTTPRequest_continue = async function _HTTPRequest_continue(overrides = {}) {
     const { url, method, postData, headers } = overrides;
-    __classPrivateFieldSet$o(this, _HTTPRequest_interceptionHandled, true, "f");
+    __classPrivateFieldSet$p(this, _HTTPRequest_interceptionHandled, true, "f");
     const postDataBinaryBase64 = postData
         ? Buffer.from(postData).toString('base64')
         : undefined;
     if (this._interceptionId === undefined) {
         throw new Error('HTTPRequest is missing _interceptionId needed for Fetch.continueRequest');
     }
-    await __classPrivateFieldGet$p(this, _HTTPRequest_client, "f")
+    await __classPrivateFieldGet$q(this, _HTTPRequest_client, "f")
         .send('Fetch.continueRequest', {
         requestId: this._interceptionId,
         url,
@@ -95145,11 +95166,11 @@ _HTTPRequest_client = new WeakMap(), _HTTPRequest_isNavigationRequest = new Weak
         headers: headers ? headersArray(headers) : undefined,
     })
         .catch(error => {
-        __classPrivateFieldSet$o(this, _HTTPRequest_interceptionHandled, false, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_interceptionHandled, false, "f");
         return handleError(error);
     });
 }, _HTTPRequest_respond = async function _HTTPRequest_respond(response) {
-    __classPrivateFieldSet$o(this, _HTTPRequest_interceptionHandled, true, "f");
+    __classPrivateFieldSet$p(this, _HTTPRequest_interceptionHandled, true, "f");
     const responseBody = response.body && isString$2(response.body)
         ? Buffer.from(response.body)
         : response.body || null;
@@ -95174,7 +95195,7 @@ _HTTPRequest_client = new WeakMap(), _HTTPRequest_isNavigationRequest = new Weak
     if (this._interceptionId === undefined) {
         throw new Error('HTTPRequest is missing _interceptionId needed for Fetch.fulfillRequest');
     }
-    await __classPrivateFieldGet$p(this, _HTTPRequest_client, "f")
+    await __classPrivateFieldGet$q(this, _HTTPRequest_client, "f")
         .send('Fetch.fulfillRequest', {
         requestId: this._interceptionId,
         responseCode: status,
@@ -95183,15 +95204,15 @@ _HTTPRequest_client = new WeakMap(), _HTTPRequest_isNavigationRequest = new Weak
         body: responseBody ? responseBody.toString('base64') : undefined,
     })
         .catch(error => {
-        __classPrivateFieldSet$o(this, _HTTPRequest_interceptionHandled, false, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_interceptionHandled, false, "f");
         return handleError(error);
     });
 }, _HTTPRequest_abort = async function _HTTPRequest_abort(errorReason) {
-    __classPrivateFieldSet$o(this, _HTTPRequest_interceptionHandled, true, "f");
+    __classPrivateFieldSet$p(this, _HTTPRequest_interceptionHandled, true, "f");
     if (this._interceptionId === undefined) {
         throw new Error('HTTPRequest is missing _interceptionId needed for Fetch.failRequest');
     }
-    await __classPrivateFieldGet$p(this, _HTTPRequest_client, "f")
+    await __classPrivateFieldGet$q(this, _HTTPRequest_client, "f")
         .send('Fetch.failRequest', {
         requestId: this._interceptionId,
         errorReason: errorReason || 'Failed',
@@ -95239,13 +95260,13 @@ async function handleError(error) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$n = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$o = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$o = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$p = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -95268,61 +95289,61 @@ class SecurityDetails {
         _SecurityDetails_validTo.set(this, void 0);
         _SecurityDetails_protocol.set(this, void 0);
         _SecurityDetails_sanList.set(this, void 0);
-        __classPrivateFieldSet$n(this, _SecurityDetails_subjectName, securityPayload.subjectName, "f");
-        __classPrivateFieldSet$n(this, _SecurityDetails_issuer, securityPayload.issuer, "f");
-        __classPrivateFieldSet$n(this, _SecurityDetails_validFrom, securityPayload.validFrom, "f");
-        __classPrivateFieldSet$n(this, _SecurityDetails_validTo, securityPayload.validTo, "f");
-        __classPrivateFieldSet$n(this, _SecurityDetails_protocol, securityPayload.protocol, "f");
-        __classPrivateFieldSet$n(this, _SecurityDetails_sanList, securityPayload.sanList, "f");
+        __classPrivateFieldSet$o(this, _SecurityDetails_subjectName, securityPayload.subjectName, "f");
+        __classPrivateFieldSet$o(this, _SecurityDetails_issuer, securityPayload.issuer, "f");
+        __classPrivateFieldSet$o(this, _SecurityDetails_validFrom, securityPayload.validFrom, "f");
+        __classPrivateFieldSet$o(this, _SecurityDetails_validTo, securityPayload.validTo, "f");
+        __classPrivateFieldSet$o(this, _SecurityDetails_protocol, securityPayload.protocol, "f");
+        __classPrivateFieldSet$o(this, _SecurityDetails_sanList, securityPayload.sanList, "f");
     }
     /**
      * The name of the issuer of the certificate.
      */
     issuer() {
-        return __classPrivateFieldGet$o(this, _SecurityDetails_issuer, "f");
+        return __classPrivateFieldGet$p(this, _SecurityDetails_issuer, "f");
     }
     /**
      * {@link https://en.wikipedia.org/wiki/Unix_time | Unix timestamp}
      * marking the start of the certificate's validity.
      */
     validFrom() {
-        return __classPrivateFieldGet$o(this, _SecurityDetails_validFrom, "f");
+        return __classPrivateFieldGet$p(this, _SecurityDetails_validFrom, "f");
     }
     /**
      * {@link https://en.wikipedia.org/wiki/Unix_time | Unix timestamp}
      * marking the end of the certificate's validity.
      */
     validTo() {
-        return __classPrivateFieldGet$o(this, _SecurityDetails_validTo, "f");
+        return __classPrivateFieldGet$p(this, _SecurityDetails_validTo, "f");
     }
     /**
      * The security protocol being used, e.g. "TLS 1.2".
      */
     protocol() {
-        return __classPrivateFieldGet$o(this, _SecurityDetails_protocol, "f");
+        return __classPrivateFieldGet$p(this, _SecurityDetails_protocol, "f");
     }
     /**
      * The name of the subject to which the certificate was issued.
      */
     subjectName() {
-        return __classPrivateFieldGet$o(this, _SecurityDetails_subjectName, "f");
+        return __classPrivateFieldGet$p(this, _SecurityDetails_subjectName, "f");
     }
     /**
      * The list of {@link https://en.wikipedia.org/wiki/Subject_Alternative_Name | subject alternative names (SANs)} of the certificate.
      */
     subjectAlternativeNames() {
-        return __classPrivateFieldGet$o(this, _SecurityDetails_sanList, "f");
+        return __classPrivateFieldGet$p(this, _SecurityDetails_sanList, "f");
     }
 }
 _SecurityDetails_subjectName = new WeakMap(), _SecurityDetails_issuer = new WeakMap(), _SecurityDetails_validFrom = new WeakMap(), _SecurityDetails_validTo = new WeakMap(), _SecurityDetails_protocol = new WeakMap(), _SecurityDetails_sanList = new WeakMap();
 
-var __classPrivateFieldSet$m = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$n = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$n = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$o = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -95348,67 +95369,67 @@ class HTTPResponse extends HTTPResponse$1 {
         _HTTPResponse_headers.set(this, {});
         _HTTPResponse_securityDetails.set(this, void 0);
         _HTTPResponse_timing.set(this, void 0);
-        __classPrivateFieldSet$m(this, _HTTPResponse_client, client, "f");
-        __classPrivateFieldSet$m(this, _HTTPResponse_request, request, "f");
-        __classPrivateFieldSet$m(this, _HTTPResponse_remoteAddress, {
+        __classPrivateFieldSet$n(this, _HTTPResponse_client, client, "f");
+        __classPrivateFieldSet$n(this, _HTTPResponse_request, request, "f");
+        __classPrivateFieldSet$n(this, _HTTPResponse_remoteAddress, {
             ip: responsePayload.remoteIPAddress,
             port: responsePayload.remotePort,
         }, "f");
-        __classPrivateFieldSet$m(this, _HTTPResponse_statusText, __classPrivateFieldGet$n(this, _HTTPResponse_instances, "m", _HTTPResponse_parseStatusTextFromExtrInfo).call(this, extraInfo) ||
+        __classPrivateFieldSet$n(this, _HTTPResponse_statusText, __classPrivateFieldGet$o(this, _HTTPResponse_instances, "m", _HTTPResponse_parseStatusTextFromExtrInfo).call(this, extraInfo) ||
             responsePayload.statusText, "f");
-        __classPrivateFieldSet$m(this, _HTTPResponse_url, request.url(), "f");
-        __classPrivateFieldSet$m(this, _HTTPResponse_fromDiskCache, !!responsePayload.fromDiskCache, "f");
-        __classPrivateFieldSet$m(this, _HTTPResponse_fromServiceWorker, !!responsePayload.fromServiceWorker, "f");
-        __classPrivateFieldSet$m(this, _HTTPResponse_status, extraInfo ? extraInfo.statusCode : responsePayload.status, "f");
+        __classPrivateFieldSet$n(this, _HTTPResponse_url, request.url(), "f");
+        __classPrivateFieldSet$n(this, _HTTPResponse_fromDiskCache, !!responsePayload.fromDiskCache, "f");
+        __classPrivateFieldSet$n(this, _HTTPResponse_fromServiceWorker, !!responsePayload.fromServiceWorker, "f");
+        __classPrivateFieldSet$n(this, _HTTPResponse_status, extraInfo ? extraInfo.statusCode : responsePayload.status, "f");
         const headers = extraInfo ? extraInfo.headers : responsePayload.headers;
         for (const [key, value] of Object.entries(headers)) {
-            __classPrivateFieldGet$n(this, _HTTPResponse_headers, "f")[key.toLowerCase()] = value;
+            __classPrivateFieldGet$o(this, _HTTPResponse_headers, "f")[key.toLowerCase()] = value;
         }
-        __classPrivateFieldSet$m(this, _HTTPResponse_securityDetails, responsePayload.securityDetails
+        __classPrivateFieldSet$n(this, _HTTPResponse_securityDetails, responsePayload.securityDetails
             ? new SecurityDetails(responsePayload.securityDetails)
             : null, "f");
-        __classPrivateFieldSet$m(this, _HTTPResponse_timing, responsePayload.timing || null, "f");
+        __classPrivateFieldSet$n(this, _HTTPResponse_timing, responsePayload.timing || null, "f");
     }
     _resolveBody(err) {
         if (err) {
-            return __classPrivateFieldGet$n(this, _HTTPResponse_bodyLoadedPromise, "f").resolve(err);
+            return __classPrivateFieldGet$o(this, _HTTPResponse_bodyLoadedPromise, "f").resolve(err);
         }
-        return __classPrivateFieldGet$n(this, _HTTPResponse_bodyLoadedPromise, "f").resolve();
+        return __classPrivateFieldGet$o(this, _HTTPResponse_bodyLoadedPromise, "f").resolve();
     }
     remoteAddress() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_remoteAddress, "f");
+        return __classPrivateFieldGet$o(this, _HTTPResponse_remoteAddress, "f");
     }
     url() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_url, "f");
+        return __classPrivateFieldGet$o(this, _HTTPResponse_url, "f");
     }
     ok() {
         // TODO: document === 0 case?
-        return __classPrivateFieldGet$n(this, _HTTPResponse_status, "f") === 0 || (__classPrivateFieldGet$n(this, _HTTPResponse_status, "f") >= 200 && __classPrivateFieldGet$n(this, _HTTPResponse_status, "f") <= 299);
+        return __classPrivateFieldGet$o(this, _HTTPResponse_status, "f") === 0 || (__classPrivateFieldGet$o(this, _HTTPResponse_status, "f") >= 200 && __classPrivateFieldGet$o(this, _HTTPResponse_status, "f") <= 299);
     }
     status() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_status, "f");
+        return __classPrivateFieldGet$o(this, _HTTPResponse_status, "f");
     }
     statusText() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_statusText, "f");
+        return __classPrivateFieldGet$o(this, _HTTPResponse_statusText, "f");
     }
     headers() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_headers, "f");
+        return __classPrivateFieldGet$o(this, _HTTPResponse_headers, "f");
     }
     securityDetails() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_securityDetails, "f");
+        return __classPrivateFieldGet$o(this, _HTTPResponse_securityDetails, "f");
     }
     timing() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_timing, "f");
+        return __classPrivateFieldGet$o(this, _HTTPResponse_timing, "f");
     }
     buffer() {
-        if (!__classPrivateFieldGet$n(this, _HTTPResponse_contentPromise, "f")) {
-            __classPrivateFieldSet$m(this, _HTTPResponse_contentPromise, __classPrivateFieldGet$n(this, _HTTPResponse_bodyLoadedPromise, "f").then(async (error) => {
+        if (!__classPrivateFieldGet$o(this, _HTTPResponse_contentPromise, "f")) {
+            __classPrivateFieldSet$n(this, _HTTPResponse_contentPromise, __classPrivateFieldGet$o(this, _HTTPResponse_bodyLoadedPromise, "f").then(async (error) => {
                 if (error) {
                     throw error;
                 }
                 try {
-                    const response = await __classPrivateFieldGet$n(this, _HTTPResponse_client, "f").send('Network.getResponseBody', {
-                        requestId: __classPrivateFieldGet$n(this, _HTTPResponse_request, "f")._requestId,
+                    const response = await __classPrivateFieldGet$o(this, _HTTPResponse_client, "f").send('Network.getResponseBody', {
+                        requestId: __classPrivateFieldGet$o(this, _HTTPResponse_request, "f")._requestId,
                     });
                     return Buffer.from(response.body, response.base64Encoded ? 'base64' : 'utf8');
                 }
@@ -95421,19 +95442,19 @@ class HTTPResponse extends HTTPResponse$1 {
                 }
             }), "f");
         }
-        return __classPrivateFieldGet$n(this, _HTTPResponse_contentPromise, "f");
+        return __classPrivateFieldGet$o(this, _HTTPResponse_contentPromise, "f");
     }
     request() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_request, "f");
+        return __classPrivateFieldGet$o(this, _HTTPResponse_request, "f");
     }
     fromCache() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_fromDiskCache, "f") || __classPrivateFieldGet$n(this, _HTTPResponse_request, "f")._fromMemoryCache;
+        return __classPrivateFieldGet$o(this, _HTTPResponse_fromDiskCache, "f") || __classPrivateFieldGet$o(this, _HTTPResponse_request, "f")._fromMemoryCache;
     }
     fromServiceWorker() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_fromServiceWorker, "f");
+        return __classPrivateFieldGet$o(this, _HTTPResponse_fromServiceWorker, "f");
     }
     frame() {
-        return __classPrivateFieldGet$n(this, _HTTPResponse_request, "f").frame();
+        return __classPrivateFieldGet$o(this, _HTTPResponse_request, "f").frame();
     }
 }
 _HTTPResponse_client = new WeakMap(), _HTTPResponse_request = new WeakMap(), _HTTPResponse_contentPromise = new WeakMap(), _HTTPResponse_bodyLoadedPromise = new WeakMap(), _HTTPResponse_remoteAddress = new WeakMap(), _HTTPResponse_status = new WeakMap(), _HTTPResponse_statusText = new WeakMap(), _HTTPResponse_url = new WeakMap(), _HTTPResponse_fromDiskCache = new WeakMap(), _HTTPResponse_fromServiceWorker = new WeakMap(), _HTTPResponse_headers = new WeakMap(), _HTTPResponse_securityDetails = new WeakMap(), _HTTPResponse_timing = new WeakMap(), _HTTPResponse_instances = new WeakSet(), _HTTPResponse_parseStatusTextFromExtrInfo = function _HTTPResponse_parseStatusTextFromExtrInfo(extraInfo) {
@@ -95470,7 +95491,7 @@ _HTTPResponse_client = new WeakMap(), _HTTPResponse_request = new WeakMap(), _HT
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$m = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$n = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -95532,23 +95553,23 @@ class NetworkEventManager {
         _NetworkEventManager_queuedEventGroupMap.set(this, new Map());
     }
     forget(networkRequestId) {
-        __classPrivateFieldGet$m(this, _NetworkEventManager_requestWillBeSentMap, "f").delete(networkRequestId);
-        __classPrivateFieldGet$m(this, _NetworkEventManager_requestPausedMap, "f").delete(networkRequestId);
-        __classPrivateFieldGet$m(this, _NetworkEventManager_queuedEventGroupMap, "f").delete(networkRequestId);
-        __classPrivateFieldGet$m(this, _NetworkEventManager_queuedRedirectInfoMap, "f").delete(networkRequestId);
-        __classPrivateFieldGet$m(this, _NetworkEventManager_responseReceivedExtraInfoMap, "f").delete(networkRequestId);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_requestWillBeSentMap, "f").delete(networkRequestId);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_requestPausedMap, "f").delete(networkRequestId);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_queuedEventGroupMap, "f").delete(networkRequestId);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_queuedRedirectInfoMap, "f").delete(networkRequestId);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_responseReceivedExtraInfoMap, "f").delete(networkRequestId);
     }
     responseExtraInfo(networkRequestId) {
-        if (!__classPrivateFieldGet$m(this, _NetworkEventManager_responseReceivedExtraInfoMap, "f").has(networkRequestId)) {
-            __classPrivateFieldGet$m(this, _NetworkEventManager_responseReceivedExtraInfoMap, "f").set(networkRequestId, []);
+        if (!__classPrivateFieldGet$n(this, _NetworkEventManager_responseReceivedExtraInfoMap, "f").has(networkRequestId)) {
+            __classPrivateFieldGet$n(this, _NetworkEventManager_responseReceivedExtraInfoMap, "f").set(networkRequestId, []);
         }
-        return __classPrivateFieldGet$m(this, _NetworkEventManager_responseReceivedExtraInfoMap, "f").get(networkRequestId);
+        return __classPrivateFieldGet$n(this, _NetworkEventManager_responseReceivedExtraInfoMap, "f").get(networkRequestId);
     }
     queuedRedirectInfo(fetchRequestId) {
-        if (!__classPrivateFieldGet$m(this, _NetworkEventManager_queuedRedirectInfoMap, "f").has(fetchRequestId)) {
-            __classPrivateFieldGet$m(this, _NetworkEventManager_queuedRedirectInfoMap, "f").set(fetchRequestId, []);
+        if (!__classPrivateFieldGet$n(this, _NetworkEventManager_queuedRedirectInfoMap, "f").has(fetchRequestId)) {
+            __classPrivateFieldGet$n(this, _NetworkEventManager_queuedRedirectInfoMap, "f").set(fetchRequestId, []);
         }
-        return __classPrivateFieldGet$m(this, _NetworkEventManager_queuedRedirectInfoMap, "f").get(fetchRequestId);
+        return __classPrivateFieldGet$n(this, _NetworkEventManager_queuedRedirectInfoMap, "f").get(fetchRequestId);
     }
     queueRedirectInfo(fetchRequestId, redirectInfo) {
         this.queuedRedirectInfo(fetchRequestId).push(redirectInfo);
@@ -95557,45 +95578,45 @@ class NetworkEventManager {
         return this.queuedRedirectInfo(fetchRequestId).shift();
     }
     numRequestsInProgress() {
-        return [...__classPrivateFieldGet$m(this, _NetworkEventManager_httpRequestsMap, "f")].filter(([, request]) => {
+        return [...__classPrivateFieldGet$n(this, _NetworkEventManager_httpRequestsMap, "f")].filter(([, request]) => {
             return !request.response();
         }).length;
     }
     storeRequestWillBeSent(networkRequestId, event) {
-        __classPrivateFieldGet$m(this, _NetworkEventManager_requestWillBeSentMap, "f").set(networkRequestId, event);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_requestWillBeSentMap, "f").set(networkRequestId, event);
     }
     getRequestWillBeSent(networkRequestId) {
-        return __classPrivateFieldGet$m(this, _NetworkEventManager_requestWillBeSentMap, "f").get(networkRequestId);
+        return __classPrivateFieldGet$n(this, _NetworkEventManager_requestWillBeSentMap, "f").get(networkRequestId);
     }
     forgetRequestWillBeSent(networkRequestId) {
-        __classPrivateFieldGet$m(this, _NetworkEventManager_requestWillBeSentMap, "f").delete(networkRequestId);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_requestWillBeSentMap, "f").delete(networkRequestId);
     }
     getRequestPaused(networkRequestId) {
-        return __classPrivateFieldGet$m(this, _NetworkEventManager_requestPausedMap, "f").get(networkRequestId);
+        return __classPrivateFieldGet$n(this, _NetworkEventManager_requestPausedMap, "f").get(networkRequestId);
     }
     forgetRequestPaused(networkRequestId) {
-        __classPrivateFieldGet$m(this, _NetworkEventManager_requestPausedMap, "f").delete(networkRequestId);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_requestPausedMap, "f").delete(networkRequestId);
     }
     storeRequestPaused(networkRequestId, event) {
-        __classPrivateFieldGet$m(this, _NetworkEventManager_requestPausedMap, "f").set(networkRequestId, event);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_requestPausedMap, "f").set(networkRequestId, event);
     }
     getRequest(networkRequestId) {
-        return __classPrivateFieldGet$m(this, _NetworkEventManager_httpRequestsMap, "f").get(networkRequestId);
+        return __classPrivateFieldGet$n(this, _NetworkEventManager_httpRequestsMap, "f").get(networkRequestId);
     }
     storeRequest(networkRequestId, request) {
-        __classPrivateFieldGet$m(this, _NetworkEventManager_httpRequestsMap, "f").set(networkRequestId, request);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_httpRequestsMap, "f").set(networkRequestId, request);
     }
     forgetRequest(networkRequestId) {
-        __classPrivateFieldGet$m(this, _NetworkEventManager_httpRequestsMap, "f").delete(networkRequestId);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_httpRequestsMap, "f").delete(networkRequestId);
     }
     getQueuedEventGroup(networkRequestId) {
-        return __classPrivateFieldGet$m(this, _NetworkEventManager_queuedEventGroupMap, "f").get(networkRequestId);
+        return __classPrivateFieldGet$n(this, _NetworkEventManager_queuedEventGroupMap, "f").get(networkRequestId);
     }
     queueEventGroup(networkRequestId, event) {
-        __classPrivateFieldGet$m(this, _NetworkEventManager_queuedEventGroupMap, "f").set(networkRequestId, event);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_queuedEventGroupMap, "f").set(networkRequestId, event);
     }
     forgetQueuedEventGroup(networkRequestId) {
-        __classPrivateFieldGet$m(this, _NetworkEventManager_queuedEventGroupMap, "f").delete(networkRequestId);
+        __classPrivateFieldGet$n(this, _NetworkEventManager_queuedEventGroupMap, "f").delete(networkRequestId);
     }
 }
 _NetworkEventManager_requestWillBeSentMap = new WeakMap(), _NetworkEventManager_requestPausedMap = new WeakMap(), _NetworkEventManager_httpRequestsMap = new WeakMap(), _NetworkEventManager_responseReceivedExtraInfoMap = new WeakMap(), _NetworkEventManager_queuedRedirectInfoMap = new WeakMap(), _NetworkEventManager_queuedEventGroupMap = new WeakMap();
@@ -95615,13 +95636,13 @@ _NetworkEventManager_requestWillBeSentMap = new WeakMap(), _NetworkEventManager_
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$l = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$m = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$l = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$m = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -95664,36 +95685,36 @@ class NetworkManager extends EventEmitter$3 {
             latency: 0,
         });
         _NetworkManager_deferredInitPromise.set(this, void 0);
-        __classPrivateFieldSet$l(this, _NetworkManager_client, client, "f");
-        __classPrivateFieldSet$l(this, _NetworkManager_ignoreHTTPSErrors, ignoreHTTPSErrors, "f");
-        __classPrivateFieldSet$l(this, _NetworkManager_frameManager, frameManager, "f");
-        __classPrivateFieldGet$l(this, _NetworkManager_client, "f").on('Fetch.requestPaused', __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onRequestPaused).bind(this));
-        __classPrivateFieldGet$l(this, _NetworkManager_client, "f").on('Fetch.authRequired', __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onAuthRequired).bind(this));
-        __classPrivateFieldGet$l(this, _NetworkManager_client, "f").on('Network.requestWillBeSent', __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onRequestWillBeSent).bind(this));
-        __classPrivateFieldGet$l(this, _NetworkManager_client, "f").on('Network.requestServedFromCache', __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onRequestServedFromCache).bind(this));
-        __classPrivateFieldGet$l(this, _NetworkManager_client, "f").on('Network.responseReceived', __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onResponseReceived).bind(this));
-        __classPrivateFieldGet$l(this, _NetworkManager_client, "f").on('Network.loadingFinished', __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onLoadingFinished).bind(this));
-        __classPrivateFieldGet$l(this, _NetworkManager_client, "f").on('Network.loadingFailed', __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onLoadingFailed).bind(this));
-        __classPrivateFieldGet$l(this, _NetworkManager_client, "f").on('Network.responseReceivedExtraInfo', __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onResponseReceivedExtraInfo).bind(this));
+        __classPrivateFieldSet$m(this, _NetworkManager_client, client, "f");
+        __classPrivateFieldSet$m(this, _NetworkManager_ignoreHTTPSErrors, ignoreHTTPSErrors, "f");
+        __classPrivateFieldSet$m(this, _NetworkManager_frameManager, frameManager, "f");
+        __classPrivateFieldGet$m(this, _NetworkManager_client, "f").on('Fetch.requestPaused', __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onRequestPaused).bind(this));
+        __classPrivateFieldGet$m(this, _NetworkManager_client, "f").on('Fetch.authRequired', __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onAuthRequired).bind(this));
+        __classPrivateFieldGet$m(this, _NetworkManager_client, "f").on('Network.requestWillBeSent', __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onRequestWillBeSent).bind(this));
+        __classPrivateFieldGet$m(this, _NetworkManager_client, "f").on('Network.requestServedFromCache', __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onRequestServedFromCache).bind(this));
+        __classPrivateFieldGet$m(this, _NetworkManager_client, "f").on('Network.responseReceived', __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onResponseReceived).bind(this));
+        __classPrivateFieldGet$m(this, _NetworkManager_client, "f").on('Network.loadingFinished', __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onLoadingFinished).bind(this));
+        __classPrivateFieldGet$m(this, _NetworkManager_client, "f").on('Network.loadingFailed', __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onLoadingFailed).bind(this));
+        __classPrivateFieldGet$m(this, _NetworkManager_client, "f").on('Network.responseReceivedExtraInfo', __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onResponseReceivedExtraInfo).bind(this));
     }
     /**
      * Initialize calls should avoid async dependencies between CDP calls as those
      * might not resolve until after the target is resumed causing a deadlock.
      */
     initialize() {
-        if (__classPrivateFieldGet$l(this, _NetworkManager_deferredInitPromise, "f")) {
-            return __classPrivateFieldGet$l(this, _NetworkManager_deferredInitPromise, "f");
+        if (__classPrivateFieldGet$m(this, _NetworkManager_deferredInitPromise, "f")) {
+            return __classPrivateFieldGet$m(this, _NetworkManager_deferredInitPromise, "f");
         }
-        __classPrivateFieldSet$l(this, _NetworkManager_deferredInitPromise, createDebuggableDeferredPromise('NetworkManager initialization timed out'), "f");
+        __classPrivateFieldSet$m(this, _NetworkManager_deferredInitPromise, createDebuggableDeferredPromise('NetworkManager initialization timed out'), "f");
         const init = Promise.all([
-            __classPrivateFieldGet$l(this, _NetworkManager_ignoreHTTPSErrors, "f")
-                ? __classPrivateFieldGet$l(this, _NetworkManager_client, "f").send('Security.setIgnoreCertificateErrors', {
+            __classPrivateFieldGet$m(this, _NetworkManager_ignoreHTTPSErrors, "f")
+                ? __classPrivateFieldGet$m(this, _NetworkManager_client, "f").send('Security.setIgnoreCertificateErrors', {
                     ignore: true,
                 })
                 : null,
-            __classPrivateFieldGet$l(this, _NetworkManager_client, "f").send('Network.enable'),
+            __classPrivateFieldGet$m(this, _NetworkManager_client, "f").send('Network.enable'),
         ]);
-        const deferredInitPromise = __classPrivateFieldGet$l(this, _NetworkManager_deferredInitPromise, "f");
+        const deferredInitPromise = __classPrivateFieldGet$m(this, _NetworkManager_deferredInitPromise, "f");
         init
             .then(() => {
             deferredInitPromise.resolve();
@@ -95701,77 +95722,77 @@ class NetworkManager extends EventEmitter$3 {
             .catch(err => {
             deferredInitPromise.reject(err);
         });
-        return __classPrivateFieldGet$l(this, _NetworkManager_deferredInitPromise, "f");
+        return __classPrivateFieldGet$m(this, _NetworkManager_deferredInitPromise, "f");
     }
     async authenticate(credentials) {
-        __classPrivateFieldSet$l(this, _NetworkManager_credentials, credentials, "f");
-        await __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_updateProtocolRequestInterception).call(this);
+        __classPrivateFieldSet$m(this, _NetworkManager_credentials, credentials, "f");
+        await __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_updateProtocolRequestInterception).call(this);
     }
     async setExtraHTTPHeaders(extraHTTPHeaders) {
-        __classPrivateFieldSet$l(this, _NetworkManager_extraHTTPHeaders, {}, "f");
+        __classPrivateFieldSet$m(this, _NetworkManager_extraHTTPHeaders, {}, "f");
         for (const key of Object.keys(extraHTTPHeaders)) {
             const value = extraHTTPHeaders[key];
             assert$1(isString$2(value), `Expected value of header "${key}" to be String, but "${typeof value}" is found.`);
-            __classPrivateFieldGet$l(this, _NetworkManager_extraHTTPHeaders, "f")[key.toLowerCase()] = value;
+            __classPrivateFieldGet$m(this, _NetworkManager_extraHTTPHeaders, "f")[key.toLowerCase()] = value;
         }
-        await __classPrivateFieldGet$l(this, _NetworkManager_client, "f").send('Network.setExtraHTTPHeaders', {
-            headers: __classPrivateFieldGet$l(this, _NetworkManager_extraHTTPHeaders, "f"),
+        await __classPrivateFieldGet$m(this, _NetworkManager_client, "f").send('Network.setExtraHTTPHeaders', {
+            headers: __classPrivateFieldGet$m(this, _NetworkManager_extraHTTPHeaders, "f"),
         });
     }
     extraHTTPHeaders() {
-        return Object.assign({}, __classPrivateFieldGet$l(this, _NetworkManager_extraHTTPHeaders, "f"));
+        return Object.assign({}, __classPrivateFieldGet$m(this, _NetworkManager_extraHTTPHeaders, "f"));
     }
     numRequestsInProgress() {
-        return __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").numRequestsInProgress();
+        return __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").numRequestsInProgress();
     }
     async setOfflineMode(value) {
-        __classPrivateFieldGet$l(this, _NetworkManager_emulatedNetworkConditions, "f").offline = value;
-        await __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_updateNetworkConditions).call(this);
+        __classPrivateFieldGet$m(this, _NetworkManager_emulatedNetworkConditions, "f").offline = value;
+        await __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_updateNetworkConditions).call(this);
     }
     async emulateNetworkConditions(networkConditions) {
-        __classPrivateFieldGet$l(this, _NetworkManager_emulatedNetworkConditions, "f").upload = networkConditions
+        __classPrivateFieldGet$m(this, _NetworkManager_emulatedNetworkConditions, "f").upload = networkConditions
             ? networkConditions.upload
             : -1;
-        __classPrivateFieldGet$l(this, _NetworkManager_emulatedNetworkConditions, "f").download = networkConditions
+        __classPrivateFieldGet$m(this, _NetworkManager_emulatedNetworkConditions, "f").download = networkConditions
             ? networkConditions.download
             : -1;
-        __classPrivateFieldGet$l(this, _NetworkManager_emulatedNetworkConditions, "f").latency = networkConditions
+        __classPrivateFieldGet$m(this, _NetworkManager_emulatedNetworkConditions, "f").latency = networkConditions
             ? networkConditions.latency
             : 0;
-        await __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_updateNetworkConditions).call(this);
+        await __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_updateNetworkConditions).call(this);
     }
     async setUserAgent(userAgent, userAgentMetadata) {
-        await __classPrivateFieldGet$l(this, _NetworkManager_client, "f").send('Network.setUserAgentOverride', {
+        await __classPrivateFieldGet$m(this, _NetworkManager_client, "f").send('Network.setUserAgentOverride', {
             userAgent: userAgent,
             userAgentMetadata: userAgentMetadata,
         });
     }
     async setCacheEnabled(enabled) {
-        __classPrivateFieldSet$l(this, _NetworkManager_userCacheDisabled, !enabled, "f");
-        await __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_updateProtocolCacheDisabled).call(this);
+        __classPrivateFieldSet$m(this, _NetworkManager_userCacheDisabled, !enabled, "f");
+        await __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_updateProtocolCacheDisabled).call(this);
     }
     async setRequestInterception(value) {
-        __classPrivateFieldSet$l(this, _NetworkManager_userRequestInterceptionEnabled, value, "f");
-        await __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_updateProtocolRequestInterception).call(this);
+        __classPrivateFieldSet$m(this, _NetworkManager_userRequestInterceptionEnabled, value, "f");
+        await __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_updateProtocolRequestInterception).call(this);
     }
 }
 _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new WeakMap(), _NetworkManager_frameManager = new WeakMap(), _NetworkManager_networkEventManager = new WeakMap(), _NetworkManager_extraHTTPHeaders = new WeakMap(), _NetworkManager_credentials = new WeakMap(), _NetworkManager_attemptedAuthentications = new WeakMap(), _NetworkManager_userRequestInterceptionEnabled = new WeakMap(), _NetworkManager_protocolRequestInterceptionEnabled = new WeakMap(), _NetworkManager_userCacheDisabled = new WeakMap(), _NetworkManager_emulatedNetworkConditions = new WeakMap(), _NetworkManager_deferredInitPromise = new WeakMap(), _NetworkManager_instances = new WeakSet(), _NetworkManager_updateNetworkConditions = async function _NetworkManager_updateNetworkConditions() {
-    await __classPrivateFieldGet$l(this, _NetworkManager_client, "f").send('Network.emulateNetworkConditions', {
-        offline: __classPrivateFieldGet$l(this, _NetworkManager_emulatedNetworkConditions, "f").offline,
-        latency: __classPrivateFieldGet$l(this, _NetworkManager_emulatedNetworkConditions, "f").latency,
-        uploadThroughput: __classPrivateFieldGet$l(this, _NetworkManager_emulatedNetworkConditions, "f").upload,
-        downloadThroughput: __classPrivateFieldGet$l(this, _NetworkManager_emulatedNetworkConditions, "f").download,
+    await __classPrivateFieldGet$m(this, _NetworkManager_client, "f").send('Network.emulateNetworkConditions', {
+        offline: __classPrivateFieldGet$m(this, _NetworkManager_emulatedNetworkConditions, "f").offline,
+        latency: __classPrivateFieldGet$m(this, _NetworkManager_emulatedNetworkConditions, "f").latency,
+        uploadThroughput: __classPrivateFieldGet$m(this, _NetworkManager_emulatedNetworkConditions, "f").upload,
+        downloadThroughput: __classPrivateFieldGet$m(this, _NetworkManager_emulatedNetworkConditions, "f").download,
     });
 }, _NetworkManager_updateProtocolRequestInterception = async function _NetworkManager_updateProtocolRequestInterception() {
-    const enabled = __classPrivateFieldGet$l(this, _NetworkManager_userRequestInterceptionEnabled, "f") || !!__classPrivateFieldGet$l(this, _NetworkManager_credentials, "f");
-    if (enabled === __classPrivateFieldGet$l(this, _NetworkManager_protocolRequestInterceptionEnabled, "f")) {
+    const enabled = __classPrivateFieldGet$m(this, _NetworkManager_userRequestInterceptionEnabled, "f") || !!__classPrivateFieldGet$m(this, _NetworkManager_credentials, "f");
+    if (enabled === __classPrivateFieldGet$m(this, _NetworkManager_protocolRequestInterceptionEnabled, "f")) {
         return;
     }
-    __classPrivateFieldSet$l(this, _NetworkManager_protocolRequestInterceptionEnabled, enabled, "f");
+    __classPrivateFieldSet$m(this, _NetworkManager_protocolRequestInterceptionEnabled, enabled, "f");
     if (enabled) {
         await Promise.all([
-            __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_updateProtocolCacheDisabled).call(this),
-            __classPrivateFieldGet$l(this, _NetworkManager_client, "f").send('Fetch.enable', {
+            __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_updateProtocolCacheDisabled).call(this),
+            __classPrivateFieldGet$m(this, _NetworkManager_client, "f").send('Fetch.enable', {
                 handleAuthRequests: true,
                 patterns: [{ urlPattern: '*' }],
             }),
@@ -95779,58 +95800,58 @@ _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new 
     }
     else {
         await Promise.all([
-            __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_updateProtocolCacheDisabled).call(this),
-            __classPrivateFieldGet$l(this, _NetworkManager_client, "f").send('Fetch.disable'),
+            __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_updateProtocolCacheDisabled).call(this),
+            __classPrivateFieldGet$m(this, _NetworkManager_client, "f").send('Fetch.disable'),
         ]);
     }
 }, _NetworkManager_cacheDisabled = function _NetworkManager_cacheDisabled() {
-    return __classPrivateFieldGet$l(this, _NetworkManager_userCacheDisabled, "f");
+    return __classPrivateFieldGet$m(this, _NetworkManager_userCacheDisabled, "f");
 }, _NetworkManager_updateProtocolCacheDisabled = async function _NetworkManager_updateProtocolCacheDisabled() {
-    await __classPrivateFieldGet$l(this, _NetworkManager_client, "f").send('Network.setCacheDisabled', {
-        cacheDisabled: __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_cacheDisabled).call(this),
+    await __classPrivateFieldGet$m(this, _NetworkManager_client, "f").send('Network.setCacheDisabled', {
+        cacheDisabled: __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_cacheDisabled).call(this),
     });
 }, _NetworkManager_onRequestWillBeSent = function _NetworkManager_onRequestWillBeSent(event) {
     // Request interception doesn't happen for data URLs with Network Service.
-    if (__classPrivateFieldGet$l(this, _NetworkManager_userRequestInterceptionEnabled, "f") &&
+    if (__classPrivateFieldGet$m(this, _NetworkManager_userRequestInterceptionEnabled, "f") &&
         !event.request.url.startsWith('data:')) {
         const { requestId: networkRequestId } = event;
-        __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").storeRequestWillBeSent(networkRequestId, event);
+        __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").storeRequestWillBeSent(networkRequestId, event);
         /**
          * CDP may have sent a Fetch.requestPaused event already. Check for it.
          */
-        const requestPausedEvent = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getRequestPaused(networkRequestId);
+        const requestPausedEvent = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getRequestPaused(networkRequestId);
         if (requestPausedEvent) {
             const { requestId: fetchRequestId } = requestPausedEvent;
-            __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_patchRequestEventHeaders).call(this, event, requestPausedEvent);
-            __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onRequest).call(this, event, fetchRequestId);
-            __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").forgetRequestPaused(networkRequestId);
+            __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_patchRequestEventHeaders).call(this, event, requestPausedEvent);
+            __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onRequest).call(this, event, fetchRequestId);
+            __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").forgetRequestPaused(networkRequestId);
         }
         return;
     }
-    __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onRequest).call(this, event, undefined);
+    __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onRequest).call(this, event, undefined);
 }, _NetworkManager_onAuthRequired = function _NetworkManager_onAuthRequired(event) {
     let response = 'Default';
-    if (__classPrivateFieldGet$l(this, _NetworkManager_attemptedAuthentications, "f").has(event.requestId)) {
+    if (__classPrivateFieldGet$m(this, _NetworkManager_attemptedAuthentications, "f").has(event.requestId)) {
         response = 'CancelAuth';
     }
-    else if (__classPrivateFieldGet$l(this, _NetworkManager_credentials, "f")) {
+    else if (__classPrivateFieldGet$m(this, _NetworkManager_credentials, "f")) {
         response = 'ProvideCredentials';
-        __classPrivateFieldGet$l(this, _NetworkManager_attemptedAuthentications, "f").add(event.requestId);
+        __classPrivateFieldGet$m(this, _NetworkManager_attemptedAuthentications, "f").add(event.requestId);
     }
-    const { username, password } = __classPrivateFieldGet$l(this, _NetworkManager_credentials, "f") || {
+    const { username, password } = __classPrivateFieldGet$m(this, _NetworkManager_credentials, "f") || {
         username: undefined,
         password: undefined,
     };
-    __classPrivateFieldGet$l(this, _NetworkManager_client, "f")
+    __classPrivateFieldGet$m(this, _NetworkManager_client, "f")
         .send('Fetch.continueWithAuth', {
         requestId: event.requestId,
         authChallengeResponse: { response, username, password },
     })
         .catch(debugError);
 }, _NetworkManager_onRequestPaused = function _NetworkManager_onRequestPaused(event) {
-    if (!__classPrivateFieldGet$l(this, _NetworkManager_userRequestInterceptionEnabled, "f") &&
-        __classPrivateFieldGet$l(this, _NetworkManager_protocolRequestInterceptionEnabled, "f")) {
-        __classPrivateFieldGet$l(this, _NetworkManager_client, "f")
+    if (!__classPrivateFieldGet$m(this, _NetworkManager_userRequestInterceptionEnabled, "f") &&
+        __classPrivateFieldGet$m(this, _NetworkManager_protocolRequestInterceptionEnabled, "f")) {
+        __classPrivateFieldGet$m(this, _NetworkManager_client, "f")
             .send('Fetch.continueRequest', {
             requestId: event.requestId,
         })
@@ -95838,26 +95859,26 @@ _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new 
     }
     const { networkId: networkRequestId, requestId: fetchRequestId } = event;
     if (!networkRequestId) {
-        __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onRequestWithoutNetworkInstrumentation).call(this, event);
+        __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onRequestWithoutNetworkInstrumentation).call(this, event);
         return;
     }
     const requestWillBeSentEvent = (() => {
-        const requestWillBeSentEvent = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getRequestWillBeSent(networkRequestId);
+        const requestWillBeSentEvent = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getRequestWillBeSent(networkRequestId);
         // redirect requests have the same `requestId`,
         if (requestWillBeSentEvent &&
             (requestWillBeSentEvent.request.url !== event.request.url ||
                 requestWillBeSentEvent.request.method !== event.request.method)) {
-            __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").forgetRequestWillBeSent(networkRequestId);
+            __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").forgetRequestWillBeSent(networkRequestId);
             return;
         }
         return requestWillBeSentEvent;
     })();
     if (requestWillBeSentEvent) {
-        __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_patchRequestEventHeaders).call(this, requestWillBeSentEvent, event);
-        __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onRequest).call(this, requestWillBeSentEvent, fetchRequestId);
+        __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_patchRequestEventHeaders).call(this, requestWillBeSentEvent, event);
+        __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onRequest).call(this, requestWillBeSentEvent, fetchRequestId);
     }
     else {
-        __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").storeRequestPaused(networkRequestId, event);
+        __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").storeRequestPaused(networkRequestId, event);
     }
 }, _NetworkManager_patchRequestEventHeaders = function _NetworkManager_patchRequestEventHeaders(requestWillBeSentEvent, requestPausedEvent) {
     requestWillBeSentEvent.request.headers = {
@@ -95869,9 +95890,9 @@ _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new 
     // If an event has no networkId it should not have any network events. We
     // still want to dispatch it for the interception by the user.
     const frame = event.frameId
-        ? __classPrivateFieldGet$l(this, _NetworkManager_frameManager, "f").frame(event.frameId)
+        ? __classPrivateFieldGet$m(this, _NetworkManager_frameManager, "f").frame(event.frameId)
         : null;
-    const request = new HTTPRequest(__classPrivateFieldGet$l(this, _NetworkManager_client, "f"), frame, event.requestId, __classPrivateFieldGet$l(this, _NetworkManager_userRequestInterceptionEnabled, "f"), event, []);
+    const request = new HTTPRequest(__classPrivateFieldGet$m(this, _NetworkManager_client, "f"), frame, event.requestId, __classPrivateFieldGet$m(this, _NetworkManager_userRequestInterceptionEnabled, "f"), event, []);
     this.emit(NetworkManagerEmittedEvents.Request, request);
     request.finalizeInterceptions();
 }, _NetworkManager_onRequest = function _NetworkManager_onRequest(event, fetchRequestId) {
@@ -95886,53 +95907,53 @@ _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new 
         // response/requestfinished.
         let redirectResponseExtraInfo = null;
         if (event.redirectHasExtraInfo) {
-            redirectResponseExtraInfo = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f")
+            redirectResponseExtraInfo = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f")
                 .responseExtraInfo(event.requestId)
                 .shift();
             if (!redirectResponseExtraInfo) {
-                __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").queueRedirectInfo(event.requestId, {
+                __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").queueRedirectInfo(event.requestId, {
                     event,
                     fetchRequestId,
                 });
                 return;
             }
         }
-        const request = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getRequest(event.requestId);
+        const request = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getRequest(event.requestId);
         // If we connect late to the target, we could have missed the
         // requestWillBeSent event.
         if (request) {
-            __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_handleRequestRedirect).call(this, request, event.redirectResponse, redirectResponseExtraInfo);
+            __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_handleRequestRedirect).call(this, request, event.redirectResponse, redirectResponseExtraInfo);
             redirectChain = request._redirectChain;
         }
     }
     const frame = event.frameId
-        ? __classPrivateFieldGet$l(this, _NetworkManager_frameManager, "f").frame(event.frameId)
+        ? __classPrivateFieldGet$m(this, _NetworkManager_frameManager, "f").frame(event.frameId)
         : null;
-    const request = new HTTPRequest(__classPrivateFieldGet$l(this, _NetworkManager_client, "f"), frame, fetchRequestId, __classPrivateFieldGet$l(this, _NetworkManager_userRequestInterceptionEnabled, "f"), event, redirectChain);
-    __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").storeRequest(event.requestId, request);
+    const request = new HTTPRequest(__classPrivateFieldGet$m(this, _NetworkManager_client, "f"), frame, fetchRequestId, __classPrivateFieldGet$m(this, _NetworkManager_userRequestInterceptionEnabled, "f"), event, redirectChain);
+    __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").storeRequest(event.requestId, request);
     this.emit(NetworkManagerEmittedEvents.Request, request);
     request.finalizeInterceptions();
 }, _NetworkManager_onRequestServedFromCache = function _NetworkManager_onRequestServedFromCache(event) {
-    const request = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getRequest(event.requestId);
+    const request = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getRequest(event.requestId);
     if (request) {
         request._fromMemoryCache = true;
     }
     this.emit(NetworkManagerEmittedEvents.RequestServedFromCache, request);
 }, _NetworkManager_handleRequestRedirect = function _NetworkManager_handleRequestRedirect(request, responsePayload, extraInfo) {
-    const response = new HTTPResponse(__classPrivateFieldGet$l(this, _NetworkManager_client, "f"), request, responsePayload, extraInfo);
+    const response = new HTTPResponse(__classPrivateFieldGet$m(this, _NetworkManager_client, "f"), request, responsePayload, extraInfo);
     request._response = response;
     request._redirectChain.push(request);
     response._resolveBody(new Error('Response body is unavailable for redirect responses'));
-    __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_forgetRequest).call(this, request, false);
+    __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_forgetRequest).call(this, request, false);
     this.emit(NetworkManagerEmittedEvents.Response, response);
     this.emit(NetworkManagerEmittedEvents.RequestFinished, request);
 }, _NetworkManager_emitResponseEvent = function _NetworkManager_emitResponseEvent(responseReceived, extraInfo) {
-    const request = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getRequest(responseReceived.requestId);
+    const request = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getRequest(responseReceived.requestId);
     // FileUpload sends a response without a matching request.
     if (!request) {
         return;
     }
-    const extraInfos = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").responseExtraInfo(responseReceived.requestId);
+    const extraInfos = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").responseExtraInfo(responseReceived.requestId);
     if (extraInfos.length) {
         debugError(new Error('Unexpected extraInfo events for request ' +
             responseReceived.requestId));
@@ -95943,73 +95964,73 @@ _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new 
     if (responseReceived.response.fromDiskCache) {
         extraInfo = null;
     }
-    const response = new HTTPResponse(__classPrivateFieldGet$l(this, _NetworkManager_client, "f"), request, responseReceived.response, extraInfo);
+    const response = new HTTPResponse(__classPrivateFieldGet$m(this, _NetworkManager_client, "f"), request, responseReceived.response, extraInfo);
     request._response = response;
     this.emit(NetworkManagerEmittedEvents.Response, response);
 }, _NetworkManager_onResponseReceived = function _NetworkManager_onResponseReceived(event) {
-    const request = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getRequest(event.requestId);
+    const request = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getRequest(event.requestId);
     let extraInfo = null;
     if (request && !request._fromMemoryCache && event.hasExtraInfo) {
-        extraInfo = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f")
+        extraInfo = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f")
             .responseExtraInfo(event.requestId)
             .shift();
         if (!extraInfo) {
             // Wait until we get the corresponding ExtraInfo event.
-            __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").queueEventGroup(event.requestId, {
+            __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").queueEventGroup(event.requestId, {
                 responseReceivedEvent: event,
             });
             return;
         }
     }
-    __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_emitResponseEvent).call(this, event, extraInfo);
+    __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_emitResponseEvent).call(this, event, extraInfo);
 }, _NetworkManager_onResponseReceivedExtraInfo = function _NetworkManager_onResponseReceivedExtraInfo(event) {
     // We may have skipped a redirect response/request pair due to waiting for
     // this ExtraInfo event. If so, continue that work now that we have the
     // request.
-    const redirectInfo = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").takeQueuedRedirectInfo(event.requestId);
+    const redirectInfo = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").takeQueuedRedirectInfo(event.requestId);
     if (redirectInfo) {
-        __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").responseExtraInfo(event.requestId).push(event);
-        __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_onRequest).call(this, redirectInfo.event, redirectInfo.fetchRequestId);
+        __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").responseExtraInfo(event.requestId).push(event);
+        __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onRequest).call(this, redirectInfo.event, redirectInfo.fetchRequestId);
         return;
     }
     // We may have skipped response and loading events because we didn't have
     // this ExtraInfo event yet. If so, emit those events now.
-    const queuedEvents = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getQueuedEventGroup(event.requestId);
+    const queuedEvents = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getQueuedEventGroup(event.requestId);
     if (queuedEvents) {
-        __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").forgetQueuedEventGroup(event.requestId);
-        __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_emitResponseEvent).call(this, queuedEvents.responseReceivedEvent, event);
+        __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").forgetQueuedEventGroup(event.requestId);
+        __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_emitResponseEvent).call(this, queuedEvents.responseReceivedEvent, event);
         if (queuedEvents.loadingFinishedEvent) {
-            __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_emitLoadingFinished).call(this, queuedEvents.loadingFinishedEvent);
+            __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_emitLoadingFinished).call(this, queuedEvents.loadingFinishedEvent);
         }
         if (queuedEvents.loadingFailedEvent) {
-            __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_emitLoadingFailed).call(this, queuedEvents.loadingFailedEvent);
+            __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_emitLoadingFailed).call(this, queuedEvents.loadingFailedEvent);
         }
         return;
     }
     // Wait until we get another event that can use this ExtraInfo event.
-    __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").responseExtraInfo(event.requestId).push(event);
+    __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").responseExtraInfo(event.requestId).push(event);
 }, _NetworkManager_forgetRequest = function _NetworkManager_forgetRequest(request, events) {
     const requestId = request._requestId;
     const interceptionId = request._interceptionId;
-    __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").forgetRequest(requestId);
+    __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").forgetRequest(requestId);
     interceptionId !== undefined &&
-        __classPrivateFieldGet$l(this, _NetworkManager_attemptedAuthentications, "f").delete(interceptionId);
+        __classPrivateFieldGet$m(this, _NetworkManager_attemptedAuthentications, "f").delete(interceptionId);
     if (events) {
-        __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").forget(requestId);
+        __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").forget(requestId);
     }
 }, _NetworkManager_onLoadingFinished = function _NetworkManager_onLoadingFinished(event) {
     // If the response event for this request is still waiting on a
     // corresponding ExtraInfo event, then wait to emit this event too.
-    const queuedEvents = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getQueuedEventGroup(event.requestId);
+    const queuedEvents = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getQueuedEventGroup(event.requestId);
     if (queuedEvents) {
         queuedEvents.loadingFinishedEvent = event;
     }
     else {
-        __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_emitLoadingFinished).call(this, event);
+        __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_emitLoadingFinished).call(this, event);
     }
 }, _NetworkManager_emitLoadingFinished = function _NetworkManager_emitLoadingFinished(event) {
     var _a;
-    const request = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getRequest(event.requestId);
+    const request = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getRequest(event.requestId);
     // For certain requestIds we never receive requestWillBeSent event.
     // @see https://crbug.com/750469
     if (!request) {
@@ -96020,20 +96041,20 @@ _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new 
     if (request.response()) {
         (_a = request.response()) === null || _a === void 0 ? void 0 : _a._resolveBody(null);
     }
-    __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_forgetRequest).call(this, request, true);
+    __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_forgetRequest).call(this, request, true);
     this.emit(NetworkManagerEmittedEvents.RequestFinished, request);
 }, _NetworkManager_onLoadingFailed = function _NetworkManager_onLoadingFailed(event) {
     // If the response event for this request is still waiting on a
     // corresponding ExtraInfo event, then wait to emit this event too.
-    const queuedEvents = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getQueuedEventGroup(event.requestId);
+    const queuedEvents = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getQueuedEventGroup(event.requestId);
     if (queuedEvents) {
         queuedEvents.loadingFailedEvent = event;
     }
     else {
-        __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_emitLoadingFailed).call(this, event);
+        __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_emitLoadingFailed).call(this, event);
     }
 }, _NetworkManager_emitLoadingFailed = function _NetworkManager_emitLoadingFailed(event) {
-    const request = __classPrivateFieldGet$l(this, _NetworkManager_networkEventManager, "f").getRequest(event.requestId);
+    const request = __classPrivateFieldGet$m(this, _NetworkManager_networkEventManager, "f").getRequest(event.requestId);
     // For certain requestIds we never receive requestWillBeSent event.
     // @see https://crbug.com/750469
     if (!request) {
@@ -96044,7 +96065,7 @@ _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new 
     if (response) {
         response._resolveBody(null);
     }
-    __classPrivateFieldGet$l(this, _NetworkManager_instances, "m", _NetworkManager_forgetRequest).call(this, request, true);
+    __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_forgetRequest).call(this, request, true);
     this.emit(NetworkManagerEmittedEvents.RequestFailed, request);
 };
 
@@ -96063,13 +96084,13 @@ _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new 
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$k = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$l = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$k = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$l = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -96110,123 +96131,123 @@ class LifecycleWatcher {
         else if (typeof waitUntil === 'string') {
             waitUntil = [waitUntil];
         }
-        __classPrivateFieldSet$k(this, _LifecycleWatcher_initialLoaderId, frame._loaderId, "f");
-        __classPrivateFieldSet$k(this, _LifecycleWatcher_expectedLifecycle, waitUntil.map(value => {
+        __classPrivateFieldSet$l(this, _LifecycleWatcher_initialLoaderId, frame._loaderId, "f");
+        __classPrivateFieldSet$l(this, _LifecycleWatcher_expectedLifecycle, waitUntil.map(value => {
             const protocolEvent = puppeteerToProtocolLifecycle.get(value);
             assert$1(protocolEvent, 'Unknown value for options.waitUntil: ' + value);
             return protocolEvent;
         }), "f");
-        __classPrivateFieldSet$k(this, _LifecycleWatcher_frameManager, frameManager, "f");
-        __classPrivateFieldSet$k(this, _LifecycleWatcher_frame, frame, "f");
-        __classPrivateFieldSet$k(this, _LifecycleWatcher_timeout, timeout, "f");
-        __classPrivateFieldSet$k(this, _LifecycleWatcher_eventListeners, [
-            addEventListener$1(frameManager.client, CDPSessionEmittedEvents.Disconnected, __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_terminate).bind(this, new Error('Navigation failed because browser has disconnected!'))),
-            addEventListener$1(__classPrivateFieldGet$k(this, _LifecycleWatcher_frameManager, "f"), FrameManagerEmittedEvents.LifecycleEvent, __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).bind(this)),
-            addEventListener$1(__classPrivateFieldGet$k(this, _LifecycleWatcher_frameManager, "f"), FrameManagerEmittedEvents.FrameNavigatedWithinDocument, __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_navigatedWithinDocument).bind(this)),
-            addEventListener$1(__classPrivateFieldGet$k(this, _LifecycleWatcher_frameManager, "f"), FrameManagerEmittedEvents.FrameNavigated, __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_navigated).bind(this)),
-            addEventListener$1(__classPrivateFieldGet$k(this, _LifecycleWatcher_frameManager, "f"), FrameManagerEmittedEvents.FrameSwapped, __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_frameSwapped).bind(this)),
-            addEventListener$1(__classPrivateFieldGet$k(this, _LifecycleWatcher_frameManager, "f"), FrameManagerEmittedEvents.FrameDetached, __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_onFrameDetached).bind(this)),
-            addEventListener$1(__classPrivateFieldGet$k(this, _LifecycleWatcher_frameManager, "f").networkManager, NetworkManagerEmittedEvents.Request, __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_onRequest).bind(this)),
-            addEventListener$1(__classPrivateFieldGet$k(this, _LifecycleWatcher_frameManager, "f").networkManager, NetworkManagerEmittedEvents.Response, __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_onResponse).bind(this)),
-            addEventListener$1(__classPrivateFieldGet$k(this, _LifecycleWatcher_frameManager, "f").networkManager, NetworkManagerEmittedEvents.RequestFailed, __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_onRequestFailed).bind(this)),
+        __classPrivateFieldSet$l(this, _LifecycleWatcher_frameManager, frameManager, "f");
+        __classPrivateFieldSet$l(this, _LifecycleWatcher_frame, frame, "f");
+        __classPrivateFieldSet$l(this, _LifecycleWatcher_timeout, timeout, "f");
+        __classPrivateFieldSet$l(this, _LifecycleWatcher_eventListeners, [
+            addEventListener$1(frameManager.client, CDPSessionEmittedEvents.Disconnected, __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_terminate).bind(this, new Error('Navigation failed because browser has disconnected!'))),
+            addEventListener$1(__classPrivateFieldGet$l(this, _LifecycleWatcher_frameManager, "f"), FrameManagerEmittedEvents.LifecycleEvent, __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).bind(this)),
+            addEventListener$1(__classPrivateFieldGet$l(this, _LifecycleWatcher_frameManager, "f"), FrameManagerEmittedEvents.FrameNavigatedWithinDocument, __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_navigatedWithinDocument).bind(this)),
+            addEventListener$1(__classPrivateFieldGet$l(this, _LifecycleWatcher_frameManager, "f"), FrameManagerEmittedEvents.FrameNavigated, __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_navigated).bind(this)),
+            addEventListener$1(__classPrivateFieldGet$l(this, _LifecycleWatcher_frameManager, "f"), FrameManagerEmittedEvents.FrameSwapped, __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_frameSwapped).bind(this)),
+            addEventListener$1(__classPrivateFieldGet$l(this, _LifecycleWatcher_frameManager, "f"), FrameManagerEmittedEvents.FrameDetached, __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_onFrameDetached).bind(this)),
+            addEventListener$1(__classPrivateFieldGet$l(this, _LifecycleWatcher_frameManager, "f").networkManager, NetworkManagerEmittedEvents.Request, __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_onRequest).bind(this)),
+            addEventListener$1(__classPrivateFieldGet$l(this, _LifecycleWatcher_frameManager, "f").networkManager, NetworkManagerEmittedEvents.Response, __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_onResponse).bind(this)),
+            addEventListener$1(__classPrivateFieldGet$l(this, _LifecycleWatcher_frameManager, "f").networkManager, NetworkManagerEmittedEvents.RequestFailed, __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_onRequestFailed).bind(this)),
         ], "f");
-        __classPrivateFieldSet$k(this, _LifecycleWatcher_timeoutPromise, __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_createTimeoutPromise).call(this), "f");
-        __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).call(this);
+        __classPrivateFieldSet$l(this, _LifecycleWatcher_timeoutPromise, __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_createTimeoutPromise).call(this), "f");
+        __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).call(this);
     }
     async navigationResponse() {
         var _a;
         // Continue with a possibly null response.
-        await ((_a = __classPrivateFieldGet$k(this, _LifecycleWatcher_navigationResponseReceived, "f")) === null || _a === void 0 ? void 0 : _a.catch(() => { }));
-        return __classPrivateFieldGet$k(this, _LifecycleWatcher_navigationRequest, "f") ? __classPrivateFieldGet$k(this, _LifecycleWatcher_navigationRequest, "f").response() : null;
+        await ((_a = __classPrivateFieldGet$l(this, _LifecycleWatcher_navigationResponseReceived, "f")) === null || _a === void 0 ? void 0 : _a.catch(() => { }));
+        return __classPrivateFieldGet$l(this, _LifecycleWatcher_navigationRequest, "f") ? __classPrivateFieldGet$l(this, _LifecycleWatcher_navigationRequest, "f").response() : null;
     }
     sameDocumentNavigationPromise() {
-        return __classPrivateFieldGet$k(this, _LifecycleWatcher_sameDocumentNavigationPromise, "f");
+        return __classPrivateFieldGet$l(this, _LifecycleWatcher_sameDocumentNavigationPromise, "f");
     }
     newDocumentNavigationPromise() {
-        return __classPrivateFieldGet$k(this, _LifecycleWatcher_newDocumentNavigationPromise, "f");
+        return __classPrivateFieldGet$l(this, _LifecycleWatcher_newDocumentNavigationPromise, "f");
     }
     lifecyclePromise() {
-        return __classPrivateFieldGet$k(this, _LifecycleWatcher_lifecyclePromise, "f");
+        return __classPrivateFieldGet$l(this, _LifecycleWatcher_lifecyclePromise, "f");
     }
     timeoutOrTerminationPromise() {
-        return Promise.race([__classPrivateFieldGet$k(this, _LifecycleWatcher_timeoutPromise, "f"), __classPrivateFieldGet$k(this, _LifecycleWatcher_terminationPromise, "f")]);
+        return Promise.race([__classPrivateFieldGet$l(this, _LifecycleWatcher_timeoutPromise, "f"), __classPrivateFieldGet$l(this, _LifecycleWatcher_terminationPromise, "f")]);
     }
     dispose() {
-        removeEventListeners(__classPrivateFieldGet$k(this, _LifecycleWatcher_eventListeners, "f"));
-        __classPrivateFieldGet$k(this, _LifecycleWatcher_maximumTimer, "f") !== undefined && clearTimeout(__classPrivateFieldGet$k(this, _LifecycleWatcher_maximumTimer, "f"));
+        removeEventListeners(__classPrivateFieldGet$l(this, _LifecycleWatcher_eventListeners, "f"));
+        __classPrivateFieldGet$l(this, _LifecycleWatcher_maximumTimer, "f") !== undefined && clearTimeout(__classPrivateFieldGet$l(this, _LifecycleWatcher_maximumTimer, "f"));
     }
 }
 _LifecycleWatcher_expectedLifecycle = new WeakMap(), _LifecycleWatcher_frameManager = new WeakMap(), _LifecycleWatcher_frame = new WeakMap(), _LifecycleWatcher_timeout = new WeakMap(), _LifecycleWatcher_navigationRequest = new WeakMap(), _LifecycleWatcher_eventListeners = new WeakMap(), _LifecycleWatcher_initialLoaderId = new WeakMap(), _LifecycleWatcher_sameDocumentNavigationPromise = new WeakMap(), _LifecycleWatcher_lifecyclePromise = new WeakMap(), _LifecycleWatcher_newDocumentNavigationPromise = new WeakMap(), _LifecycleWatcher_terminationPromise = new WeakMap(), _LifecycleWatcher_timeoutPromise = new WeakMap(), _LifecycleWatcher_maximumTimer = new WeakMap(), _LifecycleWatcher_hasSameDocumentNavigation = new WeakMap(), _LifecycleWatcher_swapped = new WeakMap(), _LifecycleWatcher_navigationResponseReceived = new WeakMap(), _LifecycleWatcher_instances = new WeakSet(), _LifecycleWatcher_onRequest = function _LifecycleWatcher_onRequest(request) {
     var _a, _b;
-    if (request.frame() !== __classPrivateFieldGet$k(this, _LifecycleWatcher_frame, "f") || !request.isNavigationRequest()) {
+    if (request.frame() !== __classPrivateFieldGet$l(this, _LifecycleWatcher_frame, "f") || !request.isNavigationRequest()) {
         return;
     }
-    __classPrivateFieldSet$k(this, _LifecycleWatcher_navigationRequest, request, "f");
+    __classPrivateFieldSet$l(this, _LifecycleWatcher_navigationRequest, request, "f");
     // Resolve previous navigation response in case there are multiple
     // navigation requests reported by the backend. This generally should not
     // happen by it looks like it's possible.
-    (_a = __classPrivateFieldGet$k(this, _LifecycleWatcher_navigationResponseReceived, "f")) === null || _a === void 0 ? void 0 : _a.resolve();
-    __classPrivateFieldSet$k(this, _LifecycleWatcher_navigationResponseReceived, createDeferredPromise(), "f");
+    (_a = __classPrivateFieldGet$l(this, _LifecycleWatcher_navigationResponseReceived, "f")) === null || _a === void 0 ? void 0 : _a.resolve();
+    __classPrivateFieldSet$l(this, _LifecycleWatcher_navigationResponseReceived, createDeferredPromise(), "f");
     if (request.response() !== null) {
-        (_b = __classPrivateFieldGet$k(this, _LifecycleWatcher_navigationResponseReceived, "f")) === null || _b === void 0 ? void 0 : _b.resolve();
+        (_b = __classPrivateFieldGet$l(this, _LifecycleWatcher_navigationResponseReceived, "f")) === null || _b === void 0 ? void 0 : _b.resolve();
     }
 }, _LifecycleWatcher_onRequestFailed = function _LifecycleWatcher_onRequestFailed(request) {
     var _a, _b;
-    if (((_a = __classPrivateFieldGet$k(this, _LifecycleWatcher_navigationRequest, "f")) === null || _a === void 0 ? void 0 : _a._requestId) !== request._requestId) {
+    if (((_a = __classPrivateFieldGet$l(this, _LifecycleWatcher_navigationRequest, "f")) === null || _a === void 0 ? void 0 : _a._requestId) !== request._requestId) {
         return;
     }
-    (_b = __classPrivateFieldGet$k(this, _LifecycleWatcher_navigationResponseReceived, "f")) === null || _b === void 0 ? void 0 : _b.resolve();
+    (_b = __classPrivateFieldGet$l(this, _LifecycleWatcher_navigationResponseReceived, "f")) === null || _b === void 0 ? void 0 : _b.resolve();
 }, _LifecycleWatcher_onResponse = function _LifecycleWatcher_onResponse(response) {
     var _a, _b;
-    if (((_a = __classPrivateFieldGet$k(this, _LifecycleWatcher_navigationRequest, "f")) === null || _a === void 0 ? void 0 : _a._requestId) !== response.request()._requestId) {
+    if (((_a = __classPrivateFieldGet$l(this, _LifecycleWatcher_navigationRequest, "f")) === null || _a === void 0 ? void 0 : _a._requestId) !== response.request()._requestId) {
         return;
     }
-    (_b = __classPrivateFieldGet$k(this, _LifecycleWatcher_navigationResponseReceived, "f")) === null || _b === void 0 ? void 0 : _b.resolve();
+    (_b = __classPrivateFieldGet$l(this, _LifecycleWatcher_navigationResponseReceived, "f")) === null || _b === void 0 ? void 0 : _b.resolve();
 }, _LifecycleWatcher_onFrameDetached = function _LifecycleWatcher_onFrameDetached(frame) {
-    if (__classPrivateFieldGet$k(this, _LifecycleWatcher_frame, "f") === frame) {
-        __classPrivateFieldGet$k(this, _LifecycleWatcher_terminationPromise, "f").resolve(new Error('Navigating frame was detached'));
+    if (__classPrivateFieldGet$l(this, _LifecycleWatcher_frame, "f") === frame) {
+        __classPrivateFieldGet$l(this, _LifecycleWatcher_terminationPromise, "f").resolve(new Error('Navigating frame was detached'));
         return;
     }
-    __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).call(this);
+    __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).call(this);
 }, _LifecycleWatcher_terminate = function _LifecycleWatcher_terminate(error) {
-    __classPrivateFieldGet$k(this, _LifecycleWatcher_terminationPromise, "f").resolve(error);
+    __classPrivateFieldGet$l(this, _LifecycleWatcher_terminationPromise, "f").resolve(error);
 }, _LifecycleWatcher_createTimeoutPromise = async function _LifecycleWatcher_createTimeoutPromise() {
-    if (!__classPrivateFieldGet$k(this, _LifecycleWatcher_timeout, "f")) {
+    if (!__classPrivateFieldGet$l(this, _LifecycleWatcher_timeout, "f")) {
         return new Promise(noop$7);
     }
-    const errorMessage = 'Navigation timeout of ' + __classPrivateFieldGet$k(this, _LifecycleWatcher_timeout, "f") + ' ms exceeded';
+    const errorMessage = 'Navigation timeout of ' + __classPrivateFieldGet$l(this, _LifecycleWatcher_timeout, "f") + ' ms exceeded';
     await new Promise(fulfill => {
-        return (__classPrivateFieldSet$k(this, _LifecycleWatcher_maximumTimer, setTimeout(fulfill, __classPrivateFieldGet$k(this, _LifecycleWatcher_timeout, "f")), "f"));
+        return (__classPrivateFieldSet$l(this, _LifecycleWatcher_maximumTimer, setTimeout(fulfill, __classPrivateFieldGet$l(this, _LifecycleWatcher_timeout, "f")), "f"));
     });
     return new TimeoutError$1(errorMessage);
 }, _LifecycleWatcher_navigatedWithinDocument = function _LifecycleWatcher_navigatedWithinDocument(frame) {
-    if (frame !== __classPrivateFieldGet$k(this, _LifecycleWatcher_frame, "f")) {
+    if (frame !== __classPrivateFieldGet$l(this, _LifecycleWatcher_frame, "f")) {
         return;
     }
-    __classPrivateFieldSet$k(this, _LifecycleWatcher_hasSameDocumentNavigation, true, "f");
-    __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).call(this);
+    __classPrivateFieldSet$l(this, _LifecycleWatcher_hasSameDocumentNavigation, true, "f");
+    __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).call(this);
 }, _LifecycleWatcher_navigated = function _LifecycleWatcher_navigated(frame) {
-    if (frame !== __classPrivateFieldGet$k(this, _LifecycleWatcher_frame, "f")) {
+    if (frame !== __classPrivateFieldGet$l(this, _LifecycleWatcher_frame, "f")) {
         return;
     }
-    __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).call(this);
+    __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).call(this);
 }, _LifecycleWatcher_frameSwapped = function _LifecycleWatcher_frameSwapped(frame) {
-    if (frame !== __classPrivateFieldGet$k(this, _LifecycleWatcher_frame, "f")) {
+    if (frame !== __classPrivateFieldGet$l(this, _LifecycleWatcher_frame, "f")) {
         return;
     }
-    __classPrivateFieldSet$k(this, _LifecycleWatcher_swapped, true, "f");
-    __classPrivateFieldGet$k(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).call(this);
+    __classPrivateFieldSet$l(this, _LifecycleWatcher_swapped, true, "f");
+    __classPrivateFieldGet$l(this, _LifecycleWatcher_instances, "m", _LifecycleWatcher_checkLifecycleComplete).call(this);
 }, _LifecycleWatcher_checkLifecycleComplete = function _LifecycleWatcher_checkLifecycleComplete() {
     // We expect navigation to commit.
-    if (!checkLifecycle(__classPrivateFieldGet$k(this, _LifecycleWatcher_frame, "f"), __classPrivateFieldGet$k(this, _LifecycleWatcher_expectedLifecycle, "f"))) {
+    if (!checkLifecycle(__classPrivateFieldGet$l(this, _LifecycleWatcher_frame, "f"), __classPrivateFieldGet$l(this, _LifecycleWatcher_expectedLifecycle, "f"))) {
         return;
     }
-    __classPrivateFieldGet$k(this, _LifecycleWatcher_lifecyclePromise, "f").resolve();
-    if (__classPrivateFieldGet$k(this, _LifecycleWatcher_hasSameDocumentNavigation, "f")) {
-        __classPrivateFieldGet$k(this, _LifecycleWatcher_sameDocumentNavigationPromise, "f").resolve(undefined);
+    __classPrivateFieldGet$l(this, _LifecycleWatcher_lifecyclePromise, "f").resolve();
+    if (__classPrivateFieldGet$l(this, _LifecycleWatcher_hasSameDocumentNavigation, "f")) {
+        __classPrivateFieldGet$l(this, _LifecycleWatcher_sameDocumentNavigationPromise, "f").resolve(undefined);
     }
-    if (__classPrivateFieldGet$k(this, _LifecycleWatcher_swapped, "f") || __classPrivateFieldGet$k(this, _LifecycleWatcher_frame, "f")._loaderId !== __classPrivateFieldGet$k(this, _LifecycleWatcher_initialLoaderId, "f")) {
-        __classPrivateFieldGet$k(this, _LifecycleWatcher_newDocumentNavigationPromise, "f").resolve(undefined);
+    if (__classPrivateFieldGet$l(this, _LifecycleWatcher_swapped, "f") || __classPrivateFieldGet$l(this, _LifecycleWatcher_frame, "f")._loaderId !== __classPrivateFieldGet$l(this, _LifecycleWatcher_initialLoaderId, "f")) {
+        __classPrivateFieldGet$l(this, _LifecycleWatcher_newDocumentNavigationPromise, "f").resolve(undefined);
     }
     function checkLifecycle(frame, expectedLifecycle) {
         for (const event of expectedLifecycle) {
@@ -96259,13 +96280,13 @@ _LifecycleWatcher_expectedLifecycle = new WeakMap(), _LifecycleWatcher_frameMana
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$j = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$k = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$j = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$k = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -96286,76 +96307,76 @@ class WaitTask {
         _WaitTask_result.set(this, createDeferredPromise());
         _WaitTask_poller.set(this, void 0);
         _WaitTask_signal.set(this, void 0);
-        __classPrivateFieldSet$j(this, _WaitTask_world, world, "f");
-        __classPrivateFieldSet$j(this, _WaitTask_polling, options.polling, "f");
-        __classPrivateFieldSet$j(this, _WaitTask_root, options.root, "f");
-        __classPrivateFieldSet$j(this, _WaitTask_signal, options.signal, "f");
-        (_a = __classPrivateFieldGet$j(this, _WaitTask_signal, "f")) === null || _a === void 0 ? void 0 : _a.addEventListener('abort', () => {
+        __classPrivateFieldSet$k(this, _WaitTask_world, world, "f");
+        __classPrivateFieldSet$k(this, _WaitTask_polling, options.polling, "f");
+        __classPrivateFieldSet$k(this, _WaitTask_root, options.root, "f");
+        __classPrivateFieldSet$k(this, _WaitTask_signal, options.signal, "f");
+        (_a = __classPrivateFieldGet$k(this, _WaitTask_signal, "f")) === null || _a === void 0 ? void 0 : _a.addEventListener('abort', () => {
             this.terminate(new AbortError('WaitTask has been aborted.'));
         }, {
             once: true,
         });
         switch (typeof fn) {
             case 'string':
-                __classPrivateFieldSet$j(this, _WaitTask_fn, `() => {return (${fn});}`, "f");
+                __classPrivateFieldSet$k(this, _WaitTask_fn, `() => {return (${fn});}`, "f");
                 break;
             default:
-                __classPrivateFieldSet$j(this, _WaitTask_fn, stringifyFunction(fn), "f");
+                __classPrivateFieldSet$k(this, _WaitTask_fn, stringifyFunction(fn), "f");
                 break;
         }
-        __classPrivateFieldSet$j(this, _WaitTask_args, args, "f");
-        __classPrivateFieldGet$j(this, _WaitTask_world, "f").taskManager.add(this);
+        __classPrivateFieldSet$k(this, _WaitTask_args, args, "f");
+        __classPrivateFieldGet$k(this, _WaitTask_world, "f").taskManager.add(this);
         if (options.timeout) {
-            __classPrivateFieldSet$j(this, _WaitTask_timeout, setTimeout(() => {
+            __classPrivateFieldSet$k(this, _WaitTask_timeout, setTimeout(() => {
                 this.terminate(new TimeoutError$1(`Waiting failed: ${options.timeout}ms exceeded`));
             }, options.timeout), "f");
         }
         this.rerun();
     }
     get result() {
-        return __classPrivateFieldGet$j(this, _WaitTask_result, "f");
+        return __classPrivateFieldGet$k(this, _WaitTask_result, "f");
     }
     async rerun() {
         try {
-            switch (__classPrivateFieldGet$j(this, _WaitTask_polling, "f")) {
+            switch (__classPrivateFieldGet$k(this, _WaitTask_polling, "f")) {
                 case 'raf':
-                    __classPrivateFieldSet$j(this, _WaitTask_poller, await __classPrivateFieldGet$j(this, _WaitTask_world, "f").evaluateHandle(({ RAFPoller, createFunction }, fn, ...args) => {
+                    __classPrivateFieldSet$k(this, _WaitTask_poller, await __classPrivateFieldGet$k(this, _WaitTask_world, "f").evaluateHandle(({ RAFPoller, createFunction }, fn, ...args) => {
                         const fun = createFunction(fn);
                         return new RAFPoller(() => {
                             return fun(...args);
                         });
                     }, LazyArg.create(context => {
                         return context.puppeteerUtil;
-                    }), __classPrivateFieldGet$j(this, _WaitTask_fn, "f"), ...__classPrivateFieldGet$j(this, _WaitTask_args, "f")), "f");
+                    }), __classPrivateFieldGet$k(this, _WaitTask_fn, "f"), ...__classPrivateFieldGet$k(this, _WaitTask_args, "f")), "f");
                     break;
                 case 'mutation':
-                    __classPrivateFieldSet$j(this, _WaitTask_poller, await __classPrivateFieldGet$j(this, _WaitTask_world, "f").evaluateHandle(({ MutationPoller, createFunction }, root, fn, ...args) => {
+                    __classPrivateFieldSet$k(this, _WaitTask_poller, await __classPrivateFieldGet$k(this, _WaitTask_world, "f").evaluateHandle(({ MutationPoller, createFunction }, root, fn, ...args) => {
                         const fun = createFunction(fn);
                         return new MutationPoller(() => {
                             return fun(...args);
                         }, root || document);
                     }, LazyArg.create(context => {
                         return context.puppeteerUtil;
-                    }), __classPrivateFieldGet$j(this, _WaitTask_root, "f"), __classPrivateFieldGet$j(this, _WaitTask_fn, "f"), ...__classPrivateFieldGet$j(this, _WaitTask_args, "f")), "f");
+                    }), __classPrivateFieldGet$k(this, _WaitTask_root, "f"), __classPrivateFieldGet$k(this, _WaitTask_fn, "f"), ...__classPrivateFieldGet$k(this, _WaitTask_args, "f")), "f");
                     break;
                 default:
-                    __classPrivateFieldSet$j(this, _WaitTask_poller, await __classPrivateFieldGet$j(this, _WaitTask_world, "f").evaluateHandle(({ IntervalPoller, createFunction }, ms, fn, ...args) => {
+                    __classPrivateFieldSet$k(this, _WaitTask_poller, await __classPrivateFieldGet$k(this, _WaitTask_world, "f").evaluateHandle(({ IntervalPoller, createFunction }, ms, fn, ...args) => {
                         const fun = createFunction(fn);
                         return new IntervalPoller(() => {
                             return fun(...args);
                         }, ms);
                     }, LazyArg.create(context => {
                         return context.puppeteerUtil;
-                    }), __classPrivateFieldGet$j(this, _WaitTask_polling, "f"), __classPrivateFieldGet$j(this, _WaitTask_fn, "f"), ...__classPrivateFieldGet$j(this, _WaitTask_args, "f")), "f");
+                    }), __classPrivateFieldGet$k(this, _WaitTask_polling, "f"), __classPrivateFieldGet$k(this, _WaitTask_fn, "f"), ...__classPrivateFieldGet$k(this, _WaitTask_args, "f")), "f");
                     break;
             }
-            await __classPrivateFieldGet$j(this, _WaitTask_poller, "f").evaluate(poller => {
+            await __classPrivateFieldGet$k(this, _WaitTask_poller, "f").evaluate(poller => {
                 poller.start();
             });
-            const result = await __classPrivateFieldGet$j(this, _WaitTask_poller, "f").evaluateHandle(poller => {
+            const result = await __classPrivateFieldGet$k(this, _WaitTask_poller, "f").evaluateHandle(poller => {
                 return poller.result();
             });
-            __classPrivateFieldGet$j(this, _WaitTask_result, "f").resolve(result);
+            __classPrivateFieldGet$k(this, _WaitTask_result, "f").resolve(result);
             await this.terminate();
         }
         catch (error) {
@@ -96366,21 +96387,21 @@ class WaitTask {
         }
     }
     async terminate(error) {
-        __classPrivateFieldGet$j(this, _WaitTask_world, "f").taskManager.delete(this);
-        if (__classPrivateFieldGet$j(this, _WaitTask_timeout, "f")) {
-            clearTimeout(__classPrivateFieldGet$j(this, _WaitTask_timeout, "f"));
+        __classPrivateFieldGet$k(this, _WaitTask_world, "f").taskManager.delete(this);
+        if (__classPrivateFieldGet$k(this, _WaitTask_timeout, "f")) {
+            clearTimeout(__classPrivateFieldGet$k(this, _WaitTask_timeout, "f"));
         }
-        if (error && !__classPrivateFieldGet$j(this, _WaitTask_result, "f").finished()) {
-            __classPrivateFieldGet$j(this, _WaitTask_result, "f").reject(error);
+        if (error && !__classPrivateFieldGet$k(this, _WaitTask_result, "f").finished()) {
+            __classPrivateFieldGet$k(this, _WaitTask_result, "f").reject(error);
         }
-        if (__classPrivateFieldGet$j(this, _WaitTask_poller, "f")) {
+        if (__classPrivateFieldGet$k(this, _WaitTask_poller, "f")) {
             try {
-                await __classPrivateFieldGet$j(this, _WaitTask_poller, "f").evaluateHandle(async (poller) => {
+                await __classPrivateFieldGet$k(this, _WaitTask_poller, "f").evaluateHandle(async (poller) => {
                     await poller.stop();
                 });
-                if (__classPrivateFieldGet$j(this, _WaitTask_poller, "f")) {
-                    await __classPrivateFieldGet$j(this, _WaitTask_poller, "f").dispose();
-                    __classPrivateFieldSet$j(this, _WaitTask_poller, undefined, "f");
+                if (__classPrivateFieldGet$k(this, _WaitTask_poller, "f")) {
+                    await __classPrivateFieldGet$k(this, _WaitTask_poller, "f").dispose();
+                    __classPrivateFieldSet$k(this, _WaitTask_poller, undefined, "f");
                 }
             }
             catch {
@@ -96422,19 +96443,19 @@ class TaskManager {
         _TaskManager_tasks.set(this, new Set());
     }
     add(task) {
-        __classPrivateFieldGet$j(this, _TaskManager_tasks, "f").add(task);
+        __classPrivateFieldGet$k(this, _TaskManager_tasks, "f").add(task);
     }
     delete(task) {
-        __classPrivateFieldGet$j(this, _TaskManager_tasks, "f").delete(task);
+        __classPrivateFieldGet$k(this, _TaskManager_tasks, "f").delete(task);
     }
     terminateAll(error) {
-        for (const task of __classPrivateFieldGet$j(this, _TaskManager_tasks, "f")) {
+        for (const task of __classPrivateFieldGet$k(this, _TaskManager_tasks, "f")) {
             task.terminate(error);
         }
-        __classPrivateFieldGet$j(this, _TaskManager_tasks, "f").clear();
+        __classPrivateFieldGet$k(this, _TaskManager_tasks, "f").clear();
     }
     async rerunAll() {
-        await Promise.all([...__classPrivateFieldGet$j(this, _TaskManager_tasks, "f")].map(task => {
+        await Promise.all([...__classPrivateFieldGet$k(this, _TaskManager_tasks, "f")].map(task => {
             return task.rerun();
         }));
     }
@@ -96456,12 +96477,12 @@ _TaskManager_tasks = new WeakMap();
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$i = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$j = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$i = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$j = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -96473,10 +96494,10 @@ var _IsolatedWorld_instances, _IsolatedWorld_frame, _IsolatedWorld_document, _Is
  */
 class IsolatedWorld {
     get taskManager() {
-        return __classPrivateFieldGet$i(this, _IsolatedWorld_taskManager, "f");
+        return __classPrivateFieldGet$j(this, _IsolatedWorld_taskManager, "f");
     }
     get _bindings() {
-        return __classPrivateFieldGet$i(this, _IsolatedWorld_bindings, "f");
+        return __classPrivateFieldGet$j(this, _IsolatedWorld_bindings, "f");
     }
     constructor(frame) {
         _IsolatedWorld_instances.add(this);
@@ -96506,10 +96527,10 @@ class IsolatedWorld {
             if (type !== 'internal') {
                 return;
             }
-            if (!__classPrivateFieldGet$i(this, _IsolatedWorld_contextBindings, "f").has(name)) {
+            if (!__classPrivateFieldGet$j(this, _IsolatedWorld_contextBindings, "f").has(name)) {
                 return;
             }
-            const context = await __classPrivateFieldGet$i(this, _IsolatedWorld_context, "f");
+            const context = await __classPrivateFieldGet$j(this, _IsolatedWorld_context, "f");
             if (event.executionContextId !== context._contextId) {
                 return;
             }
@@ -96518,37 +96539,37 @@ class IsolatedWorld {
         });
         // Keep own reference to client because it might differ from the FrameManager's
         // client for OOP iframes.
-        __classPrivateFieldSet$i(this, _IsolatedWorld_frame, frame, "f");
-        __classPrivateFieldGet$i(this, _IsolatedWorld_instances, "a", _IsolatedWorld_client_get).on('Runtime.bindingCalled', __classPrivateFieldGet$i(this, _IsolatedWorld_onBindingCalled, "f"));
+        __classPrivateFieldSet$j(this, _IsolatedWorld_frame, frame, "f");
+        __classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_client_get).on('Runtime.bindingCalled', __classPrivateFieldGet$j(this, _IsolatedWorld_onBindingCalled, "f"));
     }
     frame() {
-        return __classPrivateFieldGet$i(this, _IsolatedWorld_frame, "f");
+        return __classPrivateFieldGet$j(this, _IsolatedWorld_frame, "f");
     }
     clearContext() {
-        __classPrivateFieldSet$i(this, _IsolatedWorld_document, undefined, "f");
-        __classPrivateFieldSet$i(this, _IsolatedWorld_context, createDeferredPromise(), "f");
+        __classPrivateFieldSet$j(this, _IsolatedWorld_document, undefined, "f");
+        __classPrivateFieldSet$j(this, _IsolatedWorld_context, createDeferredPromise(), "f");
     }
     setContext(context) {
-        __classPrivateFieldGet$i(this, _IsolatedWorld_contextBindings, "f").clear();
-        __classPrivateFieldGet$i(this, _IsolatedWorld_context, "f").resolve(context);
-        __classPrivateFieldGet$i(this, _IsolatedWorld_taskManager, "f").rerunAll();
+        __classPrivateFieldGet$j(this, _IsolatedWorld_contextBindings, "f").clear();
+        __classPrivateFieldGet$j(this, _IsolatedWorld_context, "f").resolve(context);
+        __classPrivateFieldGet$j(this, _IsolatedWorld_taskManager, "f").rerunAll();
     }
     hasContext() {
-        return __classPrivateFieldGet$i(this, _IsolatedWorld_context, "f").resolved();
+        return __classPrivateFieldGet$j(this, _IsolatedWorld_context, "f").resolved();
     }
     _detach() {
-        __classPrivateFieldSet$i(this, _IsolatedWorld_detached, true, "f");
-        __classPrivateFieldGet$i(this, _IsolatedWorld_instances, "a", _IsolatedWorld_client_get).off('Runtime.bindingCalled', __classPrivateFieldGet$i(this, _IsolatedWorld_onBindingCalled, "f"));
-        __classPrivateFieldGet$i(this, _IsolatedWorld_taskManager, "f").terminateAll(new Error('waitForFunction failed: frame got detached.'));
+        __classPrivateFieldSet$j(this, _IsolatedWorld_detached, true, "f");
+        __classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_client_get).off('Runtime.bindingCalled', __classPrivateFieldGet$j(this, _IsolatedWorld_onBindingCalled, "f"));
+        __classPrivateFieldGet$j(this, _IsolatedWorld_taskManager, "f").terminateAll(new Error('waitForFunction failed: frame got detached.'));
     }
     executionContext() {
-        if (__classPrivateFieldGet$i(this, _IsolatedWorld_detached, "f")) {
-            throw new Error(`Execution context is not available in detached frame "${__classPrivateFieldGet$i(this, _IsolatedWorld_frame, "f").url()}" (are you trying to evaluate?)`);
+        if (__classPrivateFieldGet$j(this, _IsolatedWorld_detached, "f")) {
+            throw new Error(`Execution context is not available in detached frame "${__classPrivateFieldGet$j(this, _IsolatedWorld_frame, "f").url()}" (are you trying to evaluate?)`);
         }
-        if (__classPrivateFieldGet$i(this, _IsolatedWorld_context, "f") === null) {
+        if (__classPrivateFieldGet$j(this, _IsolatedWorld_context, "f") === null) {
             throw new Error(`Execution content promise is missing`);
         }
-        return __classPrivateFieldGet$i(this, _IsolatedWorld_context, "f");
+        return __classPrivateFieldGet$j(this, _IsolatedWorld_context, "f");
     }
     async evaluateHandle(pageFunction, ...args) {
         const context = await this.executionContext();
@@ -96567,14 +96588,14 @@ class IsolatedWorld {
         return document.$$(selector);
     }
     async document() {
-        if (__classPrivateFieldGet$i(this, _IsolatedWorld_document, "f")) {
-            return __classPrivateFieldGet$i(this, _IsolatedWorld_document, "f");
+        if (__classPrivateFieldGet$j(this, _IsolatedWorld_document, "f")) {
+            return __classPrivateFieldGet$j(this, _IsolatedWorld_document, "f");
         }
         const context = await this.executionContext();
-        __classPrivateFieldSet$i(this, _IsolatedWorld_document, await context.evaluateHandle(() => {
+        __classPrivateFieldSet$j(this, _IsolatedWorld_document, await context.evaluateHandle(() => {
             return document;
         }), "f");
-        return __classPrivateFieldGet$i(this, _IsolatedWorld_document, "f");
+        return __classPrivateFieldGet$j(this, _IsolatedWorld_document, "f");
     }
     async $x(expression) {
         const document = await this.document();
@@ -96601,9 +96622,9 @@ class IsolatedWorld {
         });
     }
     async setContent(html, options = {}) {
-        const { waitUntil = ['load'], timeout = __classPrivateFieldGet$i(this, _IsolatedWorld_instances, "a", _IsolatedWorld_timeoutSettings_get).navigationTimeout(), } = options;
+        const { waitUntil = ['load'], timeout = __classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_timeoutSettings_get).navigationTimeout(), } = options;
         await setPageContent(this, html);
-        const watcher = new LifecycleWatcher(__classPrivateFieldGet$i(this, _IsolatedWorld_instances, "a", _IsolatedWorld_frameManager_get), __classPrivateFieldGet$i(this, _IsolatedWorld_frame, "f"), waitUntil, timeout);
+        const watcher = new LifecycleWatcher(__classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_frameManager_get), __classPrivateFieldGet$j(this, _IsolatedWorld_frame, "f"), waitUntil, timeout);
         const error = await Promise.race([
             watcher.timeoutOrTerminationPromise(),
             watcher.lifecyclePromise(),
@@ -96651,17 +96672,17 @@ class IsolatedWorld {
         await handle.dispose();
     }
     async _addBindingToContext(context, name) {
-        if (__classPrivateFieldGet$i(this, _IsolatedWorld_contextBindings, "f").has(name)) {
+        if (__classPrivateFieldGet$j(this, _IsolatedWorld_contextBindings, "f").has(name)) {
             return;
         }
-        await __classPrivateFieldGet$i(this, _IsolatedWorld_mutex, "f").acquire();
+        await __classPrivateFieldGet$j(this, _IsolatedWorld_mutex, "f").acquire();
         try {
             await context._client.send('Runtime.addBinding', {
                 name,
                 executionContextName: context._contextName,
             });
             await context.evaluate(addPageBinding, 'internal', name);
-            __classPrivateFieldGet$i(this, _IsolatedWorld_contextBindings, "f").add(name);
+            __classPrivateFieldGet$j(this, _IsolatedWorld_contextBindings, "f").add(name);
         }
         catch (error) {
             // We could have tried to evaluate in a context which was already
@@ -96680,11 +96701,11 @@ class IsolatedWorld {
             debugError(error);
         }
         finally {
-            __classPrivateFieldGet$i(this, _IsolatedWorld_mutex, "f").release();
+            __classPrivateFieldGet$j(this, _IsolatedWorld_mutex, "f").release();
         }
     }
     waitForFunction(pageFunction, options = {}, ...args) {
-        const { polling = 'raf', timeout = __classPrivateFieldGet$i(this, _IsolatedWorld_instances, "a", _IsolatedWorld_timeoutSettings_get).timeout(), root, signal, } = options;
+        const { polling = 'raf', timeout = __classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_timeoutSettings_get).timeout(), root, signal, } = options;
         if (typeof polling === 'number' && polling < 0) {
             throw new Error('Cannot poll with non-positive interval');
         }
@@ -96703,7 +96724,7 @@ class IsolatedWorld {
     }
     async adoptBackendNode(backendNodeId) {
         const executionContext = await this.executionContext();
-        const { object } = await __classPrivateFieldGet$i(this, _IsolatedWorld_instances, "a", _IsolatedWorld_client_get).send('DOM.resolveNode', {
+        const { object } = await __classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_client_get).send('DOM.resolveNode', {
             backendNodeId: backendNodeId,
             executionContextId: executionContext._contextId,
         });
@@ -96712,7 +96733,7 @@ class IsolatedWorld {
     async adoptHandle(handle) {
         const context = await this.executionContext();
         assert$1(handle.executionContext() !== context, 'Cannot adopt handle that already belongs to this execution context');
-        const nodeInfo = await __classPrivateFieldGet$i(this, _IsolatedWorld_instances, "a", _IsolatedWorld_client_get).send('DOM.describeNode', {
+        const nodeInfo = await __classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_client_get).send('DOM.describeNode', {
             objectId: handle.id,
         });
         return (await this.adoptBackendNode(nodeInfo.node.backendNodeId));
@@ -96722,7 +96743,7 @@ class IsolatedWorld {
         if (handle.executionContext() === context) {
             return handle;
         }
-        const info = await __classPrivateFieldGet$i(this, _IsolatedWorld_instances, "a", _IsolatedWorld_client_get).send('DOM.describeNode', {
+        const info = await __classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_client_get).send('DOM.describeNode', {
             objectId: handle.remoteObject().objectId,
         });
         const newHandle = (await this.adoptBackendNode(info.node.backendNodeId));
@@ -96731,11 +96752,11 @@ class IsolatedWorld {
     }
 }
 _IsolatedWorld_frame = new WeakMap(), _IsolatedWorld_document = new WeakMap(), _IsolatedWorld_context = new WeakMap(), _IsolatedWorld_detached = new WeakMap(), _IsolatedWorld_contextBindings = new WeakMap(), _IsolatedWorld_bindings = new WeakMap(), _IsolatedWorld_taskManager = new WeakMap(), _IsolatedWorld_mutex = new WeakMap(), _IsolatedWorld_onBindingCalled = new WeakMap(), _IsolatedWorld_instances = new WeakSet(), _IsolatedWorld_client_get = function _IsolatedWorld_client_get() {
-    return __classPrivateFieldGet$i(this, _IsolatedWorld_frame, "f")._client();
+    return __classPrivateFieldGet$j(this, _IsolatedWorld_frame, "f")._client();
 }, _IsolatedWorld_frameManager_get = function _IsolatedWorld_frameManager_get() {
-    return __classPrivateFieldGet$i(this, _IsolatedWorld_frame, "f")._frameManager;
+    return __classPrivateFieldGet$j(this, _IsolatedWorld_frame, "f")._frameManager;
 }, _IsolatedWorld_timeoutSettings_get = function _IsolatedWorld_timeoutSettings_get() {
-    return __classPrivateFieldGet$i(this, _IsolatedWorld_instances, "a", _IsolatedWorld_frameManager_get).timeoutSettings;
+    return __classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_frameManager_get).timeoutSettings;
 };
 class Mutex {
     constructor() {
@@ -96744,21 +96765,21 @@ class Mutex {
     }
     // This is FIFO.
     acquire() {
-        if (!__classPrivateFieldGet$i(this, _Mutex_locked, "f")) {
-            __classPrivateFieldSet$i(this, _Mutex_locked, true, "f");
+        if (!__classPrivateFieldGet$j(this, _Mutex_locked, "f")) {
+            __classPrivateFieldSet$j(this, _Mutex_locked, true, "f");
             return Promise.resolve();
         }
         let resolve;
         const promise = new Promise(res => {
             resolve = res;
         });
-        __classPrivateFieldGet$i(this, _Mutex_acquirers, "f").push(resolve);
+        __classPrivateFieldGet$j(this, _Mutex_acquirers, "f").push(resolve);
         return promise;
     }
     release() {
-        const resolve = __classPrivateFieldGet$i(this, _Mutex_acquirers, "f").shift();
+        const resolve = __classPrivateFieldGet$j(this, _Mutex_acquirers, "f").shift();
         if (!resolve) {
-            __classPrivateFieldSet$i(this, _Mutex_locked, false, "f");
+            __classPrivateFieldSet$j(this, _Mutex_locked, false, "f");
             return;
         }
         resolve();
@@ -96781,13 +96802,13 @@ _Mutex_locked = new WeakMap(), _Mutex_acquirers = new WeakMap();
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$h = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$i = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$h = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$i = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -96867,10 +96888,10 @@ class Frame {
          */
         this._lifecycleEvents = new Set();
         this._frameManager = frameManager;
-        __classPrivateFieldSet$h(this, _Frame_url, '', "f");
+        __classPrivateFieldSet$i(this, _Frame_url, '', "f");
         this._id = frameId;
         this._parentId = parentFrameId;
-        __classPrivateFieldSet$h(this, _Frame_detached, false, "f");
+        __classPrivateFieldSet$i(this, _Frame_detached, false, "f");
         this._loaderId = '';
         this.updateClient(client);
     }
@@ -96878,7 +96899,7 @@ class Frame {
      * @internal
      */
     updateClient(client) {
-        __classPrivateFieldSet$h(this, _Frame_client, client, "f");
+        __classPrivateFieldSet$i(this, _Frame_client, client, "f");
         this.worlds = {
             [MAIN_WORLD]: new IsolatedWorld(this),
             [PUPPETEER_WORLD]: new IsolatedWorld(this),
@@ -96895,7 +96916,7 @@ class Frame {
      * `false`.
      */
     isOOPFrame() {
-        return __classPrivateFieldGet$h(this, _Frame_client, "f") !== this._frameManager.client;
+        return __classPrivateFieldGet$i(this, _Frame_client, "f") !== this._frameManager.client;
     }
     /**
      * Navigates a frame to the given url.
@@ -96939,7 +96960,7 @@ class Frame {
         let ensureNewDocumentNavigation = false;
         const watcher = new LifecycleWatcher(this._frameManager, this, waitUntil, timeout);
         let error = await Promise.race([
-            navigate(__classPrivateFieldGet$h(this, _Frame_client, "f"), url, referer, referrerPolicy, this._id),
+            navigate(__classPrivateFieldGet$i(this, _Frame_client, "f"), url, referer, referrerPolicy, this._id),
             watcher.timeoutOrTerminationPromise(),
         ]);
         if (!error) {
@@ -97028,7 +97049,7 @@ class Frame {
      * @internal
      */
     _client() {
-        return __classPrivateFieldGet$h(this, _Frame_client, "f");
+        return __classPrivateFieldGet$i(this, _Frame_client, "f");
     }
     /**
      * @internal
@@ -97269,7 +97290,7 @@ class Frame {
      * The frame's URL.
      */
     url() {
-        return __classPrivateFieldGet$h(this, _Frame_url, "f");
+        return __classPrivateFieldGet$i(this, _Frame_url, "f");
     }
     /**
      * The parent frame, if any. Detached and main frames return `null`.
@@ -97287,7 +97308,7 @@ class Frame {
      * Is`true` if the frame has been detached. Otherwise, `false`.
      */
     isDetached() {
-        return __classPrivateFieldGet$h(this, _Frame_detached, "f");
+        return __classPrivateFieldGet$i(this, _Frame_detached, "f");
     }
     /**
      * Adds a `<script>` tag into the page with the desired url or content.
@@ -97505,7 +97526,7 @@ class Frame {
      */
     _deviceRequestPromptManager() {
         if (this.isOOPFrame()) {
-            return this._frameManager._deviceRequestPromptManager(__classPrivateFieldGet$h(this, _Frame_client, "f"));
+            return this._frameManager._deviceRequestPromptManager(__classPrivateFieldGet$i(this, _Frame_client, "f"));
         }
         const parentFrame = this.parentFrame();
         assert$1(parentFrame !== null);
@@ -97542,13 +97563,13 @@ class Frame {
      */
     _navigated(framePayload) {
         this._name = framePayload.name;
-        __classPrivateFieldSet$h(this, _Frame_url, `${framePayload.url}${framePayload.urlFragment || ''}`, "f");
+        __classPrivateFieldSet$i(this, _Frame_url, `${framePayload.url}${framePayload.urlFragment || ''}`, "f");
     }
     /**
      * @internal
      */
     _navigatedWithinDocument(url) {
-        __classPrivateFieldSet$h(this, _Frame_url, url, "f");
+        __classPrivateFieldSet$i(this, _Frame_url, url, "f");
     }
     /**
      * @internal
@@ -97577,7 +97598,7 @@ class Frame {
      * @internal
      */
     _detach() {
-        __classPrivateFieldSet$h(this, _Frame_detached, true, "f");
+        __classPrivateFieldSet$i(this, _Frame_detached, true, "f");
         this.worlds[MAIN_WORLD]._detach();
         this.worlds[PUPPETEER_WORLD]._detach();
     }
@@ -97599,12 +97620,12 @@ _Frame_url = new WeakMap(), _Frame_detached = new WeakMap(), _Frame_client = new
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$g = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$h = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$g = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$h = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -97629,10 +97650,10 @@ class FrameTree {
         _FrameTree_waitRequests.set(this, new Map());
     }
     getMainFrame() {
-        return __classPrivateFieldGet$g(this, _FrameTree_mainFrame, "f");
+        return __classPrivateFieldGet$h(this, _FrameTree_mainFrame, "f");
     }
     getById(frameId) {
-        return __classPrivateFieldGet$g(this, _FrameTree_frames, "f").get(frameId);
+        return __classPrivateFieldGet$h(this, _FrameTree_frames, "f").get(frameId);
     }
     /**
      * Returns a promise that is resolved once the frame with
@@ -97644,43 +97665,43 @@ class FrameTree {
             return Promise.resolve(frame);
         }
         const deferred = createDeferredPromise();
-        const callbacks = __classPrivateFieldGet$g(this, _FrameTree_waitRequests, "f").get(frameId) || new Set();
+        const callbacks = __classPrivateFieldGet$h(this, _FrameTree_waitRequests, "f").get(frameId) || new Set();
         callbacks.add(deferred);
         return deferred;
     }
     frames() {
-        return Array.from(__classPrivateFieldGet$g(this, _FrameTree_frames, "f").values());
+        return Array.from(__classPrivateFieldGet$h(this, _FrameTree_frames, "f").values());
     }
     addFrame(frame) {
         var _a;
-        __classPrivateFieldGet$g(this, _FrameTree_frames, "f").set(frame._id, frame);
+        __classPrivateFieldGet$h(this, _FrameTree_frames, "f").set(frame._id, frame);
         if (frame._parentId) {
-            __classPrivateFieldGet$g(this, _FrameTree_parentIds, "f").set(frame._id, frame._parentId);
-            if (!__classPrivateFieldGet$g(this, _FrameTree_childIds, "f").has(frame._parentId)) {
-                __classPrivateFieldGet$g(this, _FrameTree_childIds, "f").set(frame._parentId, new Set());
+            __classPrivateFieldGet$h(this, _FrameTree_parentIds, "f").set(frame._id, frame._parentId);
+            if (!__classPrivateFieldGet$h(this, _FrameTree_childIds, "f").has(frame._parentId)) {
+                __classPrivateFieldGet$h(this, _FrameTree_childIds, "f").set(frame._parentId, new Set());
             }
-            __classPrivateFieldGet$g(this, _FrameTree_childIds, "f").get(frame._parentId).add(frame._id);
+            __classPrivateFieldGet$h(this, _FrameTree_childIds, "f").get(frame._parentId).add(frame._id);
         }
         else {
-            __classPrivateFieldSet$g(this, _FrameTree_mainFrame, frame, "f");
+            __classPrivateFieldSet$h(this, _FrameTree_mainFrame, frame, "f");
         }
-        (_a = __classPrivateFieldGet$g(this, _FrameTree_waitRequests, "f").get(frame._id)) === null || _a === void 0 ? void 0 : _a.forEach(request => {
+        (_a = __classPrivateFieldGet$h(this, _FrameTree_waitRequests, "f").get(frame._id)) === null || _a === void 0 ? void 0 : _a.forEach(request => {
             return request.resolve(frame);
         });
     }
     removeFrame(frame) {
         var _a;
-        __classPrivateFieldGet$g(this, _FrameTree_frames, "f").delete(frame._id);
-        __classPrivateFieldGet$g(this, _FrameTree_parentIds, "f").delete(frame._id);
+        __classPrivateFieldGet$h(this, _FrameTree_frames, "f").delete(frame._id);
+        __classPrivateFieldGet$h(this, _FrameTree_parentIds, "f").delete(frame._id);
         if (frame._parentId) {
-            (_a = __classPrivateFieldGet$g(this, _FrameTree_childIds, "f").get(frame._parentId)) === null || _a === void 0 ? void 0 : _a.delete(frame._id);
+            (_a = __classPrivateFieldGet$h(this, _FrameTree_childIds, "f").get(frame._parentId)) === null || _a === void 0 ? void 0 : _a.delete(frame._id);
         }
         else {
-            __classPrivateFieldSet$g(this, _FrameTree_mainFrame, undefined, "f");
+            __classPrivateFieldSet$h(this, _FrameTree_mainFrame, undefined, "f");
         }
     }
     childFrames(frameId) {
-        const childIds = __classPrivateFieldGet$g(this, _FrameTree_childIds, "f").get(frameId);
+        const childIds = __classPrivateFieldGet$h(this, _FrameTree_childIds, "f").get(frameId);
         if (!childIds) {
             return [];
         }
@@ -97693,7 +97714,7 @@ class FrameTree {
         });
     }
     parentFrame(frameId) {
-        const parentId = __classPrivateFieldGet$g(this, _FrameTree_parentIds, "f").get(frameId);
+        const parentId = __classPrivateFieldGet$h(this, _FrameTree_parentIds, "f").get(frameId);
         return parentId ? this.getById(parentId) : undefined;
     }
 }
@@ -97714,12 +97735,12 @@ _FrameTree_frames = new WeakMap(), _FrameTree_parentIds = new WeakMap(), _FrameT
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$f = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$g = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$f = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$g = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -97750,13 +97771,13 @@ const FrameManagerEmittedEvents = {
  */
 class FrameManager extends EventEmitter$3 {
     get timeoutSettings() {
-        return __classPrivateFieldGet$f(this, _FrameManager_timeoutSettings, "f");
+        return __classPrivateFieldGet$g(this, _FrameManager_timeoutSettings, "f");
     }
     get networkManager() {
-        return __classPrivateFieldGet$f(this, _FrameManager_networkManager, "f");
+        return __classPrivateFieldGet$g(this, _FrameManager_networkManager, "f");
     }
     get client() {
-        return __classPrivateFieldGet$f(this, _FrameManager_client, "f");
+        return __classPrivateFieldGet$g(this, _FrameManager_client, "f");
     }
     constructor(client, page, ignoreHTTPSErrors, timeoutSettings) {
         super();
@@ -97778,61 +97799,61 @@ class FrameManager extends EventEmitter$3 {
          */
         _FrameManager_frameNavigatedReceived.set(this, new Set());
         _FrameManager_deviceRequestPromptManagerMap.set(this, new WeakMap());
-        __classPrivateFieldSet$f(this, _FrameManager_client, client, "f");
-        __classPrivateFieldSet$f(this, _FrameManager_page, page, "f");
-        __classPrivateFieldSet$f(this, _FrameManager_networkManager, new NetworkManager(client, ignoreHTTPSErrors, this), "f");
-        __classPrivateFieldSet$f(this, _FrameManager_timeoutSettings, timeoutSettings, "f");
-        this.setupEventListeners(__classPrivateFieldGet$f(this, _FrameManager_client, "f"));
+        __classPrivateFieldSet$g(this, _FrameManager_client, client, "f");
+        __classPrivateFieldSet$g(this, _FrameManager_page, page, "f");
+        __classPrivateFieldSet$g(this, _FrameManager_networkManager, new NetworkManager(client, ignoreHTTPSErrors, this), "f");
+        __classPrivateFieldSet$g(this, _FrameManager_timeoutSettings, timeoutSettings, "f");
+        this.setupEventListeners(__classPrivateFieldGet$g(this, _FrameManager_client, "f"));
     }
     setupEventListeners(session) {
         session.on('Page.frameAttached', event => {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onFrameAttached).call(this, session, event.frameId, event.parentFrameId);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onFrameAttached).call(this, session, event.frameId, event.parentFrameId);
         });
         session.on('Page.frameNavigated', event => {
-            __classPrivateFieldGet$f(this, _FrameManager_frameNavigatedReceived, "f").add(event.frame.id);
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onFrameNavigated).call(this, event.frame);
+            __classPrivateFieldGet$g(this, _FrameManager_frameNavigatedReceived, "f").add(event.frame.id);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onFrameNavigated).call(this, event.frame);
         });
         session.on('Page.navigatedWithinDocument', event => {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onFrameNavigatedWithinDocument).call(this, event.frameId, event.url);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onFrameNavigatedWithinDocument).call(this, event.frameId, event.url);
         });
         session.on('Page.frameDetached', (event) => {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onFrameDetached).call(this, event.frameId, event.reason);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onFrameDetached).call(this, event.frameId, event.reason);
         });
         session.on('Page.frameStartedLoading', event => {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onFrameStartedLoading).call(this, event.frameId);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onFrameStartedLoading).call(this, event.frameId);
         });
         session.on('Page.frameStoppedLoading', event => {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onFrameStoppedLoading).call(this, event.frameId);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onFrameStoppedLoading).call(this, event.frameId);
         });
         session.on('Runtime.executionContextCreated', event => {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onExecutionContextCreated).call(this, event.context, session);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onExecutionContextCreated).call(this, event.context, session);
         });
         session.on('Runtime.executionContextDestroyed', event => {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onExecutionContextDestroyed).call(this, event.executionContextId, session);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onExecutionContextDestroyed).call(this, event.executionContextId, session);
         });
         session.on('Runtime.executionContextsCleared', () => {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onExecutionContextsCleared).call(this, session);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onExecutionContextsCleared).call(this, session);
         });
         session.on('Page.lifecycleEvent', event => {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onLifecycleEvent).call(this, event);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onLifecycleEvent).call(this, event);
         });
     }
-    async initialize(client = __classPrivateFieldGet$f(this, _FrameManager_client, "f")) {
+    async initialize(client = __classPrivateFieldGet$g(this, _FrameManager_client, "f")) {
         try {
             const result = await Promise.all([
                 client.send('Page.enable'),
                 client.send('Page.getFrameTree'),
             ]);
             const { frameTree } = result[1];
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_handleFrameTree).call(this, client, frameTree);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_handleFrameTree).call(this, client, frameTree);
             await Promise.all([
                 client.send('Page.setLifecycleEventsEnabled', { enabled: true }),
                 client.send('Runtime.enable').then(() => {
-                    return __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_createIsolatedWorld).call(this, client, UTILITY_WORLD_NAME);
+                    return __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_createIsolatedWorld).call(this, client, UTILITY_WORLD_NAME);
                 }),
                 // TODO: Network manager is not aware of OOP iframes yet.
-                client === __classPrivateFieldGet$f(this, _FrameManager_client, "f")
-                    ? __classPrivateFieldGet$f(this, _FrameManager_networkManager, "f").initialize()
+                client === __classPrivateFieldGet$g(this, _FrameManager_client, "f")
+                    ? __classPrivateFieldGet$g(this, _FrameManager_networkManager, "f").initialize()
                     : Promise.resolve(),
             ]);
         }
@@ -97844,16 +97865,16 @@ class FrameManager extends EventEmitter$3 {
             throw error;
         }
     }
-    executionContextById(contextId, session = __classPrivateFieldGet$f(this, _FrameManager_client, "f")) {
+    executionContextById(contextId, session = __classPrivateFieldGet$g(this, _FrameManager_client, "f")) {
         const context = this.getExecutionContextById(contextId, session);
         assert$1(context, 'INTERNAL ERROR: missing context with id = ' + contextId);
         return context;
     }
-    getExecutionContextById(contextId, session = __classPrivateFieldGet$f(this, _FrameManager_client, "f")) {
-        return __classPrivateFieldGet$f(this, _FrameManager_contextIdToContext, "f").get(`${session.id()}:${contextId}`);
+    getExecutionContextById(contextId, session = __classPrivateFieldGet$g(this, _FrameManager_client, "f")) {
+        return __classPrivateFieldGet$g(this, _FrameManager_contextIdToContext, "f").get(`${session.id()}:${contextId}`);
     }
     page() {
-        return __classPrivateFieldGet$f(this, _FrameManager_page, "f");
+        return __classPrivateFieldGet$g(this, _FrameManager_page, "f");
     }
     mainFrame() {
         const mainFrame = this._frameTree.getMainFrame();
@@ -97881,10 +97902,10 @@ class FrameManager extends EventEmitter$3 {
      * @internal
      */
     _deviceRequestPromptManager(client) {
-        let manager = __classPrivateFieldGet$f(this, _FrameManager_deviceRequestPromptManagerMap, "f").get(client);
+        let manager = __classPrivateFieldGet$g(this, _FrameManager_deviceRequestPromptManagerMap, "f").get(client);
         if (manager === undefined) {
-            manager = new DeviceRequestPromptManager(client, __classPrivateFieldGet$f(this, _FrameManager_timeoutSettings, "f"));
-            __classPrivateFieldGet$f(this, _FrameManager_deviceRequestPromptManagerMap, "f").set(client, manager);
+            manager = new DeviceRequestPromptManager(client, __classPrivateFieldGet$g(this, _FrameManager_timeoutSettings, "f"));
+            __classPrivateFieldGet$g(this, _FrameManager_deviceRequestPromptManagerMap, "f").set(client, manager);
         }
         return manager;
     }
@@ -97911,19 +97932,19 @@ _FrameManager_page = new WeakMap(), _FrameManager_networkManager = new WeakMap()
     this.emit(FrameManagerEmittedEvents.LifecycleEvent, frame);
 }, _FrameManager_handleFrameTree = function _FrameManager_handleFrameTree(session, frameTree) {
     if (frameTree.frame.parentId) {
-        __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onFrameAttached).call(this, session, frameTree.frame.id, frameTree.frame.parentId);
+        __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onFrameAttached).call(this, session, frameTree.frame.id, frameTree.frame.parentId);
     }
-    if (!__classPrivateFieldGet$f(this, _FrameManager_frameNavigatedReceived, "f").has(frameTree.frame.id)) {
-        __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_onFrameNavigated).call(this, frameTree.frame);
+    if (!__classPrivateFieldGet$g(this, _FrameManager_frameNavigatedReceived, "f").has(frameTree.frame.id)) {
+        __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_onFrameNavigated).call(this, frameTree.frame);
     }
     else {
-        __classPrivateFieldGet$f(this, _FrameManager_frameNavigatedReceived, "f").delete(frameTree.frame.id);
+        __classPrivateFieldGet$g(this, _FrameManager_frameNavigatedReceived, "f").delete(frameTree.frame.id);
     }
     if (!frameTree.childFrames) {
         return;
     }
     for (const child of frameTree.childFrames) {
-        __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_handleFrameTree).call(this, session, child);
+        __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_handleFrameTree).call(this, session, child);
     }
 }, _FrameManager_onFrameAttached = function _FrameManager_onFrameAttached(session, frameId, parentFrameId) {
     let frame = this.frame(frameId);
@@ -97946,7 +97967,7 @@ _FrameManager_page = new WeakMap(), _FrameManager_networkManager = new WeakMap()
     // Detach all child frames first.
     if (frame) {
         for (const child of frame.childFrames()) {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_removeFramesRecursively).call(this, child);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_removeFramesRecursively).call(this, child);
         }
     }
     // Update or create main frame.
@@ -97958,7 +97979,7 @@ _FrameManager_page = new WeakMap(), _FrameManager_networkManager = new WeakMap()
         }
         else {
             // Initial main frame navigation.
-            frame = new Frame(this, frameId, undefined, __classPrivateFieldGet$f(this, _FrameManager_client, "f"));
+            frame = new Frame(this, frameId, undefined, __classPrivateFieldGet$g(this, _FrameManager_client, "f"));
         }
         this._frameTree.addFrame(frame);
     }
@@ -97967,7 +97988,7 @@ _FrameManager_page = new WeakMap(), _FrameManager_networkManager = new WeakMap()
     this.emit(FrameManagerEmittedEvents.FrameNavigated, frame);
 }, _FrameManager_createIsolatedWorld = async function _FrameManager_createIsolatedWorld(session, name) {
     const key = `${session.id()}:${name}`;
-    if (__classPrivateFieldGet$f(this, _FrameManager_isolatedWorlds, "f").has(key)) {
+    if (__classPrivateFieldGet$g(this, _FrameManager_isolatedWorlds, "f").has(key)) {
         return;
     }
     await session.send('Page.addScriptToEvaluateOnNewDocument', {
@@ -97989,7 +98010,7 @@ _FrameManager_page = new WeakMap(), _FrameManager_networkManager = new WeakMap()
         })
             .catch(debugError);
     }));
-    __classPrivateFieldGet$f(this, _FrameManager_isolatedWorlds, "f").add(key);
+    __classPrivateFieldGet$g(this, _FrameManager_isolatedWorlds, "f").add(key);
 }, _FrameManager_onFrameNavigatedWithinDocument = function _FrameManager_onFrameNavigatedWithinDocument(frameId, url) {
     const frame = this.frame(frameId);
     if (!frame) {
@@ -98005,7 +98026,7 @@ _FrameManager_page = new WeakMap(), _FrameManager_networkManager = new WeakMap()
         // an actual removement of the frame.
         // For frames that become OOP iframes, the reason would be 'swap'.
         if (frame) {
-            __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_removeFramesRecursively).call(this, frame);
+            __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_removeFramesRecursively).call(this, frame);
         }
     }
     else if (reason === 'swap') {
@@ -98032,24 +98053,24 @@ _FrameManager_page = new WeakMap(), _FrameManager_networkManager = new WeakMap()
             world = frame.worlds[PUPPETEER_WORLD];
         }
     }
-    const context = new ExecutionContext((frame === null || frame === void 0 ? void 0 : frame._client()) || __classPrivateFieldGet$f(this, _FrameManager_client, "f"), contextPayload, world);
+    const context = new ExecutionContext((frame === null || frame === void 0 ? void 0 : frame._client()) || __classPrivateFieldGet$g(this, _FrameManager_client, "f"), contextPayload, world);
     if (world) {
         world.setContext(context);
     }
     const key = `${session.id()}:${contextPayload.id}`;
-    __classPrivateFieldGet$f(this, _FrameManager_contextIdToContext, "f").set(key, context);
+    __classPrivateFieldGet$g(this, _FrameManager_contextIdToContext, "f").set(key, context);
 }, _FrameManager_onExecutionContextDestroyed = function _FrameManager_onExecutionContextDestroyed(executionContextId, session) {
     const key = `${session.id()}:${executionContextId}`;
-    const context = __classPrivateFieldGet$f(this, _FrameManager_contextIdToContext, "f").get(key);
+    const context = __classPrivateFieldGet$g(this, _FrameManager_contextIdToContext, "f").get(key);
     if (!context) {
         return;
     }
-    __classPrivateFieldGet$f(this, _FrameManager_contextIdToContext, "f").delete(key);
+    __classPrivateFieldGet$g(this, _FrameManager_contextIdToContext, "f").delete(key);
     if (context._world) {
         context._world.clearContext();
     }
 }, _FrameManager_onExecutionContextsCleared = function _FrameManager_onExecutionContextsCleared(session) {
-    for (const [key, context] of __classPrivateFieldGet$f(this, _FrameManager_contextIdToContext, "f").entries()) {
+    for (const [key, context] of __classPrivateFieldGet$g(this, _FrameManager_contextIdToContext, "f").entries()) {
         // Make sure to only clear execution contexts that belong
         // to the current session.
         if (context._client !== session) {
@@ -98058,11 +98079,11 @@ _FrameManager_page = new WeakMap(), _FrameManager_networkManager = new WeakMap()
         if (context._world) {
             context._world.clearContext();
         }
-        __classPrivateFieldGet$f(this, _FrameManager_contextIdToContext, "f").delete(key);
+        __classPrivateFieldGet$g(this, _FrameManager_contextIdToContext, "f").delete(key);
     }
 }, _FrameManager_removeFramesRecursively = function _FrameManager_removeFramesRecursively(frame) {
     for (const child of frame.childFrames()) {
-        __classPrivateFieldGet$f(this, _FrameManager_instances, "m", _FrameManager_removeFramesRecursively).call(this, child);
+        __classPrivateFieldGet$g(this, _FrameManager_instances, "m", _FrameManager_removeFramesRecursively).call(this, child);
     }
     frame._detach();
     this._frameTree.removeFrame(frame);
@@ -98488,13 +98509,13 @@ const _keyDefinitions = {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$e = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$f = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$e = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$f = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -98553,7 +98574,7 @@ class Keyboard {
          * @internal
          */
         this._modifiers = 0;
-        __classPrivateFieldSet$e(this, _Keyboard_client, client, "f");
+        __classPrivateFieldSet$f(this, _Keyboard_client, client, "f");
     }
     /**
      * Dispatches a `keydown` event.
@@ -98586,12 +98607,12 @@ class Keyboard {
         text: undefined,
         commands: [],
     }) {
-        const description = __classPrivateFieldGet$e(this, _Keyboard_instances, "m", _Keyboard_keyDescriptionForString).call(this, key);
-        const autoRepeat = __classPrivateFieldGet$e(this, _Keyboard_pressedKeys, "f").has(description.code);
-        __classPrivateFieldGet$e(this, _Keyboard_pressedKeys, "f").add(description.code);
-        this._modifiers |= __classPrivateFieldGet$e(this, _Keyboard_instances, "m", _Keyboard_modifierBit).call(this, description.key);
+        const description = __classPrivateFieldGet$f(this, _Keyboard_instances, "m", _Keyboard_keyDescriptionForString).call(this, key);
+        const autoRepeat = __classPrivateFieldGet$f(this, _Keyboard_pressedKeys, "f").has(description.code);
+        __classPrivateFieldGet$f(this, _Keyboard_pressedKeys, "f").add(description.code);
+        this._modifiers |= __classPrivateFieldGet$f(this, _Keyboard_instances, "m", _Keyboard_modifierBit).call(this, description.key);
         const text = options.text === undefined ? description.text : options.text;
-        await __classPrivateFieldGet$e(this, _Keyboard_client, "f").send('Input.dispatchKeyEvent', {
+        await __classPrivateFieldGet$f(this, _Keyboard_client, "f").send('Input.dispatchKeyEvent', {
             type: text ? 'keyDown' : 'rawKeyDown',
             modifiers: this._modifiers,
             windowsVirtualKeyCode: description.keyCode,
@@ -98613,10 +98634,10 @@ class Keyboard {
      * for a list of all key names.
      */
     async up(key) {
-        const description = __classPrivateFieldGet$e(this, _Keyboard_instances, "m", _Keyboard_keyDescriptionForString).call(this, key);
-        this._modifiers &= ~__classPrivateFieldGet$e(this, _Keyboard_instances, "m", _Keyboard_modifierBit).call(this, description.key);
-        __classPrivateFieldGet$e(this, _Keyboard_pressedKeys, "f").delete(description.code);
-        await __classPrivateFieldGet$e(this, _Keyboard_client, "f").send('Input.dispatchKeyEvent', {
+        const description = __classPrivateFieldGet$f(this, _Keyboard_instances, "m", _Keyboard_keyDescriptionForString).call(this, key);
+        this._modifiers &= ~__classPrivateFieldGet$f(this, _Keyboard_instances, "m", _Keyboard_modifierBit).call(this, description.key);
+        __classPrivateFieldGet$f(this, _Keyboard_pressedKeys, "f").delete(description.code);
+        await __classPrivateFieldGet$f(this, _Keyboard_client, "f").send('Input.dispatchKeyEvent', {
             type: 'keyUp',
             modifiers: this._modifiers,
             key: description.key,
@@ -98642,7 +98663,7 @@ class Keyboard {
      * @param char - Character to send into the page.
      */
     async sendCharacter(char) {
-        await __classPrivateFieldGet$e(this, _Keyboard_client, "f").send('Input.insertText', { text: char });
+        await __classPrivateFieldGet$f(this, _Keyboard_client, "f").send('Input.insertText', { text: char });
     }
     charIsKey(char) {
         return !!_keyDefinitions[char];
@@ -98910,8 +98931,8 @@ class Mouse {
         });
         // Transactions can run in parallel, so we store each of thme in this array.
         _Mouse_transactions.set(this, []);
-        __classPrivateFieldSet$e(this, _Mouse_client, client, "f");
-        __classPrivateFieldSet$e(this, _Mouse_keyboard, keyboard, "f");
+        __classPrivateFieldSet$f(this, _Mouse_client, client, "f");
+        __classPrivateFieldSet$f(this, _Mouse_keyboard, keyboard, "f");
     }
     /**
      * Moves the mouse to the given coordinate.
@@ -98922,20 +98943,20 @@ class Mouse {
      */
     async move(x, y, options = {}) {
         const { steps = 1 } = options;
-        const from = __classPrivateFieldGet$e(this, _Mouse_instances, "a", _Mouse_state_get).position;
+        const from = __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get).position;
         const to = { x, y };
         for (let i = 1; i <= steps; i++) {
-            await __classPrivateFieldGet$e(this, _Mouse_instances, "m", _Mouse_withTransaction).call(this, updateState => {
+            await __classPrivateFieldGet$f(this, _Mouse_instances, "m", _Mouse_withTransaction).call(this, updateState => {
                 updateState({
                     position: {
                         x: from.x + (to.x - from.x) * (i / steps),
                         y: from.y + (to.y - from.y) * (i / steps),
                     },
                 });
-                const { buttons, position } = __classPrivateFieldGet$e(this, _Mouse_instances, "a", _Mouse_state_get);
-                return __classPrivateFieldGet$e(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
+                const { buttons, position } = __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get);
+                return __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
                     type: 'mouseMoved',
-                    modifiers: __classPrivateFieldGet$e(this, _Mouse_keyboard, "f")._modifiers,
+                    modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
                     buttons,
                     button: getButtonFromPressedButtons(buttons),
                     ...position,
@@ -98954,17 +98975,17 @@ class Mouse {
         if (!flag) {
             throw new Error(`Unsupported mouse button: ${button}`);
         }
-        if (__classPrivateFieldGet$e(this, _Mouse_instances, "a", _Mouse_state_get).buttons & flag) {
+        if (__classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get).buttons & flag) {
             throw new Error(`'${button}' is already pressed.`);
         }
-        await __classPrivateFieldGet$e(this, _Mouse_instances, "m", _Mouse_withTransaction).call(this, updateState => {
+        await __classPrivateFieldGet$f(this, _Mouse_instances, "m", _Mouse_withTransaction).call(this, updateState => {
             updateState({
-                buttons: __classPrivateFieldGet$e(this, _Mouse_instances, "a", _Mouse_state_get).buttons | flag,
+                buttons: __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get).buttons | flag,
             });
-            const { buttons, position } = __classPrivateFieldGet$e(this, _Mouse_instances, "a", _Mouse_state_get);
-            return __classPrivateFieldGet$e(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
+            const { buttons, position } = __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get);
+            return __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
                 type: 'mousePressed',
-                modifiers: __classPrivateFieldGet$e(this, _Mouse_keyboard, "f")._modifiers,
+                modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
                 clickCount,
                 buttons,
                 button,
@@ -98983,17 +99004,17 @@ class Mouse {
         if (!flag) {
             throw new Error(`Unsupported mouse button: ${button}`);
         }
-        if (!(__classPrivateFieldGet$e(this, _Mouse_instances, "a", _Mouse_state_get).buttons & flag)) {
+        if (!(__classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get).buttons & flag)) {
             throw new Error(`'${button}' is not pressed.`);
         }
-        await __classPrivateFieldGet$e(this, _Mouse_instances, "m", _Mouse_withTransaction).call(this, updateState => {
+        await __classPrivateFieldGet$f(this, _Mouse_instances, "m", _Mouse_withTransaction).call(this, updateState => {
             updateState({
-                buttons: __classPrivateFieldGet$e(this, _Mouse_instances, "a", _Mouse_state_get).buttons & ~flag,
+                buttons: __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get).buttons & ~flag,
             });
-            const { buttons, position } = __classPrivateFieldGet$e(this, _Mouse_instances, "a", _Mouse_state_get);
-            return __classPrivateFieldGet$e(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
+            const { buttons, position } = __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get);
+            return __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
                 type: 'mouseReleased',
-                modifiers: __classPrivateFieldGet$e(this, _Mouse_keyboard, "f")._modifiers,
+                modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
                 clickCount,
                 buttons,
                 button,
@@ -99054,11 +99075,11 @@ class Mouse {
      */
     async wheel(options = {}) {
         const { deltaX = 0, deltaY = 0 } = options;
-        const { position, buttons } = __classPrivateFieldGet$e(this, _Mouse_instances, "a", _Mouse_state_get);
-        await __classPrivateFieldGet$e(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
+        const { position, buttons } = __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get);
+        await __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
             type: 'mouseWheel',
             pointerType: 'mouse',
-            modifiers: __classPrivateFieldGet$e(this, _Mouse_keyboard, "f")._modifiers,
+            modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
             deltaY,
             deltaX,
             buttons,
@@ -99072,7 +99093,7 @@ class Mouse {
      */
     async drag(start, target) {
         const promise = new Promise(resolve => {
-            __classPrivateFieldGet$e(this, _Mouse_client, "f").once('Input.dragIntercepted', event => {
+            __classPrivateFieldGet$f(this, _Mouse_client, "f").once('Input.dragIntercepted', event => {
                 return resolve(event.data);
             });
         });
@@ -99087,11 +99108,11 @@ class Mouse {
      * @param data - drag data containing items and operations mask
      */
     async dragEnter(target, data) {
-        await __classPrivateFieldGet$e(this, _Mouse_client, "f").send('Input.dispatchDragEvent', {
+        await __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchDragEvent', {
             type: 'dragEnter',
             x: target.x,
             y: target.y,
-            modifiers: __classPrivateFieldGet$e(this, _Mouse_keyboard, "f")._modifiers,
+            modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
             data,
         });
     }
@@ -99101,11 +99122,11 @@ class Mouse {
      * @param data - drag data containing items and operations mask
      */
     async dragOver(target, data) {
-        await __classPrivateFieldGet$e(this, _Mouse_client, "f").send('Input.dispatchDragEvent', {
+        await __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchDragEvent', {
             type: 'dragOver',
             x: target.x,
             y: target.y,
-            modifiers: __classPrivateFieldGet$e(this, _Mouse_keyboard, "f")._modifiers,
+            modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
             data,
         });
     }
@@ -99115,11 +99136,11 @@ class Mouse {
      * @param data - drag data containing items and operations mask
      */
     async drop(target, data) {
-        await __classPrivateFieldGet$e(this, _Mouse_client, "f").send('Input.dispatchDragEvent', {
+        await __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchDragEvent', {
             type: 'drop',
             x: target.x,
             y: target.y,
-            modifiers: __classPrivateFieldGet$e(this, _Mouse_keyboard, "f")._modifiers,
+            modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
             data,
         });
     }
@@ -99146,19 +99167,19 @@ class Mouse {
     }
 }
 _Mouse_client = new WeakMap(), _Mouse_keyboard = new WeakMap(), _Mouse__state = new WeakMap(), _Mouse_transactions = new WeakMap(), _Mouse_instances = new WeakSet(), _Mouse_state_get = function _Mouse_state_get() {
-    return Object.assign({ ...__classPrivateFieldGet$e(this, _Mouse__state, "f") }, ...__classPrivateFieldGet$e(this, _Mouse_transactions, "f"));
+    return Object.assign({ ...__classPrivateFieldGet$f(this, _Mouse__state, "f") }, ...__classPrivateFieldGet$f(this, _Mouse_transactions, "f"));
 }, _Mouse_createTransaction = function _Mouse_createTransaction() {
     const transaction = {};
-    __classPrivateFieldGet$e(this, _Mouse_transactions, "f").push(transaction);
+    __classPrivateFieldGet$f(this, _Mouse_transactions, "f").push(transaction);
     const popTransaction = () => {
-        __classPrivateFieldGet$e(this, _Mouse_transactions, "f").splice(__classPrivateFieldGet$e(this, _Mouse_transactions, "f").indexOf(transaction), 1);
+        __classPrivateFieldGet$f(this, _Mouse_transactions, "f").splice(__classPrivateFieldGet$f(this, _Mouse_transactions, "f").indexOf(transaction), 1);
     };
     return {
         update: (updates) => {
             Object.assign(transaction, updates);
         },
         commit: () => {
-            __classPrivateFieldSet$e(this, _Mouse__state, { ...__classPrivateFieldGet$e(this, _Mouse__state, "f"), ...transaction }, "f");
+            __classPrivateFieldSet$f(this, _Mouse__state, { ...__classPrivateFieldGet$f(this, _Mouse__state, "f"), ...transaction }, "f");
             popTransaction();
         },
         rollback: popTransaction,
@@ -99169,7 +99190,7 @@ _Mouse_client = new WeakMap(), _Mouse_keyboard = new WeakMap(), _Mouse__state = 
  * the error of the action.
  */
 async function _Mouse_withTransaction(action) {
-    const { update, commit, rollback } = __classPrivateFieldGet$e(this, _Mouse_instances, "m", _Mouse_createTransaction).call(this);
+    const { update, commit, rollback } = __classPrivateFieldGet$f(this, _Mouse_instances, "m", _Mouse_createTransaction).call(this);
     try {
         await action(update);
         commit();
@@ -99190,8 +99211,8 @@ class Touchscreen {
     constructor(client, keyboard) {
         _Touchscreen_client.set(this, void 0);
         _Touchscreen_keyboard.set(this, void 0);
-        __classPrivateFieldSet$e(this, _Touchscreen_client, client, "f");
-        __classPrivateFieldSet$e(this, _Touchscreen_keyboard, keyboard, "f");
+        __classPrivateFieldSet$f(this, _Touchscreen_client, client, "f");
+        __classPrivateFieldSet$f(this, _Touchscreen_keyboard, keyboard, "f");
     }
     /**
      * Dispatches a `touchstart` and `touchend` event.
@@ -99209,10 +99230,10 @@ class Touchscreen {
      */
     async touchStart(x, y) {
         const touchPoints = [{ x: Math.round(x), y: Math.round(y) }];
-        await __classPrivateFieldGet$e(this, _Touchscreen_client, "f").send('Input.dispatchTouchEvent', {
+        await __classPrivateFieldGet$f(this, _Touchscreen_client, "f").send('Input.dispatchTouchEvent', {
             type: 'touchStart',
             touchPoints,
-            modifiers: __classPrivateFieldGet$e(this, _Touchscreen_keyboard, "f")._modifiers,
+            modifiers: __classPrivateFieldGet$f(this, _Touchscreen_keyboard, "f")._modifiers,
         });
     }
     /**
@@ -99222,20 +99243,20 @@ class Touchscreen {
      */
     async touchMove(x, y) {
         const movePoints = [{ x: Math.round(x), y: Math.round(y) }];
-        await __classPrivateFieldGet$e(this, _Touchscreen_client, "f").send('Input.dispatchTouchEvent', {
+        await __classPrivateFieldGet$f(this, _Touchscreen_client, "f").send('Input.dispatchTouchEvent', {
             type: 'touchMove',
             touchPoints: movePoints,
-            modifiers: __classPrivateFieldGet$e(this, _Touchscreen_keyboard, "f")._modifiers,
+            modifiers: __classPrivateFieldGet$f(this, _Touchscreen_keyboard, "f")._modifiers,
         });
     }
     /**
      * Dispatches a `touchend` event.
      */
     async touchEnd() {
-        await __classPrivateFieldGet$e(this, _Touchscreen_client, "f").send('Input.dispatchTouchEvent', {
+        await __classPrivateFieldGet$f(this, _Touchscreen_client, "f").send('Input.dispatchTouchEvent', {
             type: 'touchEnd',
             touchPoints: [],
-            modifiers: __classPrivateFieldGet$e(this, _Touchscreen_keyboard, "f")._modifiers,
+            modifiers: __classPrivateFieldGet$f(this, _Touchscreen_keyboard, "f")._modifiers,
         });
     }
 }
@@ -99256,13 +99277,13 @@ _Touchscreen_client = new WeakMap(), _Touchscreen_keyboard = new WeakMap();
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$d = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$e = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$d = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$e = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -99276,40 +99297,40 @@ class TimeoutSettings {
     constructor() {
         _TimeoutSettings_defaultTimeout.set(this, void 0);
         _TimeoutSettings_defaultNavigationTimeout.set(this, void 0);
-        __classPrivateFieldSet$d(this, _TimeoutSettings_defaultTimeout, null, "f");
-        __classPrivateFieldSet$d(this, _TimeoutSettings_defaultNavigationTimeout, null, "f");
+        __classPrivateFieldSet$e(this, _TimeoutSettings_defaultTimeout, null, "f");
+        __classPrivateFieldSet$e(this, _TimeoutSettings_defaultNavigationTimeout, null, "f");
     }
     setDefaultTimeout(timeout) {
-        __classPrivateFieldSet$d(this, _TimeoutSettings_defaultTimeout, timeout, "f");
+        __classPrivateFieldSet$e(this, _TimeoutSettings_defaultTimeout, timeout, "f");
     }
     setDefaultNavigationTimeout(timeout) {
-        __classPrivateFieldSet$d(this, _TimeoutSettings_defaultNavigationTimeout, timeout, "f");
+        __classPrivateFieldSet$e(this, _TimeoutSettings_defaultNavigationTimeout, timeout, "f");
     }
     navigationTimeout() {
-        if (__classPrivateFieldGet$d(this, _TimeoutSettings_defaultNavigationTimeout, "f") !== null) {
-            return __classPrivateFieldGet$d(this, _TimeoutSettings_defaultNavigationTimeout, "f");
+        if (__classPrivateFieldGet$e(this, _TimeoutSettings_defaultNavigationTimeout, "f") !== null) {
+            return __classPrivateFieldGet$e(this, _TimeoutSettings_defaultNavigationTimeout, "f");
         }
-        if (__classPrivateFieldGet$d(this, _TimeoutSettings_defaultTimeout, "f") !== null) {
-            return __classPrivateFieldGet$d(this, _TimeoutSettings_defaultTimeout, "f");
+        if (__classPrivateFieldGet$e(this, _TimeoutSettings_defaultTimeout, "f") !== null) {
+            return __classPrivateFieldGet$e(this, _TimeoutSettings_defaultTimeout, "f");
         }
         return DEFAULT_TIMEOUT;
     }
     timeout() {
-        if (__classPrivateFieldGet$d(this, _TimeoutSettings_defaultTimeout, "f") !== null) {
-            return __classPrivateFieldGet$d(this, _TimeoutSettings_defaultTimeout, "f");
+        if (__classPrivateFieldGet$e(this, _TimeoutSettings_defaultTimeout, "f") !== null) {
+            return __classPrivateFieldGet$e(this, _TimeoutSettings_defaultTimeout, "f");
         }
         return DEFAULT_TIMEOUT;
     }
 }
 _TimeoutSettings_defaultTimeout = new WeakMap(), _TimeoutSettings_defaultNavigationTimeout = new WeakMap();
 
-var __classPrivateFieldSet$c = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$d = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$c = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$d = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -99339,7 +99360,7 @@ class Tracing {
         _Tracing_client.set(this, void 0);
         _Tracing_recording.set(this, false);
         _Tracing_path.set(this, void 0);
-        __classPrivateFieldSet$c(this, _Tracing_client, client, "f");
+        __classPrivateFieldSet$d(this, _Tracing_client, client, "f");
     }
     /**
      * Starts a trace for the current page.
@@ -99349,7 +99370,7 @@ class Tracing {
      * @param options - Optional `TracingOptions`.
      */
     async start(options = {}) {
-        assert$1(!__classPrivateFieldGet$c(this, _Tracing_recording, "f"), 'Cannot start recording trace while already recording trace.');
+        assert$1(!__classPrivateFieldGet$d(this, _Tracing_recording, "f"), 'Cannot start recording trace while already recording trace.');
         const defaultCategories = [
             '-*',
             'devtools.timeline',
@@ -99377,9 +99398,9 @@ class Tracing {
         const includedCategories = categories.filter(cat => {
             return !cat.startsWith('-');
         });
-        __classPrivateFieldSet$c(this, _Tracing_path, path, "f");
-        __classPrivateFieldSet$c(this, _Tracing_recording, true, "f");
-        await __classPrivateFieldGet$c(this, _Tracing_client, "f").send('Tracing.start', {
+        __classPrivateFieldSet$d(this, _Tracing_path, path, "f");
+        __classPrivateFieldSet$d(this, _Tracing_recording, true, "f");
+        await __classPrivateFieldGet$d(this, _Tracing_client, "f").send('Tracing.start', {
             transferMode: 'ReturnAsStream',
             traceConfig: {
                 excludedCategories,
@@ -99398,10 +99419,10 @@ class Tracing {
             resolve = x;
             reject = y;
         });
-        __classPrivateFieldGet$c(this, _Tracing_client, "f").once('Tracing.tracingComplete', async (event) => {
+        __classPrivateFieldGet$d(this, _Tracing_client, "f").once('Tracing.tracingComplete', async (event) => {
             try {
-                const readable = await getReadableFromProtocolStream(__classPrivateFieldGet$c(this, _Tracing_client, "f"), event.stream);
-                const buffer = await getReadableAsBuffer(readable, __classPrivateFieldGet$c(this, _Tracing_path, "f"));
+                const readable = await getReadableFromProtocolStream(__classPrivateFieldGet$d(this, _Tracing_client, "f"), event.stream);
+                const buffer = await getReadableAsBuffer(readable, __classPrivateFieldGet$d(this, _Tracing_path, "f"));
                 resolve(buffer !== null && buffer !== void 0 ? buffer : undefined);
             }
             catch (error) {
@@ -99413,20 +99434,20 @@ class Tracing {
                 }
             }
         });
-        await __classPrivateFieldGet$c(this, _Tracing_client, "f").send('Tracing.end');
-        __classPrivateFieldSet$c(this, _Tracing_recording, false, "f");
+        await __classPrivateFieldGet$d(this, _Tracing_client, "f").send('Tracing.end');
+        __classPrivateFieldSet$d(this, _Tracing_recording, false, "f");
         return contentPromise;
     }
 }
 _Tracing_client = new WeakMap(), _Tracing_recording = new WeakMap(), _Tracing_path = new WeakMap();
 
-var __classPrivateFieldSet$b = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$c = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$b = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$c = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -99467,41 +99488,41 @@ class WebWorker extends EventEmitter$3 {
         _WebWorker_executionContext.set(this, createDeferredPromise());
         _WebWorker_client.set(this, void 0);
         _WebWorker_url.set(this, void 0);
-        __classPrivateFieldSet$b(this, _WebWorker_client, client, "f");
-        __classPrivateFieldSet$b(this, _WebWorker_url, url, "f");
-        __classPrivateFieldGet$b(this, _WebWorker_client, "f").once('Runtime.executionContextCreated', async (event) => {
+        __classPrivateFieldSet$c(this, _WebWorker_client, client, "f");
+        __classPrivateFieldSet$c(this, _WebWorker_url, url, "f");
+        __classPrivateFieldGet$c(this, _WebWorker_client, "f").once('Runtime.executionContextCreated', async (event) => {
             const context = new ExecutionContext(client, event.context);
-            __classPrivateFieldGet$b(this, _WebWorker_executionContext, "f").resolve(context);
+            __classPrivateFieldGet$c(this, _WebWorker_executionContext, "f").resolve(context);
         });
-        __classPrivateFieldGet$b(this, _WebWorker_client, "f").on('Runtime.consoleAPICalled', async (event) => {
-            const context = await __classPrivateFieldGet$b(this, _WebWorker_executionContext, "f");
+        __classPrivateFieldGet$c(this, _WebWorker_client, "f").on('Runtime.consoleAPICalled', async (event) => {
+            const context = await __classPrivateFieldGet$c(this, _WebWorker_executionContext, "f");
             return consoleAPICalled(event.type, event.args.map((object) => {
                 return new CDPJSHandle(context, object);
             }), event.stackTrace);
         });
-        __classPrivateFieldGet$b(this, _WebWorker_client, "f").on('Runtime.exceptionThrown', exception => {
+        __classPrivateFieldGet$c(this, _WebWorker_client, "f").on('Runtime.exceptionThrown', exception => {
             return exceptionThrown(exception.exceptionDetails);
         });
         // This might fail if the target is closed before we receive all execution contexts.
-        __classPrivateFieldGet$b(this, _WebWorker_client, "f").send('Runtime.enable').catch(debugError);
+        __classPrivateFieldGet$c(this, _WebWorker_client, "f").send('Runtime.enable').catch(debugError);
     }
     /**
      * @internal
      */
     async executionContext() {
-        return __classPrivateFieldGet$b(this, _WebWorker_executionContext, "f");
+        return __classPrivateFieldGet$c(this, _WebWorker_executionContext, "f");
     }
     /**
      * The URL of this web worker.
      */
     url() {
-        return __classPrivateFieldGet$b(this, _WebWorker_url, "f");
+        return __classPrivateFieldGet$c(this, _WebWorker_url, "f");
     }
     /**
      * The CDP session client the WebWorker belongs to.
      */
     get client() {
-        return __classPrivateFieldGet$b(this, _WebWorker_client, "f");
+        return __classPrivateFieldGet$c(this, _WebWorker_client, "f");
     }
     /**
      * If the function passed to the `worker.evaluate` returns a Promise, then
@@ -99518,7 +99539,7 @@ class WebWorker extends EventEmitter$3 {
      * @returns Promise which resolves to the return value of `pageFunction`.
      */
     async evaluate(pageFunction, ...args) {
-        const context = await __classPrivateFieldGet$b(this, _WebWorker_executionContext, "f");
+        const context = await __classPrivateFieldGet$c(this, _WebWorker_executionContext, "f");
         return context.evaluate(pageFunction, ...args);
     }
     /**
@@ -99534,7 +99555,7 @@ class WebWorker extends EventEmitter$3 {
      * @returns Promise which resolves to the return value of `pageFunction`.
      */
     async evaluateHandle(pageFunction, ...args) {
-        const context = await __classPrivateFieldGet$b(this, _WebWorker_executionContext, "f");
+        const context = await __classPrivateFieldGet$c(this, _WebWorker_executionContext, "f");
         return context.evaluateHandle(pageFunction, ...args);
     }
 }
@@ -99555,12 +99576,12 @@ _WebWorker_executionContext = new WeakMap(), _WebWorker_client = new WeakMap(), 
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$a = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$b = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$a = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$b = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -99576,7 +99597,7 @@ class CDPPage extends Page$1 {
      */
     static async _create(client, target, ignoreHTTPSErrors, defaultViewport, screenshotTaskQueue) {
         const page = new CDPPage(client, target, ignoreHTTPSErrors, screenshotTaskQueue);
-        await __classPrivateFieldGet$a(page, _CDPPage_instances, "m", _CDPPage_initialize).call(page);
+        await __classPrivateFieldGet$b(page, _CDPPage_instances, "m", _CDPPage_initialize).call(page);
         if (defaultViewport) {
             try {
                 await page.setViewport(defaultViewport);
@@ -99621,56 +99642,56 @@ class CDPPage extends Page$1 {
         _CDPPage_onDetachedFromTarget.set(this, (target) => {
             var _a;
             const sessionId = (_a = target._session()) === null || _a === void 0 ? void 0 : _a.id();
-            const worker = __classPrivateFieldGet$a(this, _CDPPage_workers, "f").get(sessionId);
+            const worker = __classPrivateFieldGet$b(this, _CDPPage_workers, "f").get(sessionId);
             if (!worker) {
                 return;
             }
-            __classPrivateFieldGet$a(this, _CDPPage_workers, "f").delete(sessionId);
+            __classPrivateFieldGet$b(this, _CDPPage_workers, "f").delete(sessionId);
             this.emit("workerdestroyed" /* PageEmittedEvents.WorkerDestroyed */, worker);
         });
         _CDPPage_onAttachedToTarget.set(this, (createdTarget) => {
-            __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").onAttachedToTarget(createdTarget);
+            __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").onAttachedToTarget(createdTarget);
             if (createdTarget._getTargetInfo().type === 'worker') {
                 const session = createdTarget._session();
                 assert$1(session);
-                const worker = new WebWorker(session, createdTarget.url(), __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_addConsoleMessage).bind(this), __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_handleException).bind(this));
-                __classPrivateFieldGet$a(this, _CDPPage_workers, "f").set(session.id(), worker);
+                const worker = new WebWorker(session, createdTarget.url(), __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_addConsoleMessage).bind(this), __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_handleException).bind(this));
+                __classPrivateFieldGet$b(this, _CDPPage_workers, "f").set(session.id(), worker);
                 this.emit("workercreated" /* PageEmittedEvents.WorkerCreated */, worker);
             }
             if (createdTarget._session()) {
-                __classPrivateFieldGet$a(this, _CDPPage_target, "f")
+                __classPrivateFieldGet$b(this, _CDPPage_target, "f")
                     ._targetManager()
-                    .addTargetInterceptor(createdTarget._session(), __classPrivateFieldGet$a(this, _CDPPage_onAttachedToTarget, "f"));
+                    .addTargetInterceptor(createdTarget._session(), __classPrivateFieldGet$b(this, _CDPPage_onAttachedToTarget, "f"));
             }
         });
-        __classPrivateFieldSet$a(this, _CDPPage_client, client, "f");
-        __classPrivateFieldSet$a(this, _CDPPage_target, target, "f");
-        __classPrivateFieldSet$a(this, _CDPPage_keyboard, new Keyboard(client), "f");
-        __classPrivateFieldSet$a(this, _CDPPage_mouse, new Mouse(client, __classPrivateFieldGet$a(this, _CDPPage_keyboard, "f")), "f");
-        __classPrivateFieldSet$a(this, _CDPPage_touchscreen, new Touchscreen(client, __classPrivateFieldGet$a(this, _CDPPage_keyboard, "f")), "f");
-        __classPrivateFieldSet$a(this, _CDPPage_accessibility, new Accessibility(client), "f");
-        __classPrivateFieldSet$a(this, _CDPPage_frameManager, new FrameManager(client, this, ignoreHTTPSErrors, __classPrivateFieldGet$a(this, _CDPPage_timeoutSettings, "f")), "f");
-        __classPrivateFieldSet$a(this, _CDPPage_emulationManager, new EmulationManager(client), "f");
-        __classPrivateFieldSet$a(this, _CDPPage_tracing, new Tracing(client), "f");
-        __classPrivateFieldSet$a(this, _CDPPage_coverage, new Coverage(client), "f");
-        __classPrivateFieldSet$a(this, _CDPPage_screenshotTaskQueue, screenshotTaskQueue, "f");
-        __classPrivateFieldSet$a(this, _CDPPage_viewport, null, "f");
-        __classPrivateFieldGet$a(this, _CDPPage_target, "f")
+        __classPrivateFieldSet$b(this, _CDPPage_client, client, "f");
+        __classPrivateFieldSet$b(this, _CDPPage_target, target, "f");
+        __classPrivateFieldSet$b(this, _CDPPage_keyboard, new Keyboard(client), "f");
+        __classPrivateFieldSet$b(this, _CDPPage_mouse, new Mouse(client, __classPrivateFieldGet$b(this, _CDPPage_keyboard, "f")), "f");
+        __classPrivateFieldSet$b(this, _CDPPage_touchscreen, new Touchscreen(client, __classPrivateFieldGet$b(this, _CDPPage_keyboard, "f")), "f");
+        __classPrivateFieldSet$b(this, _CDPPage_accessibility, new Accessibility(client), "f");
+        __classPrivateFieldSet$b(this, _CDPPage_frameManager, new FrameManager(client, this, ignoreHTTPSErrors, __classPrivateFieldGet$b(this, _CDPPage_timeoutSettings, "f")), "f");
+        __classPrivateFieldSet$b(this, _CDPPage_emulationManager, new EmulationManager(client), "f");
+        __classPrivateFieldSet$b(this, _CDPPage_tracing, new Tracing(client), "f");
+        __classPrivateFieldSet$b(this, _CDPPage_coverage, new Coverage(client), "f");
+        __classPrivateFieldSet$b(this, _CDPPage_screenshotTaskQueue, screenshotTaskQueue, "f");
+        __classPrivateFieldSet$b(this, _CDPPage_viewport, null, "f");
+        __classPrivateFieldGet$b(this, _CDPPage_target, "f")
             ._targetManager()
-            .addTargetInterceptor(__classPrivateFieldGet$a(this, _CDPPage_client, "f"), __classPrivateFieldGet$a(this, _CDPPage_onAttachedToTarget, "f"));
-        __classPrivateFieldGet$a(this, _CDPPage_target, "f")
+            .addTargetInterceptor(__classPrivateFieldGet$b(this, _CDPPage_client, "f"), __classPrivateFieldGet$b(this, _CDPPage_onAttachedToTarget, "f"));
+        __classPrivateFieldGet$b(this, _CDPPage_target, "f")
             ._targetManager()
-            .on("targetGone" /* TargetManagerEmittedEvents.TargetGone */, __classPrivateFieldGet$a(this, _CDPPage_onDetachedFromTarget, "f"));
-        __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").on(FrameManagerEmittedEvents.FrameAttached, event => {
+            .on("targetGone" /* TargetManagerEmittedEvents.TargetGone */, __classPrivateFieldGet$b(this, _CDPPage_onDetachedFromTarget, "f"));
+        __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").on(FrameManagerEmittedEvents.FrameAttached, event => {
             return this.emit("frameattached" /* PageEmittedEvents.FrameAttached */, event);
         });
-        __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").on(FrameManagerEmittedEvents.FrameDetached, event => {
+        __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").on(FrameManagerEmittedEvents.FrameDetached, event => {
             return this.emit("framedetached" /* PageEmittedEvents.FrameDetached */, event);
         });
-        __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").on(FrameManagerEmittedEvents.FrameNavigated, event => {
+        __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").on(FrameManagerEmittedEvents.FrameNavigated, event => {
             return this.emit("framenavigated" /* PageEmittedEvents.FrameNavigated */, event);
         });
-        const networkManager = __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager;
+        const networkManager = __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager;
         networkManager.on(NetworkManagerEmittedEvents.Request, event => {
             return this.emit("request" /* PageEmittedEvents.Request */, event);
         });
@@ -99693,63 +99714,63 @@ class CDPPage extends Page$1 {
             return this.emit("load" /* PageEmittedEvents.Load */);
         });
         client.on('Runtime.consoleAPICalled', event => {
-            return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_onConsoleAPI).call(this, event);
+            return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_onConsoleAPI).call(this, event);
         });
         client.on('Runtime.bindingCalled', event => {
-            return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_onBindingCalled).call(this, event);
+            return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_onBindingCalled).call(this, event);
         });
         client.on('Page.javascriptDialogOpening', event => {
-            return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_onDialog).call(this, event);
+            return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_onDialog).call(this, event);
         });
         client.on('Runtime.exceptionThrown', exception => {
-            return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_handleException).call(this, exception.exceptionDetails);
+            return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_handleException).call(this, exception.exceptionDetails);
         });
         client.on('Inspector.targetCrashed', () => {
-            return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_onTargetCrashed).call(this);
+            return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_onTargetCrashed).call(this);
         });
         client.on('Performance.metrics', event => {
-            return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_emitMetrics).call(this, event);
+            return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_emitMetrics).call(this, event);
         });
         client.on('Log.entryAdded', event => {
-            return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_onLogEntryAdded).call(this, event);
+            return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_onLogEntryAdded).call(this, event);
         });
         client.on('Page.fileChooserOpened', event => {
-            return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_onFileChooser).call(this, event);
+            return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_onFileChooser).call(this, event);
         });
-        __classPrivateFieldGet$a(this, _CDPPage_target, "f")._isClosedPromise.then(() => {
-            __classPrivateFieldGet$a(this, _CDPPage_target, "f")
+        __classPrivateFieldGet$b(this, _CDPPage_target, "f")._isClosedPromise.then(() => {
+            __classPrivateFieldGet$b(this, _CDPPage_target, "f")
                 ._targetManager()
-                .removeTargetInterceptor(__classPrivateFieldGet$a(this, _CDPPage_client, "f"), __classPrivateFieldGet$a(this, _CDPPage_onAttachedToTarget, "f"));
-            __classPrivateFieldGet$a(this, _CDPPage_target, "f")
+                .removeTargetInterceptor(__classPrivateFieldGet$b(this, _CDPPage_client, "f"), __classPrivateFieldGet$b(this, _CDPPage_onAttachedToTarget, "f"));
+            __classPrivateFieldGet$b(this, _CDPPage_target, "f")
                 ._targetManager()
-                .off("targetGone" /* TargetManagerEmittedEvents.TargetGone */, __classPrivateFieldGet$a(this, _CDPPage_onDetachedFromTarget, "f"));
+                .off("targetGone" /* TargetManagerEmittedEvents.TargetGone */, __classPrivateFieldGet$b(this, _CDPPage_onDetachedFromTarget, "f"));
             this.emit("close" /* PageEmittedEvents.Close */);
-            __classPrivateFieldSet$a(this, _CDPPage_closed, true, "f");
+            __classPrivateFieldSet$b(this, _CDPPage_closed, true, "f");
         });
     }
     /**
      * @internal
      */
     _client() {
-        return __classPrivateFieldGet$a(this, _CDPPage_client, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_client, "f");
     }
     isDragInterceptionEnabled() {
-        return __classPrivateFieldGet$a(this, _CDPPage_userDragInterceptionEnabled, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_userDragInterceptionEnabled, "f");
     }
     isJavaScriptEnabled() {
-        return __classPrivateFieldGet$a(this, _CDPPage_javascriptEnabled, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_javascriptEnabled, "f");
     }
     waitForFileChooser(options = {}) {
-        const needsEnable = __classPrivateFieldGet$a(this, _CDPPage_fileChooserPromises, "f").size === 0;
-        const { timeout = __classPrivateFieldGet$a(this, _CDPPage_timeoutSettings, "f").timeout() } = options;
+        const needsEnable = __classPrivateFieldGet$b(this, _CDPPage_fileChooserPromises, "f").size === 0;
+        const { timeout = __classPrivateFieldGet$b(this, _CDPPage_timeoutSettings, "f").timeout() } = options;
         const promise = createDeferredPromise({
             message: `Waiting for \`FileChooser\` failed: ${timeout}ms exceeded`,
             timeout,
         });
-        __classPrivateFieldGet$a(this, _CDPPage_fileChooserPromises, "f").add(promise);
+        __classPrivateFieldGet$b(this, _CDPPage_fileChooserPromises, "f").add(promise);
         let enablePromise;
         if (needsEnable) {
-            enablePromise = __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.setInterceptFileChooserDialog', {
+            enablePromise = __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.setInterceptFileChooserDialog', {
                 enabled: true,
             });
         }
@@ -99758,7 +99779,7 @@ class CDPPage extends Page$1 {
             return result;
         })
             .catch(error => {
-            __classPrivateFieldGet$a(this, _CDPPage_fileChooserPromises, "f").delete(promise);
+            __classPrivateFieldGet$b(this, _CDPPage_fileChooserPromises, "f").delete(promise);
             throw error;
         });
     }
@@ -99773,66 +99794,66 @@ class CDPPage extends Page$1 {
         if (accuracy < 0) {
             throw new Error(`Invalid accuracy "${accuracy}": precondition 0 <= ACCURACY failed.`);
         }
-        await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setGeolocationOverride', {
+        await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setGeolocationOverride', {
             longitude,
             latitude,
             accuracy,
         });
     }
     target() {
-        return __classPrivateFieldGet$a(this, _CDPPage_target, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_target, "f");
     }
     browser() {
-        return __classPrivateFieldGet$a(this, _CDPPage_target, "f").browser();
+        return __classPrivateFieldGet$b(this, _CDPPage_target, "f").browser();
     }
     browserContext() {
-        return __classPrivateFieldGet$a(this, _CDPPage_target, "f").browserContext();
+        return __classPrivateFieldGet$b(this, _CDPPage_target, "f").browserContext();
     }
     mainFrame() {
-        return __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").mainFrame();
+        return __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").mainFrame();
     }
     get keyboard() {
-        return __classPrivateFieldGet$a(this, _CDPPage_keyboard, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_keyboard, "f");
     }
     get touchscreen() {
-        return __classPrivateFieldGet$a(this, _CDPPage_touchscreen, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_touchscreen, "f");
     }
     get coverage() {
-        return __classPrivateFieldGet$a(this, _CDPPage_coverage, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_coverage, "f");
     }
     get tracing() {
-        return __classPrivateFieldGet$a(this, _CDPPage_tracing, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_tracing, "f");
     }
     get accessibility() {
-        return __classPrivateFieldGet$a(this, _CDPPage_accessibility, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_accessibility, "f");
     }
     frames() {
-        return __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").frames();
+        return __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").frames();
     }
     workers() {
-        return Array.from(__classPrivateFieldGet$a(this, _CDPPage_workers, "f").values());
+        return Array.from(__classPrivateFieldGet$b(this, _CDPPage_workers, "f").values());
     }
     async setRequestInterception(value) {
-        return __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager.setRequestInterception(value);
+        return __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager.setRequestInterception(value);
     }
     async setDragInterception(enabled) {
-        __classPrivateFieldSet$a(this, _CDPPage_userDragInterceptionEnabled, enabled, "f");
-        return __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Input.setInterceptDrags', { enabled });
+        __classPrivateFieldSet$b(this, _CDPPage_userDragInterceptionEnabled, enabled, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Input.setInterceptDrags', { enabled });
     }
     setOfflineMode(enabled) {
-        return __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager.setOfflineMode(enabled);
+        return __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager.setOfflineMode(enabled);
     }
     emulateNetworkConditions(networkConditions) {
-        return __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager.emulateNetworkConditions(networkConditions);
+        return __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager.emulateNetworkConditions(networkConditions);
     }
     setDefaultNavigationTimeout(timeout) {
-        __classPrivateFieldGet$a(this, _CDPPage_timeoutSettings, "f").setDefaultNavigationTimeout(timeout);
+        __classPrivateFieldGet$b(this, _CDPPage_timeoutSettings, "f").setDefaultNavigationTimeout(timeout);
     }
     setDefaultTimeout(timeout) {
-        __classPrivateFieldGet$a(this, _CDPPage_timeoutSettings, "f").setDefaultTimeout(timeout);
+        __classPrivateFieldGet$b(this, _CDPPage_timeoutSettings, "f").setDefaultTimeout(timeout);
     }
     getDefaultTimeout() {
-        return __classPrivateFieldGet$a(this, _CDPPage_timeoutSettings, "f").timeout();
+        return __classPrivateFieldGet$b(this, _CDPPage_timeoutSettings, "f").timeout();
     }
     async $(selector) {
         return this.mainFrame().$(selector);
@@ -99863,7 +99884,7 @@ class CDPPage extends Page$1 {
         return this.mainFrame().$x(expression);
     }
     async cookies(...urls) {
-        const originalCookies = (await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Network.getCookies', {
+        const originalCookies = (await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Network.getCookies', {
             urls: urls.length ? urls : [this.url()],
         })).cookies;
         const unsupportedCookieAttributes = ['priority'];
@@ -99882,7 +99903,7 @@ class CDPPage extends Page$1 {
             if (!cookie.url && pageURL.startsWith('http')) {
                 item.url = pageURL;
             }
-            await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Network.deleteCookies', item);
+            await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Network.deleteCookies', item);
         }
     }
     async setCookie(...cookies) {
@@ -99899,7 +99920,7 @@ class CDPPage extends Page$1 {
         });
         await this.deleteCookie(...items);
         if (items.length) {
-            await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Network.setCookies', { cookies: items });
+            await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Network.setCookies', { cookies: items });
         }
     }
     async addScriptTag(options) {
@@ -99909,7 +99930,7 @@ class CDPPage extends Page$1 {
         return this.mainFrame().addStyleTag(options);
     }
     async exposeFunction(name, pptrFunction) {
-        if (__classPrivateFieldGet$a(this, _CDPPage_bindings, "f").has(name)) {
+        if (__classPrivateFieldGet$b(this, _CDPPage_bindings, "f").has(name)) {
             throw new Error(`Failed to add page binding with name ${name}: window['${name}'] already exists!`);
         }
         let binding;
@@ -99921,10 +99942,10 @@ class CDPPage extends Page$1 {
                 binding = new Binding(name, pptrFunction.default);
                 break;
         }
-        __classPrivateFieldGet$a(this, _CDPPage_bindings, "f").set(name, binding);
+        __classPrivateFieldGet$b(this, _CDPPage_bindings, "f").set(name, binding);
         const expression = pageBindingInitString('exposedFun', name);
-        await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Runtime.addBinding', { name: name });
-        await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.addScriptToEvaluateOnNewDocument', {
+        await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Runtime.addBinding', { name: name });
+        await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.addScriptToEvaluateOnNewDocument', {
             source: expression,
         });
         await Promise.all(this.frames().map(frame => {
@@ -99932,43 +99953,43 @@ class CDPPage extends Page$1 {
         }));
     }
     async authenticate(credentials) {
-        return __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager.authenticate(credentials);
+        return __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager.authenticate(credentials);
     }
     async setExtraHTTPHeaders(headers) {
-        return __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager.setExtraHTTPHeaders(headers);
+        return __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager.setExtraHTTPHeaders(headers);
     }
     async setUserAgent(userAgent, userAgentMetadata) {
-        return __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager.setUserAgent(userAgent, userAgentMetadata);
+        return __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager.setUserAgent(userAgent, userAgentMetadata);
     }
     async metrics() {
-        const response = await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Performance.getMetrics');
-        return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_buildMetricsObject).call(this, response.metrics);
+        const response = await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Performance.getMetrics');
+        return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_buildMetricsObject).call(this, response.metrics);
     }
     url() {
         return this.mainFrame().url();
     }
     async content() {
-        return await __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").mainFrame().content();
+        return await __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").mainFrame().content();
     }
     async setContent(html, options = {}) {
-        await __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").mainFrame().setContent(html, options);
+        await __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").mainFrame().setContent(html, options);
     }
     async goto(url, options = {}) {
-        return await __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").mainFrame().goto(url, options);
+        return await __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").mainFrame().goto(url, options);
     }
     async reload(options) {
         const result = await Promise.all([
             this.waitForNavigation(options),
-            __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.reload'),
+            __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.reload'),
         ]);
         return result[0];
     }
     async waitForNavigation(options = {}) {
-        return await __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").mainFrame().waitForNavigation(options);
+        return await __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").mainFrame().waitForNavigation(options);
     }
     async waitForRequest(urlOrPredicate, options = {}) {
-        const { timeout = __classPrivateFieldGet$a(this, _CDPPage_timeoutSettings, "f").timeout() } = options;
-        return waitForEvent(__classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager, NetworkManagerEmittedEvents.Request, async (request) => {
+        const { timeout = __classPrivateFieldGet$b(this, _CDPPage_timeoutSettings, "f").timeout() } = options;
+        return waitForEvent(__classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager, NetworkManagerEmittedEvents.Request, async (request) => {
             if (isString$2(urlOrPredicate)) {
                 return urlOrPredicate === request.url();
             }
@@ -99976,11 +99997,11 @@ class CDPPage extends Page$1 {
                 return !!(await urlOrPredicate(request));
             }
             return false;
-        }, timeout, __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_sessionClosePromise).call(this));
+        }, timeout, __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_sessionClosePromise).call(this));
     }
     async waitForResponse(urlOrPredicate, options = {}) {
-        const { timeout = __classPrivateFieldGet$a(this, _CDPPage_timeoutSettings, "f").timeout() } = options;
-        return waitForEvent(__classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager, NetworkManagerEmittedEvents.Response, async (response) => {
+        const { timeout = __classPrivateFieldGet$b(this, _CDPPage_timeoutSettings, "f").timeout() } = options;
+        return waitForEvent(__classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager, NetworkManagerEmittedEvents.Response, async (response) => {
             if (isString$2(urlOrPredicate)) {
                 return urlOrPredicate === response.url();
             }
@@ -99988,11 +100009,11 @@ class CDPPage extends Page$1 {
                 return !!(await urlOrPredicate(response));
             }
             return false;
-        }, timeout, __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_sessionClosePromise).call(this));
+        }, timeout, __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_sessionClosePromise).call(this));
     }
     async waitForNetworkIdle(options = {}) {
-        const { idleTime = 500, timeout = __classPrivateFieldGet$a(this, _CDPPage_timeoutSettings, "f").timeout() } = options;
-        const networkManager = __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager;
+        const { idleTime = 500, timeout = __classPrivateFieldGet$b(this, _CDPPage_timeoutSettings, "f").timeout() } = options;
+        const networkManager = __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager;
         const idlePromise = createDeferredPromise();
         let abortRejectCallback;
         const abortPromise = new Promise((_, reject) => {
@@ -100025,7 +100046,7 @@ class CDPPage extends Page$1 {
         await Promise.race([
             idlePromise,
             ...eventPromises,
-            __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_sessionClosePromise).call(this),
+            __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_sessionClosePromise).call(this),
         ]).then(r => {
             cleanup();
             return r;
@@ -100035,7 +100056,7 @@ class CDPPage extends Page$1 {
         });
     }
     async waitForFrame(urlOrPredicate, options = {}) {
-        const { timeout = __classPrivateFieldGet$a(this, _CDPPage_timeoutSettings, "f").timeout() } = options;
+        const { timeout = __classPrivateFieldGet$b(this, _CDPPage_timeoutSettings, "f").timeout() } = options;
         let predicate;
         if (isString$2(urlOrPredicate)) {
             predicate = (frame) => {
@@ -100052,8 +100073,8 @@ class CDPPage extends Page$1 {
             };
         }
         const eventRace = Promise.race([
-            waitForEvent(__classPrivateFieldGet$a(this, _CDPPage_frameManager, "f"), FrameManagerEmittedEvents.FrameAttached, predicate, timeout, __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_sessionClosePromise).call(this)),
-            waitForEvent(__classPrivateFieldGet$a(this, _CDPPage_frameManager, "f"), FrameManagerEmittedEvents.FrameNavigated, predicate, timeout, __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_sessionClosePromise).call(this)),
+            waitForEvent(__classPrivateFieldGet$b(this, _CDPPage_frameManager, "f"), FrameManagerEmittedEvents.FrameAttached, predicate, timeout, __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_sessionClosePromise).call(this)),
+            waitForEvent(__classPrivateFieldGet$b(this, _CDPPage_frameManager, "f"), FrameManagerEmittedEvents.FrameNavigated, predicate, timeout, __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_sessionClosePromise).call(this)),
             ...this.frames().map(async (frame) => {
                 if (await predicate(frame)) {
                     return frame;
@@ -100064,57 +100085,57 @@ class CDPPage extends Page$1 {
         return eventRace;
     }
     async goBack(options = {}) {
-        return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_go).call(this, -1, options);
+        return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_go).call(this, -1, options);
     }
     async goForward(options = {}) {
-        return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_go).call(this, +1, options);
+        return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_go).call(this, +1, options);
     }
     async bringToFront() {
-        await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.bringToFront');
+        await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.bringToFront');
     }
     async setJavaScriptEnabled(enabled) {
-        if (__classPrivateFieldGet$a(this, _CDPPage_javascriptEnabled, "f") === enabled) {
+        if (__classPrivateFieldGet$b(this, _CDPPage_javascriptEnabled, "f") === enabled) {
             return;
         }
-        __classPrivateFieldSet$a(this, _CDPPage_javascriptEnabled, enabled, "f");
-        await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setScriptExecutionDisabled', {
+        __classPrivateFieldSet$b(this, _CDPPage_javascriptEnabled, enabled, "f");
+        await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setScriptExecutionDisabled', {
             value: !enabled,
         });
     }
     async setBypassCSP(enabled) {
-        await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.setBypassCSP', { enabled });
+        await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.setBypassCSP', { enabled });
     }
     async emulateMediaType(type) {
         assert$1(type === 'screen' ||
             type === 'print' ||
             (type !== null && type !== void 0 ? type : undefined) === undefined, 'Unsupported media type: ' + type);
-        await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setEmulatedMedia', {
+        await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setEmulatedMedia', {
             media: type || '',
         });
     }
     async emulateCPUThrottling(factor) {
         assert$1(factor === null || factor >= 1, 'Throttling rate should be greater or equal to 1');
-        await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setCPUThrottlingRate', {
+        await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setCPUThrottlingRate', {
             rate: factor !== null ? factor : 1,
         });
     }
     async emulateMediaFeatures(features) {
         if (!features) {
-            await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setEmulatedMedia', {});
+            await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setEmulatedMedia', {});
         }
         if (Array.isArray(features)) {
             for (const mediaFeature of features) {
                 const name = mediaFeature.name;
                 assert$1(/^(?:prefers-(?:color-scheme|reduced-motion)|color-gamut)$/.test(name), 'Unsupported media feature: ' + name);
             }
-            await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setEmulatedMedia', {
+            await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setEmulatedMedia', {
                 features: features,
             });
         }
     }
     async emulateTimezone(timezoneId) {
         try {
-            await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setTimezoneOverride', {
+            await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setTimezoneOverride', {
                 timezoneId: timezoneId || '',
             });
         }
@@ -100127,13 +100148,13 @@ class CDPPage extends Page$1 {
     }
     async emulateIdleState(overrides) {
         if (overrides) {
-            await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setIdleOverride', {
+            await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setIdleOverride', {
                 isUserActive: overrides.isUserActive,
                 isScreenUnlocked: overrides.isScreenUnlocked,
             });
         }
         else {
-            await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.clearIdleOverride');
+            await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.clearIdleOverride');
         }
     }
     async emulateVisionDeficiency(type) {
@@ -100147,7 +100168,7 @@ class CDPPage extends Page$1 {
         ]);
         try {
             assert$1(!type || visionDeficiencies.has(type), `Unsupported vision deficiency: ${type}`);
-            await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setEmulatedVisionDeficiency', {
+            await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setEmulatedVisionDeficiency', {
                 type: type || 'none',
             });
         }
@@ -100156,26 +100177,26 @@ class CDPPage extends Page$1 {
         }
     }
     async setViewport(viewport) {
-        const needsReload = await __classPrivateFieldGet$a(this, _CDPPage_emulationManager, "f").emulateViewport(viewport);
-        __classPrivateFieldSet$a(this, _CDPPage_viewport, viewport, "f");
+        const needsReload = await __classPrivateFieldGet$b(this, _CDPPage_emulationManager, "f").emulateViewport(viewport);
+        __classPrivateFieldSet$b(this, _CDPPage_viewport, viewport, "f");
         if (needsReload) {
             await this.reload();
         }
     }
     viewport() {
-        return __classPrivateFieldGet$a(this, _CDPPage_viewport, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_viewport, "f");
     }
     async evaluate(pageFunction, ...args) {
-        return __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").mainFrame().evaluate(pageFunction, ...args);
+        return __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").mainFrame().evaluate(pageFunction, ...args);
     }
     async evaluateOnNewDocument(pageFunction, ...args) {
         const source = evaluationString(pageFunction, ...args);
-        await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.addScriptToEvaluateOnNewDocument', {
+        await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.addScriptToEvaluateOnNewDocument', {
             source,
         });
     }
     async setCacheEnabled(enabled = true) {
-        await __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").networkManager.setCacheEnabled(enabled);
+        await __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").networkManager.setCacheEnabled(enabled);
     }
     async screenshot(options = {}) {
         let screenshotType = "png" /* Protocol.Page.CaptureScreenshotRequestFormat.Png */;
@@ -100230,16 +100251,16 @@ class CDPPage extends Page$1 {
             assert$1(options.clip.width !== 0, 'Expected options.clip.width not to be 0.');
             assert$1(options.clip.height !== 0, 'Expected options.clip.height not to be 0.');
         }
-        return __classPrivateFieldGet$a(this, _CDPPage_screenshotTaskQueue, "f").postTask(() => {
-            return __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_screenshotTask).call(this, screenshotType, options);
+        return __classPrivateFieldGet$b(this, _CDPPage_screenshotTaskQueue, "f").postTask(() => {
+            return __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_screenshotTask).call(this, screenshotType, options);
         });
     }
     async createPDFStream(options = {}) {
         const { landscape, displayHeaderFooter, headerTemplate, footerTemplate, printBackground, scale, width: paperWidth, height: paperHeight, margin, pageRanges, preferCSSPageSize, omitBackground, timeout, } = this._getPDFOptions(options);
         if (omitBackground) {
-            await __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_setTransparentBackgroundColor).call(this);
+            await __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_setTransparentBackgroundColor).call(this);
         }
-        const printCommandPromise = __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.printToPDF', {
+        const printCommandPromise = __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.printToPDF', {
             transferMode: 'ReturnAsStream',
             landscape,
             displayHeaderFooter,
@@ -100258,10 +100279,10 @@ class CDPPage extends Page$1 {
         });
         const result = await waitWithTimeout(printCommandPromise, 'Page.printToPDF', timeout);
         if (omitBackground) {
-            await __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_resetDefaultBackgroundColor).call(this);
+            await __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_resetDefaultBackgroundColor).call(this);
         }
         assert$1(result.stream, '`stream` is missing from `Page.printToPDF');
-        return getReadableFromProtocolStream(__classPrivateFieldGet$a(this, _CDPPage_client, "f"), result.stream);
+        return getReadableFromProtocolStream(__classPrivateFieldGet$b(this, _CDPPage_client, "f"), result.stream);
     }
     async pdf(options = {}) {
         const { path = undefined } = options;
@@ -100274,24 +100295,24 @@ class CDPPage extends Page$1 {
         return this.mainFrame().title();
     }
     async close(options = { runBeforeUnload: undefined }) {
-        const connection = __classPrivateFieldGet$a(this, _CDPPage_client, "f").connection();
+        const connection = __classPrivateFieldGet$b(this, _CDPPage_client, "f").connection();
         assert$1(connection, 'Protocol error: Connection closed. Most likely the page has been closed.');
         const runBeforeUnload = !!options.runBeforeUnload;
         if (runBeforeUnload) {
-            await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.close');
+            await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.close');
         }
         else {
             await connection.send('Target.closeTarget', {
-                targetId: __classPrivateFieldGet$a(this, _CDPPage_target, "f")._targetId,
+                targetId: __classPrivateFieldGet$b(this, _CDPPage_target, "f")._targetId,
             });
-            await __classPrivateFieldGet$a(this, _CDPPage_target, "f")._isClosedPromise;
+            await __classPrivateFieldGet$b(this, _CDPPage_target, "f")._isClosedPromise;
         }
     }
     isClosed() {
-        return __classPrivateFieldGet$a(this, _CDPPage_closed, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_closed, "f");
     }
     get mouse() {
-        return __classPrivateFieldGet$a(this, _CDPPage_mouse, "f");
+        return __classPrivateFieldGet$b(this, _CDPPage_mouse, "f");
     }
     click(selector, options = {}) {
         return this.mainFrame().click(selector, options);
@@ -100353,9 +100374,9 @@ class CDPPage extends Page$1 {
 _CDPPage_closed = new WeakMap(), _CDPPage_client = new WeakMap(), _CDPPage_target = new WeakMap(), _CDPPage_keyboard = new WeakMap(), _CDPPage_mouse = new WeakMap(), _CDPPage_timeoutSettings = new WeakMap(), _CDPPage_touchscreen = new WeakMap(), _CDPPage_accessibility = new WeakMap(), _CDPPage_frameManager = new WeakMap(), _CDPPage_emulationManager = new WeakMap(), _CDPPage_tracing = new WeakMap(), _CDPPage_bindings = new WeakMap(), _CDPPage_coverage = new WeakMap(), _CDPPage_javascriptEnabled = new WeakMap(), _CDPPage_viewport = new WeakMap(), _CDPPage_screenshotTaskQueue = new WeakMap(), _CDPPage_workers = new WeakMap(), _CDPPage_fileChooserPromises = new WeakMap(), _CDPPage_disconnectPromise = new WeakMap(), _CDPPage_userDragInterceptionEnabled = new WeakMap(), _CDPPage_onDetachedFromTarget = new WeakMap(), _CDPPage_onAttachedToTarget = new WeakMap(), _CDPPage_instances = new WeakSet(), _CDPPage_initialize = async function _CDPPage_initialize() {
     try {
         await Promise.all([
-            __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").initialize(),
-            __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Performance.enable'),
-            __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Log.enable'),
+            __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").initialize(),
+            __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Performance.enable'),
+            __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Log.enable'),
         ]);
     }
     catch (err) {
@@ -100367,25 +100388,25 @@ _CDPPage_closed = new WeakMap(), _CDPPage_client = new WeakMap(), _CDPPage_targe
         }
     }
 }, _CDPPage_onFileChooser = async function _CDPPage_onFileChooser(event) {
-    if (!__classPrivateFieldGet$a(this, _CDPPage_fileChooserPromises, "f").size) {
+    if (!__classPrivateFieldGet$b(this, _CDPPage_fileChooserPromises, "f").size) {
         return;
     }
-    const frame = __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").frame(event.frameId);
+    const frame = __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").frame(event.frameId);
     assert$1(frame, 'This should never happen.');
     // This is guaranteed to be an HTMLInputElement handle by the event.
     const handle = (await frame.worlds[MAIN_WORLD].adoptBackendNode(event.backendNodeId));
     const fileChooser = new FileChooser(handle, event);
-    for (const promise of __classPrivateFieldGet$a(this, _CDPPage_fileChooserPromises, "f")) {
+    for (const promise of __classPrivateFieldGet$b(this, _CDPPage_fileChooserPromises, "f")) {
         promise.resolve(fileChooser);
     }
-    __classPrivateFieldGet$a(this, _CDPPage_fileChooserPromises, "f").clear();
+    __classPrivateFieldGet$b(this, _CDPPage_fileChooserPromises, "f").clear();
 }, _CDPPage_onTargetCrashed = function _CDPPage_onTargetCrashed() {
     this.emit('error', new Error('Page crashed!'));
 }, _CDPPage_onLogEntryAdded = function _CDPPage_onLogEntryAdded(event) {
     const { level, text, args, source, url, lineNumber } = event.entry;
     if (args) {
         args.map(arg => {
-            return releaseObject(__classPrivateFieldGet$a(this, _CDPPage_client, "f"), arg);
+            return releaseObject(__classPrivateFieldGet$b(this, _CDPPage_client, "f"), arg);
         });
     }
     if (source !== 'worker') {
@@ -100394,7 +100415,7 @@ _CDPPage_closed = new WeakMap(), _CDPPage_client = new WeakMap(), _CDPPage_targe
 }, _CDPPage_emitMetrics = function _CDPPage_emitMetrics(event) {
     this.emit("metrics" /* PageEmittedEvents.Metrics */, {
         title: event.title,
-        metrics: __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_buildMetricsObject).call(this, event.metrics),
+        metrics: __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_buildMetricsObject).call(this, event.metrics),
     });
 }, _CDPPage_buildMetricsObject = function _CDPPage_buildMetricsObject(metrics) {
     const result = {};
@@ -100426,7 +100447,7 @@ _CDPPage_closed = new WeakMap(), _CDPPage_client = new WeakMap(), _CDPPage_targe
         // @see https://github.com/puppeteer/puppeteer/issues/3865
         return;
     }
-    const context = __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").getExecutionContextById(event.executionContextId, __classPrivateFieldGet$a(this, _CDPPage_client, "f"));
+    const context = __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").getExecutionContextById(event.executionContextId, __classPrivateFieldGet$b(this, _CDPPage_client, "f"));
     if (!context) {
         debugError(new Error(`ExecutionContext not found for a console message: ${JSON.stringify(event)}`));
         return;
@@ -100434,7 +100455,7 @@ _CDPPage_closed = new WeakMap(), _CDPPage_client = new WeakMap(), _CDPPage_targe
     const values = event.args.map(arg => {
         return createJSHandle(context, arg);
     });
-    __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_addConsoleMessage).call(this, event.type, values, event.stackTrace);
+    __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_addConsoleMessage).call(this, event.type, values, event.stackTrace);
 }, _CDPPage_onBindingCalled = async function _CDPPage_onBindingCalled(event) {
     let payload;
     try {
@@ -100449,11 +100470,11 @@ _CDPPage_closed = new WeakMap(), _CDPPage_client = new WeakMap(), _CDPPage_targe
     if (type !== 'exposedFun') {
         return;
     }
-    const context = __classPrivateFieldGet$a(this, _CDPPage_frameManager, "f").executionContextById(event.executionContextId, __classPrivateFieldGet$a(this, _CDPPage_client, "f"));
+    const context = __classPrivateFieldGet$b(this, _CDPPage_frameManager, "f").executionContextById(event.executionContextId, __classPrivateFieldGet$b(this, _CDPPage_client, "f"));
     if (!context) {
         return;
     }
-    const binding = __classPrivateFieldGet$a(this, _CDPPage_bindings, "f").get(name);
+    const binding = __classPrivateFieldGet$b(this, _CDPPage_bindings, "f").get(name);
     await (binding === null || binding === void 0 ? void 0 : binding.run(context, seq, args, isTrivial));
 }, _CDPPage_addConsoleMessage = function _CDPPage_addConsoleMessage(eventType, args, stackTrace) {
     if (!this.listenerCount("console" /* PageEmittedEvents.Console */)) {
@@ -100496,46 +100517,46 @@ _CDPPage_closed = new WeakMap(), _CDPPage_client = new WeakMap(), _CDPPage_targe
         dialogType = event.type;
     }
     assert$1(dialogType, 'Unknown javascript dialog type: ' + event.type);
-    const dialog = new Dialog(__classPrivateFieldGet$a(this, _CDPPage_client, "f"), dialogType, event.message, event.defaultPrompt);
+    const dialog = new Dialog(__classPrivateFieldGet$b(this, _CDPPage_client, "f"), dialogType, event.message, event.defaultPrompt);
     this.emit("dialog" /* PageEmittedEvents.Dialog */, dialog);
 }, _CDPPage_resetDefaultBackgroundColor = 
 /**
  * Resets default white background
  */
 async function _CDPPage_resetDefaultBackgroundColor() {
-    await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setDefaultBackgroundColorOverride');
+    await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setDefaultBackgroundColorOverride');
 }, _CDPPage_setTransparentBackgroundColor = 
 /**
  * Hides default white background
  */
 async function _CDPPage_setTransparentBackgroundColor() {
-    await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setDefaultBackgroundColorOverride', {
+    await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setDefaultBackgroundColorOverride', {
         color: { r: 0, g: 0, b: 0, a: 0 },
     });
 }, _CDPPage_sessionClosePromise = function _CDPPage_sessionClosePromise() {
-    if (!__classPrivateFieldGet$a(this, _CDPPage_disconnectPromise, "f")) {
-        __classPrivateFieldSet$a(this, _CDPPage_disconnectPromise, new Promise(fulfill => {
-            return __classPrivateFieldGet$a(this, _CDPPage_client, "f").once(CDPSessionEmittedEvents.Disconnected, () => {
+    if (!__classPrivateFieldGet$b(this, _CDPPage_disconnectPromise, "f")) {
+        __classPrivateFieldSet$b(this, _CDPPage_disconnectPromise, new Promise(fulfill => {
+            return __classPrivateFieldGet$b(this, _CDPPage_client, "f").once(CDPSessionEmittedEvents.Disconnected, () => {
                 return fulfill(new Error('Target closed'));
             });
         }), "f");
     }
-    return __classPrivateFieldGet$a(this, _CDPPage_disconnectPromise, "f");
+    return __classPrivateFieldGet$b(this, _CDPPage_disconnectPromise, "f");
 }, _CDPPage_go = async function _CDPPage_go(delta, options) {
-    const history = await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.getNavigationHistory');
+    const history = await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.getNavigationHistory');
     const entry = history.entries[history.currentIndex + delta];
     if (!entry) {
         return null;
     }
     const result = await Promise.all([
         this.waitForNavigation(options),
-        __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.navigateToHistoryEntry', { entryId: entry.id }),
+        __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.navigateToHistoryEntry', { entryId: entry.id }),
     ]);
     return result[0];
 }, _CDPPage_screenshotTask = async function _CDPPage_screenshotTask(format, options = {}) {
     var _a, _b;
-    await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Target.activateTarget', {
-        targetId: __classPrivateFieldGet$a(this, _CDPPage_target, "f")._targetId,
+    await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Target.activateTarget', {
+        targetId: __classPrivateFieldGet$b(this, _CDPPage_target, "f")._targetId,
     });
     let clip = options.clip ? processClip(options.clip) : undefined;
     let captureBeyondViewport = (_a = options.captureBeyondViewport) !== null && _a !== void 0 ? _a : true;
@@ -100544,14 +100565,14 @@ async function _CDPPage_setTransparentBackgroundColor() {
         // Overwrite clip for full page.
         clip = undefined;
         if (!captureBeyondViewport) {
-            const metrics = await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.getLayoutMetrics');
+            const metrics = await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.getLayoutMetrics');
             // Fallback to `contentSize` in case of using Firefox.
             const { width, height } = metrics.cssContentSize || metrics.contentSize;
-            const { isMobile = false, deviceScaleFactor = 1, isLandscape = false, } = __classPrivateFieldGet$a(this, _CDPPage_viewport, "f") || {};
+            const { isMobile = false, deviceScaleFactor = 1, isLandscape = false, } = __classPrivateFieldGet$b(this, _CDPPage_viewport, "f") || {};
             const screenOrientation = isLandscape
                 ? { angle: 90, type: 'landscapePrimary' }
                 : { angle: 0, type: 'portraitPrimary' };
-            await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Emulation.setDeviceMetricsOverride', {
+            await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Emulation.setDeviceMetricsOverride', {
                 mobile: isMobile,
                 width,
                 height,
@@ -100565,9 +100586,9 @@ async function _CDPPage_setTransparentBackgroundColor() {
     }
     const shouldSetDefaultBackground = options.omitBackground && (format === 'png' || format === 'webp');
     if (shouldSetDefaultBackground) {
-        await __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_setTransparentBackgroundColor).call(this);
+        await __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_setTransparentBackgroundColor).call(this);
     }
-    const result = await __classPrivateFieldGet$a(this, _CDPPage_client, "f").send('Page.captureScreenshot', {
+    const result = await __classPrivateFieldGet$b(this, _CDPPage_client, "f").send('Page.captureScreenshot', {
         format,
         quality: options.quality,
         clip: clip && {
@@ -100578,10 +100599,10 @@ async function _CDPPage_setTransparentBackgroundColor() {
         fromSurface,
     });
     if (shouldSetDefaultBackground) {
-        await __classPrivateFieldGet$a(this, _CDPPage_instances, "m", _CDPPage_resetDefaultBackgroundColor).call(this);
+        await __classPrivateFieldGet$b(this, _CDPPage_instances, "m", _CDPPage_resetDefaultBackgroundColor).call(this);
     }
-    if (options.fullPage && __classPrivateFieldGet$a(this, _CDPPage_viewport, "f")) {
-        await this.setViewport(__classPrivateFieldGet$a(this, _CDPPage_viewport, "f"));
+    if (options.fullPage && __classPrivateFieldGet$b(this, _CDPPage_viewport, "f")) {
+        await this.setViewport(__classPrivateFieldGet$b(this, _CDPPage_viewport, "f"));
     }
     if (options.encoding === 'base64') {
         return result.data;
@@ -100628,13 +100649,13 @@ const supportedMetrics = new Set([
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$9 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$a = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$9 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$a = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -100663,15 +100684,15 @@ class Target {
         _Target_workerPromise.set(this, void 0);
         _Target_screenshotTaskQueue.set(this, void 0);
         _Target_targetManager.set(this, void 0);
-        __classPrivateFieldSet$9(this, _Target_session, session, "f");
-        __classPrivateFieldSet$9(this, _Target_targetManager, targetManager, "f");
-        __classPrivateFieldSet$9(this, _Target_targetInfo, targetInfo, "f");
-        __classPrivateFieldSet$9(this, _Target_browserContext, browserContext, "f");
+        __classPrivateFieldSet$a(this, _Target_session, session, "f");
+        __classPrivateFieldSet$a(this, _Target_targetManager, targetManager, "f");
+        __classPrivateFieldSet$a(this, _Target_targetInfo, targetInfo, "f");
+        __classPrivateFieldSet$a(this, _Target_browserContext, browserContext, "f");
         this._targetId = targetInfo.targetId;
-        __classPrivateFieldSet$9(this, _Target_sessionFactory, sessionFactory, "f");
-        __classPrivateFieldSet$9(this, _Target_ignoreHTTPSErrors, ignoreHTTPSErrors, "f");
-        __classPrivateFieldSet$9(this, _Target_defaultViewport, defaultViewport !== null && defaultViewport !== void 0 ? defaultViewport : undefined, "f");
-        __classPrivateFieldSet$9(this, _Target_screenshotTaskQueue, screenshotTaskQueue, "f");
+        __classPrivateFieldSet$a(this, _Target_sessionFactory, sessionFactory, "f");
+        __classPrivateFieldSet$a(this, _Target_ignoreHTTPSErrors, ignoreHTTPSErrors, "f");
+        __classPrivateFieldSet$a(this, _Target_defaultViewport, defaultViewport !== null && defaultViewport !== void 0 ? defaultViewport : undefined, "f");
+        __classPrivateFieldSet$a(this, _Target_screenshotTaskQueue, screenshotTaskQueue, "f");
         this._isPageTargetCallback = isPageTargetCallback;
         this._initializedPromise = new Promise(fulfill => {
             return (this._initializedCallback = fulfill);
@@ -100680,10 +100701,10 @@ class Target {
                 return false;
             }
             const opener = this.opener();
-            if (!opener || !__classPrivateFieldGet$9(opener, _Target_pagePromise, "f") || this.type() !== 'page') {
+            if (!opener || !__classPrivateFieldGet$a(opener, _Target_pagePromise, "f") || this.type() !== 'page') {
                 return true;
             }
-            const openerPage = await __classPrivateFieldGet$9(opener, _Target_pagePromise, "f");
+            const openerPage = await __classPrivateFieldGet$a(opener, _Target_pagePromise, "f");
             if (!openerPage.listenerCount("popup" /* PageEmittedEvents.Popup */)) {
                 return true;
             }
@@ -100695,8 +100716,8 @@ class Target {
             return (this._closedCallback = fulfill);
         });
         this._isInitialized =
-            !this._isPageTargetCallback(__classPrivateFieldGet$9(this, _Target_targetInfo, "f")) ||
-                __classPrivateFieldGet$9(this, _Target_targetInfo, "f").url !== '';
+            !this._isPageTargetCallback(__classPrivateFieldGet$a(this, _Target_targetInfo, "f")) ||
+                __classPrivateFieldGet$a(this, _Target_targetInfo, "f").url !== '';
         if (this._isInitialized) {
             this._initializedCallback(true);
         }
@@ -100705,61 +100726,61 @@ class Target {
      * @internal
      */
     _session() {
-        return __classPrivateFieldGet$9(this, _Target_session, "f");
+        return __classPrivateFieldGet$a(this, _Target_session, "f");
     }
     /**
      * Creates a Chrome Devtools Protocol session attached to the target.
      */
     createCDPSession() {
-        return __classPrivateFieldGet$9(this, _Target_sessionFactory, "f").call(this, false);
+        return __classPrivateFieldGet$a(this, _Target_sessionFactory, "f").call(this, false);
     }
     /**
      * @internal
      */
     _targetManager() {
-        return __classPrivateFieldGet$9(this, _Target_targetManager, "f");
+        return __classPrivateFieldGet$a(this, _Target_targetManager, "f");
     }
     /**
      * @internal
      */
     _getTargetInfo() {
-        return __classPrivateFieldGet$9(this, _Target_targetInfo, "f");
+        return __classPrivateFieldGet$a(this, _Target_targetInfo, "f");
     }
     /**
      * If the target is not of type `"page"` or `"background_page"`, returns `null`.
      */
     async page() {
         var _a;
-        if (this._isPageTargetCallback(__classPrivateFieldGet$9(this, _Target_targetInfo, "f")) && !__classPrivateFieldGet$9(this, _Target_pagePromise, "f")) {
-            __classPrivateFieldSet$9(this, _Target_pagePromise, (__classPrivateFieldGet$9(this, _Target_session, "f")
-                ? Promise.resolve(__classPrivateFieldGet$9(this, _Target_session, "f"))
-                : __classPrivateFieldGet$9(this, _Target_sessionFactory, "f").call(this, true)).then(client => {
+        if (this._isPageTargetCallback(__classPrivateFieldGet$a(this, _Target_targetInfo, "f")) && !__classPrivateFieldGet$a(this, _Target_pagePromise, "f")) {
+            __classPrivateFieldSet$a(this, _Target_pagePromise, (__classPrivateFieldGet$a(this, _Target_session, "f")
+                ? Promise.resolve(__classPrivateFieldGet$a(this, _Target_session, "f"))
+                : __classPrivateFieldGet$a(this, _Target_sessionFactory, "f").call(this, true)).then(client => {
                 var _a;
-                return CDPPage._create(client, this, __classPrivateFieldGet$9(this, _Target_ignoreHTTPSErrors, "f"), (_a = __classPrivateFieldGet$9(this, _Target_defaultViewport, "f")) !== null && _a !== void 0 ? _a : null, __classPrivateFieldGet$9(this, _Target_screenshotTaskQueue, "f"));
+                return CDPPage._create(client, this, __classPrivateFieldGet$a(this, _Target_ignoreHTTPSErrors, "f"), (_a = __classPrivateFieldGet$a(this, _Target_defaultViewport, "f")) !== null && _a !== void 0 ? _a : null, __classPrivateFieldGet$a(this, _Target_screenshotTaskQueue, "f"));
             }), "f");
         }
-        return (_a = (await __classPrivateFieldGet$9(this, _Target_pagePromise, "f"))) !== null && _a !== void 0 ? _a : null;
+        return (_a = (await __classPrivateFieldGet$a(this, _Target_pagePromise, "f"))) !== null && _a !== void 0 ? _a : null;
     }
     /**
      * If the target is not of type `"service_worker"` or `"shared_worker"`, returns `null`.
      */
     async worker() {
-        if (__classPrivateFieldGet$9(this, _Target_targetInfo, "f").type !== 'service_worker' &&
-            __classPrivateFieldGet$9(this, _Target_targetInfo, "f").type !== 'shared_worker') {
+        if (__classPrivateFieldGet$a(this, _Target_targetInfo, "f").type !== 'service_worker' &&
+            __classPrivateFieldGet$a(this, _Target_targetInfo, "f").type !== 'shared_worker') {
             return null;
         }
-        if (!__classPrivateFieldGet$9(this, _Target_workerPromise, "f")) {
+        if (!__classPrivateFieldGet$a(this, _Target_workerPromise, "f")) {
             // TODO(einbinder): Make workers send their console logs.
-            __classPrivateFieldSet$9(this, _Target_workerPromise, (__classPrivateFieldGet$9(this, _Target_session, "f")
-                ? Promise.resolve(__classPrivateFieldGet$9(this, _Target_session, "f"))
-                : __classPrivateFieldGet$9(this, _Target_sessionFactory, "f").call(this, false)).then(client => {
-                return new WebWorker(client, __classPrivateFieldGet$9(this, _Target_targetInfo, "f").url, () => { } /* consoleAPICalled */, () => { } /* exceptionThrown */);
+            __classPrivateFieldSet$a(this, _Target_workerPromise, (__classPrivateFieldGet$a(this, _Target_session, "f")
+                ? Promise.resolve(__classPrivateFieldGet$a(this, _Target_session, "f"))
+                : __classPrivateFieldGet$a(this, _Target_sessionFactory, "f").call(this, false)).then(client => {
+                return new WebWorker(client, __classPrivateFieldGet$a(this, _Target_targetInfo, "f").url, () => { } /* consoleAPICalled */, () => { } /* exceptionThrown */);
             }), "f");
         }
-        return __classPrivateFieldGet$9(this, _Target_workerPromise, "f");
+        return __classPrivateFieldGet$a(this, _Target_workerPromise, "f");
     }
     url() {
-        return __classPrivateFieldGet$9(this, _Target_targetInfo, "f").url;
+        return __classPrivateFieldGet$a(this, _Target_targetInfo, "f").url;
     }
     /**
      * Identifies what kind of target this is.
@@ -100769,7 +100790,7 @@ class Target {
      * See {@link https://developer.chrome.com/extensions/background_pages | docs} for more info about background pages.
      */
     type() {
-        const type = __classPrivateFieldGet$9(this, _Target_targetInfo, "f").type;
+        const type = __classPrivateFieldGet$a(this, _Target_targetInfo, "f").type;
         if (type === 'page' ||
             type === 'background_page' ||
             type === 'service_worker' ||
@@ -100784,19 +100805,19 @@ class Target {
      * Get the browser the target belongs to.
      */
     browser() {
-        return __classPrivateFieldGet$9(this, _Target_browserContext, "f").browser();
+        return __classPrivateFieldGet$a(this, _Target_browserContext, "f").browser();
     }
     /**
      * Get the browser context the target belongs to.
      */
     browserContext() {
-        return __classPrivateFieldGet$9(this, _Target_browserContext, "f");
+        return __classPrivateFieldGet$a(this, _Target_browserContext, "f");
     }
     /**
      * Get the target that opened this target. Top-level targets return `null`.
      */
     opener() {
-        const { openerId } = __classPrivateFieldGet$9(this, _Target_targetInfo, "f");
+        const { openerId } = __classPrivateFieldGet$a(this, _Target_targetInfo, "f");
         if (!openerId) {
             return;
         }
@@ -100806,10 +100827,10 @@ class Target {
      * @internal
      */
     _targetInfoChanged(targetInfo) {
-        __classPrivateFieldSet$9(this, _Target_targetInfo, targetInfo, "f");
+        __classPrivateFieldSet$a(this, _Target_targetInfo, targetInfo, "f");
         if (!this._isInitialized &&
-            (!this._isPageTargetCallback(__classPrivateFieldGet$9(this, _Target_targetInfo, "f")) ||
-                __classPrivateFieldGet$9(this, _Target_targetInfo, "f").url !== '')) {
+            (!this._isPageTargetCallback(__classPrivateFieldGet$a(this, _Target_targetInfo, "f")) ||
+                __classPrivateFieldGet$a(this, _Target_targetInfo, "f").url !== '')) {
             this._isInitialized = true;
             this._initializedCallback(true);
             return;
@@ -100833,13 +100854,13 @@ _Target_browserContext = new WeakMap(), _Target_session = new WeakMap(), _Target
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$8 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$9 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$8 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$9 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -100851,11 +100872,11 @@ var _TaskQueue_chain;
 class TaskQueue {
     constructor() {
         _TaskQueue_chain.set(this, void 0);
-        __classPrivateFieldSet$8(this, _TaskQueue_chain, Promise.resolve(), "f");
+        __classPrivateFieldSet$9(this, _TaskQueue_chain, Promise.resolve(), "f");
     }
     postTask(task) {
-        const result = __classPrivateFieldGet$8(this, _TaskQueue_chain, "f").then(task);
-        __classPrivateFieldSet$8(this, _TaskQueue_chain, result.then(() => {
+        const result = __classPrivateFieldGet$9(this, _TaskQueue_chain, "f").then(task);
+        __classPrivateFieldSet$9(this, _TaskQueue_chain, result.then(() => {
             return undefined;
         }, () => {
             return undefined;
@@ -100880,12 +100901,12 @@ _TaskQueue_chain = new WeakMap();
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$7 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$8 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$7 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$8 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -100908,7 +100929,7 @@ class CDPBrowser extends Browser$1 {
      * @internal
      */
     get _targets() {
-        return __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").getAvailableTargets();
+        return __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").getAvailableTargets();
     }
     /**
      * @internal
@@ -100933,15 +100954,15 @@ class CDPBrowser extends Browser$1 {
         _CDPBrowser_createTarget.set(this, (targetInfo, session) => {
             var _a;
             const { browserContextId } = targetInfo;
-            const context = browserContextId && __classPrivateFieldGet$7(this, _CDPBrowser_contexts, "f").has(browserContextId)
-                ? __classPrivateFieldGet$7(this, _CDPBrowser_contexts, "f").get(browserContextId)
-                : __classPrivateFieldGet$7(this, _CDPBrowser_defaultContext, "f");
+            const context = browserContextId && __classPrivateFieldGet$8(this, _CDPBrowser_contexts, "f").has(browserContextId)
+                ? __classPrivateFieldGet$8(this, _CDPBrowser_contexts, "f").get(browserContextId)
+                : __classPrivateFieldGet$8(this, _CDPBrowser_defaultContext, "f");
             if (!context) {
                 throw new Error('Missing browser context');
             }
-            return new Target(targetInfo, session, context, __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f"), (isAutoAttachEmulated) => {
-                return __classPrivateFieldGet$7(this, _CDPBrowser_connection, "f")._createSession(targetInfo, isAutoAttachEmulated);
-            }, __classPrivateFieldGet$7(this, _CDPBrowser_ignoreHTTPSErrors, "f"), (_a = __classPrivateFieldGet$7(this, _CDPBrowser_defaultViewport, "f")) !== null && _a !== void 0 ? _a : null, __classPrivateFieldGet$7(this, _CDPBrowser_screenshotTaskQueue, "f"), __classPrivateFieldGet$7(this, _CDPBrowser_isPageTargetCallback, "f"));
+            return new Target(targetInfo, session, context, __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f"), (isAutoAttachEmulated) => {
+                return __classPrivateFieldGet$8(this, _CDPBrowser_connection, "f")._createSession(targetInfo, isAutoAttachEmulated);
+            }, __classPrivateFieldGet$8(this, _CDPBrowser_ignoreHTTPSErrors, "f"), (_a = __classPrivateFieldGet$8(this, _CDPBrowser_defaultViewport, "f")) !== null && _a !== void 0 ? _a : null, __classPrivateFieldGet$8(this, _CDPBrowser_screenshotTaskQueue, "f"), __classPrivateFieldGet$8(this, _CDPBrowser_isPageTargetCallback, "f"));
         });
         _CDPBrowser_onAttachedToTarget.set(this, async (target) => {
             if (await target._initializedPromise) {
@@ -100976,49 +100997,49 @@ class CDPBrowser extends Browser$1 {
             this.emit('targetdiscovered', targetInfo);
         });
         product = product || 'chrome';
-        __classPrivateFieldSet$7(this, _CDPBrowser_ignoreHTTPSErrors, ignoreHTTPSErrors, "f");
-        __classPrivateFieldSet$7(this, _CDPBrowser_defaultViewport, defaultViewport, "f");
-        __classPrivateFieldSet$7(this, _CDPBrowser_process, process, "f");
-        __classPrivateFieldSet$7(this, _CDPBrowser_screenshotTaskQueue, new TaskQueue(), "f");
-        __classPrivateFieldSet$7(this, _CDPBrowser_connection, connection, "f");
-        __classPrivateFieldSet$7(this, _CDPBrowser_closeCallback, closeCallback || function () { }, "f");
-        __classPrivateFieldSet$7(this, _CDPBrowser_targetFilterCallback, targetFilterCallback ||
+        __classPrivateFieldSet$8(this, _CDPBrowser_ignoreHTTPSErrors, ignoreHTTPSErrors, "f");
+        __classPrivateFieldSet$8(this, _CDPBrowser_defaultViewport, defaultViewport, "f");
+        __classPrivateFieldSet$8(this, _CDPBrowser_process, process, "f");
+        __classPrivateFieldSet$8(this, _CDPBrowser_screenshotTaskQueue, new TaskQueue(), "f");
+        __classPrivateFieldSet$8(this, _CDPBrowser_connection, connection, "f");
+        __classPrivateFieldSet$8(this, _CDPBrowser_closeCallback, closeCallback || function () { }, "f");
+        __classPrivateFieldSet$8(this, _CDPBrowser_targetFilterCallback, targetFilterCallback ||
             (() => {
                 return true;
             }), "f");
-        __classPrivateFieldGet$7(this, _CDPBrowser_instances, "m", _CDPBrowser_setIsPageTargetCallback).call(this, isPageTargetCallback);
+        __classPrivateFieldGet$8(this, _CDPBrowser_instances, "m", _CDPBrowser_setIsPageTargetCallback).call(this, isPageTargetCallback);
         if (product === 'firefox') {
-            __classPrivateFieldSet$7(this, _CDPBrowser_targetManager, new FirefoxTargetManager(connection, __classPrivateFieldGet$7(this, _CDPBrowser_createTarget, "f"), __classPrivateFieldGet$7(this, _CDPBrowser_targetFilterCallback, "f")), "f");
+            __classPrivateFieldSet$8(this, _CDPBrowser_targetManager, new FirefoxTargetManager(connection, __classPrivateFieldGet$8(this, _CDPBrowser_createTarget, "f"), __classPrivateFieldGet$8(this, _CDPBrowser_targetFilterCallback, "f")), "f");
         }
         else {
-            __classPrivateFieldSet$7(this, _CDPBrowser_targetManager, new ChromeTargetManager(connection, __classPrivateFieldGet$7(this, _CDPBrowser_createTarget, "f"), __classPrivateFieldGet$7(this, _CDPBrowser_targetFilterCallback, "f")), "f");
+            __classPrivateFieldSet$8(this, _CDPBrowser_targetManager, new ChromeTargetManager(connection, __classPrivateFieldGet$8(this, _CDPBrowser_createTarget, "f"), __classPrivateFieldGet$8(this, _CDPBrowser_targetFilterCallback, "f")), "f");
         }
-        __classPrivateFieldSet$7(this, _CDPBrowser_defaultContext, new CDPBrowserContext(__classPrivateFieldGet$7(this, _CDPBrowser_connection, "f"), this), "f");
-        __classPrivateFieldSet$7(this, _CDPBrowser_contexts, new Map(), "f");
+        __classPrivateFieldSet$8(this, _CDPBrowser_defaultContext, new CDPBrowserContext(__classPrivateFieldGet$8(this, _CDPBrowser_connection, "f"), this), "f");
+        __classPrivateFieldSet$8(this, _CDPBrowser_contexts, new Map(), "f");
         for (const contextId of contextIds) {
-            __classPrivateFieldGet$7(this, _CDPBrowser_contexts, "f").set(contextId, new CDPBrowserContext(__classPrivateFieldGet$7(this, _CDPBrowser_connection, "f"), this, contextId));
+            __classPrivateFieldGet$8(this, _CDPBrowser_contexts, "f").set(contextId, new CDPBrowserContext(__classPrivateFieldGet$8(this, _CDPBrowser_connection, "f"), this, contextId));
         }
     }
     /**
      * @internal
      */
     async _attach() {
-        __classPrivateFieldGet$7(this, _CDPBrowser_connection, "f").on(ConnectionEmittedEvents.Disconnected, __classPrivateFieldGet$7(this, _CDPBrowser_emitDisconnected, "f"));
-        __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").on("targetAvailable" /* TargetManagerEmittedEvents.TargetAvailable */, __classPrivateFieldGet$7(this, _CDPBrowser_onAttachedToTarget, "f"));
-        __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").on("targetGone" /* TargetManagerEmittedEvents.TargetGone */, __classPrivateFieldGet$7(this, _CDPBrowser_onDetachedFromTarget, "f"));
-        __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").on("targetChanged" /* TargetManagerEmittedEvents.TargetChanged */, __classPrivateFieldGet$7(this, _CDPBrowser_onTargetChanged, "f"));
-        __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").on("targetDiscovered" /* TargetManagerEmittedEvents.TargetDiscovered */, __classPrivateFieldGet$7(this, _CDPBrowser_onTargetDiscovered, "f"));
-        await __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").initialize();
+        __classPrivateFieldGet$8(this, _CDPBrowser_connection, "f").on(ConnectionEmittedEvents.Disconnected, __classPrivateFieldGet$8(this, _CDPBrowser_emitDisconnected, "f"));
+        __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").on("targetAvailable" /* TargetManagerEmittedEvents.TargetAvailable */, __classPrivateFieldGet$8(this, _CDPBrowser_onAttachedToTarget, "f"));
+        __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").on("targetGone" /* TargetManagerEmittedEvents.TargetGone */, __classPrivateFieldGet$8(this, _CDPBrowser_onDetachedFromTarget, "f"));
+        __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").on("targetChanged" /* TargetManagerEmittedEvents.TargetChanged */, __classPrivateFieldGet$8(this, _CDPBrowser_onTargetChanged, "f"));
+        __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").on("targetDiscovered" /* TargetManagerEmittedEvents.TargetDiscovered */, __classPrivateFieldGet$8(this, _CDPBrowser_onTargetDiscovered, "f"));
+        await __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").initialize();
     }
     /**
      * @internal
      */
     _detach() {
-        __classPrivateFieldGet$7(this, _CDPBrowser_connection, "f").off(ConnectionEmittedEvents.Disconnected, __classPrivateFieldGet$7(this, _CDPBrowser_emitDisconnected, "f"));
-        __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").off("targetAvailable" /* TargetManagerEmittedEvents.TargetAvailable */, __classPrivateFieldGet$7(this, _CDPBrowser_onAttachedToTarget, "f"));
-        __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").off("targetGone" /* TargetManagerEmittedEvents.TargetGone */, __classPrivateFieldGet$7(this, _CDPBrowser_onDetachedFromTarget, "f"));
-        __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").off("targetChanged" /* TargetManagerEmittedEvents.TargetChanged */, __classPrivateFieldGet$7(this, _CDPBrowser_onTargetChanged, "f"));
-        __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").off("targetDiscovered" /* TargetManagerEmittedEvents.TargetDiscovered */, __classPrivateFieldGet$7(this, _CDPBrowser_onTargetDiscovered, "f"));
+        __classPrivateFieldGet$8(this, _CDPBrowser_connection, "f").off(ConnectionEmittedEvents.Disconnected, __classPrivateFieldGet$8(this, _CDPBrowser_emitDisconnected, "f"));
+        __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").off("targetAvailable" /* TargetManagerEmittedEvents.TargetAvailable */, __classPrivateFieldGet$8(this, _CDPBrowser_onAttachedToTarget, "f"));
+        __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").off("targetGone" /* TargetManagerEmittedEvents.TargetGone */, __classPrivateFieldGet$8(this, _CDPBrowser_onDetachedFromTarget, "f"));
+        __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").off("targetChanged" /* TargetManagerEmittedEvents.TargetChanged */, __classPrivateFieldGet$8(this, _CDPBrowser_onTargetChanged, "f"));
+        __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").off("targetDiscovered" /* TargetManagerEmittedEvents.TargetDiscovered */, __classPrivateFieldGet$8(this, _CDPBrowser_onTargetDiscovered, "f"));
     }
     /**
      * The spawned browser process. Returns `null` if the browser instance was created with
@@ -101026,19 +101047,19 @@ class CDPBrowser extends Browser$1 {
      */
     process() {
         var _a;
-        return (_a = __classPrivateFieldGet$7(this, _CDPBrowser_process, "f")) !== null && _a !== void 0 ? _a : null;
+        return (_a = __classPrivateFieldGet$8(this, _CDPBrowser_process, "f")) !== null && _a !== void 0 ? _a : null;
     }
     /**
      * @internal
      */
     _targetManager() {
-        return __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f");
+        return __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f");
     }
     /**
      * @internal
      */
     _getIsPageTargetCallback() {
-        return __classPrivateFieldGet$7(this, _CDPBrowser_isPageTargetCallback, "f");
+        return __classPrivateFieldGet$8(this, _CDPBrowser_isPageTargetCallback, "f");
     }
     /**
      * Creates a new incognito browser context. This won't share cookies/cache with other
@@ -101060,12 +101081,12 @@ class CDPBrowser extends Browser$1 {
      */
     async createIncognitoBrowserContext(options = {}) {
         const { proxyServer, proxyBypassList } = options;
-        const { browserContextId } = await __classPrivateFieldGet$7(this, _CDPBrowser_connection, "f").send('Target.createBrowserContext', {
+        const { browserContextId } = await __classPrivateFieldGet$8(this, _CDPBrowser_connection, "f").send('Target.createBrowserContext', {
             proxyServer,
             proxyBypassList: proxyBypassList && proxyBypassList.join(','),
         });
-        const context = new CDPBrowserContext(__classPrivateFieldGet$7(this, _CDPBrowser_connection, "f"), this, browserContextId);
-        __classPrivateFieldGet$7(this, _CDPBrowser_contexts, "f").set(browserContextId, context);
+        const context = new CDPBrowserContext(__classPrivateFieldGet$8(this, _CDPBrowser_connection, "f"), this, browserContextId);
+        __classPrivateFieldGet$8(this, _CDPBrowser_contexts, "f").set(browserContextId, context);
         return context;
     }
     /**
@@ -101073,13 +101094,13 @@ class CDPBrowser extends Browser$1 {
      * return a single instance of {@link BrowserContext}.
      */
     browserContexts() {
-        return [__classPrivateFieldGet$7(this, _CDPBrowser_defaultContext, "f"), ...Array.from(__classPrivateFieldGet$7(this, _CDPBrowser_contexts, "f").values())];
+        return [__classPrivateFieldGet$8(this, _CDPBrowser_defaultContext, "f"), ...Array.from(__classPrivateFieldGet$8(this, _CDPBrowser_contexts, "f").values())];
     }
     /**
      * Returns the default browser context. The default browser context cannot be closed.
      */
     defaultBrowserContext() {
-        return __classPrivateFieldGet$7(this, _CDPBrowser_defaultContext, "f");
+        return __classPrivateFieldGet$8(this, _CDPBrowser_defaultContext, "f");
     }
     /**
      * @internal
@@ -101088,10 +101109,10 @@ class CDPBrowser extends Browser$1 {
         if (!contextId) {
             return;
         }
-        await __classPrivateFieldGet$7(this, _CDPBrowser_connection, "f").send('Target.disposeBrowserContext', {
+        await __classPrivateFieldGet$8(this, _CDPBrowser_connection, "f").send('Target.disposeBrowserContext', {
             browserContextId: contextId,
         });
-        __classPrivateFieldGet$7(this, _CDPBrowser_contexts, "f").delete(contextId);
+        __classPrivateFieldGet$8(this, _CDPBrowser_contexts, "f").delete(contextId);
     }
     /**
      * The browser websocket endpoint which can be used as an argument to
@@ -101111,24 +101132,24 @@ class CDPBrowser extends Browser$1 {
      * | browser endpoint}.
      */
     wsEndpoint() {
-        return __classPrivateFieldGet$7(this, _CDPBrowser_connection, "f").url();
+        return __classPrivateFieldGet$8(this, _CDPBrowser_connection, "f").url();
     }
     /**
      * Promise which resolves to a new {@link Page} object. The Page is created in
      * a default browser context.
      */
     async newPage() {
-        return __classPrivateFieldGet$7(this, _CDPBrowser_defaultContext, "f").newPage();
+        return __classPrivateFieldGet$8(this, _CDPBrowser_defaultContext, "f").newPage();
     }
     /**
      * @internal
      */
     async _createPageInContext(contextId) {
-        const { targetId } = await __classPrivateFieldGet$7(this, _CDPBrowser_connection, "f").send('Target.createTarget', {
+        const { targetId } = await __classPrivateFieldGet$8(this, _CDPBrowser_connection, "f").send('Target.createTarget', {
             url: 'about:blank',
             browserContextId: contextId || undefined,
         });
-        const target = __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").getAvailableTargets().get(targetId);
+        const target = __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").getAvailableTargets().get(targetId);
         if (!target) {
             throw new Error(`Missing target for page (id = ${targetId})`);
         }
@@ -101147,7 +101168,7 @@ class CDPBrowser extends Browser$1 {
      * an array with all the targets in all browser contexts.
      */
     targets() {
-        return Array.from(__classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").getAvailableTargets().values()).filter(target => {
+        return Array.from(__classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").getAvailableTargets().values()).filter(target => {
             return target._isInitialized;
         });
     }
@@ -101231,7 +101252,7 @@ class CDPBrowser extends Browser$1 {
      * The format of browser.version() might change with future releases of Chromium.
      */
     async version() {
-        const version = await __classPrivateFieldGet$7(this, _CDPBrowser_instances, "m", _CDPBrowser_getVersion).call(this);
+        const version = await __classPrivateFieldGet$8(this, _CDPBrowser_instances, "m", _CDPBrowser_getVersion).call(this);
         return version.product;
     }
     /**
@@ -101239,7 +101260,7 @@ class CDPBrowser extends Browser$1 {
      * {@link Page.setUserAgent}.
      */
     async userAgent() {
-        const version = await __classPrivateFieldGet$7(this, _CDPBrowser_instances, "m", _CDPBrowser_getVersion).call(this);
+        const version = await __classPrivateFieldGet$8(this, _CDPBrowser_instances, "m", _CDPBrowser_getVersion).call(this);
         return version.userAgent;
     }
     /**
@@ -101248,7 +101269,7 @@ class CDPBrowser extends Browser$1 {
      * used anymore.
      */
     async close() {
-        await __classPrivateFieldGet$7(this, _CDPBrowser_closeCallback, "f").call(null);
+        await __classPrivateFieldGet$8(this, _CDPBrowser_closeCallback, "f").call(null);
         this.disconnect();
     }
     /**
@@ -101257,26 +101278,26 @@ class CDPBrowser extends Browser$1 {
      * cannot be used anymore.
      */
     disconnect() {
-        __classPrivateFieldGet$7(this, _CDPBrowser_targetManager, "f").dispose();
-        __classPrivateFieldGet$7(this, _CDPBrowser_connection, "f").dispose();
+        __classPrivateFieldGet$8(this, _CDPBrowser_targetManager, "f").dispose();
+        __classPrivateFieldGet$8(this, _CDPBrowser_connection, "f").dispose();
         this._detach();
     }
     /**
      * Indicates that the browser is connected.
      */
     isConnected() {
-        return !__classPrivateFieldGet$7(this, _CDPBrowser_connection, "f")._closed;
+        return !__classPrivateFieldGet$8(this, _CDPBrowser_connection, "f")._closed;
     }
 }
 _CDPBrowser_ignoreHTTPSErrors = new WeakMap(), _CDPBrowser_defaultViewport = new WeakMap(), _CDPBrowser_process = new WeakMap(), _CDPBrowser_connection = new WeakMap(), _CDPBrowser_closeCallback = new WeakMap(), _CDPBrowser_targetFilterCallback = new WeakMap(), _CDPBrowser_isPageTargetCallback = new WeakMap(), _CDPBrowser_defaultContext = new WeakMap(), _CDPBrowser_contexts = new WeakMap(), _CDPBrowser_screenshotTaskQueue = new WeakMap(), _CDPBrowser_targetManager = new WeakMap(), _CDPBrowser_emitDisconnected = new WeakMap(), _CDPBrowser_createTarget = new WeakMap(), _CDPBrowser_onAttachedToTarget = new WeakMap(), _CDPBrowser_onDetachedFromTarget = new WeakMap(), _CDPBrowser_onTargetChanged = new WeakMap(), _CDPBrowser_onTargetDiscovered = new WeakMap(), _CDPBrowser_instances = new WeakSet(), _CDPBrowser_setIsPageTargetCallback = function _CDPBrowser_setIsPageTargetCallback(isPageTargetCallback) {
-    __classPrivateFieldSet$7(this, _CDPBrowser_isPageTargetCallback, isPageTargetCallback ||
+    __classPrivateFieldSet$8(this, _CDPBrowser_isPageTargetCallback, isPageTargetCallback ||
         ((target) => {
             return (target.type === 'page' ||
                 target.type === 'background_page' ||
                 target.type === 'webview');
         }), "f");
 }, _CDPBrowser_getVersion = function _CDPBrowser_getVersion() {
-    return __classPrivateFieldGet$7(this, _CDPBrowser_connection, "f").send('Browser.getVersion');
+    return __classPrivateFieldGet$8(this, _CDPBrowser_connection, "f").send('Browser.getVersion');
 };
 /**
  * @internal
@@ -101290,18 +101311,18 @@ class CDPBrowserContext extends BrowserContext$1 {
         _CDPBrowserContext_connection.set(this, void 0);
         _CDPBrowserContext_browser.set(this, void 0);
         _CDPBrowserContext_id.set(this, void 0);
-        __classPrivateFieldSet$7(this, _CDPBrowserContext_connection, connection, "f");
-        __classPrivateFieldSet$7(this, _CDPBrowserContext_browser, browser, "f");
-        __classPrivateFieldSet$7(this, _CDPBrowserContext_id, contextId, "f");
+        __classPrivateFieldSet$8(this, _CDPBrowserContext_connection, connection, "f");
+        __classPrivateFieldSet$8(this, _CDPBrowserContext_browser, browser, "f");
+        __classPrivateFieldSet$8(this, _CDPBrowserContext_id, contextId, "f");
     }
     get id() {
-        return __classPrivateFieldGet$7(this, _CDPBrowserContext_id, "f");
+        return __classPrivateFieldGet$8(this, _CDPBrowserContext_id, "f");
     }
     /**
      * An array of all active targets inside the browser context.
      */
     targets() {
-        return __classPrivateFieldGet$7(this, _CDPBrowserContext_browser, "f").targets().filter(target => {
+        return __classPrivateFieldGet$8(this, _CDPBrowserContext_browser, "f").targets().filter(target => {
             return target.browserContext() === this;
         });
     }
@@ -101326,7 +101347,7 @@ class CDPBrowserContext extends BrowserContext$1 {
      * that matches the `predicate` function.
      */
     waitForTarget(predicate, options = {}) {
-        return __classPrivateFieldGet$7(this, _CDPBrowserContext_browser, "f").waitForTarget(target => {
+        return __classPrivateFieldGet$8(this, _CDPBrowserContext_browser, "f").waitForTarget(target => {
             return target.browserContext() === this && predicate(target);
         }, options);
     }
@@ -101343,7 +101364,7 @@ class CDPBrowserContext extends BrowserContext$1 {
             var _a;
             return (target.type() === 'page' ||
                 (target.type() === 'other' &&
-                    ((_a = __classPrivateFieldGet$7(this, _CDPBrowserContext_browser, "f")._getIsPageTargetCallback()) === null || _a === void 0 ? void 0 : _a(target._getTargetInfo()))));
+                    ((_a = __classPrivateFieldGet$8(this, _CDPBrowserContext_browser, "f")._getIsPageTargetCallback()) === null || _a === void 0 ? void 0 : _a(target._getTargetInfo()))));
         })
             .map(target => {
             return target.page();
@@ -101360,7 +101381,7 @@ class CDPBrowserContext extends BrowserContext$1 {
      * The default browser context cannot be closed.
      */
     isIncognito() {
-        return !!__classPrivateFieldGet$7(this, _CDPBrowserContext_id, "f");
+        return !!__classPrivateFieldGet$8(this, _CDPBrowserContext_id, "f");
     }
     /**
      * @example
@@ -101384,9 +101405,9 @@ class CDPBrowserContext extends BrowserContext$1 {
             }
             return protocolPermission;
         });
-        await __classPrivateFieldGet$7(this, _CDPBrowserContext_connection, "f").send('Browser.grantPermissions', {
+        await __classPrivateFieldGet$8(this, _CDPBrowserContext_connection, "f").send('Browser.grantPermissions', {
             origin,
-            browserContextId: __classPrivateFieldGet$7(this, _CDPBrowserContext_id, "f") || undefined,
+            browserContextId: __classPrivateFieldGet$8(this, _CDPBrowserContext_id, "f") || undefined,
             permissions: protocolPermissions,
         });
     }
@@ -101403,21 +101424,21 @@ class CDPBrowserContext extends BrowserContext$1 {
      * ```
      */
     async clearPermissionOverrides() {
-        await __classPrivateFieldGet$7(this, _CDPBrowserContext_connection, "f").send('Browser.resetPermissions', {
-            browserContextId: __classPrivateFieldGet$7(this, _CDPBrowserContext_id, "f") || undefined,
+        await __classPrivateFieldGet$8(this, _CDPBrowserContext_connection, "f").send('Browser.resetPermissions', {
+            browserContextId: __classPrivateFieldGet$8(this, _CDPBrowserContext_id, "f") || undefined,
         });
     }
     /**
      * Creates a new page in the browser context.
      */
     newPage() {
-        return __classPrivateFieldGet$7(this, _CDPBrowserContext_browser, "f")._createPageInContext(__classPrivateFieldGet$7(this, _CDPBrowserContext_id, "f"));
+        return __classPrivateFieldGet$8(this, _CDPBrowserContext_browser, "f")._createPageInContext(__classPrivateFieldGet$8(this, _CDPBrowserContext_id, "f"));
     }
     /**
      * The browser this browser context belongs to.
      */
     browser() {
-        return __classPrivateFieldGet$7(this, _CDPBrowserContext_browser, "f");
+        return __classPrivateFieldGet$8(this, _CDPBrowserContext_browser, "f");
     }
     /**
      * Closes the browser context. All the targets that belong to the browser context
@@ -101427,8 +101448,8 @@ class CDPBrowserContext extends BrowserContext$1 {
      * Only incognito browser contexts can be closed.
      */
     async close() {
-        assert$1(__classPrivateFieldGet$7(this, _CDPBrowserContext_id, "f"), 'Non-incognito profiles cannot be closed!');
-        await __classPrivateFieldGet$7(this, _CDPBrowserContext_browser, "f")._disposeContext(__classPrivateFieldGet$7(this, _CDPBrowserContext_id, "f"));
+        assert$1(__classPrivateFieldGet$8(this, _CDPBrowserContext_id, "f"), 'Non-incognito profiles cannot be closed!');
+        await __classPrivateFieldGet$8(this, _CDPBrowserContext_browser, "f")._disposeContext(__classPrivateFieldGet$8(this, _CDPBrowserContext_id, "f"));
     }
 }
 _CDPBrowserContext_connection = new WeakMap(), _CDPBrowserContext_browser = new WeakMap(), _CDPBrowserContext_id = new WeakMap();
@@ -101536,13 +101557,13 @@ async function getWSEndpoint(browserURL) {
     }
 }
 
-var __classPrivateFieldSet$6 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$7 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$6 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$7 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -101563,25 +101584,25 @@ class BrowserWebSocketTransport {
     }
     constructor(ws) {
         _BrowserWebSocketTransport_ws.set(this, void 0);
-        __classPrivateFieldSet$6(this, _BrowserWebSocketTransport_ws, ws, "f");
-        __classPrivateFieldGet$6(this, _BrowserWebSocketTransport_ws, "f").addEventListener('message', event => {
+        __classPrivateFieldSet$7(this, _BrowserWebSocketTransport_ws, ws, "f");
+        __classPrivateFieldGet$7(this, _BrowserWebSocketTransport_ws, "f").addEventListener('message', event => {
             if (this.onmessage) {
                 this.onmessage.call(null, event.data);
             }
         });
-        __classPrivateFieldGet$6(this, _BrowserWebSocketTransport_ws, "f").addEventListener('close', () => {
+        __classPrivateFieldGet$7(this, _BrowserWebSocketTransport_ws, "f").addEventListener('close', () => {
             if (this.onclose) {
                 this.onclose.call(null);
             }
         });
         // Silently ignore all errors - we don't know what to do with them.
-        __classPrivateFieldGet$6(this, _BrowserWebSocketTransport_ws, "f").addEventListener('error', () => { });
+        __classPrivateFieldGet$7(this, _BrowserWebSocketTransport_ws, "f").addEventListener('error', () => { });
     }
     send(message) {
-        __classPrivateFieldGet$6(this, _BrowserWebSocketTransport_ws, "f").send(message);
+        __classPrivateFieldGet$7(this, _BrowserWebSocketTransport_ws, "f").send(message);
     }
     close() {
-        __classPrivateFieldGet$6(this, _BrowserWebSocketTransport_ws, "f").close();
+        __classPrivateFieldGet$7(this, _BrowserWebSocketTransport_ws, "f").close();
     }
 }
 _BrowserWebSocketTransport_ws = new WeakMap();
@@ -106774,13 +106795,13 @@ var WebSocket$2 = /*@__PURE__*/getDefaultExportFromCjs(websocket);
  */
 const packageVersion = '19.11.1';
 
-var __classPrivateFieldSet$5 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$6 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$5 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$6 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -106809,25 +106830,25 @@ class NodeWebSocketTransport {
     }
     constructor(ws) {
         _NodeWebSocketTransport_ws.set(this, void 0);
-        __classPrivateFieldSet$5(this, _NodeWebSocketTransport_ws, ws, "f");
-        __classPrivateFieldGet$5(this, _NodeWebSocketTransport_ws, "f").addEventListener('message', event => {
+        __classPrivateFieldSet$6(this, _NodeWebSocketTransport_ws, ws, "f");
+        __classPrivateFieldGet$6(this, _NodeWebSocketTransport_ws, "f").addEventListener('message', event => {
             if (this.onmessage) {
                 this.onmessage.call(null, event.data);
             }
         });
-        __classPrivateFieldGet$5(this, _NodeWebSocketTransport_ws, "f").addEventListener('close', () => {
+        __classPrivateFieldGet$6(this, _NodeWebSocketTransport_ws, "f").addEventListener('close', () => {
             if (this.onclose) {
                 this.onclose.call(null);
             }
         });
         // Silently ignore all errors - we don't know what to do with them.
-        __classPrivateFieldGet$5(this, _NodeWebSocketTransport_ws, "f").addEventListener('error', () => { });
+        __classPrivateFieldGet$6(this, _NodeWebSocketTransport_ws, "f").addEventListener('error', () => { });
     }
     send(message) {
-        __classPrivateFieldGet$5(this, _NodeWebSocketTransport_ws, "f").send(message);
+        __classPrivateFieldGet$6(this, _NodeWebSocketTransport_ws, "f").send(message);
     }
     close() {
-        __classPrivateFieldGet$5(this, _NodeWebSocketTransport_ws, "f").close();
+        __classPrivateFieldGet$6(this, _NodeWebSocketTransport_ws, "f").close();
     }
 }
 _NodeWebSocketTransport_ws = new WeakMap();
@@ -116258,13 +116279,13 @@ async function rm(path) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$4 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$5 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$4 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$5 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -116294,7 +116315,7 @@ const browserConfig = {
         host: 'https://archive.mozilla.org/pub/firefox/nightly/latest-mozilla-central',
     },
 };
-const exec = require$$0$2.promisify(childProcess.exec);
+const exec$1 = require$$0$2.promisify(childProcess.exec);
 function archiveName(product, platform, revision) {
     switch (product) {
         case 'chrome':
@@ -116378,32 +116399,32 @@ class BrowserFetcher {
         _BrowserFetcher_downloadPath.set(this, void 0);
         _BrowserFetcher_downloadHost.set(this, void 0);
         _BrowserFetcher_platform.set(this, void 0);
-        __classPrivateFieldSet$4(this, _BrowserFetcher_product, (_a = options.product) !== null && _a !== void 0 ? _a : 'chrome', "f");
-        __classPrivateFieldSet$4(this, _BrowserFetcher_downloadPath, options.path, "f");
-        __classPrivateFieldSet$4(this, _BrowserFetcher_downloadHost, (_b = options.host) !== null && _b !== void 0 ? _b : browserConfig[__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f")].host, "f");
+        __classPrivateFieldSet$5(this, _BrowserFetcher_product, (_a = options.product) !== null && _a !== void 0 ? _a : 'chrome', "f");
+        __classPrivateFieldSet$5(this, _BrowserFetcher_downloadPath, options.path, "f");
+        __classPrivateFieldSet$5(this, _BrowserFetcher_downloadHost, (_b = options.host) !== null && _b !== void 0 ? _b : browserConfig[__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f")].host, "f");
         if (options.platform) {
-            __classPrivateFieldSet$4(this, _BrowserFetcher_platform, options.platform, "f");
+            __classPrivateFieldSet$5(this, _BrowserFetcher_platform, options.platform, "f");
         }
         else {
             const platform = os$3.platform();
             switch (platform) {
                 case 'darwin':
-                    switch (__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f")) {
+                    switch (__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f")) {
                         case 'chrome':
-                            __classPrivateFieldSet$4(this, _BrowserFetcher_platform, os$3.arch() === 'arm64' && options.useMacOSARMBinary
+                            __classPrivateFieldSet$5(this, _BrowserFetcher_platform, os$3.arch() === 'arm64' && options.useMacOSARMBinary
                                 ? 'mac_arm'
                                 : 'mac', "f");
                             break;
                         case 'firefox':
-                            __classPrivateFieldSet$4(this, _BrowserFetcher_platform, 'mac', "f");
+                            __classPrivateFieldSet$5(this, _BrowserFetcher_platform, 'mac', "f");
                             break;
                     }
                     break;
                 case 'linux':
-                    __classPrivateFieldSet$4(this, _BrowserFetcher_platform, 'linux', "f");
+                    __classPrivateFieldSet$5(this, _BrowserFetcher_platform, 'linux', "f");
                     break;
                 case 'win32':
-                    __classPrivateFieldSet$4(this, _BrowserFetcher_platform, os$3.arch() === 'x64' ||
+                    __classPrivateFieldSet$5(this, _BrowserFetcher_platform, os$3.arch() === 'x64' ||
                         // Windows 11 for ARM supports x64 emulation
                         (os$3.arch() === 'arm64' && isWindows11$1(os$3.release()))
                         ? 'win64'
@@ -116413,27 +116434,27 @@ class BrowserFetcher {
                     assert$1(false, 'Unsupported platform: ' + platform);
             }
         }
-        assert$1(downloadURLs[__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f")][__classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f")], 'Unsupported platform: ' + __classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f"));
+        assert$1(downloadURLs[__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f")][__classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f")], 'Unsupported platform: ' + __classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f"));
     }
     /**
      * Returns the current `Platform`, which is one of `mac`, `linux`,
      * `win32` or `win64`.
      */
     platform() {
-        return __classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f");
+        return __classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f");
     }
     /**
      * Returns the current `Product`, which is one of `chrome` or
      * `firefox`.
      */
     product() {
-        return __classPrivateFieldGet$4(this, _BrowserFetcher_product, "f");
+        return __classPrivateFieldGet$5(this, _BrowserFetcher_product, "f");
     }
     /**
      * The download host being used.
      */
     host() {
-        return __classPrivateFieldGet$4(this, _BrowserFetcher_downloadHost, "f");
+        return __classPrivateFieldGet$5(this, _BrowserFetcher_downloadHost, "f");
     }
     /**
      * Initiates a HEAD request to check if the revision is available.
@@ -116444,9 +116465,9 @@ class BrowserFetcher {
      * from the host.
      */
     canDownload(revision) {
-        const url = downloadURL(__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f"), __classPrivateFieldGet$4(this, _BrowserFetcher_downloadHost, "f"), revision);
+        const url = downloadURL(__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f"), __classPrivateFieldGet$5(this, _BrowserFetcher_downloadHost, "f"), revision);
         return new Promise(resolve => {
-            const request = httpRequest(url, 'HEAD', response => {
+            const request = httpRequest$1(url, 'HEAD', response => {
                 resolve(response.statusCode === 200);
             }, false);
             request.on('error', error => {
@@ -116466,16 +116487,16 @@ class BrowserFetcher {
      * and extracted.
      */
     async download(revision, progressCallback = () => { }) {
-        const url = downloadURL(__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f"), __classPrivateFieldGet$4(this, _BrowserFetcher_downloadHost, "f"), revision);
+        const url = downloadURL(__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f"), __classPrivateFieldGet$5(this, _BrowserFetcher_downloadHost, "f"), revision);
         const fileName = url.split('/').pop();
         assert$1(fileName, `A malformed download URL was found: ${url}.`);
-        const archivePath = path$5.join(__classPrivateFieldGet$4(this, _BrowserFetcher_downloadPath, "f"), fileName);
-        const outputPath = __classPrivateFieldGet$4(this, _BrowserFetcher_instances, "m", _BrowserFetcher_getFolderPath).call(this, revision);
+        const archivePath = path$5.join(__classPrivateFieldGet$5(this, _BrowserFetcher_downloadPath, "f"), fileName);
+        const outputPath = __classPrivateFieldGet$5(this, _BrowserFetcher_instances, "m", _BrowserFetcher_getFolderPath).call(this, revision);
         if (fs$b.existsSync(outputPath)) {
             return this.revisionInfo(revision);
         }
-        if (!fs$b.existsSync(__classPrivateFieldGet$4(this, _BrowserFetcher_downloadPath, "f"))) {
-            await promises.mkdir(__classPrivateFieldGet$4(this, _BrowserFetcher_downloadPath, "f"), { recursive: true });
+        if (!fs$b.existsSync(__classPrivateFieldGet$5(this, _BrowserFetcher_downloadPath, "f"))) {
+            await promises.mkdir(__classPrivateFieldGet$5(this, _BrowserFetcher_downloadPath, "f"), { recursive: true });
         }
         // Use system Chromium builds on Linux ARM devices
         if (os$3.platform() === 'linux' && os$3.arch() === 'arm64') {
@@ -116484,7 +116505,7 @@ class BrowserFetcher {
         }
         try {
             await _downloadFile(url, archivePath, progressCallback);
-            await install(archivePath, outputPath);
+            await install$1(archivePath, outputPath);
         }
         finally {
             if (fs$b.existsSync(archivePath)) {
@@ -116504,17 +116525,17 @@ class BrowserFetcher {
      * available locally on disk.
      */
     localRevisions() {
-        if (!fs$b.existsSync(__classPrivateFieldGet$4(this, _BrowserFetcher_downloadPath, "f"))) {
+        if (!fs$b.existsSync(__classPrivateFieldGet$5(this, _BrowserFetcher_downloadPath, "f"))) {
             return [];
         }
-        const fileNames = fs$b.readdirSync(__classPrivateFieldGet$4(this, _BrowserFetcher_downloadPath, "f"));
+        const fileNames = fs$b.readdirSync(__classPrivateFieldGet$5(this, _BrowserFetcher_downloadPath, "f"));
         return fileNames
             .map(fileName => {
-            return parseFolderPath(__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f"), fileName);
+            return parseFolderPath$1(__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"), fileName);
         })
             .filter((entry) => {
             var _a;
-            return (_a = (entry && entry.platform === __classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f"))) !== null && _a !== void 0 ? _a : false;
+            return (_a = (entry && entry.platform === __classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f"))) !== null && _a !== void 0 ? _a : false;
         })
             .map(entry => {
             return entry.revision;
@@ -116528,7 +116549,7 @@ class BrowserFetcher {
      * throws if the revision has not been downloaded.
      */
     async remove(revision) {
-        const folderPath = __classPrivateFieldGet$4(this, _BrowserFetcher_instances, "m", _BrowserFetcher_getFolderPath).call(this, revision);
+        const folderPath = __classPrivateFieldGet$5(this, _BrowserFetcher_instances, "m", _BrowserFetcher_getFolderPath).call(this, revision);
         assert$1(fs$b.existsSync(folderPath), `Failed to remove: revision ${revision} is not downloaded`);
         await rm(folderPath);
     }
@@ -116537,26 +116558,26 @@ class BrowserFetcher {
      * @returns The revision info for the given revision.
      */
     revisionInfo(revision) {
-        const folderPath = __classPrivateFieldGet$4(this, _BrowserFetcher_instances, "m", _BrowserFetcher_getFolderPath).call(this, revision);
+        const folderPath = __classPrivateFieldGet$5(this, _BrowserFetcher_instances, "m", _BrowserFetcher_getFolderPath).call(this, revision);
         let executablePath = '';
-        switch (__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f")) {
+        switch (__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f")) {
             case 'chrome':
-                switch (__classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f")) {
+                switch (__classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f")) {
                     case 'mac':
                     case 'mac_arm':
-                        executablePath = path$5.join(folderPath, archiveName(__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f"), revision), 'Chromium.app', 'Contents', 'MacOS', 'Chromium');
+                        executablePath = path$5.join(folderPath, archiveName(__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f"), revision), 'Chromium.app', 'Contents', 'MacOS', 'Chromium');
                         break;
                     case 'linux':
-                        executablePath = path$5.join(folderPath, archiveName(__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f"), revision), 'chrome');
+                        executablePath = path$5.join(folderPath, archiveName(__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f"), revision), 'chrome');
                         break;
                     case 'win32':
                     case 'win64':
-                        executablePath = path$5.join(folderPath, archiveName(__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f"), revision), 'chrome.exe');
+                        executablePath = path$5.join(folderPath, archiveName(__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f"), revision), 'chrome.exe');
                         break;
                 }
                 break;
             case 'firefox':
-                switch (__classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f")) {
+                switch (__classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f")) {
                     case 'mac':
                     case 'mac_arm':
                         executablePath = path$5.join(folderPath, 'Firefox Nightly.app', 'Contents', 'MacOS', 'firefox');
@@ -116570,7 +116591,7 @@ class BrowserFetcher {
                         break;
                 }
         }
-        const url = downloadURL(__classPrivateFieldGet$4(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f"), __classPrivateFieldGet$4(this, _BrowserFetcher_downloadHost, "f"), revision);
+        const url = downloadURL(__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"), __classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f"), __classPrivateFieldGet$5(this, _BrowserFetcher_downloadHost, "f"), revision);
         const local = fs$b.existsSync(folderPath);
         debugFetcher({
             revision,
@@ -116578,7 +116599,7 @@ class BrowserFetcher {
             folderPath,
             local,
             url,
-            product: __classPrivateFieldGet$4(this, _BrowserFetcher_product, "f"),
+            product: __classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"),
         });
         return {
             revision,
@@ -116586,20 +116607,20 @@ class BrowserFetcher {
             folderPath,
             local,
             url,
-            product: __classPrivateFieldGet$4(this, _BrowserFetcher_product, "f"),
+            product: __classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"),
         };
     }
     /**
      * @internal
      */
     getDownloadPath() {
-        return __classPrivateFieldGet$4(this, _BrowserFetcher_downloadPath, "f");
+        return __classPrivateFieldGet$5(this, _BrowserFetcher_downloadPath, "f");
     }
 }
 _BrowserFetcher_product = new WeakMap(), _BrowserFetcher_downloadPath = new WeakMap(), _BrowserFetcher_downloadHost = new WeakMap(), _BrowserFetcher_platform = new WeakMap(), _BrowserFetcher_instances = new WeakSet(), _BrowserFetcher_getFolderPath = function _BrowserFetcher_getFolderPath(revision) {
-    return path$5.resolve(__classPrivateFieldGet$4(this, _BrowserFetcher_downloadPath, "f"), `${__classPrivateFieldGet$4(this, _BrowserFetcher_platform, "f")}-${revision}`);
+    return path$5.resolve(__classPrivateFieldGet$5(this, _BrowserFetcher_downloadPath, "f"), `${__classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f")}-${revision}`);
 };
-function parseFolderPath(product, folderPath) {
+function parseFolderPath$1(product, folderPath) {
     const name = path$5.basename(folderPath);
     const splits = name.split('-');
     if (splits.length !== 2) {
@@ -116640,7 +116661,7 @@ function _downloadFile(url, destinationPath, progressCallback) {
     });
     let downloadedBytes = 0;
     let totalBytes = 0;
-    const request = httpRequest(url, 'GET', response => {
+    const request = httpRequest$1(url, 'GET', response => {
         if (response.statusCode !== 200) {
             const error = new Error(`Download failed: server returned code ${response.statusCode}. URL: ${url}`);
             // consume response data to free up memory
@@ -116670,17 +116691,17 @@ function _downloadFile(url, destinationPath, progressCallback) {
         progressCallback(downloadedBytes, totalBytes);
     }
 }
-async function install(archivePath, folderPath) {
+async function install$1(archivePath, folderPath) {
     debugFetcher(`Installing ${archivePath} to ${folderPath}`);
     if (archivePath.endsWith('.zip')) {
         await extractZip$1(archivePath, { dir: folderPath });
     }
     else if (archivePath.endsWith('.tar.bz2')) {
-        await extractTar(archivePath, folderPath);
+        await extractTar$1(archivePath, folderPath);
     }
     else if (archivePath.endsWith('.dmg')) {
         await promises.mkdir(folderPath);
-        await installDMG(archivePath, folderPath);
+        await installDMG$1(archivePath, folderPath);
     }
     else {
         throw new Error(`Unsupported archive format: ${archivePath}`);
@@ -116689,7 +116710,7 @@ async function install(archivePath, folderPath) {
 /**
  * @internal
  */
-function extractTar(tarPath, folderPath) {
+function extractTar$1(tarPath, folderPath) {
     return new Promise((fulfill, reject) => {
         const tarStream = tarFs.extract(folderPath);
         tarStream.on('error', reject);
@@ -116701,8 +116722,8 @@ function extractTar(tarPath, folderPath) {
 /**
  * @internal
  */
-async function installDMG(dmgPath, folderPath) {
-    const { stdout } = await exec(`hdiutil attach -nobrowse -noautoopen "${dmgPath}"`);
+async function installDMG$1(dmgPath, folderPath) {
+    const { stdout } = await exec$1(`hdiutil attach -nobrowse -noautoopen "${dmgPath}"`);
     const volumes = stdout.match(/\/Volumes\/(.*)/m);
     if (!volumes) {
         throw new Error(`Could not find volume path in ${stdout}`);
@@ -116718,14 +116739,14 @@ async function installDMG(dmgPath, folderPath) {
         }
         const mountedPath = path$5.join(mountPath, appName);
         debugFetcher(`Copying ${mountedPath} to ${folderPath}`);
-        await exec(`cp -R "${mountedPath}" "${folderPath}"`);
+        await exec$1(`cp -R "${mountedPath}" "${folderPath}"`);
     }
     finally {
         debugFetcher(`Unmounting ${mountPath}`);
-        await exec(`hdiutil detach "${mountPath}" -quiet`);
+        await exec$1(`hdiutil detach "${mountPath}" -quiet`);
     }
 }
-function httpRequest(url, method, response, keepAlive = true) {
+function httpRequest$1(url, method, response, keepAlive = true) {
     const urlParsed = Url.parse(url);
     let options = {
         ...urlParsed,
@@ -116757,7 +116778,7 @@ function httpRequest(url, method, response, keepAlive = true) {
             res.statusCode >= 300 &&
             res.statusCode < 400 &&
             res.headers.location) {
-            httpRequest(res.headers.location, method, response);
+            httpRequest$1(res.headers.location, method, response);
         }
         else {
             response(res);
@@ -116768,6 +116789,104 @@ function httpRequest(url, method, response, keepAlive = true) {
         : http$4.request(options, requestCallback);
     request.end();
     return request;
+}
+
+/**
+ * Copyright 2023 Google Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+function httpRequest(url, method, response, keepAlive = true) {
+    const options = {
+        protocol: url.protocol,
+        hostname: url.hostname,
+        port: url.port,
+        path: url.pathname + url.search,
+        method,
+        headers: keepAlive ? { Connection: 'keep-alive' } : undefined,
+    };
+    const proxyURL = getProxyForUrl_1(url.toString());
+    if (proxyURL) {
+        const proxy = new Url.URL(proxyURL);
+        if (proxy.protocol === 'http:') {
+            options.path = url.href;
+            options.hostname = proxy.hostname;
+            options.protocol = proxy.protocol;
+            options.port = proxy.port;
+        }
+        else {
+            options.agent = createHttpsProxyAgent$1({
+                host: proxy.host,
+                path: proxy.pathname,
+                port: proxy.port,
+                secureProxy: proxy.protocol === 'https:',
+                headers: options.headers,
+            });
+        }
+    }
+    const requestCallback = (res) => {
+        if (res.statusCode &&
+            res.statusCode >= 300 &&
+            res.statusCode < 400 &&
+            res.headers.location) {
+            httpRequest(new Url.URL(res.headers.location), method, response);
+        }
+        else {
+            response(res);
+        }
+    };
+    const request = options.protocol === 'https:'
+        ? https__namespace.request(options, requestCallback)
+        : http__namespace.request(options, requestCallback);
+    request.end();
+    return request;
+}
+/**
+ * @internal
+ */
+function downloadFile(url, destinationPath, progressCallback) {
+    return new Promise((resolve, reject) => {
+        let downloadedBytes = 0;
+        let totalBytes = 0;
+        function onData(chunk) {
+            downloadedBytes += chunk.length;
+            progressCallback(downloadedBytes, totalBytes);
+        }
+        const request = httpRequest(url, 'GET', response => {
+            if (response.statusCode !== 200) {
+                const error = new Error(`Download failed: server returned code ${response.statusCode}. URL: ${url}`);
+                // consume response data to free up memory
+                response.resume();
+                reject(error);
+                return;
+            }
+            const file = fs$b.createWriteStream(destinationPath);
+            file.on('finish', () => {
+                return resolve();
+            });
+            file.on('error', error => {
+                return reject(error);
+            });
+            response.pipe(file);
+            totalBytes = parseInt(response.headers['content-length'], 10);
+            if (progressCallback) {
+                response.on('data', onData);
+            }
+        });
+        request.on('error', error => {
+            return reject(error);
+        });
+    });
 }
 
 /**
@@ -116814,6 +116933,31 @@ function relativeExecutablePath$3(platform, _buildId) {
         case BrowserPlatform.WIN64:
             return path$5.join('firefox', 'firefox.exe');
     }
+}
+async function resolveBuildId$4(channel = 'FIREFOX_NIGHTLY') {
+    return new Promise((resolve, reject) => {
+        const request = httpRequest(new URL('https://product-details.mozilla.org/1.0/firefox_versions.json'), 'GET', response => {
+            let data = '';
+            if (response.statusCode && response.statusCode >= 400) {
+                return reject(new Error(`Got status code ${response.statusCode}`));
+            }
+            response.on('data', chunk => {
+                data += chunk;
+            });
+            response.on('end', () => {
+                try {
+                    const versions = JSON.parse(data);
+                    return resolve(versions[channel]);
+                }
+                catch {
+                    return reject(new Error('Firefox version not found'));
+                }
+            });
+        }, false);
+        request.on('error', err => {
+            reject(err);
+        });
+    });
 }
 async function createProfile$1(options) {
     if (!fs$b.existsSync(options.path)) {
@@ -117108,6 +117252,20 @@ function folder$1(platform) {
             return 'win64';
     }
 }
+function chromiumDashPlatform(platform) {
+    switch (platform) {
+        case BrowserPlatform.LINUX:
+            return 'linux';
+        case BrowserPlatform.MAC_ARM:
+            return 'mac';
+        case BrowserPlatform.MAC:
+            return 'mac';
+        case BrowserPlatform.WIN32:
+            return 'win';
+        case BrowserPlatform.WIN64:
+            return 'win64';
+    }
+}
 function resolveDownloadUrl$2(platform, buildId, baseUrl = 'https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing') {
     return `${baseUrl}/${resolveDownloadPath$2(platform, buildId).join('/')}`;
 }
@@ -117125,6 +117283,31 @@ function relativeExecutablePath$2(platform, _buildId) {
         case BrowserPlatform.WIN64:
             return path$5.join('chrome-' + folder$1(platform), 'chrome.exe');
     }
+}
+async function resolveBuildId$3(platform, channel = 'beta') {
+    return new Promise((resolve, reject) => {
+        const request = httpRequest(new URL(`https://chromiumdash.appspot.com/fetch_releases?platform=${chromiumDashPlatform(platform)}&channel=${channel}`), 'GET', response => {
+            let data = '';
+            if (response.statusCode && response.statusCode >= 400) {
+                return reject(new Error(`Got status code ${response.statusCode}`));
+            }
+            response.on('data', chunk => {
+                data += chunk;
+            });
+            response.on('end', () => {
+                try {
+                    const response = JSON.parse(String(data));
+                    return resolve(response[0].version);
+                }
+                catch {
+                    return reject(new Error('Chrome version not found'));
+                }
+            });
+        }, false);
+        request.on('error', err => {
+            reject(err);
+        });
+    });
 }
 function resolveSystemExecutablePath$1(platform, channel) {
     switch (platform) {
@@ -117210,6 +117393,30 @@ function relativeExecutablePath$1(platform, _buildId) {
             return 'chromedriver.exe';
     }
 }
+async function resolveBuildId$2(_channel = 'latest') {
+    return new Promise((resolve, reject) => {
+        const request = httpRequest(new URL(`https://chromedriver.storage.googleapis.com/LATEST_RELEASE`), 'GET', response => {
+            let data = '';
+            if (response.statusCode && response.statusCode >= 400) {
+                return reject(new Error(`Got status code ${response.statusCode}`));
+            }
+            response.on('data', chunk => {
+                data += chunk;
+            });
+            response.on('end', () => {
+                try {
+                    return resolve(String(data));
+                }
+                catch {
+                    return reject(new Error('Chrome version not found'));
+                }
+            });
+        }, false);
+        request.on('error', err => {
+            reject(err);
+        });
+    });
+}
 
 /**
  * Copyright 2023 Google Inc. All rights reserved.
@@ -117271,6 +117478,32 @@ function relativeExecutablePath(platform, _buildId) {
             return path$5.join('chrome-win', 'chrome.exe');
     }
 }
+async function resolveBuildId$1(platform, 
+// We will need it for other channels/keywords.
+_channel = 'latest') {
+    return new Promise((resolve, reject) => {
+        const request = httpRequest(new URL(`https://storage.googleapis.com/chromium-browser-snapshots/${folder(platform)}/LAST_CHANGE`), 'GET', response => {
+            let data = '';
+            if (response.statusCode && response.statusCode >= 400) {
+                return reject(new Error(`Got status code ${response.statusCode}`));
+            }
+            response.on('data', chunk => {
+                data += chunk;
+            });
+            response.on('end', () => {
+                try {
+                    return resolve(String(data));
+                }
+                catch {
+                    return reject(new Error('Chrome version not found'));
+                }
+            });
+        }, false);
+        request.on('error', err => {
+            reject(err);
+        });
+    });
+}
 
 /**
  * Copyright 2023 Google Inc. All rights reserved.
@@ -117287,12 +117520,12 @@ function relativeExecutablePath(platform, _buildId) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-({
+const downloadUrls = {
     [Browser.CHROMEDRIVER]: resolveDownloadUrl$1,
     [Browser.CHROME]: resolveDownloadUrl$2,
     [Browser.CHROMIUM]: resolveDownloadUrl,
     [Browser.FIREFOX]: resolveDownloadUrl$3,
-});
+};
 ({
     [Browser.CHROMEDRIVER]: resolveDownloadPath$1,
     [Browser.CHROME]: resolveDownloadPath$2,
@@ -117305,6 +117538,36 @@ function relativeExecutablePath(platform, _buildId) {
     [Browser.CHROMIUM]: relativeExecutablePath,
     [Browser.FIREFOX]: relativeExecutablePath$3,
 });
+/**
+ * @public
+ */
+async function resolveBuildId(browser, platform, tag) {
+    switch (browser) {
+        case Browser.FIREFOX:
+            switch (tag) {
+                case BrowserTag.LATEST:
+                    return await resolveBuildId$4('FIREFOX_NIGHTLY');
+            }
+        case Browser.CHROME:
+            switch (tag) {
+                case BrowserTag.LATEST:
+                    // In CfT beta is the latest version.
+                    return await resolveBuildId$3(platform, 'beta');
+            }
+        case Browser.CHROMEDRIVER:
+            switch (tag) {
+                case BrowserTag.LATEST:
+                    return await resolveBuildId$2('latest');
+            }
+        case Browser.CHROMIUM:
+            switch (tag) {
+                case BrowserTag.LATEST:
+                    return await resolveBuildId$1(platform, 'latest');
+            }
+    }
+    // We assume the tag is the buildId if it didn't match any keywords.
+    return tag;
+}
 /**
  * @public
  */
@@ -117347,17 +117610,95 @@ function resolveSystemExecutablePath(browser, platform, channel) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-(undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$4 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-(undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$4 = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
+var _Cache_rootDir;
+/**
+ * The cache used by Puppeteer relies on the following structure:
+ *
+ * - rootDir
+ *   -- <browser1> | browserRoot(browser1)
+ *   ---- <platform>-<buildId> | installationDir()
+ *   ------ the browser-platform-buildId
+ *   ------ specific structure.
+ *   -- <browser2> | browserRoot(browser2)
+ *   ---- <platform>-<buildId> | installationDir()
+ *   ------ the browser-platform-buildId
+ *   ------ specific structure.
+ *   @internal
+ */
+class Cache {
+    constructor(rootDir) {
+        _Cache_rootDir.set(this, void 0);
+        __classPrivateFieldSet$4(this, _Cache_rootDir, rootDir, "f");
+    }
+    browserRoot(browser) {
+        // Chromium is a special case for backward compatibility: we install it in
+        // the Chrome folder so that Puppeteer can find it.
+        return path$5.join(__classPrivateFieldGet$4(this, _Cache_rootDir, "f"), browser === Browser.CHROMIUM ? Browser.CHROME : browser);
+    }
+    installationDir(browser, platform, buildId) {
+        return path$5.join(this.browserRoot(browser), `${platform}-${buildId}`);
+    }
+    clear() {
+        fs$b.rmSync(__classPrivateFieldGet$4(this, _Cache_rootDir, "f"), {
+            force: true,
+            recursive: true,
+            maxRetries: 10,
+            retryDelay: 500,
+        });
+    }
+    getInstalledBrowsers() {
+        if (!fs$b.existsSync(__classPrivateFieldGet$4(this, _Cache_rootDir, "f"))) {
+            return [];
+        }
+        const types = fs$b.readdirSync(__classPrivateFieldGet$4(this, _Cache_rootDir, "f"));
+        const browsers = types.filter((t) => {
+            return Object.values(Browser).includes(t);
+        });
+        return browsers.flatMap(browser => {
+            const files = fs$b.readdirSync(this.browserRoot(browser));
+            return files
+                .map(file => {
+                const result = parseFolderPath(path$5.join(this.browserRoot(browser), file));
+                if (!result) {
+                    return null;
+                }
+                return {
+                    path: path$5.join(this.browserRoot(browser), file),
+                    browser,
+                    platform: result.platform,
+                    buildId: result.buildId,
+                };
+            })
+                .filter((item) => {
+                return item !== null;
+            });
+        });
+    }
+}
+_Cache_rootDir = new WeakMap();
+function parseFolderPath(folderPath) {
+    const name = path$5.basename(folderPath);
+    const splits = name.split('-');
+    if (splits.length !== 2) {
+        return;
+    }
+    const [platform, buildId] = splits;
+    if (!buildId || !platform) {
+        return;
+    }
+    return { platform, buildId };
+}
 
 /**
  * Copyright 2023 Google Inc. All rights reserved.
@@ -117760,7 +118101,62 @@ class TimeoutError extends Error {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-require$$0$2.promisify(childProcess.exec);
+const exec = require$$0$2.promisify(childProcess.exec);
+/**
+ * @internal
+ */
+async function unpackArchive(archivePath, folderPath) {
+    if (archivePath.endsWith('.zip')) {
+        await extractZip$1(archivePath, { dir: folderPath });
+    }
+    else if (archivePath.endsWith('.tar.bz2')) {
+        await extractTar(archivePath, folderPath);
+    }
+    else if (archivePath.endsWith('.dmg')) {
+        await promises.mkdir(folderPath);
+        await installDMG(archivePath, folderPath);
+    }
+    else {
+        throw new Error(`Unsupported archive format: ${archivePath}`);
+    }
+}
+/**
+ * @internal
+ */
+function extractTar(tarPath, folderPath) {
+    return new Promise((fulfill, reject) => {
+        const tarStream = tarFs.extract(folderPath);
+        tarStream.on('error', reject);
+        tarStream.on('finish', fulfill);
+        const readStream = fs$b.createReadStream(tarPath);
+        readStream.pipe(bzip()).pipe(tarStream);
+    });
+}
+/**
+ * @internal
+ */
+async function installDMG(dmgPath, folderPath) {
+    const { stdout } = await exec(`hdiutil attach -nobrowse -noautoopen "${dmgPath}"`);
+    const volumes = stdout.match(/\/Volumes\/(.*)/m);
+    if (!volumes) {
+        throw new Error(`Could not find volume path in ${stdout}`);
+    }
+    const mountPath = volumes[0];
+    try {
+        const fileNames = await promises.readdir(mountPath);
+        const appName = fileNames.find(item => {
+            return typeof item === 'string' && item.endsWith('.app');
+        });
+        if (!appName) {
+            throw new Error(`Cannot find app in ${mountPath}`);
+        }
+        const mountedPath = path__namespace.join(mountPath, appName);
+        await exec(`cp -R "${mountedPath}" "${folderPath}"`);
+    }
+    finally {
+        await exec(`hdiutil detach "${mountPath}" -quiet`);
+    }
+}
 
 /**
  * Copyright 2017 Google Inc. All rights reserved.
@@ -117777,7 +118173,101 @@ require$$0$2.promisify(childProcess.exec);
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-debug$6('puppeteer:browsers:install');
+const debugInstall = debug$6('puppeteer:browsers:install');
+const times = new Map();
+function debugTime(label) {
+    times.set(label, process.hrtime());
+}
+function debugTimeEnd(label) {
+    const end = process.hrtime();
+    const start = times.get(label);
+    if (!start) {
+        return;
+    }
+    const duration = end[0] * 1000 + end[1] / 1e6 - (start[0] * 1000 + start[1] / 1e6); // calculate duration in milliseconds
+    debugInstall(`Duration for ${label}: ${duration}ms`);
+}
+/**
+ * @public
+ */
+async function install(options) {
+    var _a, _b;
+    (_a = options.platform) !== null && _a !== void 0 ? _a : (options.platform = detectBrowserPlatform());
+    (_b = options.unpack) !== null && _b !== void 0 ? _b : (options.unpack = true);
+    if (!options.platform) {
+        throw new Error(`Cannot download a binary for the provided platform: ${os$3.platform()} (${os$3.arch()})`);
+    }
+    const url = getDownloadUrl(options.browser, options.platform, options.buildId, options.baseUrl);
+    const fileName = url.toString().split('/').pop();
+    require$$5$1(fileName, `A malformed download URL was found: ${url}.`);
+    const structure = new Cache(options.cacheDir);
+    const browserRoot = structure.browserRoot(options.browser);
+    const archivePath = path$5.join(browserRoot, fileName);
+    if (!fs$b.existsSync(browserRoot)) {
+        await promises.mkdir(browserRoot, { recursive: true });
+    }
+    if (!options.unpack) {
+        if (fs$b.existsSync(archivePath)) {
+            return {
+                path: archivePath,
+                browser: options.browser,
+                platform: options.platform,
+                buildId: options.buildId,
+            };
+        }
+        debugInstall(`Downloading binary from ${url}`);
+        debugTime('download');
+        await downloadFile(url, archivePath, options.downloadProgressCallback);
+        debugTimeEnd('download');
+        return {
+            path: archivePath,
+            browser: options.browser,
+            platform: options.platform,
+            buildId: options.buildId,
+        };
+    }
+    const outputPath = structure.installationDir(options.browser, options.platform, options.buildId);
+    if (fs$b.existsSync(outputPath)) {
+        return {
+            path: outputPath,
+            browser: options.browser,
+            platform: options.platform,
+            buildId: options.buildId,
+        };
+    }
+    try {
+        debugInstall(`Downloading binary from ${url}`);
+        try {
+            debugTime('download');
+            await downloadFile(url, archivePath, options.downloadProgressCallback);
+        }
+        finally {
+            debugTimeEnd('download');
+        }
+        debugInstall(`Installing ${archivePath} to ${outputPath}`);
+        try {
+            debugTime('extract');
+            await unpackArchive(archivePath, outputPath);
+        }
+        finally {
+            debugTimeEnd('extract');
+        }
+    }
+    finally {
+        if (fs$b.existsSync(archivePath)) {
+            await promises.unlink(archivePath);
+        }
+    }
+    return {
+        path: outputPath,
+        browser: options.browser,
+        platform: options.platform,
+        buildId: options.buildId,
+    };
+}
+function getDownloadUrl(browser, platform, buildId, baseUrl) {
+    return new URL(downloadUrls[browser](platform, buildId, baseUrl));
+}
 
 var nodeProgress = {exports: {}};
 
@@ -118019,6 +118509,12 @@ var nodeProgress = {exports: {}};
 	  }
 	}; 
 } (nodeProgress));
+
+var nodeProgressExports = nodeProgress.exports;
+
+var progress = nodeProgressExports;
+
+var ProgressBar = /*@__PURE__*/getDefaultExportFromCjs(progress);
 
 class YError extends Error {
     constructor(msg) {
@@ -123399,6 +123895,30 @@ Yargs.Parser = Parser;
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
+/**
+ * @public
+ */
+function makeProgressCallback(browser, buildId) {
+    let progressBar;
+    let lastDownloadedBytes = 0;
+    return (downloadedBytes, totalBytes) => {
+        if (!progressBar) {
+            progressBar = new ProgressBar(`Downloading ${browser} r${buildId} - ${toMegabytes(totalBytes)} [:bar] :percent :etas `, {
+                complete: '=',
+                incomplete: ' ',
+                width: 20,
+                total: totalBytes,
+            });
+        }
+        const delta = downloadedBytes - lastDownloadedBytes;
+        lastDownloadedBytes = downloadedBytes;
+        progressBar.tick(delta);
+    };
+}
+function toMegabytes(bytes) {
+    const mb = bytes / 1000 / 1000;
+    return `${Math.round(mb * 10) / 10} MB`;
+}
 
 var __classPrivateFieldSet$2 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
@@ -149914,6 +150434,123 @@ var timezone$1 = {exports: {}};
 var timezoneExports = timezone$1.exports;
 var timezone = /*@__PURE__*/getDefaultExportFromCjs(timezoneExports);
 
+/**
+ * Copyright 2020 Google Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * @internal
+ */
+const supportedProducts = {
+    chromium: 'Chromium',
+    chrome: 'Chromium',
+    firefox: 'Firefox Nightly',
+};
+/**
+ * @internal
+ */
+async function downloadBrowser() {
+    var _a;
+    overrideProxy();
+    const configuration = getConfiguration();
+    if (configuration.skipDownload) {
+        logPolitely('**INFO** Skipping browser download as instructed.');
+        return;
+    }
+    let downloadHost = configuration.downloadHost;
+    let platform = detectBrowserPlatform();
+    if (!platform) {
+        throw new Error('The current platform is not supported.');
+    }
+    // TODO: remove once Mac ARM is enabled by default for Puppeteer https://github.com/puppeteer/puppeteer/issues/9630.
+    if (platform === BrowserPlatform.MAC_ARM &&
+        !((_a = configuration.experiments) === null || _a === void 0 ? void 0 : _a.macArmChromiumEnabled)) {
+        platform = BrowserPlatform.MAC;
+    }
+    const product = configuration.defaultProduct;
+    const browser = productToBrowser(product);
+    // TODO: PUPPETEER_REVISIONS should use Chrome and not Chromium.
+    const unresolvedBuildId = configuration.browserRevision ||
+        PUPPETEER_REVISIONS[product === 'chrome' ? 'chromium' : 'firefox'] ||
+        'latest';
+    if (product === 'chrome' && downloadHost) {
+        // TODO: remove downloadHost in favour of baseDownloadUrl. The "host" of
+        // Firefox is already a URL and not a host. This would be a breaking change.
+        if (!downloadHost.endsWith('/chromium-browser-snapshots') &&
+            !downloadHost.endsWith('/chromium-browser-snapshots/')) {
+            downloadHost += downloadHost.endsWith('/')
+                ? 'chromium-browser-snapshots'
+                : '/chromium-browser-snapshots';
+        }
+    }
+    const buildId = await resolveBuildId(browser, platform, unresolvedBuildId);
+    try {
+        const result = await install({
+            browser,
+            cacheDir: configuration.cacheDirectory,
+            platform,
+            buildId,
+            downloadProgressCallback: makeProgressCallback(browser, buildId),
+            baseUrl: downloadHost,
+        });
+        logPolitely(`${supportedProducts[product]} (${result.buildId}) downloaded to ${result.path}`);
+    }
+    catch (error) {
+        console.error(`ERROR: Failed to set up ${supportedProducts[product]} r${buildId}! Set "PUPPETEER_SKIP_DOWNLOAD" env variable to skip download.`);
+        console.error(error);
+        process.exit(1);
+    }
+}
+function productToBrowser(product) {
+    switch (product) {
+        case 'chrome':
+            return Browser.CHROMIUM;
+        case 'firefox':
+            return Browser.FIREFOX;
+    }
+    return Browser.CHROMIUM;
+}
+/**
+ * @internal
+ */
+function logPolitely(toBeLogged) {
+    const logLevel = process.env['npm_config_loglevel'] || '';
+    const logLevelDisplay = ['silent', 'error', 'warn'].indexOf(logLevel) > -1;
+    // eslint-disable-next-line no-console
+    if (!logLevelDisplay) {
+        console.log(toBeLogged);
+    }
+}
+/**
+ * @internal
+ */
+function overrideProxy() {
+    // Override current environment proxy settings with npm configuration, if any.
+    const NPM_HTTPS_PROXY = process.env['npm_config_https_proxy'] || process.env['npm_config_proxy'];
+    const NPM_HTTP_PROXY = process.env['npm_config_http_proxy'] || process.env['npm_config_proxy'];
+    const NPM_NO_PROXY = process.env['npm_config_no_proxy'];
+    if (NPM_HTTPS_PROXY) {
+        process.env['HTTPS_PROXY'] = NPM_HTTPS_PROXY;
+    }
+    if (NPM_HTTP_PROXY) {
+        process.env['HTTP_PROXY'] = NPM_HTTP_PROXY;
+    }
+    if (NPM_NO_PROXY) {
+        process.env['NO_PROXY'] = NPM_NO_PROXY;
+    }
+}
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
 function run() {
@@ -149931,6 +150568,7 @@ function run() {
 }
 function runActionsEnvironments() {
     return __awaiter$7(this, void 0, void 0, function* () {
+        yield downloadBrowser();
         const id = coreExports.getInput(inputKeys.lottoId);
         const pwd = coreExports.getInput(inputKeys.lottoPassword);
         const lottoService = new LottoService({ headless: true });

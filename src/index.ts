@@ -8,6 +8,9 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 
+// @ts-ignore
+import { downloadBrowser } from 'puppeteer/internal/node/install.js';
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -23,6 +26,8 @@ async function run() {
   }
 }
 async function runActionsEnvironments() {
+  await downloadBrowser();
+
   const id = core.getInput(inputKeys.lottoId);
   const pwd = core.getInput(inputKeys.lottoPassword);
 

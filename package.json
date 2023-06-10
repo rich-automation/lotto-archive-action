@@ -6,7 +6,7 @@
   "author": "bang9 <gusrn1423@naver.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "build": "rm -rf dist/*.js && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "fix": "yarn fix:eslint && yarn fix:prettier",
     "fix:eslint": "eslint --fix src --ext js,jsx,ts,tsx ",
     "fix:prettier": "prettier --write \"src/**/*.{ts,tsx,js}\"",

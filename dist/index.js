@@ -87794,7 +87794,7 @@ const getOpenedIssues = () => __awaiter$7(void 0, void 0, void 0, function* () {
     const issues = yield octokit().rest.issues.listForRepo(Object.assign({ state: 'open', per_page: 100 }, context().repo));
     return issues.data;
 });
-const findWaitingIssues = () => __awaiter$7(void 0, void 0, void 0, function* () {
+const getWaitingIssues = () => __awaiter$7(void 0, void 0, void 0, function* () {
     const issues = yield getOpenedIssues();
     return issues.filter(issue => {
         return issue.labels.some(label => {
@@ -87807,16 +87807,16 @@ const findWaitingIssues = () => __awaiter$7(void 0, void 0, void 0, function* ()
         });
     });
 });
-const markIssueAs = (issueNumber, updatedLabels) => __awaiter$7(void 0, void 0, void 0, function* () {
-    const shouldClosed = updatedLabels.length === 1 && updatedLabels[0] === labels.losing;
-    const nextState = shouldClosed ? 'closed' : 'open';
-    const nextLabels = shouldClosed ? updatedLabels : updatedLabels.filter(it => it !== labels.losing);
-    if (!shouldClosed) {
+const markIssueAsChecked = (issueNumber, updatedLabels) => __awaiter$7(void 0, void 0, void 0, function* () {
+    const shouldBeClosed = updatedLabels.length === 1 && updatedLabels[0] === labels.losing;
+    const nextState = shouldBeClosed ? 'closed' : 'open';
+    const nextLabels = shouldBeClosed ? updatedLabels : updatedLabels.filter(it => it !== labels.losing);
+    if (!shouldBeClosed) {
         yield octokit().rest.issues.createComment(Object.assign({ issue_number: issueNumber, body: `@${context().repo.owner} ${nextLabels.length}게임에 당첨됐습니다!` }, context().repo));
     }
-    return octokit().rest.issues.update(Object.assign(Object.assign({}, context().repo), { state: nextState, issue_number: issueNumber, labels: nextLabels }));
+    return octokit().rest.issues.update(Object.assign({ state: nextState, issue_number: issueNumber, labels: nextLabels }, context().repo));
 });
-const createPurchaseIssue = (date, body) => __awaiter$7(void 0, void 0, void 0, function* () {
+const createWaitingIssue = (date, body) => __awaiter$7(void 0, void 0, void 0, function* () {
     return octokit().rest.issues.create(Object.assign({ labels: [labels.waiting], title: date, body: body }, context().repo));
 });
 const initLabels = () => __awaiter$7(void 0, void 0, void 0, function* () {
@@ -150590,7 +150590,7 @@ function runInitRepo() {
 }
 function runWinningCheck(service) {
     return __awaiter$7(this, void 0, void 0, function* () {
-        const waitingIssues = yield findWaitingIssues();
+        const waitingIssues = yield getWaitingIssues();
         if (waitingIssues.length > 0) {
             coreExports.info(`총 ${waitingIssues.length}개의 구매 내역에 대해서 당첨 발표를 확인합니다.`);
             const promises = waitingIssues.map((issue) => __awaiter$7(this, void 0, void 0, function* () {
@@ -150602,7 +150602,7 @@ function runWinningCheck(service) {
                     }));
                     const ranks = yield Promise.all(checkPromises);
                     const rankLabels = [...new Set(ranks.map(it => rankToLabel(it)))];
-                    yield markIssueAs(issue.number, rankLabels);
+                    yield markIssueAsChecked(issue.number, rankLabels);
                 }
             }));
             const result = yield Promise.allSettled(promises);
@@ -150626,7 +150626,7 @@ function runPurchase(service) {
             const round = getCurrentLottoRound() + 1;
             const link = service.getCheckWinningLink(round, numbers);
             const issueBody = bodyBuilder({ date, round, numbers, link });
-            yield createPurchaseIssue(date, issueBody);
+            yield createWaitingIssue(date, issueBody);
         }
         catch (e) {
             yield service.destroy();

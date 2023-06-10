@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import { createPurchaseIssue, findWaitingIssues, initLabels, markIssueAs, rankToLabel } from './internal/issues';
+import { createWaitingIssue, getWaitingIssues, initLabels, markIssueAsChecked, rankToLabel } from './internal/issues';
 import { getCurrentLottoRound, LottoService } from '@rich-automation/lotto';
 import { inputKeys } from './internal/constants';
 import type { LottoServiceInterface } from '@rich-automation/lotto/lib/typescript/types';
@@ -49,7 +49,7 @@ async function runInitRepo() {
 }
 
 async function runWinningCheck(service: LottoServiceInterface) {
-  const waitingIssues = await findWaitingIssues();
+  const waitingIssues = await getWaitingIssues();
   if (waitingIssues.length > 0) {
     core.info(`총 ${waitingIssues.length}개의 구매 내역에 대해서 당첨 발표를 확인합니다.`);
 
@@ -64,7 +64,7 @@ async function runWinningCheck(service: LottoServiceInterface) {
         const ranks = await Promise.all(checkPromises);
 
         const rankLabels = [...new Set(ranks.map(it => rankToLabel(it)))];
-        await markIssueAs(issue.number, rankLabels);
+        await markIssueAsChecked(issue.number, rankLabels);
       }
     });
 
@@ -89,7 +89,7 @@ async function runPurchase(service: LottoServiceInterface) {
     const link = service.getCheckWinningLink(round, numbers);
 
     const issueBody = bodyBuilder({ date, round, numbers, link });
-    await createPurchaseIssue(date, issueBody);
+    await createWaitingIssue(date, issueBody);
   } catch (e) {
     await service.destroy();
 

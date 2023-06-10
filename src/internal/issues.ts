@@ -11,7 +11,7 @@ export const getOpenedIssues = async () => {
   return issues.data;
 };
 
-export const findWaitingIssues = async () => {
+export const getWaitingIssues = async () => {
   const issues = await getOpenedIssues();
 
   return issues.filter(issue => {
@@ -25,13 +25,13 @@ export const findWaitingIssues = async () => {
   });
 };
 
-export const markIssueAs = async (issueNumber: number, updatedLabels: string[]) => {
-  const shouldClosed = updatedLabels.length === 1 && updatedLabels[0] === labels.losing;
+export const markIssueAsChecked = async (issueNumber: number, updatedLabels: string[]) => {
+  const shouldBeClosed = updatedLabels.length === 1 && updatedLabels[0] === labels.losing;
 
-  const nextState = shouldClosed ? 'closed' : 'open';
-  const nextLabels = shouldClosed ? updatedLabels : updatedLabels.filter(it => it !== labels.losing);
+  const nextState = shouldBeClosed ? 'closed' : 'open';
+  const nextLabels = shouldBeClosed ? updatedLabels : updatedLabels.filter(it => it !== labels.losing);
 
-  if (!shouldClosed) {
+  if (!shouldBeClosed) {
     await octokit().rest.issues.createComment({
       issue_number: issueNumber,
       body: `@${context().repo.owner} ${nextLabels.length}게임에 당첨됐습니다!`,
@@ -40,14 +40,14 @@ export const markIssueAs = async (issueNumber: number, updatedLabels: string[]) 
   }
 
   return octokit().rest.issues.update({
-    ...context().repo,
     state: nextState,
     issue_number: issueNumber,
-    labels: nextLabels
+    labels: nextLabels,
+    ...context().repo
   });
 };
 
-export const createPurchaseIssue = async (date: string, body: string) => {
+export const createWaitingIssue = async (date: string, body: string) => {
   return octokit().rest.issues.create({
     labels: [labels.waiting],
     title: date,

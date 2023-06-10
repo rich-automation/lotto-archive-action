@@ -2,13 +2,17 @@ name: 'lotto-actions'
 description: 'GitHub Actions for lotto purchase'
 author: 'bang9<gusrn1423@naver.com>'
 inputs:
-  lotto_id:
+  id:
     required: true
     description: 'Input dhlottery id'
     default: ''
-  lotto_pwd:
+  pwd:
     required: true
     description: 'Input dhlottery password'
+    default: ''
+  token:
+    required: true
+    description: 'Input github token'
     default: ''
 runs:
   using: 'node16'

@@ -1,7 +1,7 @@
 name: Run actions (manual)
 on: workflow_dispatch
 jobs:
-  build:
+  run-actions:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

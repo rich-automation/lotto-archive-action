@@ -34,13 +34,14 @@ export const markIssueAs = async (issueNumber: number, updatedLabels: string[]) 
       body: `@${context().repo.owner} ${updatedLabels.length}게임에 당첨됐습니다!`,
       ...context().repo
     });
+  } else {
   }
 
   return octokit().rest.issues.update({
     ...context().repo,
     state: shouldClosed ? 'closed' : 'open',
     issue_number: issueNumber,
-    labels: updatedLabels
+    labels: shouldClosed ? updatedLabels : updatedLabels.filter(it => it !== labels.losing)
   });
 };
 

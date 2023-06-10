@@ -1,16 +1,16 @@
-import { getOctokit, context as ctx } from '@actions/github';
-import core from '@actions/core';
+import * as github from '@actions/github';
+import * as core from '@actions/core';
 import { inputKeys } from './constants';
 
-let _octokit: ReturnType<typeof getOctokit>;
+let _octokit: ReturnType<typeof github.getOctokit>;
 
 export const octokit = () => {
   if (_octokit) return _octokit;
   const token = core.getInput(inputKeys.githubToken);
-  _octokit = getOctokit(token);
+  _octokit = github.getOctokit(token);
   return _octokit;
 };
 
 export const context = () => {
-  return ctx;
+  return github.context;
 };

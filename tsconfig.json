@@ -23,6 +23,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": ["src"],
+  "include": ["src", "rollup.config.ts"],
   "exclude": ["dist", "lib", "node_modules", "**/__tests__/**"]
 }

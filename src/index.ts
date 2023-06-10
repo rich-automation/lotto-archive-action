@@ -17,7 +17,6 @@ async function run() {
 
     const lottoService = await runActionsEnvironments();
     await runWinningCheck(lottoService);
-
     await runPurchase(lottoService);
   } catch (e) {
     core.info(`GitHub Actions 실행에 실패했습니다. ${e}`);

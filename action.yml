@@ -5,9 +5,11 @@ inputs:
   lotto_id:
     required: true
     description: 'Input dhlottery id'
+    default: ''
   lotto_pwd:
     required: true
     description: 'Input dhlottery password'
+    default: ''
 runs:
   using: 'node16'
   main: 'dist/index.js'

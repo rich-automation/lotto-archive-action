@@ -1,4 +1,5 @@
 import { context, octokit } from './github';
+import dayjs from 'dayjs';
 
 export const getOpenedIssues = async () => {
   const issues = await octokit().rest.issues.listForRepo({
@@ -20,4 +21,13 @@ export const findLastPurchaseIssue = async () => {
       return true;
     })
     .at(0);
+};
+
+export const createPurchaseIssue = async () => {
+  return octokit().rest.issues.create({
+    labels: ['LABEL'],
+    title: `${dayjs().format('YYYY-MM-DD')}`,
+    body: 'date: 2023-06-10\n' + 'numbers: [[1,2,3,4,5,6], [1,2,3,4,5,6]]\n' + 'link: https://www.naver.com',
+    ...context().repo
+  });
 };

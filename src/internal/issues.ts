@@ -34,14 +34,19 @@ export const createPurchaseIssue = async () => {
 };
 
 export const initLabels = async () => {
-  const promises = Object.entries(labels).map(tryCreateLabel);
-  await Promise.all(promises);
+  const labelInformation = Object.entries(labels);
+
+  const allLabels = (await octokit().rest.issues.listLabelsForRepo({ ...context().repo })).data;
+  if (allLabels.length !== labelInformation.length) {
+    // Clear all labels
+    await Promise.all(allLabels.map(it => octokit().rest.issues.deleteLabel({ name: it.name, ...context().repo })));
+  }
+
+  // Create labels
+  const promises = labelInformation.map(tryCreateLabel);
+  await Promise.allSettled(promises);
 };
 
 const tryCreateLabel = async ([description, name]: [string, string]) => {
-  try {
-    await octokit().rest.issues.createLabel({ name, description, ...context().repo });
-  } catch {
-    // noop
-  }
+  return octokit().rest.issues.createLabel({ name, description, ...context().repo });
 };

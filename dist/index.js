@@ -9847,16 +9847,18 @@ const createPurchaseIssue = () => __awaiter(void 0, void 0, void 0, function* ()
     return octokit().rest.issues.create(Object.assign({ labels: [labels.waiting], title: `${dayjs_min_default()().format('YYYY-MM-DD')}`, body: 'date: 2023-06-10\n' + 'numbers: [[1,2,3,4,5,6], [1,2,3,4,5,6]]\n' + 'link: https://www.naver.com' }, context().repo));
 });
 const initLabels = () => __awaiter(void 0, void 0, void 0, function* () {
-    const promises = Object.entries(labels).map(tryCreateLabel);
-    yield Promise.all(promises);
+    const labelInformation = Object.entries(labels);
+    const allLabels = (yield octokit().rest.issues.listLabelsForRepo(Object.assign({}, context().repo))).data;
+    if (allLabels.length !== labelInformation.length) {
+        // Clear all labels
+        yield Promise.all(allLabels.map(it => octokit().rest.issues.deleteLabel(Object.assign({ name: it.name }, context().repo))));
+    }
+    // Create labels
+    const promises = labelInformation.map(tryCreateLabel);
+    yield Promise.allSettled(promises);
 });
 const tryCreateLabel = ([description, name]) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield octokit().rest.issues.createLabel(Object.assign({ name, description }, context().repo));
-    }
-    catch (_a) {
-        // noop
-    }
+    return octokit().rest.issues.createLabel(Object.assign({ name, description }, context().repo));
 });
 
 ;// CONCATENATED MODULE: ./src/index.ts

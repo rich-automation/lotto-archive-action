@@ -1,8 +1,8 @@
 {
   "name": "lotto-actions",
   "type": "module",
-  "version": "1.0.0",
-  "main": "lib/index.js",
+  "version": "0.0.4",
+  "main": "dist/index.js",
   "author": "bang9 <gusrn1423@naver.com>",
   "license": "MIT",
   "scripts": {

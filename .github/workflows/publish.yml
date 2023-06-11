@@ -19,10 +19,9 @@ jobs:
       - run: yarn install --immutable
       - name: 'set environments'
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.npm_token }}" >> .npmrc
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      - name: 'publish to npm'
+      - name: 'publish to github'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |

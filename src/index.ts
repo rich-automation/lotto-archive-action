@@ -19,8 +19,6 @@ async function run() {
     const lottoService = await runActionsEnvironments();
     await runWinningCheck(lottoService);
     await runPurchase(lottoService);
-
-    core.setOutput('time', new Date().toTimeString());
   } catch (e) {
     if (e instanceof Error) {
       core.info(`💸 GitHub Actions 실행에 실패했습니다. ${e}`);
@@ -106,6 +104,7 @@ async function runPurchase(service: LottoServiceInterface) {
     core.info('💸 구매 내역에 대한 이슈를 생성합니다.');
     const issueBody = bodyBuilder({ date, round, numbers, link });
     await createWaitingIssue(date, issueBody);
+    core.info('💸 이슈 생성 완료.');
   } catch (e) {
     await service.destroy();
 

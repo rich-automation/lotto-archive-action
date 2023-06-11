@@ -1,6 +1,7 @@
 {
   "git": {
-    "requireBranch": "main"
+    "requireBranch": "main",
+    "commitMessage": "chore: release v${version}"
   },
   "hooks": {
     "before:bump": "yarn build",

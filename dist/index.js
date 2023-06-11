@@ -84565,7 +84565,7 @@ function getNodeRequestOptions(request) {
  * @param   String      message      Error message for human
  * @return  AbortError
  */
-function AbortError$1(message) {
+function AbortError(message) {
   Error.call(this, message);
 
   this.type = 'aborted';
@@ -84575,9 +84575,9 @@ function AbortError$1(message) {
   Error.captureStackTrace(this, this.constructor);
 }
 
-AbortError$1.prototype = Object.create(Error.prototype);
-AbortError$1.prototype.constructor = AbortError$1;
-AbortError$1.prototype.name = 'AbortError';
+AbortError.prototype = Object.create(Error.prototype);
+AbortError.prototype.constructor = AbortError;
+AbortError.prototype.name = 'AbortError';
 
 const URL$1$1 = Url.URL || publicApi.URL;
 
@@ -84633,7 +84633,7 @@ function fetch(url, opts) {
 		let response = null;
 
 		const abort = function abort() {
-			let error = new AbortError$1('The user aborted a request.');
+			let error = new AbortError('The user aborted a request.');
 			reject(error);
 			if (request.body && request.body instanceof Stream$3.Readable) {
 				destroyStream(request.body, error);
@@ -88771,12 +88771,6 @@ let JSHandle$1 = class JSHandle {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$K = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var _ElementHandle_instances, _ElementHandle_asSVGElementHandle, _ElementHandle_getOwnerSVGElement;
 /**
  * ElementHandle represents an in-page DOM element.
  *
@@ -88816,7 +88810,6 @@ let ElementHandle$1 = class ElementHandle extends JSHandle$1 {
      */
     constructor(handle) {
         super();
-        _ElementHandle_instances.add(this);
         this.handle = handle;
     }
     /**
@@ -88905,20 +88898,6 @@ let ElementHandle$1 = class ElementHandle extends JSHandle$1 {
     }
     async waitForSelector() {
         throw new Error('Not implemented');
-    }
-    /**
-     * Checks if an element is visible using the same mechanism as
-     * {@link ElementHandle.waitForSelector}.
-     */
-    async isVisible() {
-        throw new Error('Not implemented.');
-    }
-    /**
-     * Checks if an element is hidden using the same mechanism as
-     * {@link ElementHandle.waitForSelector}.
-     */
-    async isHidden() {
-        throw new Error('Not implemented.');
     }
     async waitForXPath() {
         throw new Error('Not implemented');
@@ -89018,86 +88997,9 @@ let ElementHandle$1 = class ElementHandle extends JSHandle$1 {
     async screenshot() {
         throw new Error('Not implemented');
     }
-    /**
-     * @internal
-     */
-    async assertConnectedElement() {
-        const error = await this.evaluate(async (element) => {
-            if (!element.isConnected) {
-                return 'Node is detached from document';
-            }
-            if (element.nodeType !== Node.ELEMENT_NODE) {
-                return 'Node is not of type HTMLElement';
-            }
-            return;
-        });
-        if (error) {
-            throw new Error(error);
-        }
-    }
-    /**
-     * Resolves to true if the element is visible in the current viewport. If an
-     * element is an SVG, we check if the svg owner element is in the viewport
-     * instead. See https://crbug.com/963246.
-     *
-     * @param options - Threshold for the intersection between 0 (no intersection) and 1
-     * (full intersection). Defaults to 1.
-     */
-    async isIntersectingViewport(options) {
-        await this.assertConnectedElement();
-        const { threshold = 0 } = options !== null && options !== void 0 ? options : {};
-        const svgHandle = await __classPrivateFieldGet$K(this, _ElementHandle_instances, "m", _ElementHandle_asSVGElementHandle).call(this, this);
-        const intersectionTarget = svgHandle
-            ? await __classPrivateFieldGet$K(this, _ElementHandle_instances, "m", _ElementHandle_getOwnerSVGElement).call(this, svgHandle)
-            : this;
-        try {
-            return await intersectionTarget.evaluate(async (element, threshold) => {
-                const visibleRatio = await new Promise(resolve => {
-                    const observer = new IntersectionObserver(entries => {
-                        resolve(entries[0].intersectionRatio);
-                        observer.disconnect();
-                    });
-                    observer.observe(element);
-                });
-                return threshold === 1 ? visibleRatio === 1 : visibleRatio > threshold;
-            }, threshold);
-        }
-        finally {
-            if (intersectionTarget !== this) {
-                await intersectionTarget.dispose();
-            }
-        }
-    }
-    /**
-     * Scrolls the element into view using either the automation protocol client
-     * or by calling element.scrollIntoView.
-     */
-    async scrollIntoView() {
+    async isIntersectingViewport() {
         throw new Error('Not implemented');
     }
-};
-_ElementHandle_instances = new WeakSet(), _ElementHandle_asSVGElementHandle = 
-/**
- * Returns true if an element is an SVGElement (included svg, path, rect
- * etc.).
- */
-async function _ElementHandle_asSVGElementHandle(handle) {
-    if (await handle.evaluate(element => {
-        return element instanceof SVGElement;
-    })) {
-        return handle;
-    }
-    else {
-        return null;
-    }
-}, _ElementHandle_getOwnerSVGElement = async function _ElementHandle_getOwnerSVGElement(handle) {
-    // SVGSVGElement.ownerSVGElement === null.
-    return await handle.evaluateHandle(element => {
-        if (element instanceof SVGSVGElement) {
-            return element;
-        }
-        return element.ownerSVGElement;
-    });
 };
 
 /**
@@ -89209,105 +89111,6 @@ const interpolateFunction = (fn, replacements) => {
 };
 
 /**
- * Copyright 2018 Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-var __classPrivateFieldSet$G = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-};
-var __classPrivateFieldGet$J = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var _ProtocolError_code, _ProtocolError_originalMessage;
-/**
- * @deprecated Do not use.
- *
- * @public
- */
-class CustomError extends Error {
-    /**
-     * @internal
-     */
-    constructor(message) {
-        super(message);
-        this.name = this.constructor.name;
-        Error.captureStackTrace(this, this.constructor);
-    }
-}
-/**
- * TimeoutError is emitted whenever certain operations are terminated due to
- * timeout.
- *
- * @remarks
- * Example operations are {@link Page.waitForSelector | page.waitForSelector} or
- * {@link PuppeteerNode.launch | puppeteer.launch}.
- *
- * @public
- */
-let TimeoutError$1 = class TimeoutError extends CustomError {
-};
-/**
- * AbortError is emitted whenever certain operations are terminated due to
- * an abort request.
- *
- * @remarks
- * Example operations are {@link Page.waitForSelector | page.waitForSelector}.
- *
- * @public
- */
-class AbortError extends CustomError {
-}
-/**
- * ProtocolError is emitted whenever there is an error from the protocol.
- *
- * @public
- */
-class ProtocolError extends CustomError {
-    constructor() {
-        super(...arguments);
-        _ProtocolError_code.set(this, void 0);
-        _ProtocolError_originalMessage.set(this, '');
-    }
-    set code(code) {
-        __classPrivateFieldSet$G(this, _ProtocolError_code, code, "f");
-    }
-    /**
-     * @readonly
-     * @public
-     */
-    get code() {
-        return __classPrivateFieldGet$J(this, _ProtocolError_code, "f");
-    }
-    set originalMessage(originalMessage) {
-        __classPrivateFieldSet$G(this, _ProtocolError_originalMessage, originalMessage, "f");
-    }
-    /**
-     * @readonly
-     * @public
-     */
-    get originalMessage() {
-        return __classPrivateFieldGet$J(this, _ProtocolError_originalMessage, "f");
-    }
-}
-_ProtocolError_code = new WeakMap(), _ProtocolError_originalMessage = new WeakMap();
-
-/**
  * Copyright 2023 Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -89330,7 +89133,7 @@ const DEFAULT_BATCH_SIZE = 20;
  * @param size - The number of elements to transpose. This should be something
  * reasonable.
  */
-async function* fastTransposeIteratorHandle(iterator, size) {
+async function* fastTransposeIteratorHandle(iterator, size = DEFAULT_BATCH_SIZE) {
     const array = await iterator.evaluateHandle(async (iterator, size) => {
         const results = [];
         while (results.length < size) {
@@ -89352,11 +89155,8 @@ async function* fastTransposeIteratorHandle(iterator, size) {
  * of {@link fastTransposeIteratorHandle}.
  */
 async function* transposeIteratorHandle(iterator) {
-    let size = DEFAULT_BATCH_SIZE;
     try {
-        while (!(yield* fastTransposeIteratorHandle(iterator, size))) {
-            size <<= 1;
-        }
+        while (!(yield* fastTransposeIteratorHandle(iterator))) { }
     }
     finally {
         await iterator.dispose();
@@ -89418,13 +89218,13 @@ const PUPPETEER_WORLD = Symbol('puppeteerWorld');
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$F = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$G = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$I = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$J = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -89436,10 +89236,10 @@ var _LazyArg_get;
 class LazyArg {
     constructor(get) {
         _LazyArg_get.set(this, void 0);
-        __classPrivateFieldSet$F(this, _LazyArg_get, get, "f");
+        __classPrivateFieldSet$G(this, _LazyArg_get, get, "f");
     }
     async get(context) {
-        return __classPrivateFieldGet$I(this, _LazyArg_get, "f").call(this, context);
+        return __classPrivateFieldGet$J(this, _LazyArg_get, "f").call(this, context);
     }
 }
 _LazyArg_get = new WeakMap();
@@ -89550,11 +89350,8 @@ class QueryHandler {
             frame = elementOrFrame.frame;
             element = await frame.worlds[PUPPETEER_WORLD].adoptHandle(elementOrFrame);
         }
-        const { visible = false, hidden = false, timeout, signal } = options;
+        const { visible = false, hidden = false, timeout } = options;
         try {
-            if (signal === null || signal === void 0 ? void 0 : signal.aborted) {
-                throw new AbortError('QueryHander.waitFor has been aborted.');
-            }
             const handle = await frame.worlds[PUPPETEER_WORLD].waitForFunction(async (PuppeteerUtil, query, selector, root, visible) => {
                 const querySelector = PuppeteerUtil.createFunction(query);
                 const node = await querySelector(root !== null && root !== void 0 ? root : document, selector, PuppeteerUtil);
@@ -89563,14 +89360,9 @@ class QueryHandler {
                 polling: visible || hidden ? 'raf' : 'mutation',
                 root: element,
                 timeout,
-                signal,
             }, LazyArg.create(context => {
                 return context.puppeteerUtil;
             }), stringifyFunction(this._querySelector), selector, element, visible ? true : hidden ? false : undefined);
-            if (signal === null || signal === void 0 ? void 0 : signal.aborted) {
-                await handle.dispose();
-                throw new AbortError('QueryHander.waitFor has been aborted.');
-            }
             if (!(handle instanceof ElementHandle$1)) {
                 await handle.dispose();
                 return null;
@@ -89680,14 +89472,14 @@ ARIAQueryHandler.queryOne = async (element, selector) => {
  *
  * @internal
  */
-const source = "\"use strict\";var C=Object.defineProperty;var ne=Object.getOwnPropertyDescriptor;var oe=Object.getOwnPropertyNames;var se=Object.prototype.hasOwnProperty;var u=(e,t)=>{for(var n in t)C(e,n,{get:t[n],enumerable:!0})},ie=(e,t,n,r)=>{if(t&&typeof t==\"object\"||typeof t==\"function\")for(let o of oe(t))!se.call(e,o)&&o!==n&&C(e,o,{get:()=>t[o],enumerable:!(r=ne(t,o))||r.enumerable});return e};var le=e=>ie(C({},\"__esModule\",{value:!0}),e);var Oe={};u(Oe,{default:()=>Re});module.exports=le(Oe);var P=class extends Error{constructor(t){super(t),this.name=this.constructor.name,Error.captureStackTrace(this,this.constructor)}},S=class extends P{};var I=class extends P{#e;#r=\"\";set code(t){this.#e=t}get code(){return this.#e}set originalMessage(t){this.#r=t}get originalMessage(){return this.#r}},De=Object.freeze({TimeoutError:S,ProtocolError:I});function p(e){let t=!1,n=!1,r,o,i=new Promise((l,a)=>{r=l,o=a}),s=e&&e.timeout>0?setTimeout(()=>{n=!0,o(new S(e.message))},e.timeout):void 0;return Object.assign(i,{resolved:()=>t,finished:()=>t||n,resolve:l=>{s&&clearTimeout(s),t=!0,r(l)},reject:l=>{clearTimeout(s),n=!0,o(l)}})}var G=new Map,X=e=>{let t=G.get(e);return t||(t=new Function(`return ${e}`)(),G.set(e,t),t)};var R={};u(R,{ariaQuerySelector:()=>ae,ariaQuerySelectorAll:()=>k});var ae=(e,t)=>window.__ariaQuerySelector(e,t),k=async function*(e,t){yield*await window.__ariaQuerySelectorAll(e,t)};var D={};u(D,{customQuerySelectors:()=>_});var O=class{#e=new Map;register(t,n){if(!n.queryOne&&n.queryAll){let r=n.queryAll;n.queryOne=(o,i)=>{for(let s of r(o,i))return s;return null}}else if(n.queryOne&&!n.queryAll){let r=n.queryOne;n.queryAll=(o,i)=>{let s=r(o,i);return s?[s]:[]}}else if(!n.queryOne||!n.queryAll)throw new Error(\"At least one query method must be defined.\");this.#e.set(t,{querySelector:n.queryOne,querySelectorAll:n.queryAll})}unregister(t){this.#e.delete(t)}get(t){return this.#e.get(t)}clear(){this.#e.clear()}},_=new O;var M={};u(M,{pierceQuerySelector:()=>ce,pierceQuerySelectorAll:()=>ue});var ce=(e,t)=>{let n=null,r=o=>{let i=document.createTreeWalker(o,NodeFilter.SHOW_ELEMENT);do{let s=i.currentNode;s.shadowRoot&&r(s.shadowRoot),!(s instanceof ShadowRoot)&&s!==o&&!n&&s.matches(t)&&(n=s)}while(!n&&i.nextNode())};return e instanceof Document&&(e=e.documentElement),r(e),n},ue=(e,t)=>{let n=[],r=o=>{let i=document.createTreeWalker(o,NodeFilter.SHOW_ELEMENT);do{let s=i.currentNode;s.shadowRoot&&r(s.shadowRoot),!(s instanceof ShadowRoot)&&s!==o&&s.matches(t)&&n.push(s)}while(i.nextNode())};return e instanceof Document&&(e=e.documentElement),r(e),n};var m=(e,t)=>{if(!e)throw new Error(t)};var T=class{#e;#r;#n;#t;constructor(t,n){this.#e=t,this.#r=n}async start(){let t=this.#t=p(),n=await this.#e();if(n){t.resolve(n);return}this.#n=new MutationObserver(async()=>{let r=await this.#e();r&&(t.resolve(r),await this.stop())}),this.#n.observe(this.#r,{childList:!0,subtree:!0,attributes:!0})}async stop(){m(this.#t,\"Polling never started.\"),this.#t.finished()||this.#t.reject(new Error(\"Polling stopped\")),this.#n&&(this.#n.disconnect(),this.#n=void 0)}result(){return m(this.#t,\"Polling never started.\"),this.#t}},x=class{#e;#r;constructor(t){this.#e=t}async start(){let t=this.#r=p(),n=await this.#e();if(n){t.resolve(n);return}let r=async()=>{if(t.finished())return;let o=await this.#e();if(!o){window.requestAnimationFrame(r);return}t.resolve(o),await this.stop()};window.requestAnimationFrame(r)}async stop(){m(this.#r,\"Polling never started.\"),this.#r.finished()||this.#r.reject(new Error(\"Polling stopped\"))}result(){return m(this.#r,\"Polling never started.\"),this.#r}},E=class{#e;#r;#n;#t;constructor(t,n){this.#e=t,this.#r=n}async start(){let t=this.#t=p(),n=await this.#e();if(n){t.resolve(n);return}this.#n=setInterval(async()=>{let r=await this.#e();r&&(t.resolve(r),await this.stop())},this.#r)}async stop(){m(this.#t,\"Polling never started.\"),this.#t.finished()||this.#t.reject(new Error(\"Polling stopped\")),this.#n&&(clearInterval(this.#n),this.#n=void 0)}result(){return m(this.#t,\"Polling never started.\"),this.#t}};var H={};u(H,{pQuerySelector:()=>Ie,pQuerySelectorAll:()=>re});var c=class{static async*map(t,n){for await(let r of t)yield await n(r)}static async*flatMap(t,n){for await(let r of t)yield*n(r)}static async collect(t){let n=[];for await(let r of t)n.push(r);return n}static async first(t){for await(let n of t)return n}};var h={attribute:/\\[\\s*(?:(?<namespace>\\*|[-\\w\\P{ASCII}]*)\\|)?(?<name>[-\\w\\P{ASCII}]+)\\s*(?:(?<operator>\\W?=)\\s*(?<value>.+?)\\s*(\\s(?<caseSensitive>[iIsS]))?\\s*)?\\]/gu,id:/#(?<name>[-\\w\\P{ASCII}]+)/gu,class:/\\.(?<name>[-\\w\\P{ASCII}]+)/gu,comma:/\\s*,\\s*/g,combinator:/\\s*[\\s>+~]\\s*/g,\"pseudo-element\":/::(?<name>[-\\w\\P{ASCII}]+)(?:\\((?<argument>¶+)\\))?/gu,\"pseudo-class\":/:(?<name>[-\\w\\P{ASCII}]+)(?:\\((?<argument>¶+)\\))?/gu,universal:/(?:(?<namespace>\\*|[-\\w\\P{ASCII}]*)\\|)?\\*/gu,type:/(?:(?<namespace>\\*|[-\\w\\P{ASCII}]*)\\|)?(?<name>[-\\w\\P{ASCII}]+)/gu},fe=new Set([\"combinator\",\"comma\"]);var me=e=>{switch(e){case\"pseudo-element\":case\"pseudo-class\":return new RegExp(h[e].source.replace(\"(?<argument>\\xB6+)\",\"(?<argument>.+)\"),\"gu\");default:return h[e]}};function de(e,t){let n=0,r=\"\";for(;t<e.length;t++){let o=e[t];switch(o){case\"(\":++n;break;case\")\":--n;break}if(r+=o,n===0)return r}return r}function pe(e,t=h){if(!e)return[];let n=[e];for(let[o,i]of Object.entries(t))for(let s=0;s<n.length;s++){let l=n[s];if(typeof l!=\"string\")continue;i.lastIndex=0;let a=i.exec(l);if(!a)continue;let d=a.index-1,f=[],V=a[0],B=l.slice(0,d+1);B&&f.push(B),f.push({...a.groups,type:o,content:V});let z=l.slice(d+V.length+1);z&&f.push(z),n.splice(s,1,...f)}let r=0;for(let o of n)switch(typeof o){case\"string\":throw new Error(`Unexpected sequence ${o} found at index ${r}`);case\"object\":r+=o.content.length,o.pos=[r-o.content.length,r],fe.has(o.type)&&(o.content=o.content.trim()||\" \");break}return n}var he=/(['\"])([^\\\\\\n]+?)\\1/g,ge=/\\\\./g;function K(e,t=h){if(e=e.trim(),e===\"\")return[];let n=[];e=e.replace(ge,(i,s)=>(n.push({value:i,offset:s}),\"\\uE000\".repeat(i.length))),e=e.replace(he,(i,s,l,a)=>(n.push({value:i,offset:a}),`${s}${\"\\uE001\".repeat(l.length)}${s}`));{let i=0,s;for(;(s=e.indexOf(\"(\",i))>-1;){let l=de(e,s);n.push({value:l,offset:s}),e=`${e.substring(0,s)}(${\"\\xB6\".repeat(l.length-2)})${e.substring(s+l.length)}`,i=s+l.length}}let r=pe(e,t),o=new Set;for(let i of n.reverse())for(let s of r){let{offset:l,value:a}=i;if(!(s.pos[0]<=l&&l+a.length<=s.pos[1]))continue;let{content:d}=s,f=l-s.pos[0];s.content=d.slice(0,f)+a+d.slice(f+a.length),s.content!==d&&o.add(s)}for(let i of o){let s=me(i.type);if(!s)throw new Error(`Unknown token type: ${i.type}`);s.lastIndex=0;let l=s.exec(i.content);if(!l)throw new Error(`Unable to parse content for ${i.type}: ${i.content}`);Object.assign(i,l.groups)}return r}function*N(e,t){switch(e.type){case\"list\":for(let n of e.list)yield*N(n,e);break;case\"complex\":yield*N(e.left,e),yield*N(e.right,e);break;case\"compound\":yield*e.list.map(n=>[n,e]);break;default:yield[e,t]}}function g(e){let t;return Array.isArray(e)?t=e:t=[...N(e)].map(([n])=>n),t.map(n=>n.content).join(\"\")}h.combinator=/\\s*(>>>>?|[\\s>+~])\\s*/g;var ye=/\\\\[\\s\\S]/g,we=e=>{if(e.length>1){for(let t of['\"',\"'\"])if(!(!e.startsWith(t)||!e.endsWith(t)))return e.slice(t.length,-t.length).replace(ye,n=>n.slice(1))}return e};function Y(e){let t=!0,n=K(e);if(n.length===0)return[[],t];let r=[],o=[r],i=[o],s=[];for(let l of n){switch(l.type){case\"combinator\":switch(l.content){case\">>>\":t=!1,s.length&&(r.push(g(s)),s.splice(0)),r=[],o.push(\">>>\"),o.push(r);continue;case\">>>>\":t=!1,s.length&&(r.push(g(s)),s.splice(0)),r=[],o.push(\">>>>\"),o.push(r);continue}break;case\"pseudo-element\":if(!l.name.startsWith(\"-p-\"))break;t=!1,s.length&&(r.push(g(s)),s.splice(0)),r.push({name:l.name.slice(3),value:we(l.argument??\"\")});continue;case\"comma\":s.length&&(r.push(g(s)),s.splice(0)),r=[],o=[r],i.push(o);continue}s.push(l)}return s.length&&r.push(g(s)),[i,t]}var Q={};u(Q,{textQuerySelectorAll:()=>b});var Se=new Set([\"checkbox\",\"image\",\"radio\"]),be=e=>e instanceof HTMLSelectElement||e instanceof HTMLTextAreaElement||e instanceof HTMLInputElement&&!Se.has(e.type),Pe=new Set([\"SCRIPT\",\"STYLE\"]),w=e=>!Pe.has(e.nodeName)&&!document.head?.contains(e),q=new WeakMap,Z=e=>{for(;e;)q.delete(e),e instanceof ShadowRoot?e=e.host:e=e.parentNode},J=new WeakSet,Te=new MutationObserver(e=>{for(let t of e)Z(t.target)}),y=e=>{let t=q.get(e);if(t||(t={full:\"\",immediate:[]},!w(e)))return t;let n=\"\";if(be(e))t.full=e.value,t.immediate.push(e.value),e.addEventListener(\"input\",r=>{Z(r.target)},{once:!0,capture:!0});else{for(let r=e.firstChild;r;r=r.nextSibling){if(r.nodeType===Node.TEXT_NODE){t.full+=r.nodeValue??\"\",n+=r.nodeValue??\"\";continue}n&&t.immediate.push(n),n=\"\",r.nodeType===Node.ELEMENT_NODE&&(t.full+=y(r).full)}n&&t.immediate.push(n),e instanceof Element&&e.shadowRoot&&(t.full+=y(e.shadowRoot).full),J.has(e)||(Te.observe(e,{childList:!0,characterData:!0}),J.add(e))}return q.set(e,t),t};var b=function*(e,t){let n=!1;for(let r of e.childNodes)if(r instanceof Element&&w(r)){let o;r.shadowRoot?o=b(r.shadowRoot,t):o=b(r,t);for(let i of o)yield i,n=!0}n||e instanceof Element&&w(e)&&y(e).full.includes(t)&&(yield e)};var $={};u($,{checkVisibility:()=>Ee,pierce:()=>A,pierceAll:()=>L});var xe=[\"hidden\",\"collapse\"],Ee=(e,t)=>{if(!e)return t===!1;if(t===void 0)return e;let n=e.nodeType===Node.TEXT_NODE?e.parentElement:e,r=window.getComputedStyle(n),o=r&&!xe.includes(r.visibility)&&!Ne(n);return t===o?e:!1};function Ne(e){let t=e.getBoundingClientRect();return t.width===0||t.height===0}var Ae=e=>\"shadowRoot\"in e&&e.shadowRoot instanceof ShadowRoot;function*A(e){Ae(e)?yield e.shadowRoot:yield e}function*L(e){e=A(e).next().value,yield e;let t=[document.createTreeWalker(e,NodeFilter.SHOW_ELEMENT)];for(let n of t){let r;for(;r=n.nextNode();)r.shadowRoot&&(yield r.shadowRoot,t.push(document.createTreeWalker(r.shadowRoot,NodeFilter.SHOW_ELEMENT)))}}var U={};u(U,{xpathQuerySelectorAll:()=>j});var j=function*(e,t){let r=(e.ownerDocument||document).evaluate(t,e,null,XPathResult.ORDERED_NODE_ITERATOR_TYPE),o;for(;o=r.iterateNext();)yield o};var ve=/[-\\w\\P{ASCII}*]/,ee=e=>\"querySelectorAll\"in e,v=class extends Error{constructor(t,n){super(`${t} is not a valid selector: ${n}`)}},F=class{#e;#r;#n=[];#t=void 0;elements;constructor(t,n,r){this.elements=[t],this.#e=n,this.#r=r,this.#o()}async run(){if(typeof this.#t==\"string\")switch(this.#t.trimStart()){case\":scope\":this.#o();break}for(;this.#t!==void 0;this.#o()){let t=this.#t,n=this.#e;typeof t==\"string\"?t[0]&&ve.test(t[0])?this.elements=c.flatMap(this.elements,async function*(r){ee(r)&&(yield*r.querySelectorAll(t))}):this.elements=c.flatMap(this.elements,async function*(r){if(!r.parentElement){if(!ee(r))return;yield*r.querySelectorAll(t);return}let o=0;for(let i of r.parentElement.children)if(++o,i===r)break;yield*r.parentElement.querySelectorAll(`:scope>:nth-child(${o})${t}`)}):this.elements=c.flatMap(this.elements,async function*(r){switch(t.name){case\"text\":yield*b(r,t.value);break;case\"xpath\":yield*j(r,t.value);break;case\"aria\":yield*k(r,t.value);break;default:let o=_.get(t.name);if(!o)throw new v(n,`Unknown selector type: ${t.name}`);yield*o.querySelectorAll(r,t.value)}})}}#o(){if(this.#n.length!==0){this.#t=this.#n.shift();return}if(this.#r.length===0){this.#t=void 0;return}let t=this.#r.shift();switch(t){case\">>>>\":{this.elements=c.flatMap(this.elements,A),this.#o();break}case\">>>\":{this.elements=c.flatMap(this.elements,L),this.#o();break}default:this.#n=t,this.#o();break}}},W=class{#e=new WeakMap;calculate(t,n=[]){if(t===null)return n;t instanceof ShadowRoot&&(t=t.host);let r=this.#e.get(t);if(r)return[...r,...n];let o=0;for(let s=t.previousSibling;s;s=s.previousSibling)++o;let i=this.calculate(t.parentNode,[o]);return this.#e.set(t,i),[...i,...n]}},te=(e,t)=>{if(e.length+t.length===0)return 0;let[n=-1,...r]=e,[o=-1,...i]=t;return n===o?te(r,i):n<o?-1:1},Ce=async function*(e){let t=new Set;for await(let r of e)t.add(r);let n=new W;yield*[...t.values()].map(r=>[r,n.calculate(r)]).sort(([,r],[,o])=>te(r,o)).map(([r])=>r)},re=function(e,t){let n,r;try{[n,r]=Y(t)}catch{return e.querySelectorAll(t)}if(r)return e.querySelectorAll(t);if(n.some(o=>{let i=0;return o.some(s=>(typeof s==\"string\"?++i:i=0,i>1))}))throw new v(t,\"Multiple deep combinators found in sequence.\");return Ce(c.flatMap(n,o=>{let i=new F(e,t,o);return i.run(),i.elements}))},Ie=async function(e,t){for await(let n of re(e,t))return n;return null};var ke=Object.freeze({...R,...D,...M,...H,...Q,...$,...U,createDeferredPromise:p,createFunction:X,createTextContent:y,IntervalPoller:E,isSuitableNodeForTextMatching:w,MutationPoller:T,RAFPoller:x}),Re=ke;\n";
+const source = "\"use strict\";var C=Object.defineProperty;var ne=Object.getOwnPropertyDescriptor;var oe=Object.getOwnPropertyNames;var se=Object.prototype.hasOwnProperty;var u=(e,t)=>{for(var n in t)C(e,n,{get:t[n],enumerable:!0})},ie=(e,t,n,r)=>{if(t&&typeof t==\"object\"||typeof t==\"function\")for(let o of oe(t))!se.call(e,o)&&o!==n&&C(e,o,{get:()=>t[o],enumerable:!(r=ne(t,o))||r.enumerable});return e};var le=e=>ie(C({},\"__esModule\",{value:!0}),e);var Oe={};u(Oe,{default:()=>Re});module.exports=le(Oe);var P=class extends Error{constructor(t){super(t),this.name=this.constructor.name,Error.captureStackTrace(this,this.constructor)}},S=class extends P{},I=class extends P{#e;#r=\"\";set code(t){this.#e=t}get code(){return this.#e}set originalMessage(t){this.#r=t}get originalMessage(){return this.#r}},De=Object.freeze({TimeoutError:S,ProtocolError:I});function p(e){let t=!1,n=!1,r,o,i=new Promise((l,a)=>{r=l,o=a}),s=e&&e.timeout>0?setTimeout(()=>{n=!0,o(new S(e.message))},e.timeout):void 0;return Object.assign(i,{resolved:()=>t,finished:()=>t||n,resolve:l=>{s&&clearTimeout(s),t=!0,r(l)},reject:l=>{clearTimeout(s),n=!0,o(l)}})}var G=new Map,X=e=>{let t=G.get(e);return t||(t=new Function(`return ${e}`)(),G.set(e,t),t)};var R={};u(R,{ariaQuerySelector:()=>ae,ariaQuerySelectorAll:()=>k});var ae=(e,t)=>window.__ariaQuerySelector(e,t),k=async function*(e,t){yield*await window.__ariaQuerySelectorAll(e,t)};var D={};u(D,{customQuerySelectors:()=>_});var O=class{#e=new Map;register(t,n){if(!n.queryOne&&n.queryAll){let r=n.queryAll;n.queryOne=(o,i)=>{for(let s of r(o,i))return s;return null}}else if(n.queryOne&&!n.queryAll){let r=n.queryOne;n.queryAll=(o,i)=>{let s=r(o,i);return s?[s]:[]}}else if(!n.queryOne||!n.queryAll)throw new Error(\"At least one query method must be defined.\");this.#e.set(t,{querySelector:n.queryOne,querySelectorAll:n.queryAll})}unregister(t){this.#e.delete(t)}get(t){return this.#e.get(t)}clear(){this.#e.clear()}},_=new O;var M={};u(M,{pierceQuerySelector:()=>ce,pierceQuerySelectorAll:()=>ue});var ce=(e,t)=>{let n=null,r=o=>{let i=document.createTreeWalker(o,NodeFilter.SHOW_ELEMENT);do{let s=i.currentNode;s.shadowRoot&&r(s.shadowRoot),!(s instanceof ShadowRoot)&&s!==o&&!n&&s.matches(t)&&(n=s)}while(!n&&i.nextNode())};return e instanceof Document&&(e=e.documentElement),r(e),n},ue=(e,t)=>{let n=[],r=o=>{let i=document.createTreeWalker(o,NodeFilter.SHOW_ELEMENT);do{let s=i.currentNode;s.shadowRoot&&r(s.shadowRoot),!(s instanceof ShadowRoot)&&s!==o&&s.matches(t)&&n.push(s)}while(i.nextNode())};return e instanceof Document&&(e=e.documentElement),r(e),n};var m=(e,t)=>{if(!e)throw new Error(t)};var T=class{#e;#r;#n;#t;constructor(t,n){this.#e=t,this.#r=n}async start(){let t=this.#t=p(),n=await this.#e();if(n){t.resolve(n);return}this.#n=new MutationObserver(async()=>{let r=await this.#e();r&&(t.resolve(r),await this.stop())}),this.#n.observe(this.#r,{childList:!0,subtree:!0,attributes:!0})}async stop(){m(this.#t,\"Polling never started.\"),this.#t.finished()||this.#t.reject(new Error(\"Polling stopped\")),this.#n&&(this.#n.disconnect(),this.#n=void 0)}result(){return m(this.#t,\"Polling never started.\"),this.#t}},x=class{#e;#r;constructor(t){this.#e=t}async start(){let t=this.#r=p(),n=await this.#e();if(n){t.resolve(n);return}let r=async()=>{if(t.finished())return;let o=await this.#e();if(!o){window.requestAnimationFrame(r);return}t.resolve(o),await this.stop()};window.requestAnimationFrame(r)}async stop(){m(this.#r,\"Polling never started.\"),this.#r.finished()||this.#r.reject(new Error(\"Polling stopped\"))}result(){return m(this.#r,\"Polling never started.\"),this.#r}},E=class{#e;#r;#n;#t;constructor(t,n){this.#e=t,this.#r=n}async start(){let t=this.#t=p(),n=await this.#e();if(n){t.resolve(n);return}this.#n=setInterval(async()=>{let r=await this.#e();r&&(t.resolve(r),await this.stop())},this.#r)}async stop(){m(this.#t,\"Polling never started.\"),this.#t.finished()||this.#t.reject(new Error(\"Polling stopped\")),this.#n&&(clearInterval(this.#n),this.#n=void 0)}result(){return m(this.#t,\"Polling never started.\"),this.#t}};var H={};u(H,{pQuerySelector:()=>Ie,pQuerySelectorAll:()=>re});var c=class{static async*map(t,n){for await(let r of t)yield await n(r)}static async*flatMap(t,n){for await(let r of t)yield*n(r)}static async collect(t){let n=[];for await(let r of t)n.push(r);return n}static async first(t){for await(let n of t)return n}};var h={attribute:/\\[\\s*(?:(?<namespace>\\*|[-\\w\\P{ASCII}]*)\\|)?(?<name>[-\\w\\P{ASCII}]+)\\s*(?:(?<operator>\\W?=)\\s*(?<value>.+?)\\s*(\\s(?<caseSensitive>[iIsS]))?\\s*)?\\]/gu,id:/#(?<name>[-\\w\\P{ASCII}]+)/gu,class:/\\.(?<name>[-\\w\\P{ASCII}]+)/gu,comma:/\\s*,\\s*/g,combinator:/\\s*[\\s>+~]\\s*/g,\"pseudo-element\":/::(?<name>[-\\w\\P{ASCII}]+)(?:\\((?<argument>¶+)\\))?/gu,\"pseudo-class\":/:(?<name>[-\\w\\P{ASCII}]+)(?:\\((?<argument>¶+)\\))?/gu,universal:/(?:(?<namespace>\\*|[-\\w\\P{ASCII}]*)\\|)?\\*/gu,type:/(?:(?<namespace>\\*|[-\\w\\P{ASCII}]*)\\|)?(?<name>[-\\w\\P{ASCII}]+)/gu},fe=new Set([\"combinator\",\"comma\"]);var me=e=>{switch(e){case\"pseudo-element\":case\"pseudo-class\":return new RegExp(h[e].source.replace(\"(?<argument>\\xB6+)\",\"(?<argument>.+)\"),\"gu\");default:return h[e]}};function de(e,t){let n=0,r=\"\";for(;t<e.length;t++){let o=e[t];switch(o){case\"(\":++n;break;case\")\":--n;break}if(r+=o,n===0)return r}return r}function pe(e,t=h){if(!e)return[];let n=[e];for(let[o,i]of Object.entries(t))for(let s=0;s<n.length;s++){let l=n[s];if(typeof l!=\"string\")continue;i.lastIndex=0;let a=i.exec(l);if(!a)continue;let d=a.index-1,f=[],V=a[0],B=l.slice(0,d+1);B&&f.push(B),f.push({...a.groups,type:o,content:V});let z=l.slice(d+V.length+1);z&&f.push(z),n.splice(s,1,...f)}let r=0;for(let o of n)switch(typeof o){case\"string\":throw new Error(`Unexpected sequence ${o} found at index ${r}`);case\"object\":r+=o.content.length,o.pos=[r-o.content.length,r],fe.has(o.type)&&(o.content=o.content.trim()||\" \");break}return n}var he=/(['\"])([^\\\\\\n]+?)\\1/g,ge=/\\\\./g;function K(e,t=h){if(e=e.trim(),e===\"\")return[];let n=[];e=e.replace(ge,(i,s)=>(n.push({value:i,offset:s}),\"\\uE000\".repeat(i.length))),e=e.replace(he,(i,s,l,a)=>(n.push({value:i,offset:a}),`${s}${\"\\uE001\".repeat(l.length)}${s}`));{let i=0,s;for(;(s=e.indexOf(\"(\",i))>-1;){let l=de(e,s);n.push({value:l,offset:s}),e=`${e.substring(0,s)}(${\"\\xB6\".repeat(l.length-2)})${e.substring(s+l.length)}`,i=s+l.length}}let r=pe(e,t),o=new Set;for(let i of n.reverse())for(let s of r){let{offset:l,value:a}=i;if(!(s.pos[0]<=l&&l+a.length<=s.pos[1]))continue;let{content:d}=s,f=l-s.pos[0];s.content=d.slice(0,f)+a+d.slice(f+a.length),s.content!==d&&o.add(s)}for(let i of o){let s=me(i.type);if(!s)throw new Error(`Unknown token type: ${i.type}`);s.lastIndex=0;let l=s.exec(i.content);if(!l)throw new Error(`Unable to parse content for ${i.type}: ${i.content}`);Object.assign(i,l.groups)}return r}function*N(e,t){switch(e.type){case\"list\":for(let n of e.list)yield*N(n,e);break;case\"complex\":yield*N(e.left,e),yield*N(e.right,e);break;case\"compound\":yield*e.list.map(n=>[n,e]);break;default:yield[e,t]}}function g(e){let t;return Array.isArray(e)?t=e:t=[...N(e)].map(([n])=>n),t.map(n=>n.content).join(\"\")}h.combinator=/\\s*(>>>>?|[\\s>+~])\\s*/g;var ye=/\\\\[\\s\\S]/g,we=e=>{if(e.length>1){for(let t of['\"',\"'\"])if(!(!e.startsWith(t)||!e.endsWith(t)))return e.slice(t.length,-t.length).replace(ye,n=>n.slice(1))}return e};function Y(e){let t=!0,n=K(e);if(n.length===0)return[[],t];let r=[],o=[r],i=[o],s=[];for(let l of n){switch(l.type){case\"combinator\":switch(l.content){case\">>>\":t=!1,s.length&&(r.push(g(s)),s.splice(0)),r=[],o.push(\">>>\"),o.push(r);continue;case\">>>>\":t=!1,s.length&&(r.push(g(s)),s.splice(0)),r=[],o.push(\">>>>\"),o.push(r);continue}break;case\"pseudo-element\":if(!l.name.startsWith(\"-p-\"))break;t=!1,s.length&&(r.push(g(s)),s.splice(0)),r.push({name:l.name.slice(3),value:we(l.argument??\"\")});continue;case\"comma\":s.length&&(r.push(g(s)),s.splice(0)),r=[],o=[r],i.push(o);continue}s.push(l)}return s.length&&r.push(g(s)),[i,t]}var Q={};u(Q,{textQuerySelectorAll:()=>b});var Se=new Set([\"checkbox\",\"image\",\"radio\"]),be=e=>e instanceof HTMLSelectElement||e instanceof HTMLTextAreaElement||e instanceof HTMLInputElement&&!Se.has(e.type),Pe=new Set([\"SCRIPT\",\"STYLE\"]),w=e=>!Pe.has(e.nodeName)&&!document.head?.contains(e),q=new WeakMap,Z=e=>{for(;e;)q.delete(e),e instanceof ShadowRoot?e=e.host:e=e.parentNode},J=new WeakSet,Te=new MutationObserver(e=>{for(let t of e)Z(t.target)}),y=e=>{let t=q.get(e);if(t||(t={full:\"\",immediate:[]},!w(e)))return t;let n=\"\";if(be(e))t.full=e.value,t.immediate.push(e.value),e.addEventListener(\"input\",r=>{Z(r.target)},{once:!0,capture:!0});else{for(let r=e.firstChild;r;r=r.nextSibling){if(r.nodeType===Node.TEXT_NODE){t.full+=r.nodeValue??\"\",n+=r.nodeValue??\"\";continue}n&&t.immediate.push(n),n=\"\",r.nodeType===Node.ELEMENT_NODE&&(t.full+=y(r).full)}n&&t.immediate.push(n),e instanceof Element&&e.shadowRoot&&(t.full+=y(e.shadowRoot).full),J.has(e)||(Te.observe(e,{childList:!0,characterData:!0}),J.add(e))}return q.set(e,t),t};var b=function*(e,t){let n=!1;for(let r of e.childNodes)if(r instanceof Element&&w(r)){let o;r.shadowRoot?o=b(r.shadowRoot,t):o=b(r,t);for(let i of o)yield i,n=!0}n||e instanceof Element&&w(e)&&y(e).full.includes(t)&&(yield e)};var $={};u($,{checkVisibility:()=>Ee,pierce:()=>A,pierceAll:()=>L});var xe=[\"hidden\",\"collapse\"],Ee=(e,t)=>{if(!e)return t===!1;if(t===void 0)return e;let n=e.nodeType===Node.TEXT_NODE?e.parentElement:e,r=window.getComputedStyle(n),o=r&&!xe.includes(r.visibility)&&!Ne(n);return t===o?e:!1};function Ne(e){let t=e.getBoundingClientRect();return t.width===0||t.height===0}var Ae=e=>\"shadowRoot\"in e&&e.shadowRoot instanceof ShadowRoot;function*A(e){Ae(e)?yield e.shadowRoot:yield e}function*L(e){e=A(e).next().value,yield e;let t=[document.createTreeWalker(e,NodeFilter.SHOW_ELEMENT)];for(let n of t){let r;for(;r=n.nextNode();)r.shadowRoot&&(yield r.shadowRoot,t.push(document.createTreeWalker(r.shadowRoot,NodeFilter.SHOW_ELEMENT)))}}var U={};u(U,{xpathQuerySelectorAll:()=>j});var j=function*(e,t){let r=(e.ownerDocument||document).evaluate(t,e,null,XPathResult.ORDERED_NODE_ITERATOR_TYPE),o;for(;o=r.iterateNext();)yield o};var ve=/[-\\w\\P{ASCII}*]/,ee=e=>\"querySelectorAll\"in e,v=class extends Error{constructor(t,n){super(`${t} is not a valid selector: ${n}`)}},F=class{#e;#r;#n=[];#t=void 0;elements;constructor(t,n,r){this.elements=[t],this.#e=n,this.#r=r,this.#o()}async run(){if(typeof this.#t==\"string\")switch(this.#t.trimStart()){case\":scope\":this.#o();break}for(;this.#t!==void 0;this.#o()){let t=this.#t,n=this.#e;typeof t==\"string\"?t[0]&&ve.test(t[0])?this.elements=c.flatMap(this.elements,async function*(r){ee(r)&&(yield*r.querySelectorAll(t))}):this.elements=c.flatMap(this.elements,async function*(r){if(!r.parentElement){if(!ee(r))return;yield*r.querySelectorAll(t);return}let o=0;for(let i of r.parentElement.children)if(++o,i===r)break;yield*r.parentElement.querySelectorAll(`:scope>:nth-child(${o})${t}`)}):this.elements=c.flatMap(this.elements,async function*(r){switch(t.name){case\"text\":yield*b(r,t.value);break;case\"xpath\":yield*j(r,t.value);break;case\"aria\":yield*k(r,t.value);break;default:let o=_.get(t.name);if(!o)throw new v(n,`Unknown selector type: ${t.name}`);yield*o.querySelectorAll(r,t.value)}})}}#o(){if(this.#n.length!==0){this.#t=this.#n.shift();return}if(this.#r.length===0){this.#t=void 0;return}let t=this.#r.shift();switch(t){case\">>>>\":{this.elements=c.flatMap(this.elements,A),this.#o();break}case\">>>\":{this.elements=c.flatMap(this.elements,L),this.#o();break}default:this.#n=t,this.#o();break}}},W=class{#e=new WeakMap;calculate(t,n=[]){if(t===null)return n;t instanceof ShadowRoot&&(t=t.host);let r=this.#e.get(t);if(r)return[...r,...n];let o=0;for(let s=t.previousSibling;s;s=s.previousSibling)++o;let i=this.calculate(t.parentNode,[o]);return this.#e.set(t,i),[...i,...n]}},te=(e,t)=>{if(e.length+t.length===0)return 0;let[n=-1,...r]=e,[o=-1,...i]=t;return n===o?te(r,i):n<o?-1:1},Ce=async function*(e){let t=new Set;for await(let r of e)t.add(r);let n=new W;yield*[...t.values()].map(r=>[r,n.calculate(r)]).sort(([,r],[,o])=>te(r,o)).map(([r])=>r)},re=function(e,t){let n,r;try{[n,r]=Y(t)}catch{return e.querySelectorAll(t)}if(r)return e.querySelectorAll(t);if(n.some(o=>{let i=0;return o.some(s=>(typeof s==\"string\"?++i:i=0,i>1))}))throw new v(t,\"Multiple deep combinators found in sequence.\");return Ce(c.flatMap(n,o=>{let i=new F(e,t,o);return i.run(),i.elements}))},Ie=async function(e,t){for await(let n of re(e,t))return n;return null};var ke=Object.freeze({...R,...D,...M,...H,...Q,...$,...U,createDeferredPromise:p,createFunction:X,createTextContent:y,IntervalPoller:E,isSuitableNodeForTextMatching:w,MutationPoller:T,RAFPoller:x}),Re=ke;\n";
 
-var __classPrivateFieldGet$H = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$I = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$E = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$F = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -89702,30 +89494,30 @@ class ScriptInjector {
     }
     // Appends a statement of the form `(PuppeteerUtil) => {...}`.
     append(statement) {
-        __classPrivateFieldGet$H(this, _ScriptInjector_instances, "m", _ScriptInjector_update).call(this, () => {
-            __classPrivateFieldGet$H(this, _ScriptInjector_amendments, "f").add(statement);
+        __classPrivateFieldGet$I(this, _ScriptInjector_instances, "m", _ScriptInjector_update).call(this, () => {
+            __classPrivateFieldGet$I(this, _ScriptInjector_amendments, "f").add(statement);
         });
     }
     pop(statement) {
-        __classPrivateFieldGet$H(this, _ScriptInjector_instances, "m", _ScriptInjector_update).call(this, () => {
-            __classPrivateFieldGet$H(this, _ScriptInjector_amendments, "f").delete(statement);
+        __classPrivateFieldGet$I(this, _ScriptInjector_instances, "m", _ScriptInjector_update).call(this, () => {
+            __classPrivateFieldGet$I(this, _ScriptInjector_amendments, "f").delete(statement);
         });
     }
     inject(inject, force = false) {
-        if (__classPrivateFieldGet$H(this, _ScriptInjector_updated, "f") || force) {
-            inject(__classPrivateFieldGet$H(this, _ScriptInjector_instances, "m", _ScriptInjector_get).call(this));
+        if (__classPrivateFieldGet$I(this, _ScriptInjector_updated, "f") || force) {
+            inject(__classPrivateFieldGet$I(this, _ScriptInjector_instances, "m", _ScriptInjector_get).call(this));
         }
-        __classPrivateFieldSet$E(this, _ScriptInjector_updated, false, "f");
+        __classPrivateFieldSet$F(this, _ScriptInjector_updated, false, "f");
     }
 }
 _ScriptInjector_updated = new WeakMap(), _ScriptInjector_amendments = new WeakMap(), _ScriptInjector_instances = new WeakSet(), _ScriptInjector_update = function _ScriptInjector_update(callback) {
     callback();
-    __classPrivateFieldSet$E(this, _ScriptInjector_updated, true, "f");
+    __classPrivateFieldSet$F(this, _ScriptInjector_updated, true, "f");
 }, _ScriptInjector_get = function _ScriptInjector_get() {
     return `(() => {
       const module = {};
       ${source}
-      ${[...__classPrivateFieldGet$H(this, _ScriptInjector_amendments, "f")]
+      ${[...__classPrivateFieldGet$I(this, _ScriptInjector_amendments, "f")]
         .map(statement => {
         return `(${statement})(module.exports.default);`;
     })
@@ -89753,7 +89545,7 @@ const scriptInjector = new ScriptInjector();
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$G = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$H = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
@@ -89779,7 +89571,7 @@ class CustomQueryHandlerRegistry {
      * @internal
      */
     get(name) {
-        const handler = __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").get(name);
+        const handler = __classPrivateFieldGet$H(this, _CustomQueryHandlerRegistry_handlers, "f").get(name);
         return handler ? handler[1] : undefined;
     }
     /**
@@ -89805,10 +89597,10 @@ class CustomQueryHandlerRegistry {
      */
     register(name, handler) {
         var _a;
-        if (__classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").has(name)) {
+        if (__classPrivateFieldGet$H(this, _CustomQueryHandlerRegistry_handlers, "f").has(name)) {
             throw new Error(`Cannot register over existing handler: ${name}`);
         }
-        assert$1(!__classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").has(name), `Cannot register over existing handler: ${name}`);
+        assert$1(!__classPrivateFieldGet$H(this, _CustomQueryHandlerRegistry_handlers, "f").has(name), `Cannot register over existing handler: ${name}`);
         assert$1(/^[a-zA-Z]+$/.test(name), `Custom query handler names may only contain [a-zA-Z]`);
         assert$1(handler.queryAll || handler.queryOne, `At least one query method must be implemented.`);
         const Handler = (_a = class extends QueryHandler {
@@ -89838,7 +89630,7 @@ class CustomQueryHandlerRegistry {
                 ? stringifyFunction(handler.queryOne)
                 : String(undefined),
         }).toString();
-        __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").set(name, [registerScript, Handler]);
+        __classPrivateFieldGet$H(this, _CustomQueryHandlerRegistry_handlers, "f").set(name, [registerScript, Handler]);
         scriptInjector.append(registerScript);
     }
     /**
@@ -89850,12 +89642,12 @@ class CustomQueryHandlerRegistry {
      * @internal
      */
     unregister(name) {
-        const handler = __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").get(name);
+        const handler = __classPrivateFieldGet$H(this, _CustomQueryHandlerRegistry_handlers, "f").get(name);
         if (!handler) {
             throw new Error(`Cannot unregister unknown handler: ${name}`);
         }
         scriptInjector.pop(handler[0]);
-        __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").delete(name);
+        __classPrivateFieldGet$H(this, _CustomQueryHandlerRegistry_handlers, "f").delete(name);
     }
     /**
      * Gets the names of all {@link CustomQueryHandler | custom query handlers}.
@@ -89863,7 +89655,7 @@ class CustomQueryHandlerRegistry {
      * @internal
      */
     names() {
-        return [...__classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").keys()];
+        return [...__classPrivateFieldGet$H(this, _CustomQueryHandlerRegistry_handlers, "f").keys()];
     }
     /**
      * Unregisters all custom query handlers.
@@ -89871,10 +89663,10 @@ class CustomQueryHandlerRegistry {
      * @internal
      */
     clear() {
-        for (const [registerScript] of __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f")) {
+        for (const [registerScript] of __classPrivateFieldGet$H(this, _CustomQueryHandlerRegistry_handlers, "f")) {
             scriptInjector.pop(registerScript);
         }
-        __classPrivateFieldGet$G(this, _CustomQueryHandlerRegistry_handlers, "f").clear();
+        __classPrivateFieldGet$H(this, _CustomQueryHandlerRegistry_handlers, "f").clear();
     }
 }
 _CustomQueryHandlerRegistry_handlers = new WeakMap();
@@ -90045,12 +89837,12 @@ function getQueryHandlerAndSelector(selector) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldGet$F = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$G = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var __classPrivateFieldSet$D = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$E = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
@@ -90062,21 +89854,21 @@ var _CDPJSHandle_disposed, _CDPJSHandle_context, _CDPJSHandle_remoteObject;
  */
 class CDPJSHandle extends JSHandle$1 {
     get disposed() {
-        return __classPrivateFieldGet$F(this, _CDPJSHandle_disposed, "f");
+        return __classPrivateFieldGet$G(this, _CDPJSHandle_disposed, "f");
     }
     constructor(context, remoteObject) {
         super();
         _CDPJSHandle_disposed.set(this, false);
         _CDPJSHandle_context.set(this, void 0);
         _CDPJSHandle_remoteObject.set(this, void 0);
-        __classPrivateFieldSet$D(this, _CDPJSHandle_context, context, "f");
-        __classPrivateFieldSet$D(this, _CDPJSHandle_remoteObject, remoteObject, "f");
+        __classPrivateFieldSet$E(this, _CDPJSHandle_context, context, "f");
+        __classPrivateFieldSet$E(this, _CDPJSHandle_remoteObject, remoteObject, "f");
     }
     executionContext() {
-        return __classPrivateFieldGet$F(this, _CDPJSHandle_context, "f");
+        return __classPrivateFieldGet$G(this, _CDPJSHandle_context, "f");
     }
     get client() {
-        return __classPrivateFieldGet$F(this, _CDPJSHandle_context, "f")._client;
+        return __classPrivateFieldGet$G(this, _CDPJSHandle_context, "f")._client;
     }
     /**
      * @see {@link ExecutionContext.evaluate} for more details.
@@ -90096,11 +89888,11 @@ class CDPJSHandle extends JSHandle$1 {
         }, propertyName);
     }
     async getProperties() {
-        assert$1(__classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").objectId);
+        assert$1(__classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f").objectId);
         // We use Runtime.getProperties rather than iterative building because the
         // iterative approach might create a distorted snapshot.
         const response = await this.client.send('Runtime.getProperties', {
-            objectId: __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").objectId,
+            objectId: __classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f").objectId,
             ownProperties: true,
         });
         const result = new Map();
@@ -90108,13 +89900,13 @@ class CDPJSHandle extends JSHandle$1 {
             if (!property.enumerable || !property.value) {
                 continue;
             }
-            result.set(property.name, createJSHandle(__classPrivateFieldGet$F(this, _CDPJSHandle_context, "f"), property.value));
+            result.set(property.name, createJSHandle(__classPrivateFieldGet$G(this, _CDPJSHandle_context, "f"), property.value));
         }
         return result;
     }
     async jsonValue() {
-        if (!__classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").objectId) {
-            return valueFromRemoteObject(__classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f"));
+        if (!__classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f").objectId) {
+            return valueFromRemoteObject(__classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f"));
         }
         const value = await this.evaluate(object => {
             return object;
@@ -90132,24 +89924,24 @@ class CDPJSHandle extends JSHandle$1 {
         return null;
     }
     async dispose() {
-        if (__classPrivateFieldGet$F(this, _CDPJSHandle_disposed, "f")) {
+        if (__classPrivateFieldGet$G(this, _CDPJSHandle_disposed, "f")) {
             return;
         }
-        __classPrivateFieldSet$D(this, _CDPJSHandle_disposed, true, "f");
-        await releaseObject(this.client, __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f"));
+        __classPrivateFieldSet$E(this, _CDPJSHandle_disposed, true, "f");
+        await releaseObject(this.client, __classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f"));
     }
     toString() {
-        if (!__classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").objectId) {
-            return 'JSHandle:' + valueFromRemoteObject(__classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f"));
+        if (!__classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f").objectId) {
+            return 'JSHandle:' + valueFromRemoteObject(__classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f"));
         }
-        const type = __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").subtype || __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").type;
+        const type = __classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f").subtype || __classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f").type;
         return 'JSHandle@' + type;
     }
     get id() {
-        return __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f").objectId;
+        return __classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f").objectId;
     }
     remoteObject() {
-        return __classPrivateFieldGet$F(this, _CDPJSHandle_remoteObject, "f");
+        return __classPrivateFieldGet$G(this, _CDPJSHandle_remoteObject, "f");
     }
 }
 _CDPJSHandle_disposed = new WeakMap(), _CDPJSHandle_context = new WeakMap(), _CDPJSHandle_remoteObject = new WeakMap();
@@ -90169,18 +89961,18 @@ _CDPJSHandle_disposed = new WeakMap(), _CDPJSHandle_context = new WeakMap(), _CD
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var __classPrivateFieldSet$C = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+var __classPrivateFieldSet$D = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet$E = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+var __classPrivateFieldGet$F = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _CDPElementHandle_instances, _CDPElementHandle_frame, _CDPElementHandle_frameManager_get, _CDPElementHandle_page_get, _CDPElementHandle_checkVisibility, _CDPElementHandle_scrollIntoViewIfNeeded, _CDPElementHandle_getOOPIFOffsets, _CDPElementHandle_getBoxModel, _CDPElementHandle_fromProtocolQuad, _CDPElementHandle_intersectQuadWithViewport;
+var _CDPElementHandle_instances, _CDPElementHandle_frame, _CDPElementHandle_frameManager_get, _CDPElementHandle_page_get, _CDPElementHandle_scrollIntoViewIfNeeded, _CDPElementHandle_getOOPIFOffsets, _CDPElementHandle_getBoxModel, _CDPElementHandle_fromProtocolQuad, _CDPElementHandle_intersectQuadWithViewport;
 const applyOffsetsToQuad = (quad, offsetX, offsetY) => {
     return quad.map(part => {
         return { x: part.x + offsetX, y: part.y + offsetY };
@@ -90198,7 +89990,7 @@ class CDPElementHandle extends ElementHandle$1 {
         super(new CDPJSHandle(context, remoteObject));
         _CDPElementHandle_instances.add(this);
         _CDPElementHandle_frame.set(this, void 0);
-        __classPrivateFieldSet$C(this, _CDPElementHandle_frame, frame, "f");
+        __classPrivateFieldSet$D(this, _CDPElementHandle_frame, frame, "f");
     }
     /**
      * @internal
@@ -90216,7 +90008,7 @@ class CDPElementHandle extends ElementHandle$1 {
         return this.handle.remoteObject();
     }
     get frame() {
-        return __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f");
+        return __classPrivateFieldGet$F(this, _CDPElementHandle_frame, "f");
     }
     async $(selector) {
         const { updatedSelector, QueryHandler } = getQueryHandlerAndSelector(selector);
@@ -90265,12 +90057,6 @@ class CDPElementHandle extends ElementHandle$1 {
         }
         return this.waitForSelector(`xpath/${xpath}`, options);
     }
-    async isVisible() {
-        return __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_checkVisibility).call(this, true);
-    }
-    async isHidden() {
-        return __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_checkVisibility).call(this, false);
-    }
     async toElement(tagName) {
         const isMatchingTagName = await this.evaluate((node, tagName) => {
             return node.nodeName === tagName.toUpperCase();
@@ -90287,29 +90073,7 @@ class CDPElementHandle extends ElementHandle$1 {
         if (typeof nodeInfo.node.frameId !== 'string') {
             return null;
         }
-        return __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_frameManager_get).frame(nodeInfo.node.frameId);
-    }
-    async scrollIntoView() {
-        await this.assertConnectedElement();
-        try {
-            await this.client.send('DOM.scrollIntoViewIfNeeded', {
-                objectId: this.remoteObject().objectId,
-            });
-        }
-        catch (error) {
-            debugError(error);
-            // Fallback to Element.scrollIntoView if DOM.scrollIntoViewIfNeeded is not supported
-            await this.evaluate(async (element) => {
-                element.scrollIntoView({
-                    block: 'center',
-                    inline: 'center',
-                    // @ts-expect-error Chrome still supports behavior: instant but
-                    // it's not in the spec so TS shouts We don't want to make this
-                    // breaking change in Puppeteer yet so we'll ignore the line.
-                    behavior: 'instant',
-                });
-            });
-        }
+        return __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_frameManager_get).frame(nodeInfo.node.frameId);
     }
     async clickablePoint(offset) {
         const [result, layoutMetrics] = await Promise.all([
@@ -90318,7 +90082,7 @@ class CDPElementHandle extends ElementHandle$1 {
                 objectId: this.remoteObject().objectId,
             })
                 .catch(debugError),
-            __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get)._client().send('Page.getLayoutMetrics'),
+            __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get)._client().send('Page.getLayoutMetrics'),
         ]);
         if (!result || !result.quads.length) {
             throw new Error('Node is either not clickable or not an HTMLElement');
@@ -90326,16 +90090,16 @@ class CDPElementHandle extends ElementHandle$1 {
         // Filter out quads that have too small area to click into.
         // Fallback to `layoutViewport` in case of using Firefox.
         const { clientWidth, clientHeight } = layoutMetrics.cssLayoutViewport || layoutMetrics.layoutViewport;
-        const { offsetX, offsetY } = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f"));
+        const { offsetX, offsetY } = await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$F(this, _CDPElementHandle_frame, "f"));
         const quads = result.quads
             .map(quad => {
-            return __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, quad);
+            return __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, quad);
         })
             .map(quad => {
             return applyOffsetsToQuad(quad, offsetX, offsetY);
         })
             .map(quad => {
-            return __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_intersectQuadWithViewport).call(this, quad, clientWidth, clientHeight);
+            return __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_intersectQuadWithViewport).call(this, quad, clientWidth, clientHeight);
         })
             .filter(quad => {
             return computeQuadArea(quad) > 1;
@@ -90382,9 +90146,9 @@ class CDPElementHandle extends ElementHandle$1 {
      * If the element is detached from DOM, the method throws an error.
      */
     async hover() {
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const { x, y } = await this.clickablePoint();
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.move(x, y);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.move(x, y);
     }
     /**
      * This method scrolls element into view if needed, and then
@@ -90392,39 +90156,39 @@ class CDPElementHandle extends ElementHandle$1 {
      * If the element is detached from DOM, the method throws an error.
      */
     async click(options = {}) {
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const { x, y } = await this.clickablePoint(options.offset);
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.click(x, y, options);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.click(x, y, options);
     }
     /**
      * This method creates and captures a dragevent from the element.
      */
     async drag(target) {
-        assert$1(__classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).isDragInterceptionEnabled(), 'Drag Interception is not enabled!');
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        assert$1(__classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).isDragInterceptionEnabled(), 'Drag Interception is not enabled!');
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const start = await this.clickablePoint();
-        return await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.drag(start, target);
+        return await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.drag(start, target);
     }
     async dragEnter(data = { items: [], dragOperationsMask: 1 }) {
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const target = await this.clickablePoint();
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragEnter(target, data);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragEnter(target, data);
     }
     async dragOver(data = { items: [], dragOperationsMask: 1 }) {
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const target = await this.clickablePoint();
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragOver(target, data);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragOver(target, data);
     }
     async drop(data = { items: [], dragOperationsMask: 1 }) {
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const destination = await this.clickablePoint();
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.drop(destination, data);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.drop(destination, data);
     }
     async dragAndDrop(target, options) {
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const startPoint = await this.clickablePoint();
         const targetPoint = await target.clickablePoint();
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragAndDrop(startPoint, targetPoint, options);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).mouse.dragAndDrop(startPoint, targetPoint, options);
     }
     async select(...values) {
         for (const value of values) {
@@ -90515,24 +90279,24 @@ class CDPElementHandle extends ElementHandle$1 {
         }
     }
     async tap() {
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const { x, y } = await this.clickablePoint();
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchStart(x, y);
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchEnd();
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchStart(x, y);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchEnd();
     }
     async touchStart() {
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const { x, y } = await this.clickablePoint();
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchStart(x, y);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchStart(x, y);
     }
     async touchMove() {
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         const { x, y } = await this.clickablePoint();
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchMove(x, y);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchMove(x, y);
     }
     async touchEnd() {
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchEnd();
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).touchscreen.touchEnd();
     }
     async focus() {
         await this.evaluate(element => {
@@ -90544,18 +90308,18 @@ class CDPElementHandle extends ElementHandle$1 {
     }
     async type(text, options) {
         await this.focus();
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).keyboard.type(text, options);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).keyboard.type(text, options);
     }
     async press(key, options) {
         await this.focus();
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).keyboard.press(key, options);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).keyboard.press(key, options);
     }
     async boundingBox() {
-        const result = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getBoxModel).call(this);
+        const result = await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getBoxModel).call(this);
         if (!result) {
             return null;
         }
-        const { offsetX, offsetY } = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f"));
+        const { offsetX, offsetY } = await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$F(this, _CDPElementHandle_frame, "f"));
         const quad = result.model.border;
         const x = Math.min(quad[0], quad[2], quad[4], quad[6]);
         const y = Math.min(quad[1], quad[3], quad[5], quad[7]);
@@ -90564,17 +90328,17 @@ class CDPElementHandle extends ElementHandle$1 {
         return { x: x + offsetX, y: y + offsetY, width, height };
     }
     async boxModel() {
-        const result = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getBoxModel).call(this);
+        const result = await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getBoxModel).call(this);
         if (!result) {
             return null;
         }
-        const { offsetX, offsetY } = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f"));
+        const { offsetX, offsetY } = await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_getOOPIFOffsets).call(this, __classPrivateFieldGet$F(this, _CDPElementHandle_frame, "f"));
         const { content, padding, border, margin, width, height } = result.model;
         return {
-            content: applyOffsetsToQuad(__classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, content), offsetX, offsetY),
-            padding: applyOffsetsToQuad(__classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, padding), offsetX, offsetY),
-            border: applyOffsetsToQuad(__classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, border), offsetX, offsetY),
-            margin: applyOffsetsToQuad(__classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, margin), offsetX, offsetY),
+            content: applyOffsetsToQuad(__classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, content), offsetX, offsetY),
+            padding: applyOffsetsToQuad(__classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, padding), offsetX, offsetY),
+            border: applyOffsetsToQuad(__classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, border), offsetX, offsetY),
+            margin: applyOffsetsToQuad(__classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, margin), offsetX, offsetY),
             width,
             height,
         };
@@ -90583,7 +90347,7 @@ class CDPElementHandle extends ElementHandle$1 {
         let needsViewportReset = false;
         let boundingBox = await this.boundingBox();
         assert$1(boundingBox, 'Node is either not visible or not an HTMLElement');
-        const viewport = __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).viewport();
+        const viewport = __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).viewport();
         if (viewport &&
             (boundingBox.width > viewport.width ||
                 boundingBox.height > viewport.height)) {
@@ -90591,10 +90355,10 @@ class CDPElementHandle extends ElementHandle$1 {
                 width: Math.max(viewport.width, Math.ceil(boundingBox.width)),
                 height: Math.max(viewport.height, Math.ceil(boundingBox.height)),
             };
-            await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).setViewport(Object.assign({}, viewport, newViewport));
+            await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).setViewport(Object.assign({}, viewport, newViewport));
             needsViewportReset = true;
         }
-        await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
+        await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_scrollIntoViewIfNeeded).call(this);
         boundingBox = await this.boundingBox();
         assert$1(boundingBox, 'Node is either not visible or not an HTMLElement');
         assert$1(boundingBox.width !== 0, 'Node has 0 width.');
@@ -90605,38 +90369,74 @@ class CDPElementHandle extends ElementHandle$1 {
         const clip = Object.assign({}, boundingBox);
         clip.x += pageX;
         clip.y += pageY;
-        const imageData = await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).screenshot(Object.assign({}, {
+        const imageData = await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).screenshot(Object.assign({}, {
             clip,
         }, options));
         if (needsViewportReset && viewport) {
-            await __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).setViewport(viewport);
+            await __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).setViewport(viewport);
         }
         return imageData;
     }
+    async isIntersectingViewport(options) {
+        const { threshold = 0 } = options !== null && options !== void 0 ? options : {};
+        return await this.evaluate(async (element, threshold) => {
+            const visibleRatio = await new Promise(resolve => {
+                const observer = new IntersectionObserver(entries => {
+                    resolve(entries[0].intersectionRatio);
+                    observer.disconnect();
+                });
+                observer.observe(element);
+            });
+            return threshold === 1 ? visibleRatio === 1 : visibleRatio > threshold;
+        }, threshold);
+    }
 }
 _CDPElementHandle_frame = new WeakMap(), _CDPElementHandle_instances = new WeakSet(), _CDPElementHandle_frameManager_get = function _CDPElementHandle_frameManager_get() {
-    return __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f")._frameManager;
+    return __classPrivateFieldGet$F(this, _CDPElementHandle_frame, "f")._frameManager;
 }, _CDPElementHandle_page_get = function _CDPElementHandle_page_get() {
-    return __classPrivateFieldGet$E(this, _CDPElementHandle_frame, "f").page();
-}, _CDPElementHandle_checkVisibility = async function _CDPElementHandle_checkVisibility(visibility) {
-    const element = await this.frame.worlds[PUPPETEER_WORLD].adoptHandle(this);
-    try {
-        return await this.frame.worlds[PUPPETEER_WORLD].evaluate(async (PuppeteerUtil, element, visibility) => {
-            return Boolean(PuppeteerUtil.checkVisibility(element, visibility));
-        }, LazyArg.create(context => {
-            return context.puppeteerUtil;
-        }), element, visibility);
-    }
-    finally {
-        await element.dispose();
-    }
+    return __classPrivateFieldGet$F(this, _CDPElementHandle_frame, "f").page();
 }, _CDPElementHandle_scrollIntoViewIfNeeded = async function _CDPElementHandle_scrollIntoViewIfNeeded() {
-    if (await this.isIntersectingViewport({
-        threshold: 1,
-    })) {
+    const error = await this.evaluate(async (element) => {
+        if (!element.isConnected) {
+            return 'Node is detached from document';
+        }
+        if (element.nodeType !== Node.ELEMENT_NODE) {
+            return 'Node is not of type HTMLElement';
+        }
         return;
+    });
+    if (error) {
+        throw new Error(error);
     }
-    await this.scrollIntoView();
+    try {
+        await this.client.send('DOM.scrollIntoViewIfNeeded', {
+            objectId: this.remoteObject().objectId,
+        });
+    }
+    catch (_err) {
+        // Fallback to Element.scrollIntoView if DOM.scrollIntoViewIfNeeded is not supported
+        await this.evaluate(async (element, pageJavascriptEnabled) => {
+            const visibleRatio = async () => {
+                return await new Promise(resolve => {
+                    const observer = new IntersectionObserver(entries => {
+                        resolve(entries[0].intersectionRatio);
+                        observer.disconnect();
+                    });
+                    observer.observe(element);
+                });
+            };
+            if (!pageJavascriptEnabled || (await visibleRatio()) !== 1.0) {
+                element.scrollIntoView({
+                    block: 'center',
+                    inline: 'center',
+                    // @ts-expect-error Chrome still supports behavior: instant but
+                    // it's not in the spec so TS shouts We don't want to make this
+                    // breaking change in Puppeteer yet so we'll ignore the line.
+                    behavior: 'instant',
+                });
+            }
+        }, __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "a", _CDPElementHandle_page_get).isJavaScriptEnabled());
+    }
 }, _CDPElementHandle_getOOPIFOffsets = async function _CDPElementHandle_getOOPIFOffsets(frame) {
     let offsetX = 0;
     let offsetY = 0;
@@ -90657,7 +90457,7 @@ _CDPElementHandle_frame = new WeakMap(), _CDPElementHandle_instances = new WeakS
             break;
         }
         const contentBoxQuad = result.model.content;
-        const topLeftCorner = __classPrivateFieldGet$E(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, contentBoxQuad)[0];
+        const topLeftCorner = __classPrivateFieldGet$F(this, _CDPElementHandle_instances, "m", _CDPElementHandle_fromProtocolQuad).call(this, contentBoxQuad)[0];
         offsetX += topLeftCorner.x;
         offsetY += topLeftCorner.y;
         currentFrame = parent;
@@ -90697,6 +90497,94 @@ function computeQuadArea(quad) {
     }
     return Math.abs(area);
 }
+
+/**
+ * Copyright 2018 Google Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+var __classPrivateFieldSet$C = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet$E = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _ProtocolError_code, _ProtocolError_originalMessage;
+/**
+ * @deprecated Do not use.
+ *
+ * @public
+ */
+class CustomError extends Error {
+    /**
+     * @internal
+     */
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+        Error.captureStackTrace(this, this.constructor);
+    }
+}
+/**
+ * TimeoutError is emitted whenever certain operations are terminated due to
+ * timeout.
+ *
+ * @remarks
+ * Example operations are {@link Page.waitForSelector | page.waitForSelector} or
+ * {@link PuppeteerNode.launch | puppeteer.launch}.
+ *
+ * @public
+ */
+let TimeoutError$1 = class TimeoutError extends CustomError {
+};
+/**
+ * ProtocolError is emitted whenever there is an error from the protocol.
+ *
+ * @public
+ */
+class ProtocolError extends CustomError {
+    constructor() {
+        super(...arguments);
+        _ProtocolError_code.set(this, void 0);
+        _ProtocolError_originalMessage.set(this, '');
+    }
+    set code(code) {
+        __classPrivateFieldSet$C(this, _ProtocolError_code, code, "f");
+    }
+    /**
+     * @readonly
+     * @public
+     */
+    get code() {
+        return __classPrivateFieldGet$E(this, _ProtocolError_code, "f");
+    }
+    set originalMessage(originalMessage) {
+        __classPrivateFieldSet$C(this, _ProtocolError_originalMessage, originalMessage, "f");
+    }
+    /**
+     * @readonly
+     * @public
+     */
+    get originalMessage() {
+        return __classPrivateFieldGet$E(this, _ProtocolError_originalMessage, "f");
+    }
+}
+_ProtocolError_code = new WeakMap(), _ProtocolError_originalMessage = new WeakMap();
 
 /**
  * Copyright 2017 Google Inc. All rights reserved.
@@ -92577,6 +92465,33 @@ _AXNode_richlyEditable = new WeakMap(), _AXNode_editable = new WeakMap(), _AXNod
 };
 
 /**
+ * Copyright 2023 Google Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+const rmOptions = {
+    force: true,
+    recursive: true,
+    maxRetries: 5,
+};
+/**
+ * @internal
+ */
+async function rm(path) {
+    await fs$b.promises.rm(path, rmOptions);
+}
+
+/**
  * Creates and returns a promise along with the resolve/reject functions.
  *
  * If the promise has not been resolved/rejected within the `timeout` period,
@@ -93144,7 +93059,7 @@ var __classPrivateFieldGet$A = (undefined && undefined.__classPrivateFieldGet) |
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _ChromeTargetManager_instances, _ChromeTargetManager_connection, _ChromeTargetManager_discoveredTargetsByTargetId, _ChromeTargetManager_attachedTargetsByTargetId, _ChromeTargetManager_attachedTargetsBySessionId, _ChromeTargetManager_ignoredTargets, _ChromeTargetManager_targetFilterCallback, _ChromeTargetManager_targetFactory, _ChromeTargetManager_targetInterceptors, _ChromeTargetManager_attachedToTargetListenersBySession, _ChromeTargetManager_detachedFromTargetListenersBySession, _ChromeTargetManager_initializePromise, _ChromeTargetManager_targetsIdsForInit, _ChromeTargetManager_storeExistingTargetsForInit, _ChromeTargetManager_setupAttachmentListeners, _ChromeTargetManager_removeAttachmentListeners, _ChromeTargetManager_onSessionDetached, _ChromeTargetManager_onTargetCreated, _ChromeTargetManager_onTargetDestroyed, _ChromeTargetManager_onTargetInfoChanged, _ChromeTargetManager_onAttachedToTarget, _ChromeTargetManager_finishInitializationIfReady, _ChromeTargetManager_onDetachedFromTarget;
+var _ChromeTargetManager_instances, _ChromeTargetManager_connection, _ChromeTargetManager_discoveredTargetsByTargetId, _ChromeTargetManager_attachedTargetsByTargetId, _ChromeTargetManager_attachedTargetsBySessionId, _ChromeTargetManager_ignoredTargets, _ChromeTargetManager_targetFilterCallback, _ChromeTargetManager_targetFactory, _ChromeTargetManager_targetInterceptors, _ChromeTargetManager_attachedToTargetListenersBySession, _ChromeTargetManager_detachedFromTargetListenersBySession, _ChromeTargetManager_initializeCallback, _ChromeTargetManager_initializePromise, _ChromeTargetManager_targetsIdsForInit, _ChromeTargetManager_storeExistingTargetsForInit, _ChromeTargetManager_setupAttachmentListeners, _ChromeTargetManager_removeAttachmentListeners, _ChromeTargetManager_onSessionDetached, _ChromeTargetManager_onTargetCreated, _ChromeTargetManager_onTargetDestroyed, _ChromeTargetManager_onTargetInfoChanged, _ChromeTargetManager_onAttachedToTarget, _ChromeTargetManager_finishInitializationIfReady, _ChromeTargetManager_onDetachedFromTarget;
 /**
  * ChromeTargetManager uses the CDP's auto-attach mechanism to intercept
  * new targets and allow the rest of Puppeteer to configure listeners while
@@ -93187,7 +93102,10 @@ class ChromeTargetManager extends EventEmitter$3 {
         _ChromeTargetManager_targetInterceptors.set(this, new WeakMap());
         _ChromeTargetManager_attachedToTargetListenersBySession.set(this, new WeakMap());
         _ChromeTargetManager_detachedFromTargetListenersBySession.set(this, new WeakMap());
-        _ChromeTargetManager_initializePromise.set(this, createDeferredPromise());
+        _ChromeTargetManager_initializeCallback.set(this, () => { });
+        _ChromeTargetManager_initializePromise.set(this, new Promise(resolve => {
+            __classPrivateFieldSet$z(this, _ChromeTargetManager_initializeCallback, resolve, "f");
+        }));
         _ChromeTargetManager_targetsIdsForInit.set(this, new Set());
         _ChromeTargetManager_storeExistingTargetsForInit.set(this, () => {
             for (const [targetId, targetInfo,] of __classPrivateFieldGet$A(this, _ChromeTargetManager_discoveredTargetsByTargetId, "f").entries()) {
@@ -93381,7 +93299,7 @@ class ChromeTargetManager extends EventEmitter$3 {
         }));
     }
 }
-_ChromeTargetManager_connection = new WeakMap(), _ChromeTargetManager_discoveredTargetsByTargetId = new WeakMap(), _ChromeTargetManager_attachedTargetsByTargetId = new WeakMap(), _ChromeTargetManager_attachedTargetsBySessionId = new WeakMap(), _ChromeTargetManager_ignoredTargets = new WeakMap(), _ChromeTargetManager_targetFilterCallback = new WeakMap(), _ChromeTargetManager_targetFactory = new WeakMap(), _ChromeTargetManager_targetInterceptors = new WeakMap(), _ChromeTargetManager_attachedToTargetListenersBySession = new WeakMap(), _ChromeTargetManager_detachedFromTargetListenersBySession = new WeakMap(), _ChromeTargetManager_initializePromise = new WeakMap(), _ChromeTargetManager_targetsIdsForInit = new WeakMap(), _ChromeTargetManager_storeExistingTargetsForInit = new WeakMap(), _ChromeTargetManager_onSessionDetached = new WeakMap(), _ChromeTargetManager_onTargetCreated = new WeakMap(), _ChromeTargetManager_onTargetDestroyed = new WeakMap(), _ChromeTargetManager_onTargetInfoChanged = new WeakMap(), _ChromeTargetManager_onAttachedToTarget = new WeakMap(), _ChromeTargetManager_onDetachedFromTarget = new WeakMap(), _ChromeTargetManager_instances = new WeakSet(), _ChromeTargetManager_setupAttachmentListeners = function _ChromeTargetManager_setupAttachmentListeners(session) {
+_ChromeTargetManager_connection = new WeakMap(), _ChromeTargetManager_discoveredTargetsByTargetId = new WeakMap(), _ChromeTargetManager_attachedTargetsByTargetId = new WeakMap(), _ChromeTargetManager_attachedTargetsBySessionId = new WeakMap(), _ChromeTargetManager_ignoredTargets = new WeakMap(), _ChromeTargetManager_targetFilterCallback = new WeakMap(), _ChromeTargetManager_targetFactory = new WeakMap(), _ChromeTargetManager_targetInterceptors = new WeakMap(), _ChromeTargetManager_attachedToTargetListenersBySession = new WeakMap(), _ChromeTargetManager_detachedFromTargetListenersBySession = new WeakMap(), _ChromeTargetManager_initializeCallback = new WeakMap(), _ChromeTargetManager_initializePromise = new WeakMap(), _ChromeTargetManager_targetsIdsForInit = new WeakMap(), _ChromeTargetManager_storeExistingTargetsForInit = new WeakMap(), _ChromeTargetManager_onSessionDetached = new WeakMap(), _ChromeTargetManager_onTargetCreated = new WeakMap(), _ChromeTargetManager_onTargetDestroyed = new WeakMap(), _ChromeTargetManager_onTargetInfoChanged = new WeakMap(), _ChromeTargetManager_onAttachedToTarget = new WeakMap(), _ChromeTargetManager_onDetachedFromTarget = new WeakMap(), _ChromeTargetManager_instances = new WeakSet(), _ChromeTargetManager_setupAttachmentListeners = function _ChromeTargetManager_setupAttachmentListeners(session) {
     const listener = (event) => {
         return __classPrivateFieldGet$A(this, _ChromeTargetManager_onAttachedToTarget, "f").call(this, session, event);
     };
@@ -93406,7 +93324,7 @@ _ChromeTargetManager_connection = new WeakMap(), _ChromeTargetManager_discovered
 }, _ChromeTargetManager_finishInitializationIfReady = function _ChromeTargetManager_finishInitializationIfReady(targetId) {
     targetId !== undefined && __classPrivateFieldGet$A(this, _ChromeTargetManager_targetsIdsForInit, "f").delete(targetId);
     if (__classPrivateFieldGet$A(this, _ChromeTargetManager_targetsIdsForInit, "f").size === 0) {
-        __classPrivateFieldGet$A(this, _ChromeTargetManager_initializePromise, "f").resolve();
+        __classPrivateFieldGet$A(this, _ChromeTargetManager_initializeCallback, "f").call(this);
     }
 };
 
@@ -93436,7 +93354,7 @@ var __classPrivateFieldGet$z = (undefined && undefined.__classPrivateFieldGet) |
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _FirefoxTargetManager_instances, _FirefoxTargetManager_connection, _FirefoxTargetManager_discoveredTargetsByTargetId, _FirefoxTargetManager_availableTargetsByTargetId, _FirefoxTargetManager_availableTargetsBySessionId, _FirefoxTargetManager_ignoredTargets, _FirefoxTargetManager_targetFilterCallback, _FirefoxTargetManager_targetFactory, _FirefoxTargetManager_targetInterceptors, _FirefoxTargetManager_attachedToTargetListenersBySession, _FirefoxTargetManager_initializePromise, _FirefoxTargetManager_targetsIdsForInit, _FirefoxTargetManager_onSessionDetached, _FirefoxTargetManager_onTargetCreated, _FirefoxTargetManager_onTargetDestroyed, _FirefoxTargetManager_onAttachedToTarget, _FirefoxTargetManager_finishInitializationIfReady;
+var _FirefoxTargetManager_instances, _FirefoxTargetManager_connection, _FirefoxTargetManager_discoveredTargetsByTargetId, _FirefoxTargetManager_availableTargetsByTargetId, _FirefoxTargetManager_availableTargetsBySessionId, _FirefoxTargetManager_ignoredTargets, _FirefoxTargetManager_targetFilterCallback, _FirefoxTargetManager_targetFactory, _FirefoxTargetManager_targetInterceptors, _FirefoxTargetManager_attachedToTargetListenersBySession, _FirefoxTargetManager_initializeCallback, _FirefoxTargetManager_initializePromise, _FirefoxTargetManager_targetsIdsForInit, _FirefoxTargetManager_onSessionDetached, _FirefoxTargetManager_onTargetCreated, _FirefoxTargetManager_onTargetDestroyed, _FirefoxTargetManager_onAttachedToTarget, _FirefoxTargetManager_finishInitializationIfReady;
 /**
  * FirefoxTargetManager implements target management using
  * `Target.setDiscoverTargets` without using auto-attach. It, therefore, creates
@@ -93487,7 +93405,10 @@ class FirefoxTargetManager extends EventEmitter$3 {
         _FirefoxTargetManager_targetFactory.set(this, void 0);
         _FirefoxTargetManager_targetInterceptors.set(this, new WeakMap());
         _FirefoxTargetManager_attachedToTargetListenersBySession.set(this, new WeakMap());
-        _FirefoxTargetManager_initializePromise.set(this, createDeferredPromise());
+        _FirefoxTargetManager_initializeCallback.set(this, () => { });
+        _FirefoxTargetManager_initializePromise.set(this, new Promise(resolve => {
+            __classPrivateFieldSet$y(this, _FirefoxTargetManager_initializeCallback, resolve, "f");
+        }));
         _FirefoxTargetManager_targetsIdsForInit.set(this, new Set());
         _FirefoxTargetManager_onSessionDetached.set(this, (session) => {
             this.removeSessionListeners(session);
@@ -93593,10 +93514,10 @@ class FirefoxTargetManager extends EventEmitter$3 {
         await __classPrivateFieldGet$z(this, _FirefoxTargetManager_initializePromise, "f");
     }
 }
-_FirefoxTargetManager_connection = new WeakMap(), _FirefoxTargetManager_discoveredTargetsByTargetId = new WeakMap(), _FirefoxTargetManager_availableTargetsByTargetId = new WeakMap(), _FirefoxTargetManager_availableTargetsBySessionId = new WeakMap(), _FirefoxTargetManager_ignoredTargets = new WeakMap(), _FirefoxTargetManager_targetFilterCallback = new WeakMap(), _FirefoxTargetManager_targetFactory = new WeakMap(), _FirefoxTargetManager_targetInterceptors = new WeakMap(), _FirefoxTargetManager_attachedToTargetListenersBySession = new WeakMap(), _FirefoxTargetManager_initializePromise = new WeakMap(), _FirefoxTargetManager_targetsIdsForInit = new WeakMap(), _FirefoxTargetManager_onSessionDetached = new WeakMap(), _FirefoxTargetManager_onTargetCreated = new WeakMap(), _FirefoxTargetManager_onTargetDestroyed = new WeakMap(), _FirefoxTargetManager_onAttachedToTarget = new WeakMap(), _FirefoxTargetManager_instances = new WeakSet(), _FirefoxTargetManager_finishInitializationIfReady = function _FirefoxTargetManager_finishInitializationIfReady(targetId) {
+_FirefoxTargetManager_connection = new WeakMap(), _FirefoxTargetManager_discoveredTargetsByTargetId = new WeakMap(), _FirefoxTargetManager_availableTargetsByTargetId = new WeakMap(), _FirefoxTargetManager_availableTargetsBySessionId = new WeakMap(), _FirefoxTargetManager_ignoredTargets = new WeakMap(), _FirefoxTargetManager_targetFilterCallback = new WeakMap(), _FirefoxTargetManager_targetFactory = new WeakMap(), _FirefoxTargetManager_targetInterceptors = new WeakMap(), _FirefoxTargetManager_attachedToTargetListenersBySession = new WeakMap(), _FirefoxTargetManager_initializeCallback = new WeakMap(), _FirefoxTargetManager_initializePromise = new WeakMap(), _FirefoxTargetManager_targetsIdsForInit = new WeakMap(), _FirefoxTargetManager_onSessionDetached = new WeakMap(), _FirefoxTargetManager_onTargetCreated = new WeakMap(), _FirefoxTargetManager_onTargetDestroyed = new WeakMap(), _FirefoxTargetManager_onAttachedToTarget = new WeakMap(), _FirefoxTargetManager_instances = new WeakSet(), _FirefoxTargetManager_finishInitializationIfReady = function _FirefoxTargetManager_finishInitializationIfReady(targetId) {
     __classPrivateFieldGet$z(this, _FirefoxTargetManager_targetsIdsForInit, "f").delete(targetId);
     if (__classPrivateFieldGet$z(this, _FirefoxTargetManager_targetsIdsForInit, "f").size === 0) {
-        __classPrivateFieldGet$z(this, _FirefoxTargetManager_initializePromise, "f").resolve();
+        __classPrivateFieldGet$z(this, _FirefoxTargetManager_initializeCallback, "f").call(this);
     }
 };
 
@@ -93812,7 +93733,7 @@ var __classPrivateFieldSet$v = (undefined && undefined.__classPrivateFieldSet) |
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _ExecutionContext_instances, _ExecutionContext_bindingsInstalled, _ExecutionContext_puppeteerUtil, _ExecutionContext_installGlobalBinding, _ExecutionContext_evaluate;
+var _ExecutionContext_instances, _ExecutionContext_puppeteerUtil, _ExecutionContext_installGlobalBinding, _ExecutionContext_evaluate;
 /**
  * @public
  */
@@ -93843,7 +93764,6 @@ const SOURCE_URL_REGEX = /^[\040\t]*\/\/[@#] sourceURL=\s*(\S*?)\s*$/m;
 class ExecutionContext {
     constructor(client, contextPayload, world) {
         _ExecutionContext_instances.add(this);
-        _ExecutionContext_bindingsInstalled.set(this, false);
         _ExecutionContext_puppeteerUtil.set(this, void 0);
         this._client = client;
         this._world = world;
@@ -93853,9 +93773,13 @@ class ExecutionContext {
         }
     }
     get puppeteerUtil() {
-        let promise = Promise.resolve();
-        if (!__classPrivateFieldGet$w(this, _ExecutionContext_bindingsInstalled, "f")) {
-            promise = Promise.all([
+        scriptInjector.inject(script => {
+            if (__classPrivateFieldGet$w(this, _ExecutionContext_puppeteerUtil, "f")) {
+                __classPrivateFieldGet$w(this, _ExecutionContext_puppeteerUtil, "f").then(handle => {
+                    handle.dispose();
+                });
+            }
+            __classPrivateFieldSet$v(this, _ExecutionContext_puppeteerUtil, Promise.all([
                 __classPrivateFieldGet$w(this, _ExecutionContext_instances, "m", _ExecutionContext_installGlobalBinding).call(this, new Binding('__ariaQuerySelector', ARIAQueryHandler.queryOne)),
                 __classPrivateFieldGet$w(this, _ExecutionContext_instances, "m", _ExecutionContext_installGlobalBinding).call(this, new Binding('__ariaQuerySelectorAll', (async (element, selector) => {
                     const results = ARIAQueryHandler.queryAll(element, selector);
@@ -93863,16 +93787,7 @@ class ExecutionContext {
                         return elements;
                     }, ...(await AsyncIterableUtil.collect(results)));
                 }))),
-            ]);
-            __classPrivateFieldSet$v(this, _ExecutionContext_bindingsInstalled, true, "f");
-        }
-        scriptInjector.inject(script => {
-            if (__classPrivateFieldGet$w(this, _ExecutionContext_puppeteerUtil, "f")) {
-                __classPrivateFieldGet$w(this, _ExecutionContext_puppeteerUtil, "f").then(handle => {
-                    handle.dispose();
-                });
-            }
-            __classPrivateFieldSet$v(this, _ExecutionContext_puppeteerUtil, promise.then(() => {
+            ]).then(() => {
                 return this.evaluateHandle(script);
             }), "f");
         }, !__classPrivateFieldGet$w(this, _ExecutionContext_puppeteerUtil, "f"));
@@ -93974,7 +93889,7 @@ class ExecutionContext {
         return __classPrivateFieldGet$w(this, _ExecutionContext_instances, "m", _ExecutionContext_evaluate).call(this, false, pageFunction, ...args);
     }
 }
-_ExecutionContext_bindingsInstalled = new WeakMap(), _ExecutionContext_puppeteerUtil = new WeakMap(), _ExecutionContext_instances = new WeakSet(), _ExecutionContext_installGlobalBinding = async function _ExecutionContext_installGlobalBinding(binding) {
+_ExecutionContext_puppeteerUtil = new WeakMap(), _ExecutionContext_instances = new WeakSet(), _ExecutionContext_installGlobalBinding = async function _ExecutionContext_installGlobalBinding(binding) {
     try {
         if (this._world) {
             this._world._bindings.set(binding.name, binding);
@@ -94120,7 +94035,7 @@ var __classPrivateFieldGet$v = (undefined && undefined.__classPrivateFieldGet) |
 };
 var _Coverage_jsCoverage, _Coverage_cssCoverage, _JSCoverage_instances, _JSCoverage_client, _JSCoverage_enabled, _JSCoverage_scriptURLs, _JSCoverage_scriptSources, _JSCoverage_eventListeners, _JSCoverage_resetOnNavigation, _JSCoverage_reportAnonymousScripts, _JSCoverage_includeRawScriptCoverage, _JSCoverage_onExecutionContextsCleared, _JSCoverage_onScriptParsed, _CSSCoverage_instances, _CSSCoverage_client, _CSSCoverage_enabled, _CSSCoverage_stylesheetURLs, _CSSCoverage_stylesheetSources, _CSSCoverage_eventListeners, _CSSCoverage_resetOnNavigation, _CSSCoverage_onExecutionContextsCleared, _CSSCoverage_onStyleSheet;
 /**
- * The Coverage class provides methods to gather information about parts of
+ * The Coverage class provides methods to gathers information about parts of
  * JavaScript and CSS that were used by the page.
  *
  * @remarks
@@ -94692,18 +94607,16 @@ class FileChooser {
         return __classPrivateFieldGet$s(this, _FileChooser_multiple, "f");
     }
     /**
-     * Accept the file chooser request with the given file paths.
+     * Accept the file chooser request with given paths.
      *
-     * @remarks This will not validate whether the file paths exists. Also, if a
-     * path is relative, then it is resolved against the
+     * @param filePaths - If some of the `filePaths` are relative paths, then
+     * they are resolved relative to the
      * {@link https://nodejs.org/api/process.html#process_process_cwd | current working directory}.
-     * For locals script connecting to remote chrome environments, paths must be
-     * absolute.
      */
-    async accept(paths) {
+    async accept(filePaths) {
         assert$1(!__classPrivateFieldGet$s(this, _FileChooser_handled, "f"), 'Cannot accept FileChooser which is already handled!');
         __classPrivateFieldSet$r(this, _FileChooser_handled, true, "f");
-        await __classPrivateFieldGet$s(this, _FileChooser_element, "f").uploadFile(...paths);
+        await __classPrivateFieldGet$s(this, _FileChooser_element, "f").uploadFile(...filePaths);
     }
     /**
      * Closes the file chooser without selecting any files.
@@ -94948,7 +94861,7 @@ class HTTPRequest extends HTTPRequest$1 {
     get client() {
         return __classPrivateFieldGet$q(this, _HTTPRequest_client, "f");
     }
-    constructor(client, frame, interceptionId, allowInterception, data, redirectChain) {
+    constructor(client, frame, interceptionId, allowInterception, event, redirectChain) {
         super();
         _HTTPRequest_instances.add(this);
         this._failureText = null;
@@ -94973,20 +94886,20 @@ class HTTPRequest extends HTTPRequest$1 {
         _HTTPRequest_interceptHandlers.set(this, void 0);
         _HTTPRequest_initiator.set(this, void 0);
         __classPrivateFieldSet$p(this, _HTTPRequest_client, client, "f");
-        this._requestId = data.requestId;
-        __classPrivateFieldSet$p(this, _HTTPRequest_isNavigationRequest, data.requestId === data.loaderId && data.type === 'Document', "f");
+        this._requestId = event.requestId;
+        __classPrivateFieldSet$p(this, _HTTPRequest_isNavigationRequest, event.requestId === event.loaderId && event.type === 'Document', "f");
         this._interceptionId = interceptionId;
         __classPrivateFieldSet$p(this, _HTTPRequest_allowInterception, allowInterception, "f");
-        __classPrivateFieldSet$p(this, _HTTPRequest_url, data.request.url, "f");
-        __classPrivateFieldSet$p(this, _HTTPRequest_resourceType, (data.type || 'other').toLowerCase(), "f");
-        __classPrivateFieldSet$p(this, _HTTPRequest_method, data.request.method, "f");
-        __classPrivateFieldSet$p(this, _HTTPRequest_postData, data.request.postData, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_url, event.request.url, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_resourceType, (event.type || 'other').toLowerCase(), "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_method, event.request.method, "f");
+        __classPrivateFieldSet$p(this, _HTTPRequest_postData, event.request.postData, "f");
         __classPrivateFieldSet$p(this, _HTTPRequest_frame, frame, "f");
         this._redirectChain = redirectChain;
         __classPrivateFieldSet$p(this, _HTTPRequest_continueRequestOverrides, {}, "f");
         __classPrivateFieldSet$p(this, _HTTPRequest_interceptHandlers, [], "f");
-        __classPrivateFieldSet$p(this, _HTTPRequest_initiator, data.initiator, "f");
-        for (const [key, value] of Object.entries(data.request.headers)) {
+        __classPrivateFieldSet$p(this, _HTTPRequest_initiator, event.initiator, "f");
+        for (const [key, value] of Object.entries(event.request.headers)) {
             __classPrivateFieldGet$q(this, _HTTPRequest_headers, "f")[key.toLowerCase()] = value;
         }
     }
@@ -95649,7 +95562,7 @@ var __classPrivateFieldGet$m = (undefined && undefined.__classPrivateFieldGet) |
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _NetworkManager_instances, _NetworkManager_client, _NetworkManager_ignoreHTTPSErrors, _NetworkManager_frameManager, _NetworkManager_networkEventManager, _NetworkManager_extraHTTPHeaders, _NetworkManager_credentials, _NetworkManager_attemptedAuthentications, _NetworkManager_userRequestInterceptionEnabled, _NetworkManager_protocolRequestInterceptionEnabled, _NetworkManager_userCacheDisabled, _NetworkManager_emulatedNetworkConditions, _NetworkManager_deferredInitPromise, _NetworkManager_updateNetworkConditions, _NetworkManager_updateProtocolRequestInterception, _NetworkManager_cacheDisabled, _NetworkManager_updateProtocolCacheDisabled, _NetworkManager_onRequestWillBeSent, _NetworkManager_onAuthRequired, _NetworkManager_onRequestPaused, _NetworkManager_patchRequestEventHeaders, _NetworkManager_onRequestWithoutNetworkInstrumentation, _NetworkManager_onRequest, _NetworkManager_onRequestServedFromCache, _NetworkManager_handleRequestRedirect, _NetworkManager_emitResponseEvent, _NetworkManager_onResponseReceived, _NetworkManager_onResponseReceivedExtraInfo, _NetworkManager_forgetRequest, _NetworkManager_onLoadingFinished, _NetworkManager_emitLoadingFinished, _NetworkManager_onLoadingFailed, _NetworkManager_emitLoadingFailed;
+var _NetworkManager_instances, _NetworkManager_client, _NetworkManager_ignoreHTTPSErrors, _NetworkManager_frameManager, _NetworkManager_networkEventManager, _NetworkManager_extraHTTPHeaders, _NetworkManager_credentials, _NetworkManager_attemptedAuthentications, _NetworkManager_userRequestInterceptionEnabled, _NetworkManager_protocolRequestInterceptionEnabled, _NetworkManager_userCacheDisabled, _NetworkManager_emulatedNetworkConditions, _NetworkManager_deferredInitPromise, _NetworkManager_updateNetworkConditions, _NetworkManager_updateProtocolRequestInterception, _NetworkManager_cacheDisabled, _NetworkManager_updateProtocolCacheDisabled, _NetworkManager_onRequestWillBeSent, _NetworkManager_onAuthRequired, _NetworkManager_onRequestPaused, _NetworkManager_patchRequestEventHeaders, _NetworkManager_onRequest, _NetworkManager_onRequestServedFromCache, _NetworkManager_handleRequestRedirect, _NetworkManager_emitResponseEvent, _NetworkManager_onResponseReceived, _NetworkManager_onResponseReceivedExtraInfo, _NetworkManager_forgetRequest, _NetworkManager_onLoadingFinished, _NetworkManager_emitLoadingFinished, _NetworkManager_onLoadingFailed, _NetworkManager_emitLoadingFailed;
 /**
  * We use symbols to prevent any external parties listening to these events.
  * They are internal to Puppeteer.
@@ -95861,7 +95774,6 @@ _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new 
     }
     const { networkId: networkRequestId, requestId: fetchRequestId } = event;
     if (!networkRequestId) {
-        __classPrivateFieldGet$m(this, _NetworkManager_instances, "m", _NetworkManager_onRequestWithoutNetworkInstrumentation).call(this, event);
         return;
     }
     const requestWillBeSentEvent = (() => {
@@ -95888,15 +95800,6 @@ _NetworkManager_client = new WeakMap(), _NetworkManager_ignoreHTTPSErrors = new 
         // includes extra headers, like: Accept, Origin
         ...requestPausedEvent.request.headers,
     };
-}, _NetworkManager_onRequestWithoutNetworkInstrumentation = function _NetworkManager_onRequestWithoutNetworkInstrumentation(event) {
-    // If an event has no networkId it should not have any network events. We
-    // still want to dispatch it for the interception by the user.
-    const frame = event.frameId
-        ? __classPrivateFieldGet$m(this, _NetworkManager_frameManager, "f").frame(event.frameId)
-        : null;
-    const request = new HTTPRequest(__classPrivateFieldGet$m(this, _NetworkManager_client, "f"), frame, event.requestId, __classPrivateFieldGet$m(this, _NetworkManager_userRequestInterceptionEnabled, "f"), event, []);
-    this.emit(NetworkManagerEmittedEvents.Request, request);
-    request.finalizeInterceptions();
 }, _NetworkManager_onRequest = function _NetworkManager_onRequest(event, fetchRequestId) {
     let redirectChain = [];
     if (event.redirectResponse) {
@@ -96293,13 +96196,12 @@ var __classPrivateFieldGet$k = (undefined && undefined.__classPrivateFieldGet) |
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _WaitTask_world, _WaitTask_polling, _WaitTask_root, _WaitTask_fn, _WaitTask_args, _WaitTask_timeout, _WaitTask_result, _WaitTask_poller, _WaitTask_signal, _TaskManager_tasks;
+var _WaitTask_world, _WaitTask_polling, _WaitTask_root, _WaitTask_fn, _WaitTask_args, _WaitTask_timeout, _WaitTask_result, _WaitTask_poller, _TaskManager_tasks;
 /**
  * @internal
  */
 class WaitTask {
     constructor(world, options, fn, ...args) {
-        var _a;
         _WaitTask_world.set(this, void 0);
         _WaitTask_polling.set(this, void 0);
         _WaitTask_root.set(this, void 0);
@@ -96308,16 +96210,9 @@ class WaitTask {
         _WaitTask_timeout.set(this, void 0);
         _WaitTask_result.set(this, createDeferredPromise());
         _WaitTask_poller.set(this, void 0);
-        _WaitTask_signal.set(this, void 0);
         __classPrivateFieldSet$k(this, _WaitTask_world, world, "f");
         __classPrivateFieldSet$k(this, _WaitTask_polling, options.polling, "f");
         __classPrivateFieldSet$k(this, _WaitTask_root, options.root, "f");
-        __classPrivateFieldSet$k(this, _WaitTask_signal, options.signal, "f");
-        (_a = __classPrivateFieldGet$k(this, _WaitTask_signal, "f")) === null || _a === void 0 ? void 0 : _a.addEventListener('abort', () => {
-            this.terminate(new AbortError('WaitTask has been aborted.'));
-        }, {
-            once: true,
-        });
         switch (typeof fn) {
             case 'string':
                 __classPrivateFieldSet$k(this, _WaitTask_fn, `() => {return (${fn});}`, "f");
@@ -96436,7 +96331,7 @@ class WaitTask {
         return error;
     }
 }
-_WaitTask_world = new WeakMap(), _WaitTask_polling = new WeakMap(), _WaitTask_root = new WeakMap(), _WaitTask_fn = new WeakMap(), _WaitTask_args = new WeakMap(), _WaitTask_timeout = new WeakMap(), _WaitTask_result = new WeakMap(), _WaitTask_poller = new WeakMap(), _WaitTask_signal = new WeakMap();
+_WaitTask_world = new WeakMap(), _WaitTask_polling = new WeakMap(), _WaitTask_root = new WeakMap(), _WaitTask_fn = new WeakMap(), _WaitTask_args = new WeakMap(), _WaitTask_timeout = new WeakMap(), _WaitTask_result = new WeakMap(), _WaitTask_poller = new WeakMap();
 /**
  * @internal
  */
@@ -96636,7 +96531,7 @@ class IsolatedWorld {
             throw error;
         }
     }
-    async click(selector, options = {}) {
+    async click(selector, options) {
         const handle = await this.$(selector);
         assert$1(handle, `No element found for selector: ${selector}`);
         await handle.click(options);
@@ -96707,7 +96602,7 @@ class IsolatedWorld {
         }
     }
     waitForFunction(pageFunction, options = {}, ...args) {
-        const { polling = 'raf', timeout = __classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_timeoutSettings_get).timeout(), root, signal, } = options;
+        const { polling = 'raf', timeout = __classPrivateFieldGet$j(this, _IsolatedWorld_instances, "a", _IsolatedWorld_timeoutSettings_get).timeout(), root, } = options;
         if (typeof polling === 'number' && polling < 0) {
             throw new Error('Cannot poll with non-positive interval');
         }
@@ -96715,7 +96610,6 @@ class IsolatedWorld {
             polling,
             root,
             timeout,
-            signal,
         }, pageFunction, ...args);
         return waitTask.result;
     }
@@ -97326,7 +97220,16 @@ class Frame {
             throw new Error('Exactly one of `url`, `path`, or `content` must be specified.');
         }
         if (path) {
-            const fs = await importFSPromises();
+            let fs;
+            try {
+                fs = (await import('fs')).promises;
+            }
+            catch (error) {
+                if (error instanceof TypeError) {
+                    throw new Error('Can only pass a file path in a Node-like environment.');
+                }
+                throw error;
+            }
             content = await fs.readFile(path, 'utf8');
             content += `//# sourceURL=${path.replace(/\n/g, '')}`;
         }
@@ -98522,7 +98425,7 @@ var __classPrivateFieldGet$f = (undefined && undefined.__classPrivateFieldGet) |
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _Keyboard_instances, _Keyboard_client, _Keyboard_pressedKeys, _Keyboard_modifierBit, _Keyboard_keyDescriptionForString, _Mouse_instances, _Mouse_client, _Mouse_keyboard, _Mouse__state, _Mouse_state_get, _Mouse_transactions, _Mouse_createTransaction, _Mouse_withTransaction, _Touchscreen_client, _Touchscreen_keyboard;
+var _Keyboard_instances, _Keyboard_client, _Keyboard_pressedKeys, _Keyboard_modifierBit, _Keyboard_keyDescriptionForString, _Mouse_client, _Mouse_keyboard, _Mouse_x, _Mouse_y, _Mouse_button, _Touchscreen_client, _Touchscreen_keyboard;
 /**
  * Keyboard provides an api for managing a virtual keyboard.
  * The high level api is {@link Keyboard."type"},
@@ -98801,54 +98704,6 @@ _Keyboard_client = new WeakMap(), _Keyboard_pressedKeys = new WeakMap(), _Keyboa
     return description;
 };
 /**
- * Enum of valid mouse buttons.
- *
- * @public
- */
-const MouseButton = Object.freeze({
-    Left: 'left',
-    Right: 'right',
-    Middle: 'middle',
-    Back: 'back',
-    Forward: 'forward',
-});
-const getFlag = (button) => {
-    switch (button) {
-        case MouseButton.Left:
-            return 1 /* MouseButtonFlag.Left */;
-        case MouseButton.Right:
-            return 2 /* MouseButtonFlag.Right */;
-        case MouseButton.Middle:
-            return 4 /* MouseButtonFlag.Middle */;
-        case MouseButton.Back:
-            return 8 /* MouseButtonFlag.Back */;
-        case MouseButton.Forward:
-            return 16 /* MouseButtonFlag.Forward */;
-    }
-};
-/**
- * This should match
- * https://source.chromium.org/chromium/chromium/src/+/refs/heads/main:content/browser/renderer_host/input/web_input_event_builders_mac.mm;drc=a61b95c63b0b75c1cfe872d9c8cdf927c226046e;bpv=1;bpt=1;l=221.
- */
-const getButtonFromPressedButtons = (buttons) => {
-    if (buttons & 1 /* MouseButtonFlag.Left */) {
-        return MouseButton.Left;
-    }
-    else if (buttons & 2 /* MouseButtonFlag.Right */) {
-        return MouseButton.Right;
-    }
-    else if (buttons & 4 /* MouseButtonFlag.Middle */) {
-        return MouseButton.Middle;
-    }
-    else if (buttons & 8 /* MouseButtonFlag.Back */) {
-        return MouseButton.Back;
-    }
-    else if (buttons & 16 /* MouseButtonFlag.Forward */) {
-        return MouseButton.Forward;
-    }
-    return 'none';
-};
-/**
  * The Mouse class operates in main-frame CSS pixels
  * relative to the top-left corner of the viewport.
  * @remarks
@@ -98924,134 +98779,84 @@ class Mouse {
      * @internal
      */
     constructor(client, keyboard) {
-        _Mouse_instances.add(this);
         _Mouse_client.set(this, void 0);
         _Mouse_keyboard.set(this, void 0);
-        _Mouse__state.set(this, {
-            position: { x: 0, y: 0 },
-            buttons: 0 /* MouseButtonFlag.None */,
-        });
-        // Transactions can run in parallel, so we store each of thme in this array.
-        _Mouse_transactions.set(this, []);
+        _Mouse_x.set(this, 0);
+        _Mouse_y.set(this, 0);
+        _Mouse_button.set(this, 'none');
         __classPrivateFieldSet$f(this, _Mouse_client, client, "f");
         __classPrivateFieldSet$f(this, _Mouse_keyboard, keyboard, "f");
     }
     /**
-     * Moves the mouse to the given coordinate.
-     *
+     * Dispatches a `mousemove` event.
      * @param x - Horizontal position of the mouse.
      * @param y - Vertical position of the mouse.
-     * @param options - Options to configure behavior.
+     * @param options - Optional object. If specified, the `steps` property
+     * sends intermediate `mousemove` events when set to `1` (default).
      */
     async move(x, y, options = {}) {
         const { steps = 1 } = options;
-        const from = __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get).position;
-        const to = { x, y };
+        const fromX = __classPrivateFieldGet$f(this, _Mouse_x, "f"), fromY = __classPrivateFieldGet$f(this, _Mouse_y, "f");
+        __classPrivateFieldSet$f(this, _Mouse_x, x, "f");
+        __classPrivateFieldSet$f(this, _Mouse_y, y, "f");
         for (let i = 1; i <= steps; i++) {
-            await __classPrivateFieldGet$f(this, _Mouse_instances, "m", _Mouse_withTransaction).call(this, updateState => {
-                updateState({
-                    position: {
-                        x: from.x + (to.x - from.x) * (i / steps),
-                        y: from.y + (to.y - from.y) * (i / steps),
-                    },
-                });
-                const { buttons, position } = __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get);
-                return __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
-                    type: 'mouseMoved',
-                    modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
-                    buttons,
-                    button: getButtonFromPressedButtons(buttons),
-                    ...position,
-                });
-            });
-        }
-    }
-    /**
-     * Presses the mouse.
-     *
-     * @param options - Options to configure behavior.
-     */
-    async down(options = {}) {
-        const { button = MouseButton.Left, clickCount = 1 } = options;
-        const flag = getFlag(button);
-        if (!flag) {
-            throw new Error(`Unsupported mouse button: ${button}`);
-        }
-        if (__classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get).buttons & flag) {
-            throw new Error(`'${button}' is already pressed.`);
-        }
-        await __classPrivateFieldGet$f(this, _Mouse_instances, "m", _Mouse_withTransaction).call(this, updateState => {
-            updateState({
-                buttons: __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get).buttons | flag,
-            });
-            const { buttons, position } = __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get);
-            return __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
-                type: 'mousePressed',
+            await __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
+                type: 'mouseMoved',
+                button: __classPrivateFieldGet$f(this, _Mouse_button, "f"),
+                x: fromX + (__classPrivateFieldGet$f(this, _Mouse_x, "f") - fromX) * (i / steps),
+                y: fromY + (__classPrivateFieldGet$f(this, _Mouse_y, "f") - fromY) * (i / steps),
                 modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
-                clickCount,
-                buttons,
-                button,
-                ...position,
             });
-        });
-    }
-    /**
-     * Releases the mouse.
-     *
-     * @param options - Options to configure behavior.
-     */
-    async up(options = {}) {
-        const { button = MouseButton.Left, clickCount = 1 } = options;
-        const flag = getFlag(button);
-        if (!flag) {
-            throw new Error(`Unsupported mouse button: ${button}`);
         }
-        if (!(__classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get).buttons & flag)) {
-            throw new Error(`'${button}' is not pressed.`);
-        }
-        await __classPrivateFieldGet$f(this, _Mouse_instances, "m", _Mouse_withTransaction).call(this, updateState => {
-            updateState({
-                buttons: __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get).buttons & ~flag,
-            });
-            const { buttons, position } = __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get);
-            return __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
-                type: 'mouseReleased',
-                modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
-                clickCount,
-                buttons,
-                button,
-                ...position,
-            });
-        });
     }
     /**
      * Shortcut for `mouse.move`, `mouse.down` and `mouse.up`.
-     *
      * @param x - Horizontal position of the mouse.
      * @param y - Vertical position of the mouse.
-     * @param options - Options to configure behavior.
+     * @param options - Optional `MouseOptions`.
      */
     async click(x, y, options = {}) {
-        const { delay, count = 1, clickCount = count } = options;
-        if (count < 1) {
-            throw new Error('Click must occur a positive number of times.');
-        }
-        const actions = [this.move(x, y)];
-        if (clickCount === count) {
-            for (let i = 1; i < count; ++i) {
-                actions.push(this.down({ ...options, clickCount: i }), this.up({ ...options, clickCount: i }));
-            }
-        }
-        actions.push(this.down({ ...options, clickCount }));
-        if (typeof delay === 'number') {
-            await Promise.all(actions);
-            actions.length = 0;
-            await new Promise(resolve => {
-                setTimeout(resolve, delay);
+        const { delay = null } = options;
+        await this.move(x, y);
+        await this.down(options);
+        if (delay !== null) {
+            await new Promise(f => {
+                return setTimeout(f, delay);
             });
         }
-        actions.push(this.up({ ...options, clickCount }));
-        await Promise.all(actions);
+        await this.up(options);
+    }
+    /**
+     * Dispatches a `mousedown` event.
+     * @param options - Optional `MouseOptions`.
+     */
+    async down(options = {}) {
+        const { button = 'left', clickCount = 1 } = options;
+        __classPrivateFieldSet$f(this, _Mouse_button, button, "f");
+        await __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
+            type: 'mousePressed',
+            button,
+            x: __classPrivateFieldGet$f(this, _Mouse_x, "f"),
+            y: __classPrivateFieldGet$f(this, _Mouse_y, "f"),
+            modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
+            clickCount,
+        });
+    }
+    /**
+     * Dispatches a `mouseup` event.
+     * @param options - Optional `MouseOptions`.
+     */
+    async up(options = {}) {
+        const { button = 'left', clickCount = 1 } = options;
+        __classPrivateFieldSet$f(this, _Mouse_button, 'none', "f");
+        await __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
+            type: 'mouseReleased',
+            button,
+            x: __classPrivateFieldGet$f(this, _Mouse_x, "f"),
+            y: __classPrivateFieldGet$f(this, _Mouse_y, "f"),
+            modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
+            clickCount,
+        });
     }
     /**
      * Dispatches a `mousewheel` event.
@@ -99077,15 +98882,14 @@ class Mouse {
      */
     async wheel(options = {}) {
         const { deltaX = 0, deltaY = 0 } = options;
-        const { position, buttons } = __classPrivateFieldGet$f(this, _Mouse_instances, "a", _Mouse_state_get);
         await __classPrivateFieldGet$f(this, _Mouse_client, "f").send('Input.dispatchMouseEvent', {
             type: 'mouseWheel',
-            pointerType: 'mouse',
-            modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
-            deltaY,
+            x: __classPrivateFieldGet$f(this, _Mouse_x, "f"),
+            y: __classPrivateFieldGet$f(this, _Mouse_y, "f"),
             deltaX,
-            buttons,
-            ...position,
+            deltaY,
+            modifiers: __classPrivateFieldGet$f(this, _Mouse_keyboard, "f")._modifiers,
+            pointerType: 'mouse',
         });
     }
     /**
@@ -99168,40 +98972,7 @@ class Mouse {
         await this.up();
     }
 }
-_Mouse_client = new WeakMap(), _Mouse_keyboard = new WeakMap(), _Mouse__state = new WeakMap(), _Mouse_transactions = new WeakMap(), _Mouse_instances = new WeakSet(), _Mouse_state_get = function _Mouse_state_get() {
-    return Object.assign({ ...__classPrivateFieldGet$f(this, _Mouse__state, "f") }, ...__classPrivateFieldGet$f(this, _Mouse_transactions, "f"));
-}, _Mouse_createTransaction = function _Mouse_createTransaction() {
-    const transaction = {};
-    __classPrivateFieldGet$f(this, _Mouse_transactions, "f").push(transaction);
-    const popTransaction = () => {
-        __classPrivateFieldGet$f(this, _Mouse_transactions, "f").splice(__classPrivateFieldGet$f(this, _Mouse_transactions, "f").indexOf(transaction), 1);
-    };
-    return {
-        update: (updates) => {
-            Object.assign(transaction, updates);
-        },
-        commit: () => {
-            __classPrivateFieldSet$f(this, _Mouse__state, { ...__classPrivateFieldGet$f(this, _Mouse__state, "f"), ...transaction }, "f");
-            popTransaction();
-        },
-        rollback: popTransaction,
-    };
-}, _Mouse_withTransaction = 
-/**
- * This is a shortcut for a typical update, commit/rollback lifecycle based on
- * the error of the action.
- */
-async function _Mouse_withTransaction(action) {
-    const { update, commit, rollback } = __classPrivateFieldGet$f(this, _Mouse_instances, "m", _Mouse_createTransaction).call(this);
-    try {
-        await action(update);
-        commit();
-    }
-    catch (error) {
-        rollback();
-        throw error;
-    }
-};
+_Mouse_client = new WeakMap(), _Mouse_keyboard = new WeakMap(), _Mouse_x = new WeakMap(), _Mouse_y = new WeakMap(), _Mouse_button = new WeakMap();
 /**
  * The Touchscreen class exposes touchscreen events.
  * @public
@@ -99519,12 +99290,6 @@ class WebWorker extends EventEmitter$3 {
      */
     url() {
         return __classPrivateFieldGet$c(this, _WebWorker_url, "f");
-    }
-    /**
-     * The CDP session client the WebWorker belongs to.
-     */
-    get client() {
-        return __classPrivateFieldGet$c(this, _WebWorker_client, "f");
     }
     /**
      * If the function passed to the `worker.evaluate` returns a Promise, then
@@ -101205,7 +100970,11 @@ class CDPBrowser extends Browser$1 {
      */
     async waitForTarget(predicate, options = {}) {
         const { timeout = 30000 } = options;
-        const targetPromise = createDeferredPromise();
+        let resolve;
+        let isResolved = false;
+        const targetPromise = new Promise(x => {
+            return (resolve = x);
+        });
         this.on("targetcreated" /* BrowserEmittedEvents.TargetCreated */, check);
         this.on("targetchanged" /* BrowserEmittedEvents.TargetChanged */, check);
         try {
@@ -101220,8 +100989,9 @@ class CDPBrowser extends Browser$1 {
             this.off("targetchanged" /* BrowserEmittedEvents.TargetChanged */, check);
         }
         async function check(target) {
-            if ((await predicate(target)) && !targetPromise.resolved()) {
-                targetPromise.resolve(target);
+            if ((await predicate(target)) && !isResolved) {
+                isResolved = true;
+                resolve(target);
             }
         }
     }
@@ -106795,7 +106565,7 @@ var WebSocket$2 = /*@__PURE__*/getDefaultExportFromCjs(websocket);
 /**
  * @internal
  */
-const packageVersion = '19.11.1';
+const packageVersion = '19.8.5';
 
 var __classPrivateFieldSet$6 = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
@@ -116240,33 +116010,6 @@ function unbzip2Stream() {
 var bzip = /*@__PURE__*/getDefaultExportFromCjs(unbzip2Stream_1);
 
 /**
- * Copyright 2023 Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-const rmOptions = {
-    force: true,
-    recursive: true,
-    maxRetries: 5,
-};
-/**
- * @internal
- */
-async function rm(path) {
-    await fs$b.promises.rm(path, rmOptions);
-}
-
-/**
  * Copyright 2017 Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -116533,7 +116276,7 @@ class BrowserFetcher {
         const fileNames = fs$b.readdirSync(__classPrivateFieldGet$5(this, _BrowserFetcher_downloadPath, "f"));
         return fileNames
             .map(fileName => {
-            return parseFolderPath$1(__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"), fileName);
+            return parseFolderPath(__classPrivateFieldGet$5(this, _BrowserFetcher_product, "f"), fileName);
         })
             .filter((entry) => {
             var _a;
@@ -116622,7 +116365,7 @@ class BrowserFetcher {
 _BrowserFetcher_product = new WeakMap(), _BrowserFetcher_downloadPath = new WeakMap(), _BrowserFetcher_downloadHost = new WeakMap(), _BrowserFetcher_platform = new WeakMap(), _BrowserFetcher_instances = new WeakSet(), _BrowserFetcher_getFolderPath = function _BrowserFetcher_getFolderPath(revision) {
     return path$5.resolve(__classPrivateFieldGet$5(this, _BrowserFetcher_downloadPath, "f"), `${__classPrivateFieldGet$5(this, _BrowserFetcher_platform, "f")}-${revision}`);
 };
-function parseFolderPath$1(product, folderPath) {
+function parseFolderPath(product, folderPath) {
     const name = path$5.basename(folderPath);
     const splits = name.split('-');
     if (splits.length !== 2) {
@@ -117659,48 +117402,8 @@ class Cache {
             retryDelay: 500,
         });
     }
-    getInstalledBrowsers() {
-        if (!fs$b.existsSync(__classPrivateFieldGet$4(this, _Cache_rootDir, "f"))) {
-            return [];
-        }
-        const types = fs$b.readdirSync(__classPrivateFieldGet$4(this, _Cache_rootDir, "f"));
-        const browsers = types.filter((t) => {
-            return Object.values(Browser).includes(t);
-        });
-        return browsers.flatMap(browser => {
-            const files = fs$b.readdirSync(this.browserRoot(browser));
-            return files
-                .map(file => {
-                const result = parseFolderPath(path$5.join(this.browserRoot(browser), file));
-                if (!result) {
-                    return null;
-                }
-                return {
-                    path: path$5.join(this.browserRoot(browser), file),
-                    browser,
-                    platform: result.platform,
-                    buildId: result.buildId,
-                };
-            })
-                .filter((item) => {
-                return item !== null;
-            });
-        });
-    }
 }
 _Cache_rootDir = new WeakMap();
-function parseFolderPath(folderPath) {
-    const name = path$5.basename(folderPath);
-    const splits = name.split('-');
-    if (splits.length !== 2) {
-        return;
-    }
-    const [platform, buildId] = splits;
-    if (!buildId || !platform) {
-        return;
-    }
-    return { platform, buildId };
-}
 
 /**
  * Copyright 2023 Google Inc. All rights reserved.
@@ -118254,6 +117957,9 @@ async function install(options) {
         finally {
             debugTimeEnd('extract');
         }
+    }
+    catch (err) {
+        debugInstall(`Error during installation`, err);
     }
     finally {
         if (fs$b.existsSync(archivePath)) {
@@ -124169,7 +123875,7 @@ class ProductLauncher {
      */
     async createBiDiOverCDPBrowser(browserProcess, connection, closeCallback) {
         const BiDi = await Promise.resolve().then(function () { return require(
-        /* webpackIgnore: true */ './bidi-2a8008af.js'); });
+        /* webpackIgnore: true */ './bidi-64a24f61.js'); });
         const bidiConnection = await BiDi.connectBidiOverCDP(connection);
         return await BiDi.Browser.create({
             connection: bidiConnection,
@@ -124184,7 +123890,7 @@ class ProductLauncher {
         const browserWSEndpoint = (await browserProcess.waitForLineOutput(WEBDRIVER_BIDI_WEBSOCKET_ENDPOINT_REGEX, opts.timeout)) + '/session';
         const transport = await NodeWebSocketTransport.create(browserWSEndpoint);
         const BiDi = await Promise.resolve().then(function () { return require(
-        /* webpackIgnore: true */ './bidi-2a8008af.js'); });
+        /* webpackIgnore: true */ './bidi-64a24f61.js'); });
         const bidiConnection = new BiDi.Connection(transport, opts.slowMo, opts.protocolTimeout);
         return await BiDi.Browser.create({
             connection: bidiConnection,
@@ -124265,25 +123971,6 @@ _ProductLauncher_product = new WeakMap();
 class ChromeLauncher extends ProductLauncher {
     constructor(puppeteer) {
         super(puppeteer, 'chrome');
-    }
-    launch(options = {}) {
-        var _a;
-        const headless = (_a = options.headless) !== null && _a !== void 0 ? _a : true;
-        if (headless === true &&
-            (!this.puppeteer.configuration.logLevel ||
-                this.puppeteer.configuration.logLevel === 'warn') &&
-            !Boolean(process.env['PUPPETEER_DISABLE_HEADLESS_WARNING'])) {
-            console.warn([
-                '\x1B[1m\x1B[43m\x1B[30m',
-                'Puppeteer old Headless deprecation warning:\x1B[0m\x1B[33m',
-                '  In the near feature `headless: true` will default to the new Headless mode',
-                '  for Chrome instead of the old Headless implementation. For more',
-                '  information, please see https://developer.chrome.com/articles/new-headless/.',
-                '  Consider opting in early by passing `headless: "new"` to `puppeteer.launch()`',
-                '  If you encounter any bugs, please report them to https://github.com/puppeteer/puppeteer/issues/new/choose.\x1B[0m\n',
-            ].join('\n  '));
-        }
-        return super.launch(options);
     }
     /**
      * @internal

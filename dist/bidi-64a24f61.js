@@ -1215,7 +1215,7 @@ class ProcessingQueue {
     add(entry) {
         this.#queue.push(entry);
         // No need in waiting. Just initialise processor if needed.
-        void this.#processIfNeeded();
+        this.#processIfNeeded();
     }
     async #processIfNeeded() {
         if (this.#isProcessing) {
@@ -1230,7 +1230,8 @@ class ProcessingQueue {
                     .catch((e) => {
                     this.#logger?.(log_js_1$3.LogType.system, 'Event was not processed:', e);
                     this.#catch(e);
-                });
+                })
+                    .finally();
             }
         }
         this.#isProcessing = false;
@@ -1263,31 +1264,15 @@ var protocol = {};
 	exports.CDP = exports.Network = exports.Log = exports.BrowsingContext = exports.Script = exports.Message = void 0;
 	(function (Message) {
 	    // keep-sorted end;
-	    let ErrorCode;
-	    (function (ErrorCode) {
-	        // keep-sorted start
-	        ErrorCode["InvalidArgument"] = "invalid argument";
-	        ErrorCode["InvalidSessionId"] = "invalid session id";
-	        ErrorCode["NoSuchAlert"] = "no such alert";
-	        ErrorCode["NoSuchFrame"] = "no such frame";
-	        ErrorCode["NoSuchHandle"] = "no such handle";
-	        ErrorCode["NoSuchNode"] = "no such node";
-	        ErrorCode["NoSuchScript"] = "no such script";
-	        ErrorCode["SessionNotCreated"] = "session not created";
-	        ErrorCode["UnknownCommand"] = "unknown command";
-	        ErrorCode["UnknownError"] = "unknown error";
-	        ErrorCode["UnsupportedOperation"] = "unsupported operation";
-	        // keep-sorted end
-	    })(ErrorCode = Message.ErrorCode || (Message.ErrorCode = {}));
-	    class ErrorResponse {
-	        error;
-	        message;
-	        stacktrace;
+	    class ErrorResponseClass {
 	        constructor(error, message, stacktrace) {
 	            this.error = error;
 	            this.message = message;
 	            this.stacktrace = stacktrace;
 	        }
+	        error;
+	        message;
+	        stacktrace;
 	        toErrorResponse(commandId) {
 	            return {
 	                id: commandId,
@@ -1297,73 +1282,37 @@ var protocol = {};
 	            };
 	        }
 	    }
-	    Message.ErrorResponse = ErrorResponse;
-	    class InvalidArgumentException extends ErrorResponse {
+	    Message.ErrorResponseClass = ErrorResponseClass;
+	    class UnknownException extends ErrorResponseClass {
 	        constructor(message, stacktrace) {
-	            super(ErrorCode.InvalidArgument, message, stacktrace);
+	            super('unknown error', message, stacktrace);
 	        }
 	    }
-	    Message.InvalidArgumentException = InvalidArgumentException;
-	    class NoSuchHandleException extends ErrorResponse {
+	    Message.UnknownException = UnknownException;
+	    class UnknownCommandException extends ErrorResponseClass {
 	        constructor(message, stacktrace) {
-	            super(ErrorCode.NoSuchHandle, message, stacktrace);
-	        }
-	    }
-	    Message.NoSuchHandleException = NoSuchHandleException;
-	    class InvalidSessionIdException extends ErrorResponse {
-	        constructor(message, stacktrace) {
-	            super(ErrorCode.InvalidSessionId, message, stacktrace);
-	        }
-	    }
-	    Message.InvalidSessionIdException = InvalidSessionIdException;
-	    class NoSuchAlertException extends ErrorResponse {
-	        constructor(message, stacktrace) {
-	            super(ErrorCode.NoSuchAlert, message, stacktrace);
-	        }
-	    }
-	    Message.NoSuchAlertException = NoSuchAlertException;
-	    class NoSuchFrameException extends ErrorResponse {
-	        constructor(message) {
-	            super(ErrorCode.NoSuchFrame, message);
-	        }
-	    }
-	    Message.NoSuchFrameException = NoSuchFrameException;
-	    class NoSuchNodeException extends ErrorResponse {
-	        constructor(message, stacktrace) {
-	            super(ErrorCode.NoSuchNode, message, stacktrace);
-	        }
-	    }
-	    Message.NoSuchNodeException = NoSuchNodeException;
-	    class NoSuchScriptException extends ErrorResponse {
-	        constructor(message, stacktrace) {
-	            super(ErrorCode.NoSuchScript, message, stacktrace);
-	        }
-	    }
-	    Message.NoSuchScriptException = NoSuchScriptException;
-	    class SessionNotCreatedException extends ErrorResponse {
-	        constructor(message, stacktrace) {
-	            super(ErrorCode.SessionNotCreated, message, stacktrace);
-	        }
-	    }
-	    Message.SessionNotCreatedException = SessionNotCreatedException;
-	    class UnknownCommandException extends ErrorResponse {
-	        constructor(message, stacktrace) {
-	            super(ErrorCode.UnknownCommand, message, stacktrace);
+	            super('unknown command', message, stacktrace);
 	        }
 	    }
 	    Message.UnknownCommandException = UnknownCommandException;
-	    class UnknownErrorException extends ErrorResponse {
+	    class InvalidArgumentException extends ErrorResponseClass {
 	        constructor(message, stacktrace) {
-	            super(ErrorCode.UnknownError, message, stacktrace);
+	            super('invalid argument', message, stacktrace);
 	        }
 	    }
-	    Message.UnknownErrorException = UnknownErrorException;
-	    class UnsupportedOperationException extends ErrorResponse {
+	    Message.InvalidArgumentException = InvalidArgumentException;
+	    class NoSuchNodeException extends ErrorResponseClass {
 	        constructor(message, stacktrace) {
-	            super(ErrorCode.UnsupportedOperation, message, stacktrace);
+	            super('no such node', message, stacktrace);
 	        }
 	    }
-	    Message.UnsupportedOperationException = UnsupportedOperationException;
+	    Message.NoSuchNodeException = NoSuchNodeException;
+	    class NoSuchFrameException extends ErrorResponseClass {
+	        constructor(message) {
+	            super('no such frame', message);
+	        }
+	    }
+	    Message.NoSuchFrameException = NoSuchFrameException;
 	})(exports.Message || (exports.Message = {}));
 	(function (Script) {
 	    (function (EventNames) {
@@ -1391,7 +1340,6 @@ var protocol = {};
 	    (function (EventNames) {
 	        EventNames["BeforeRequestSentEvent"] = "network.beforeRequestSent";
 	        EventNames["ResponseCompletedEvent"] = "network.responseCompleted";
-	        EventNames["FetchErrorEvent"] = "network.fetchError";
 	    })(Network.EventNames || (Network.EventNames = {}));
 	})(exports.Network || (exports.Network = {}));
 	(function (CDP) {
@@ -1466,9 +1414,6 @@ class Deferred {
             this.#resolve = resolve;
             this.#reject = reject;
         });
-        // Needed to avoid `Uncaught (in promise)`. The promises returned by `then`
-        // and `catch` will be rejected anyway.
-        this.#promise.catch(() => { });
     }
     then(onFulfilled, onRejected) {
         return this.#promise.then(onFulfilled, onRejected);
@@ -1563,7 +1508,7 @@ var scriptEvaluator = {};
 	        }
 	        return {
 	            type: 'success',
-	            result: realm.cdpToBidiValue(cdpEvaluateResult, resultOwnership),
+	            result: await realm.cdpToBidiValue(cdpEvaluateResult, resultOwnership),
 	            realm: realm.realmId,
 	        };
 	    }
@@ -1598,9 +1543,8 @@ var scriptEvaluator = {};
 	                [
 	                    'Could not find object with given id',
 	                    'Argument should belong to the same JavaScript world as target object',
-	                    'Invalid remote object id',
 	                ].includes(e.message)) {
-	                throw new protocol_js_1.Message.NoSuchHandleException('Handle was not found.');
+	                throw new protocol_js_1.Message.InvalidArgumentException('Handle was not found.');
 	            }
 	            throw e;
 	        }
@@ -1614,7 +1558,7 @@ var scriptEvaluator = {};
 	        }
 	        return {
 	            type: 'success',
-	            result: realm.cdpToBidiValue(cdpCallFunctionResult, resultOwnership),
+	            result: await realm.cdpToBidiValue(cdpCallFunctionResult, resultOwnership),
 	            realm: realm.realmId,
 	        };
 	    }
@@ -1810,7 +1754,7 @@ var scriptEvaluator = {};
 	                });
 	                const channelHandle = createChannelHandleResult.result.objectId;
 	                // Long-poll the message queue asynchronously.
-	                void this.#initChannelListener(argumentValue, channelHandle, realm);
+	                this.#initChannelListener(argumentValue, channelHandle, realm);
 	                const sendMessageArgResult = await realm.cdpClient.sendCommand('Runtime.callFunctionOn', {
 	                    functionDeclaration: String((channelHandle) => {
 	                        return channelHandle.sendMessage;
@@ -1831,9 +1775,11 @@ var scriptEvaluator = {};
 	                throw new Error(`Value ${JSON.stringify(argumentValue)} is not deserializable.`);
 	        }
 	    }
-	    async #flattenKeyValuePairs(mapping, realm) {
+	    async #flattenKeyValuePairs(value, realm) {
 	        const keyValueArray = [];
-	        for (const [key, value] of mapping) {
+	        for (const pair of value) {
+	            const key = pair[0];
+	            const value = pair[1];
 	            let keyArg;
 	            if (typeof key === 'string') {
 	                // Key is a string.
@@ -1850,7 +1796,11 @@ var scriptEvaluator = {};
 	        return keyValueArray;
 	    }
 	    async #flattenValueList(list, realm) {
-	        return Promise.all(list.map((value) => this.#deserializeToCdpArg(value, realm)));
+	        const result = [];
+	        for (const value of list) {
+	            result.push(await this.#deserializeToCdpArg(value, realm));
+	        }
+	        return result;
 	    }
 	    async #initChannelListener(channel, channelHandle, realm) {
 	        const channelId = channel.value.channel;
@@ -1868,17 +1818,19 @@ var scriptEvaluator = {};
 	                executionContextId: realm.executionContextId,
 	                generateWebDriverValue: true,
 	            });
-	            this.#eventManager.registerEvent({
+	            this.#eventManager.registerPromiseEvent(realm
+	                .cdpToBidiValue(message, channel.value.ownership ?? 'none')
+	                .then((data) => ({
 	                method: protocol_js_1.Script.EventNames.MessageEvent,
 	                params: {
 	                    channel: channelId,
-	                    data: realm.cdpToBidiValue(message, channel.value.ownership ?? 'none'),
+	                    data,
 	                    source: {
 	                        realm: realm.realmId,
 	                        context: realm.browsingContextId,
 	                    },
 	                },
-	            }, realm.browsingContextId);
+	            })), realm.browsingContextId, protocol_js_1.Script.EventNames.MessageEvent);
 	        }
 	    }
 	    async #serializeCdpExceptionDetails(cdpExceptionDetails, lineOffset, resultOwnership, realm) {
@@ -1977,7 +1929,7 @@ class Realm {
         }
         this.#realmStorage.knownHandlesToRealm.delete(handle);
     }
-    cdpToBidiValue(cdpValue, resultOwnership) {
+    async cdpToBidiValue(cdpValue, resultOwnership) {
         const cdpWebDriverValue = cdpValue.result.webDriverValue;
         const bidiValue = this.webDriverValueToBiDi(cdpWebDriverValue);
         if (cdpValue.result.objectId) {
@@ -1991,27 +1943,21 @@ class Realm {
             }
             else {
                 // No need in awaiting for the object to be released.
-                void this.cdpClient.sendCommand('Runtime.releaseObject', { objectId });
+                this.cdpClient.sendCommand('Runtime.releaseObject', { objectId });
             }
         }
         return bidiValue;
     }
     webDriverValueToBiDi(webDriverValue) {
         // This relies on the CDP to implement proper BiDi serialization, except
-        // backendNodeId/sharedId and `platformobject`.
+        // backendNodeId/sharedId.
         const result = webDriverValue;
-        // Platform object is a special case. It should have only `{type: object}`
-        // without `value` field.
-        if (result.type === 'platformobject') {
-            return { type: 'object' };
-        }
         const bidiValue = result.value;
         if (bidiValue === undefined) {
             return result;
         }
         if (result.type === 'node') {
             if (Object.hasOwn(bidiValue, 'backendNodeId')) {
-                // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                 bidiValue.sharedId = `${this.navigableId}${scriptEvaluator_js_1.SHARED_ID_DIVIDER}${bidiValue.backendNodeId}`;
                 delete bidiValue['backendNodeId'];
             }
@@ -2069,14 +2015,14 @@ class Realm {
         return this.#cdpClient;
     }
     async callFunction(functionDeclaration, _this, _arguments, awaitPromise, resultOwnership) {
-        const context = this.#browsingContextStorage.getContext(this.browsingContextId);
+        const context = this.#browsingContextStorage.getKnownContext(this.browsingContextId);
         await context.awaitUnblocked();
         return {
             result: await this.#scriptEvaluator.callFunction(this, functionDeclaration, _this, _arguments, awaitPromise, resultOwnership),
         };
     }
     async scriptEvaluate(expression, awaitPromise, resultOwnership) {
-        const context = this.#browsingContextStorage.getContext(this.browsingContextId);
+        const context = this.#browsingContextStorage.getKnownContext(this.browsingContextId);
         await context.awaitUnblocked();
         return {
             result: await this.#scriptEvaluator.scriptEvaluate(this, expression, awaitPromise, resultOwnership),
@@ -2122,24 +2068,11 @@ realm.Realm = Realm;
 Object.defineProperty(browsingContextImpl, "__esModule", { value: true });
 browsingContextImpl.BrowsingContextImpl = void 0;
 const unitConversions_js_1 = unitConversions;
-const protocol_js_1$7 = protocol;
+const protocol_js_1$6 = protocol;
 const log_js_1$2 = log;
 const deferred_js_1 = deferred;
 const realm_js_1 = realm;
 class BrowsingContextImpl {
-    /** The ID of the current context. */
-    #contextId;
-    /**
-     * The ID of the parent context.
-     * If null, this is a top-level context.
-     */
-    #parentId;
-    /**
-     * Children contexts.
-     * Map from children context ID to context implementation.
-     */
-    #children = new Map();
-    #browsingContextStorage;
     #defers = {
         documentInitialized: new deferred_js_1.Deferred(),
         Page: {
@@ -2150,13 +2083,23 @@ class BrowsingContextImpl {
             },
         },
     };
-    #url = 'about:blank';
+    #contextId;
+    #parentId;
     #eventManager;
+    #children = new Map();
     #realmStorage;
+    #url = 'about:blank';
     #loaderId = null;
     #cdpTarget;
     #maybeDefaultRealm;
+    #browsingContextStorage;
     #logger;
+    get #defaultRealm() {
+        if (this.#maybeDefaultRealm === undefined) {
+            throw new Error(`No default realm for browsing context ${this.#contextId}`);
+        }
+        return this.#maybeDefaultRealm;
+    }
     constructor(cdpTarget, realmStorage, contextId, parentId, eventManager, browsingContextStorage, logger) {
         this.#cdpTarget = cdpTarget;
         this.#realmStorage = realmStorage;
@@ -2167,108 +2110,64 @@ class BrowsingContextImpl {
         this.#logger = logger;
         this.#initListeners();
     }
-    static create(cdpTarget, realmStorage, contextId, parentId, eventManager, browsingContextStorage, logger) {
+    static async create(cdpTarget, realmStorage, contextId, parentId, eventManager, browsingContextStorage, logger) {
         const context = new BrowsingContextImpl(cdpTarget, realmStorage, contextId, parentId, eventManager, browsingContextStorage, logger);
         browsingContextStorage.addContext(context);
         eventManager.registerEvent({
-            method: protocol_js_1$7.BrowsingContext.EventNames.ContextCreatedEvent,
+            method: protocol_js_1$6.BrowsingContext.EventNames.ContextCreatedEvent,
             params: context.serializeToBidiValue(),
         }, context.contextId);
-        return context;
     }
-    /**
-     * @see https://html.spec.whatwg.org/multipage/document-sequences.html#navigable
-     */
+    // https://html.spec.whatwg.org/multipage/document-sequences.html#navigable
     get navigableId() {
         return this.#loaderId;
-    }
-    delete() {
-        this.#deleteChildren();
-        this.#realmStorage.deleteRealms({
-            browsingContextId: this.contextId,
-        });
-        // Remove context from the parent.
-        if (this.parentId !== null) {
-            const parent = this.#browsingContextStorage.getContext(this.parentId);
-            parent.#children.delete(this.contextId);
-        }
-        this.#eventManager.registerEvent({
-            method: protocol_js_1$7.BrowsingContext.EventNames.ContextDestroyedEvent,
-            params: this.serializeToBidiValue(),
-        }, this.contextId);
-        this.#browsingContextStorage.deleteContext(this.contextId);
-    }
-    /** Returns the ID of this context. */
-    get contextId() {
-        return this.#contextId;
-    }
-    /** Returns the parent context ID. */
-    get parentId() {
-        return this.#parentId;
-    }
-    /** Returns all children contexts. */
-    get children() {
-        return Array.from(this.#children.values());
-    }
-    /**
-     * Returns true if this is a top-level context.
-     * This is the case whenever the parent context ID is null.
-     */
-    isTopLevelContext() {
-        return this.#parentId === null;
-    }
-    addChild(child) {
-        this.#children.set(child.contextId, child);
-    }
-    #deleteChildren() {
-        this.children.map((child) => child.delete());
-    }
-    get #defaultRealm() {
-        if (this.#maybeDefaultRealm === undefined) {
-            throw new Error(`No default realm for browsing context ${this.#contextId}`);
-        }
-        return this.#maybeDefaultRealm;
-    }
-    get cdpTarget() {
-        return this.#cdpTarget;
     }
     updateCdpTarget(cdpTarget) {
         this.#cdpTarget = cdpTarget;
         this.#initListeners();
     }
+    async delete() {
+        await this.#removeChildContexts();
+        this.#realmStorage.deleteRealms({
+            browsingContextId: this.contextId,
+        });
+        // Remove context from the parent.
+        if (this.parentId !== null) {
+            const parent = this.#browsingContextStorage.getKnownContext(this.parentId);
+            parent.#children.delete(this.contextId);
+        }
+        this.#eventManager.registerEvent({
+            method: protocol_js_1$6.BrowsingContext.EventNames.ContextDestroyedEvent,
+            params: this.serializeToBidiValue(),
+        }, this.contextId);
+        this.#browsingContextStorage.removeContext(this.contextId);
+    }
+    async #removeChildContexts() {
+        await Promise.all(this.children.map((child) => child.delete()));
+    }
+    get contextId() {
+        return this.#contextId;
+    }
+    get parentId() {
+        return this.#parentId;
+    }
+    get cdpTarget() {
+        return this.#cdpTarget;
+    }
+    get children() {
+        return Array.from(this.#children.values());
+    }
     get url() {
         return this.#url;
+    }
+    addChild(child) {
+        this.#children.set(child.contextId, child);
     }
     async awaitLoaded() {
         await this.#defers.Page.lifecycleEvent.load;
     }
-    awaitUnblocked() {
+    async awaitUnblocked() {
         return this.#cdpTarget.targetUnblocked;
-    }
-    async getOrCreateSandbox(sandbox) {
-        if (sandbox === undefined || sandbox === '') {
-            return this.#defaultRealm;
-        }
-        let maybeSandboxes = this.#realmStorage.findRealms({
-            browsingContextId: this.contextId,
-            sandbox,
-        });
-        if (maybeSandboxes.length === 0) {
-            await this.#cdpTarget.cdpClient.sendCommand('Page.createIsolatedWorld', {
-                frameId: this.contextId,
-                worldName: sandbox,
-            });
-            // `Runtime.executionContextCreated` should be emitted by the time the
-            // previous command is done.
-            maybeSandboxes = this.#realmStorage.findRealms({
-                browsingContextId: this.contextId,
-                sandbox,
-            });
-        }
-        if (maybeSandboxes.length !== 1) {
-            throw Error(`Sandbox ${sandbox} wasn't created.`);
-        }
-        return maybeSandboxes[0];
     }
     serializeToBidiValue(maxDepth = 0, addParentFiled = true) {
         return {
@@ -2287,7 +2186,7 @@ class BrowsingContextImpl {
             }
             this.#url = params.targetInfo.url;
         });
-        this.#cdpTarget.cdpClient.on('Page.frameNavigated', (params) => {
+        this.#cdpTarget.cdpClient.on('Page.frameNavigated', async (params) => {
             if (this.contextId !== params.frame.id) {
                 return;
             }
@@ -2295,7 +2194,9 @@ class BrowsingContextImpl {
             // At the point the page is initiated, all the nested iframes from the
             // previous page are detached and realms are destroyed.
             // Remove context's children.
-            this.#deleteChildren();
+            await this.#removeChildContexts();
+            // Remove all the already created realms.
+            this.#realmStorage.deleteRealms({ browsingContextId: this.contextId });
         });
         this.#cdpTarget.cdpClient.on('Page.navigatedWithinDocument', (params) => {
             if (this.contextId !== params.frameId) {
@@ -2304,7 +2205,7 @@ class BrowsingContextImpl {
             this.#url = params.url;
             this.#defers.Page.navigatedWithinDocument.resolve(params);
         });
-        this.#cdpTarget.cdpClient.on('Page.lifecycleEvent', (params) => {
+        this.#cdpTarget.cdpClient.on('Page.lifecycleEvent', async (params) => {
             if (this.contextId !== params.frameId) {
                 return;
             }
@@ -2328,7 +2229,7 @@ class BrowsingContextImpl {
                 case 'DOMContentLoaded':
                     this.#defers.Page.lifecycleEvent.DOMContentLoaded.resolve(params);
                     this.#eventManager.registerEvent({
-                        method: protocol_js_1$7.BrowsingContext.EventNames.DomContentLoadedEvent,
+                        method: protocol_js_1$6.BrowsingContext.EventNames.DomContentLoadedEvent,
                         params: {
                             context: this.contextId,
                             navigation: this.#loaderId,
@@ -2340,7 +2241,7 @@ class BrowsingContextImpl {
                 case 'load':
                     this.#defers.Page.lifecycleEvent.load.resolve(params);
                     this.#eventManager.registerEvent({
-                        method: protocol_js_1$7.BrowsingContext.EventNames.LoadEvent,
+                        method: protocol_js_1$6.BrowsingContext.EventNames.LoadEvent,
                         params: {
                             context: this.contextId,
                             navigation: this.#loaderId,
@@ -2374,11 +2275,6 @@ class BrowsingContextImpl {
             this.#realmStorage.deleteRealms({
                 cdpSessionId: this.#cdpTarget.cdpSessionId,
                 executionContextId: params.executionContextId,
-            });
-        });
-        this.#cdpTarget.cdpClient.on('Runtime.executionContextsCleared', () => {
-            this.#realmStorage.deleteRealms({
-                cdpSessionId: this.#cdpTarget.cdpSessionId,
             });
         });
     }
@@ -2432,7 +2328,7 @@ class BrowsingContextImpl {
             frameId: this.contextId,
         });
         if (cdpNavigateResult.errorText) {
-            throw new protocol_js_1$7.Message.UnknownErrorException(cdpNavigateResult.errorText);
+            throw new protocol_js_1$6.Message.UnknownException(cdpNavigateResult.errorText);
         }
         this.#documentChanged(cdpNavigateResult.loaderId);
         // Wait for `wait` condition.
@@ -2457,6 +2353,8 @@ class BrowsingContextImpl {
                     await this.#defers.Page.lifecycleEvent.load;
                 }
                 break;
+            default:
+                throw new Error(`Not implemented wait '${wait}'`);
         }
         return {
             result: {
@@ -2464,6 +2362,31 @@ class BrowsingContextImpl {
                 url,
             },
         };
+    }
+    async getOrCreateSandbox(sandbox) {
+        if (sandbox === undefined || sandbox === '') {
+            return this.#defaultRealm;
+        }
+        let maybeSandboxes = this.#realmStorage.findRealms({
+            browsingContextId: this.contextId,
+            sandbox,
+        });
+        if (maybeSandboxes.length === 0) {
+            await this.#cdpTarget.cdpClient.sendCommand('Page.createIsolatedWorld', {
+                frameId: this.contextId,
+                worldName: sandbox,
+            });
+            // `Runtime.executionContextCreated` should be emitted by the time the
+            // previous command is done.
+            maybeSandboxes = this.#realmStorage.findRealms({
+                browsingContextId: this.contextId,
+                sandbox,
+            });
+        }
+        if (maybeSandboxes.length !== 1) {
+            throw Error(`Sandbox ${sandbox} wasn't created.`);
+        }
+        return maybeSandboxes[0];
     }
     async captureScreenshot() {
         const [, result] = await Promise.all([
@@ -2485,7 +2408,7 @@ class BrowsingContextImpl {
             landscape: params.orientation === 'landscape',
             pageRanges: params.pageRanges?.join(',') ?? '',
             scale: params.scale,
-            preferCSSPageSize: !params.shrinkToFit,
+            // TODO(#518): Use `shrinkToFit`.
         };
         if (params.margin?.bottom) {
             printToPdfCdpParams.marginBottom = (0, unitConversions_js_1.inchesFromCm)(params.margin.bottom);
@@ -2509,18 +2432,6 @@ class BrowsingContextImpl {
         return {
             result: {
                 data: result.data,
-            },
-        };
-    }
-    async addPreloadScript(params) {
-        const result = await this.#cdpTarget.cdpClient.sendCommand('Page.addScriptToEvaluateOnNewDocument', {
-            // The spec provides a function, and CDP expects an evaluation.
-            source: `(${params.expression})();`,
-            worldName: params.sandbox,
-        });
-        return {
-            result: {
-                script: result.identifier,
             },
         };
     }
@@ -2656,7 +2567,7 @@ function toJson(arg) {
             .join(',')}}`;
     }
     if (arg.type === 'array') {
-        return `[${arg.value?.map((val) => toJson(val)).join(',') ?? ''}]`;
+        return `[${arg.value?.map((val) => toJson(val)).join(',')}]`;
     }
     throw Error(`Invalid value type: ${arg.toString()}`);
 }
@@ -2671,13 +2582,13 @@ function stringFromArg(arg) {
         case 'bigint':
             return String(arg.value);
         case 'regexp':
-            return `/${arg.value.pattern}/${arg.value.flags ?? ''}`;
+            return `/${arg.value.pattern}/${arg.value.flags}`;
         case 'date':
             return new Date(arg.value).toString();
         case 'object':
-            return `Object(${arg.value?.length ?? ''})`;
+            return `Object(${arg.value?.length})`;
         case 'array':
-            return `Array(${arg.value?.length ?? ''})`;
+            return `Array(${arg.value?.length})`;
         case 'map':
             return `Map(${arg.value.length})`;
         case 'set':
@@ -2699,7 +2610,7 @@ function getRemoteValuesText(args, formatText) {
         formatText) {
         return logMessageFormatter(args);
     }
-    // if args[0] is not a format specifier, just join the args with \u0020 (unicode 'SPACE')
+    // if args[0] is not a format specifier, just join the args with \u0020
     return args
         .map((arg) => {
         return stringFromArg(arg);
@@ -2710,9 +2621,9 @@ logHelper.getRemoteValuesText = getRemoteValuesText;
 
 Object.defineProperty(logManager, "__esModule", { value: true });
 logManager.LogManager = void 0;
-const protocol_js_1$6 = protocol;
+const protocol_js_1$5 = protocol;
 const logHelper_js_1 = logHelper;
-/** Converts CDP StackTrace object to BiDi StackTrace object. */
+/** Converts CDP StackTrace object to Bidi StackTrace object. */
 function getBidiStackTrace(cdpStackTrace) {
     const stackFrames = cdpStackTrace?.callFrames.map((callFrame) => {
         return {
@@ -2768,7 +2679,7 @@ class LogManager {
                         return realm.serializeCdpObject(arg, 'none');
                     }));
             this.#eventManager.registerPromiseEvent(argsPromise.then((args) => ({
-                method: protocol_js_1$6.Log.EventNames.LogEntryAddedEvent,
+                method: protocol_js_1$5.Log.EventNames.LogEntryAddedEvent,
                 params: {
                     level: getLogLevel(params.type),
                     source: {
@@ -2783,7 +2694,7 @@ class LogManager {
                     method: params.type === 'warning' ? 'warn' : params.type,
                     args,
                 },
-            })), realm?.browsingContextId ?? 'UNKNOWN', protocol_js_1$6.Log.EventNames.LogEntryAddedEvent);
+            })), realm?.browsingContextId ?? 'UNKNOWN', protocol_js_1$5.Log.EventNames.LogEntryAddedEvent);
         });
         this.#cdpTarget.cdpClient.on('Runtime.exceptionThrown', (params) => {
             // Try to find realm by `cdpSessionId` and `executionContextId`,
@@ -2803,7 +2714,7 @@ class LogManager {
                 return realm.stringifyObject(params.exceptionDetails.exception);
             })();
             this.#eventManager.registerPromiseEvent(textPromise.then((text) => ({
-                method: protocol_js_1$6.Log.EventNames.LogEntryAddedEvent,
+                method: protocol_js_1$5.Log.EventNames.LogEntryAddedEvent,
                 params: {
                     level: 'error',
                     source: {
@@ -2815,54 +2726,13 @@ class LogManager {
                     stackTrace: getBidiStackTrace(params.exceptionDetails.stackTrace),
                     type: 'javascript',
                 },
-            })), realm?.browsingContextId ?? 'UNKNOWN', protocol_js_1$6.Log.EventNames.LogEntryAddedEvent);
+            })), realm?.browsingContextId ?? 'UNKNOWN', protocol_js_1$5.Log.EventNames.LogEntryAddedEvent);
         });
     }
 }
 logManager.LogManager = LogManager;
 
 var networkProcessor = {};
-
-var DefaultMap$1 = {};
-
-/**
- * Copyright 2023 Google LLC.
- * Copyright (c) Microsoft Corporation.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-Object.defineProperty(DefaultMap$1, "__esModule", { value: true });
-DefaultMap$1.DefaultMap = void 0;
-/**
- * A subclass of Map whose functionality is almost the same as its parent
- * except for the fact that DefaultMap never returns undefined. It provides a
- * default value for keys that do not exist.
- */
-class DefaultMap extends Map {
-    /** The default value to return whenever a key is not present in the map. */
-    #getDefaultValue;
-    constructor(getDefaultValue, entries) {
-        super(entries);
-        this.#getDefaultValue = getDefaultValue;
-    }
-    get(key) {
-        if (!this.has(key)) {
-            this.set(key, this.#getDefaultValue(key));
-        }
-        return super.get(key);
-    }
-}
-DefaultMap$1.DefaultMap = DefaultMap;
 
 var networkRequest = {};
 
@@ -2888,7 +2758,6 @@ networkRequest.NetworkRequest = void 0;
 const deferred_1$1 = deferred;
 const protocol_1$1 = protocol;
 class NetworkRequest {
-    static #unknown = 'UNKNOWN';
     requestId;
     #eventManager;
     #requestWillBeSentEvent;
@@ -2941,18 +2810,6 @@ class NetworkRequest {
             this.#responseReceivedDeferred.resolve();
         }
     }
-    onLoadingFailedEvent(loadingFailedEvent) {
-        this.#beforeRequestSentDeferred.resolve();
-        this.#responseReceivedDeferred.reject(loadingFailedEvent);
-        const params = {
-            ...this.#getBaseEventParams(),
-            errorText: loadingFailedEvent.errorText,
-        };
-        this.#eventManager.registerEvent({
-            method: protocol_1$1.Network.EventNames.FetchErrorEvent,
-            params,
-        }, this.#requestWillBeSentEvent?.frameId ?? null);
-    }
     #sendBeforeRequestEvent() {
         if (!this.#isIgnoredEvent()) {
             this.#eventManager.registerPromiseEvent(this.#beforeRequestSentDeferred.then(() => this.#getBeforeRequestEvent()), this.#requestWillBeSentEvent?.frameId ?? null, protocol_1$1.Network.EventNames.BeforeRequestSentEvent);
@@ -2962,8 +2819,22 @@ class NetworkRequest {
         if (this.#requestWillBeSentEvent === undefined) {
             throw new Error('RequestWillBeSentEvent is not set');
         }
+        if (this.#requestWillBeSentExtraInfoEvent === undefined) {
+            throw new Error('RequestWillBeSentExtraInfoEvent is not set');
+        }
+        const requestWillBeSentEvent = this.#requestWillBeSentEvent;
+        const requestWillBeSentExtraInfoEvent = this.#requestWillBeSentExtraInfoEvent;
+        const baseEventParams = {
+            context: requestWillBeSentEvent.frameId ?? null,
+            navigation: requestWillBeSentEvent.loaderId,
+            // TODO: implement.
+            redirectCount: 0,
+            request: this.#getRequestData(requestWillBeSentEvent, requestWillBeSentExtraInfoEvent),
+            // Timestamp should be in milliseconds, while CDP provides it in seconds.
+            timestamp: Math.round(requestWillBeSentEvent.wallTime * 1000),
+        };
         const params = {
-            ...this.#getBaseEventParams(),
+            ...baseEventParams,
             initiator: { type: this.#getInitiatorType() },
         };
         return {
@@ -2971,30 +2842,16 @@ class NetworkRequest {
             params,
         };
     }
-    #getBaseEventParams() {
+    #getRequestData(requestWillBeSentEvent, requestWillBeSentExtraInfoEvent) {
         return {
-            context: this.#requestWillBeSentEvent?.frameId ?? null,
-            navigation: this.#requestWillBeSentEvent?.loaderId ?? null,
-            // TODO: implement.
-            redirectCount: 0,
-            request: this.#getRequestData(),
-            // Timestamp should be in milliseconds, while CDP provides it in seconds.
-            timestamp: Math.round((this.#requestWillBeSentEvent?.wallTime ?? 0) * 1000),
-        };
-    }
-    #getRequestData() {
-        const cookies = this.#requestWillBeSentExtraInfoEvent === undefined
-            ? []
-            : NetworkRequest.#getCookies(this.#requestWillBeSentExtraInfoEvent.associatedCookies);
-        return {
-            request: this.#requestWillBeSentEvent?.requestId ?? NetworkRequest.#unknown,
-            url: this.#requestWillBeSentEvent?.request.url ?? NetworkRequest.#unknown,
-            method: this.#requestWillBeSentEvent?.request.method ?? NetworkRequest.#unknown,
-            headers: Object.keys(this.#requestWillBeSentEvent?.request.headers ?? []).map((key) => ({
+            request: requestWillBeSentEvent.requestId,
+            url: requestWillBeSentEvent.request.url,
+            method: requestWillBeSentEvent.request.method,
+            headers: Object.keys(requestWillBeSentEvent.request.headers).map((key) => ({
                 name: key,
-                value: this.#requestWillBeSentEvent?.request.headers[key],
+                value: requestWillBeSentEvent.request.headers[key],
             })),
-            cookies,
+            cookies: NetworkRequest.#getCookies(requestWillBeSentExtraInfoEvent.associatedCookies),
             // TODO: implement.
             headersSize: -1,
             // TODO: implement.
@@ -3036,7 +2893,7 @@ class NetworkRequest {
             case 'parser':
             case 'script':
             case 'preflight':
-                return this.#requestWillBeSentEvent.initiator.type;
+                return this.#requestWillBeSentEvent?.initiator.type;
             default:
                 return 'other';
         }
@@ -3076,26 +2933,48 @@ class NetworkRequest {
         if (this.#responseReceivedEvent === undefined) {
             throw new Error('ResponseReceivedEvent is not set');
         }
+        if (this.#responseReceivedExtraInfoEvent === undefined) {
+            throw new Error('ResponseReceivedExtraInfoEvent is not set');
+        }
         if (this.#requestWillBeSentEvent === undefined) {
             throw new Error('RequestWillBeSentEvent is not set');
         }
+        if (this.#requestWillBeSentExtraInfoEvent === undefined) {
+            throw new Error('RequestWillBeSentExtraInfoEvent is not set');
+        }
+        const requestWillBeSentEvent = this.#requestWillBeSentEvent;
+        const requestWillBeSentExtraInfoEvent = this.#requestWillBeSentExtraInfoEvent;
+        const responseReceivedEvent = this.#responseReceivedEvent;
+        const responseReceivedExtraInfoEvent = this.#responseReceivedExtraInfoEvent;
+        const baseEventParams = {
+            context: responseReceivedEvent.frameId ?? null,
+            navigation: responseReceivedEvent.loaderId,
+            // TODO: implement.
+            redirectCount: 0,
+            request: this.#getRequestData(requestWillBeSentEvent, requestWillBeSentExtraInfoEvent),
+            // Timestamp normalized to wall time using `RequestWillBeSent` event as a
+            // baseline.
+            timestamp: Math.round(requestWillBeSentEvent.wallTime * 1000 -
+                requestWillBeSentEvent.timestamp +
+                responseReceivedEvent.timestamp),
+        };
         return {
             method: protocol_1$1.Network.EventNames.ResponseCompletedEvent,
             params: {
-                ...this.#getBaseEventParams(),
+                ...baseEventParams,
                 response: {
-                    url: this.#responseReceivedEvent.response.url,
-                    protocol: this.#responseReceivedEvent.response.protocol,
-                    status: this.#responseReceivedEvent.response.status,
-                    statusText: this.#responseReceivedEvent.response.statusText,
+                    url: responseReceivedEvent.response.url,
+                    protocol: responseReceivedEvent.response.protocol,
+                    status: responseReceivedEvent.response.status,
+                    statusText: responseReceivedEvent.response.statusText,
                     // Check if this is correct.
-                    fromCache: this.#responseReceivedEvent.response.fromDiskCache ||
-                        this.#responseReceivedEvent.response.fromPrefetchCache,
+                    fromCache: responseReceivedEvent.response.fromDiskCache ||
+                        responseReceivedEvent.response.fromPrefetchCache,
                     // TODO: implement.
-                    headers: this.#getHeaders(this.#responseReceivedEvent.response.headers),
-                    mimeType: this.#responseReceivedEvent.response.mimeType,
-                    bytesReceived: this.#responseReceivedEvent.response.encodedDataLength,
-                    headersSize: this.#responseReceivedExtraInfoEvent?.headersText?.length ?? -1,
+                    headers: this.#getHeaders(responseReceivedEvent.response.headers),
+                    mimeType: responseReceivedEvent.response.mimeType,
+                    bytesReceived: responseReceivedEvent.response.encodedDataLength,
+                    headersSize: responseReceivedExtraInfoEvent.headersText?.length ?? -1,
                     // TODO: consider removing from spec.
                     bodySize: -1,
                     content: {
@@ -3137,7 +3016,6 @@ networkRequest.NetworkRequest = NetworkRequest;
  */
 Object.defineProperty(networkProcessor, "__esModule", { value: true });
 networkProcessor.NetworkProcessor = void 0;
-const DefaultMap_1 = DefaultMap$1;
 const networkRequest_1 = networkRequest;
 class NetworkProcessor {
     #eventManager;
@@ -3145,10 +3023,9 @@ class NetworkProcessor {
      * Map of request ID to NetworkRequest objects. Needed as long as information
      * about requests comes from different events.
      */
-    #requestMap;
+    #requestMap = new Map();
     constructor(eventManager) {
         this.#eventManager = eventManager;
-        this.#requestMap = new DefaultMap_1.DefaultMap((requestId) => new networkRequest_1.NetworkRequest(requestId, this.#eventManager));
     }
     static async create(cdpClient, eventManager) {
         const networkProcessor = new NetworkProcessor(eventManager);
@@ -3172,15 +3049,14 @@ class NetworkProcessor {
                 .#getOrCreateNetworkRequest(params.requestId)
                 .onResponseReceivedEventExtraInfo(params);
         });
-        cdpClient.on('Network.loadingFailed', (params) => {
-            networkProcessor
-                .#getOrCreateNetworkRequest(params.requestId)
-                .onLoadingFailedEvent(params);
-        });
         await cdpClient.sendCommand('Network.enable');
         return networkProcessor;
     }
     #getOrCreateNetworkRequest(requestId) {
+        if (!this.#requestMap.has(requestId)) {
+            const networkRequest = new networkRequest_1.NetworkRequest(requestId, this.#eventManager);
+            this.#requestMap.set(requestId, networkRequest);
+        }
         return this.#requestMap.get(requestId);
     }
 }
@@ -3283,7 +3159,7 @@ class CdpTarget {
         }
     }
     #setEventListeners() {
-        this.#cdpClient.on('*', (method, params) => {
+        this.#cdpClient.on('*', async (method, params) => {
             this.#eventManager.registerEvent({
                 method: protocol_1.CDP.EventNames.EventReceivedEvent,
                 params: {
@@ -3299,7 +3175,7 @@ cdpTarget.CdpTarget = CdpTarget;
 
 Object.defineProperty(browsingContextProcessor, "__esModule", { value: true });
 browsingContextProcessor.BrowsingContextProcessor = void 0;
-const protocol_js_1$5 = protocol;
+const protocol_js_1$4 = protocol;
 const log_js_1$1 = log;
 const browsingContextImpl_js_1 = browsingContextImpl;
 const cdpTarget_js_1 = cdpTarget;
@@ -3320,43 +3196,44 @@ class BrowsingContextProcessor {
         this.#setEventListeners(this.#cdpConnection.browserClient());
     }
     /**
-     * This method is called for each CDP session, since this class is responsible
-     * for creating and destroying all targets and browsing contexts.
+     * `BrowsingContextProcessor` is responsible for creating and destroying all
+     * the targets and browsing contexts. This method is called for each CDP
+     * session.
      */
     #setEventListeners(cdpClient) {
-        cdpClient.on('Target.attachedToTarget', (params) => {
-            this.#handleAttachedToTargetEvent(params, cdpClient);
+        cdpClient.on('Target.attachedToTarget', async (params) => {
+            await this.#handleAttachedToTargetEvent(params, cdpClient);
         });
-        cdpClient.on('Target.detachedFromTarget', (params) => {
-            this.#handleDetachedFromTargetEvent(params);
+        cdpClient.on('Target.detachedFromTarget', async (params) => {
+            await this.#handleDetachedFromTargetEvent(params);
         });
-        cdpClient.on('Page.frameAttached', (params) => {
-            this.#handleFrameAttachedEvent(params);
+        cdpClient.on('Page.frameAttached', async (params) => {
+            await this.#handleFrameAttachedEvent(params);
         });
-        cdpClient.on('Page.frameDetached', (params) => {
-            this.#handleFrameDetachedEvent(params);
+        cdpClient.on('Page.frameDetached', async (params) => {
+            await this.#handleFrameDetachedEvent(params);
         });
     }
     // { "method": "Page.frameAttached",
     //   "params": {
     //     "frameId": "0A639AB1D9A392DF2CE02C53CC4ED3A6",
     //     "parentFrameId": "722BB0526C73B067A479BED6D0DB1156" } }
-    #handleFrameAttachedEvent(params) {
+    async #handleFrameAttachedEvent(params) {
         const parentBrowsingContext = this.#browsingContextStorage.findContext(params.parentFrameId);
         if (parentBrowsingContext !== undefined) {
-            browsingContextImpl_js_1.BrowsingContextImpl.create(parentBrowsingContext.cdpTarget, this.#realmStorage, params.frameId, params.parentFrameId, this.#eventManager, this.#browsingContextStorage, this.#logger);
+            await browsingContextImpl_js_1.BrowsingContextImpl.create(parentBrowsingContext.cdpTarget, this.#realmStorage, params.frameId, params.parentFrameId, this.#eventManager, this.#browsingContextStorage, this.#logger);
         }
     }
     // { "method": "Page.frameDetached",
     //   "params": {
     //     "frameId": "0A639AB1D9A392DF2CE02C53CC4ED3A6",
     //     "reason": "swap" } }
-    #handleFrameDetachedEvent(params) {
+    async #handleFrameDetachedEvent(params) {
         // In case of OOPiF no need in deleting BrowsingContext.
         if (params.reason === 'swap') {
             return;
         }
-        this.#browsingContextStorage.findContext(params.frameId)?.delete();
+        await this.#browsingContextStorage.findContext(params.frameId)?.delete();
     }
     // { "method": "Target.attachedToTarget",
     //   "params": {
@@ -3370,54 +3247,43 @@ class BrowsingContextProcessor {
     //       "canAccessOpener": false,
     //       "browserContextId": "1B5244080EC3FF28D03BBDA73138C0E2" },
     //     "waitingForDebugger": false } }
-    #handleAttachedToTargetEvent(params, parentSessionCdpClient) {
+    async #handleAttachedToTargetEvent(params, parentSessionCdpClient) {
         const { sessionId, targetInfo } = params;
         const targetCdpClient = this.#cdpConnection.getCdpClient(sessionId);
         if (!this.#isValidTarget(targetInfo)) {
-            // DevTools or some other not supported by BiDi target. Just release
-            // debugger  and ignore them.
-            void targetCdpClient
-                .sendCommand('Runtime.runIfWaitingForDebugger')
-                .then(() => parentSessionCdpClient.sendCommand('Target.detachFromTarget', params));
+            // DevTools or some other not supported by BiDi target.
+            await targetCdpClient.sendCommand('Runtime.runIfWaitingForDebugger');
+            await parentSessionCdpClient.sendCommand('Target.detachFromTarget', params);
             return;
         }
         this.#logger?.(log_js_1$1.LogType.browsingContexts, 'AttachedToTarget event received:', JSON.stringify(params, null, 2));
         this.#setEventListeners(targetCdpClient);
         const cdpTarget = cdpTarget_js_1.CdpTarget.create(targetInfo.targetId, targetCdpClient, sessionId, this.#realmStorage, this.#eventManager);
-        if (this.#browsingContextStorage.hasContext(targetInfo.targetId)) {
+        if (this.#browsingContextStorage.hasKnownContext(targetInfo.targetId)) {
             // OOPiF.
             this.#browsingContextStorage
-                .getContext(targetInfo.targetId)
+                .getKnownContext(targetInfo.targetId)
                 .updateCdpTarget(cdpTarget);
         }
         else {
-            browsingContextImpl_js_1.BrowsingContextImpl.create(cdpTarget, this.#realmStorage, targetInfo.targetId, null, this.#eventManager, this.#browsingContextStorage, this.#logger);
+            await browsingContextImpl_js_1.BrowsingContextImpl.create(cdpTarget, this.#realmStorage, targetInfo.targetId, null, this.#eventManager, this.#browsingContextStorage, this.#logger);
         }
     }
     // { "method": "Target.detachedFromTarget",
     //   "params": {
     //     "sessionId": "7EFBFB2A4942A8989B3EADC561BC46E9",
     //     "targetId": "19416886405CBA4E03DBB59FA67FF4E8" } }
-    #handleDetachedFromTargetEvent(params) {
+    async #handleDetachedFromTargetEvent(params) {
         // TODO: params.targetId is deprecated. Update this class to track using
         // params.sessionId instead.
         // https://github.com/GoogleChromeLabs/chromium-bidi/issues/60
         const contextId = params.targetId;
-        this.#browsingContextStorage.findContext(contextId)?.delete();
-    }
-    async #getRealm(target) {
-        if ('realm' in target) {
-            return this.#realmStorage.getRealm({
-                realmId: target.realm,
-            });
-        }
-        const context = this.#browsingContextStorage.getContext(target.context);
-        return context.getOrCreateSandbox(target.sandbox);
+        await this.#browsingContextStorage.findContext(contextId)?.delete();
     }
     process_browsingContext_getTree(params) {
         const resultContexts = params.root === undefined
             ? this.#browsingContextStorage.getTopLevelContexts()
-            : [this.#browsingContextStorage.getContext(params.root)];
+            : [this.#browsingContextStorage.getKnownContext(params.root)];
         return {
             result: {
                 contexts: resultContexts.map((c) => c.serializeToBidiValue(params.maxDepth ?? Number.MAX_VALUE)),
@@ -3428,9 +3294,9 @@ class BrowsingContextProcessor {
         const browserCdpClient = this.#cdpConnection.browserClient();
         let referenceContext = undefined;
         if (params.referenceContext !== undefined) {
-            referenceContext = this.#browsingContextStorage.getContext(params.referenceContext);
-            if (!referenceContext.isTopLevelContext()) {
-                throw new protocol_js_1$5.Message.InvalidArgumentException(`referenceContext should be a top-level context`);
+            referenceContext = this.#browsingContextStorage.getKnownContext(params.referenceContext);
+            if (referenceContext.parentId !== null) {
+                throw new protocol_js_1$4.Message.InvalidArgumentException(`referenceContext should be a top-level context`);
             }
         }
         const result = await browserCdpClient.sendCommand('Target.createTarget', {
@@ -3443,44 +3309,32 @@ class BrowsingContextProcessor {
         // are emitted after the next navigation is started.
         // Details: https://github.com/web-platform-tests/wpt/issues/35846
         const contextId = result.targetId;
-        const context = this.#browsingContextStorage.getContext(contextId);
+        const context = this.#browsingContextStorage.getKnownContext(contextId);
         await context.awaitLoaded();
         return {
             result: context.serializeToBidiValue(1),
         };
     }
-    process_browsingContext_navigate(params) {
-        const context = this.#browsingContextStorage.getContext(params.context);
+    async process_browsingContext_navigate(params) {
+        const context = this.#browsingContextStorage.getKnownContext(params.context);
         return context.navigate(params.url, params.wait === undefined ? 'none' : params.wait);
     }
     async process_browsingContext_captureScreenshot(params) {
-        const context = this.#browsingContextStorage.getContext(params.context);
+        const context = this.#browsingContextStorage.getKnownContext(params.context);
         return context.captureScreenshot();
     }
     async process_browsingContext_print(params) {
-        const context = this.#browsingContextStorage.getContext(params.context);
+        const context = this.#browsingContextStorage.getKnownContext(params.context);
         return context.print(params);
     }
-    async process_script_addPreloadScript(params) {
-        const contexts = [];
-        const scripts = [];
-        if (params.context) {
-            // TODO(#293): Handle edge case with OOPiF. Whenever a frame is moved out
-            // of process, we have to add those scripts as well.
-            contexts.push(this.#browsingContextStorage.getContext(params.context));
+    async #getRealm(target) {
+        if ('realm' in target) {
+            return this.#realmStorage.getRealm({
+                realmId: target.realm,
+            });
         }
-        else {
-            // Add all contexts.
-            // TODO(#293): Add preload scripts to all new browsing contexts as well.
-            contexts.push(...this.#browsingContextStorage.getAllContexts());
-        }
-        scripts.push(...(await Promise.all(contexts.map((context) => context.addPreloadScript(params)))));
-        // TODO(#293): What to return whenever there are multiple contexts?
-        return scripts[0];
-    }
-    // eslint-disable-next-line @typescript-eslint/require-await
-    async process_script_removePreloadScript(_params) {
-        throw new protocol_js_1$5.Message.UnknownErrorException('Not implemented.');
+        const context = this.#browsingContextStorage.getKnownContext(target.context);
+        return context.getOrCreateSandbox(target.sandbox);
     }
     async process_script_evaluate(params) {
         const realm = await this.#getRealm(params.target);
@@ -3489,7 +3343,7 @@ class BrowsingContextProcessor {
     process_script_getRealms(params) {
         if (params.context !== undefined) {
             // Make sure the context is known.
-            this.#browsingContextStorage.getContext(params.context);
+            this.#browsingContextStorage.getKnownContext(params.context);
         }
         const realms = this.#realmStorage
             .findRealms({
@@ -3514,9 +3368,9 @@ class BrowsingContextProcessor {
     }
     async process_browsingContext_close(commandParams) {
         const browserCdpClient = this.#cdpConnection.browserClient();
-        const context = this.#browsingContextStorage.getContext(commandParams.context);
-        if (!context.isTopLevelContext()) {
-            throw new protocol_js_1$5.Message.InvalidArgumentException('A top-level browsing context cannot be closed.');
+        const context = this.#browsingContextStorage.getKnownContext(commandParams.context);
+        if (context.parentId !== null) {
+            throw new protocol_js_1$4.Message.InvalidArgumentException('Not a top-level browsing context cannot be closed.');
         }
         const detachedFromTargetPromise = new Promise((resolve) => {
             const onContextDestroyed = (eventParams) => {
@@ -3527,7 +3381,9 @@ class BrowsingContextProcessor {
             };
             browserCdpClient.on('Target.detachedFromTarget', onContextDestroyed);
         });
-        await browserCdpClient.sendCommand('Target.closeTarget', {
+        await this.#cdpConnection
+            .browserClient()
+            .sendCommand('Target.closeTarget', {
             targetId: commandParams.context,
         });
         // Sometimes CDP command finishes before `detachedFromTarget` event,
@@ -3554,7 +3410,8 @@ class BrowsingContextProcessor {
     }
     process_cdp_getSession(params) {
         const context = params.context;
-        const sessionId = this.#browsingContextStorage.getContext(context).cdpTarget.cdpSessionId;
+        const sessionId = this.#browsingContextStorage.getKnownContext(context).cdpTarget
+            .cdpSessionId;
         if (sessionId === undefined) {
             return { result: { cdpSession: null } };
         }
@@ -3591,7 +3448,8 @@ class OutgoingBidiMessage {
         this.#channel = channel;
     }
     static async createFromPromise(messagePromise, channel) {
-        return messagePromise.then((message) => new OutgoingBidiMessage(message, channel));
+        const message = await messagePromise;
+        return new OutgoingBidiMessage(message, channel);
     }
     static createResolved(message, channel) {
         return Promise.resolve(new OutgoingBidiMessage(message, channel));
@@ -3623,18 +3481,12 @@ OutgoingBidiMessage$1.OutgoingBidiMessage = OutgoingBidiMessage;
  */
 Object.defineProperty(CommandProcessor$1, "__esModule", { value: true });
 CommandProcessor$1.CommandProcessor = void 0;
-const protocol_js_1$4 = protocol;
+const protocol_js_1$3 = protocol;
 const log_js_1 = log;
 const EventEmitter_js_1$1 = EventEmitter$1;
 const browsingContextProcessor_js_1 = browsingContextProcessor;
 const OutgoingBidiMessage_js_1$1 = OutgoingBidiMessage$1;
 class BidiNoOpParser {
-    parseAddPreloadScriptParams(params) {
-        return params;
-    }
-    parseRemovePreloadScriptParams(params) {
-        return params;
-    }
     parseGetRealmsParams(params) {
         return params;
     }
@@ -3718,10 +3570,6 @@ class CommandProcessor extends EventEmitter_js_1$1.EventEmitter {
                 return this.#contextProcessor.process_browsingContext_captureScreenshot(this.#parser.parseCaptureScreenshotParams(commandData.params));
             case 'browsingContext.print':
                 return this.#contextProcessor.process_browsingContext_print(this.#parser.parsePrintParams(commandData.params));
-            case 'script.addPreloadScript':
-                return this.#contextProcessor.process_script_addPreloadScript(this.#parser.parseAddPreloadScriptParams(commandData.params));
-            case 'script.removePreloadScript':
-                return this.#contextProcessor.process_script_removePreloadScript(this.#parser.parseRemovePreloadScriptParams(commandData.params));
             case 'script.getRealms':
                 return this.#contextProcessor.process_script_getRealms(this.#parser.parseGetRealmsParams(commandData.params));
             case 'script.callFunction':
@@ -3735,7 +3583,7 @@ class CommandProcessor extends EventEmitter_js_1$1.EventEmitter {
             case 'cdp.getSession':
                 return this.#contextProcessor.process_cdp_getSession(this.#parser.parseGetSessionParams(commandData.params));
             default:
-                throw new protocol_js_1$4.Message.UnknownCommandException(`Unknown command '${commandData.method}'.`);
+                throw new protocol_js_1$3.Message.UnknownCommandException(`Unknown command '${commandData.method}'.`);
         }
     }
     async processCommand(command) {
@@ -3748,14 +3596,14 @@ class CommandProcessor extends EventEmitter_js_1$1.EventEmitter {
             this.emit('response', OutgoingBidiMessage_js_1$1.OutgoingBidiMessage.createResolved(response, command.channel ?? null));
         }
         catch (e) {
-            if (e instanceof protocol_js_1$4.Message.ErrorResponse) {
+            if (e instanceof protocol_js_1$3.Message.ErrorResponseClass) {
                 const errorResponse = e;
                 this.emit('response', OutgoingBidiMessage_js_1$1.OutgoingBidiMessage.createResolved(errorResponse.toErrorResponse(command.id), command.channel ?? null));
             }
             else {
                 const error = e;
                 this.#logger?.(log_js_1.LogType.bidi, error);
-                this.emit('response', OutgoingBidiMessage_js_1$1.OutgoingBidiMessage.createResolved(new protocol_js_1$4.Message.ErrorResponse(protocol_js_1$4.Message.ErrorCode.UnknownError, error.message).toErrorResponse(command.id), command.channel ?? null));
+                this.emit('response', OutgoingBidiMessage_js_1$1.OutgoingBidiMessage.createResolved(new protocol_js_1$3.Message.UnknownException(error.message).toErrorResponse(command.id), command.channel ?? null));
             }
         }
     }
@@ -3782,55 +3630,34 @@ var browsingContextStorage = {};
  */
 Object.defineProperty(browsingContextStorage, "__esModule", { value: true });
 browsingContextStorage.BrowsingContextStorage = void 0;
-const protocol_js_1$3 = protocol;
-/** Container class for browsing contexts. */
+const protocol_js_1$2 = protocol;
 class BrowsingContextStorage {
-    /** Map from context ID to context implementation. */
     #contexts = new Map();
-    /** Gets all top-level contexts, i.e. those with no parent. */
     getTopLevelContexts() {
-        return this.getAllContexts().filter((c) => c.isTopLevelContext());
+        return Array.from(this.#contexts.values()).filter((c) => c.parentId === null);
     }
-    /** Gets all contexts. */
     getAllContexts() {
         return Array.from(this.#contexts.values());
     }
-    /** Deletes the context with the given ID. */
-    deleteContext(contextId) {
+    removeContext(contextId) {
         this.#contexts.delete(contextId);
     }
-    /** Adds the given context. */
     addContext(context) {
         this.#contexts.set(context.contextId, context);
-        if (!context.isTopLevelContext()) {
-            this.getContext(context.parentId).addChild(context);
+        if (context.parentId !== null) {
+            this.getKnownContext(context.parentId).addChild(context);
         }
     }
-    /** Returns true whether there is an existing context with the given ID. */
-    hasContext(contextId) {
+    hasKnownContext(contextId) {
         return this.#contexts.has(contextId);
     }
-    /** Gets the context with the given ID, if any. */
     findContext(contextId) {
         return this.#contexts.get(contextId);
     }
-    /** Returns the top-level context ID of the given context, if any. */
-    findTopLevelContextId(contextId) {
-        if (contextId === null) {
-            return null;
-        }
-        const maybeContext = this.findContext(contextId);
-        const parentId = maybeContext?.parentId ?? null;
-        if (parentId === null) {
-            return contextId;
-        }
-        return this.findTopLevelContextId(parentId);
-    }
-    /** Gets the context with the given ID, if any, otherwise throws. */
-    getContext(contextId) {
+    getKnownContext(contextId) {
         const result = this.findContext(contextId);
         if (result === undefined) {
-            throw new protocol_js_1$3.Message.NoSuchFrameException(`Context ${contextId} not found`);
+            throw new protocol_js_1$2.Message.NoSuchFrameException(`Context ${contextId} not found`);
         }
         return result;
     }
@@ -3944,7 +3771,8 @@ var SubscriptionManager$1 = {};
  */
 Object.defineProperty(SubscriptionManager$1, "__esModule", { value: true });
 SubscriptionManager$1.SubscriptionManager = SubscriptionManager$1.unrollEvents = SubscriptionManager$1.cartesianProduct = void 0;
-const protocol_js_1$2 = protocol;
+const protocol_js_1$1 = protocol;
+var InvalidArgumentException = protocol_js_1$1.Message.InvalidArgumentException;
 /**
  * Returns the cartesian product of the given arrays.
  *
@@ -3960,20 +3788,20 @@ function unrollEvents(events) {
     const allEvents = [];
     for (const event of events) {
         switch (event) {
-            case protocol_js_1$2.BrowsingContext.AllEvents:
-                allEvents.push(...Object.values(protocol_js_1$2.BrowsingContext.EventNames));
+            case protocol_js_1$1.BrowsingContext.AllEvents:
+                allEvents.push(...Object.values(protocol_js_1$1.BrowsingContext.EventNames));
                 break;
-            case protocol_js_1$2.CDP.AllEvents:
-                allEvents.push(...Object.values(protocol_js_1$2.CDP.EventNames));
+            case protocol_js_1$1.CDP.AllEvents:
+                allEvents.push(...Object.values(protocol_js_1$1.CDP.EventNames));
                 break;
-            case protocol_js_1$2.Log.AllEvents:
-                allEvents.push(...Object.values(protocol_js_1$2.Log.EventNames));
+            case protocol_js_1$1.Log.AllEvents:
+                allEvents.push(...Object.values(protocol_js_1$1.Log.EventNames));
                 break;
-            case protocol_js_1$2.Network.AllEvents:
-                allEvents.push(...Object.values(protocol_js_1$2.Network.EventNames));
+            case protocol_js_1$1.Network.AllEvents:
+                allEvents.push(...Object.values(protocol_js_1$1.Network.EventNames));
                 break;
-            case protocol_js_1$2.Script.AllEvents:
-                allEvents.push(...Object.values(protocol_js_1$2.Script.EventNames));
+            case protocol_js_1$1.Script.AllEvents:
+                allEvents.push(...Object.values(protocol_js_1$1.Script.EventNames));
                 break;
             default:
                 allEvents.push(event);
@@ -4009,7 +3837,7 @@ class SubscriptionManager {
         if (contextToEventMap === undefined) {
             return null;
         }
-        const maybeTopLevelContextId = this.#browsingContextStorage.findTopLevelContextId(contextId);
+        const maybeTopLevelContextId = this.#findTopLevelContextId(contextId);
         // `null` covers global subscription.
         const relevantContexts = [...new Set([null, maybeTopLevelContextId])];
         // Get all the subscription priorities.
@@ -4023,27 +3851,38 @@ class SubscriptionManager {
         // Return minimal priority.
         return Math.min(...priorities);
     }
+    #findTopLevelContextId(contextId) {
+        if (contextId === null) {
+            return null;
+        }
+        const maybeContext = this.#browsingContextStorage.findContext(contextId);
+        const parentId = maybeContext?.parentId ?? null;
+        if (parentId !== null) {
+            return this.#findTopLevelContextId(parentId);
+        }
+        return contextId;
+    }
     subscribe(event, contextId, channel) {
         // All the subscriptions are handled on the top-level contexts.
-        contextId = this.#browsingContextStorage.findTopLevelContextId(contextId);
-        if (event === protocol_js_1$2.BrowsingContext.AllEvents) {
-            Object.values(protocol_js_1$2.BrowsingContext.EventNames).map((specificEvent) => this.subscribe(specificEvent, contextId, channel));
+        contextId = this.#findTopLevelContextId(contextId);
+        if (event === protocol_js_1$1.BrowsingContext.AllEvents) {
+            Object.values(protocol_js_1$1.BrowsingContext.EventNames).map((specificEvent) => this.subscribe(specificEvent, contextId, channel));
             return;
         }
-        if (event === protocol_js_1$2.CDP.AllEvents) {
-            Object.values(protocol_js_1$2.CDP.EventNames).map((specificEvent) => this.subscribe(specificEvent, contextId, channel));
+        if (event === protocol_js_1$1.CDP.AllEvents) {
+            Object.values(protocol_js_1$1.CDP.EventNames).map((specificEvent) => this.subscribe(specificEvent, contextId, channel));
             return;
         }
-        if (event === protocol_js_1$2.Log.AllEvents) {
-            Object.values(protocol_js_1$2.Log.EventNames).map((specificEvent) => this.subscribe(specificEvent, contextId, channel));
+        if (event === protocol_js_1$1.Log.AllEvents) {
+            Object.values(protocol_js_1$1.Log.EventNames).map((specificEvent) => this.subscribe(specificEvent, contextId, channel));
             return;
         }
-        if (event === protocol_js_1$2.Network.AllEvents) {
-            Object.values(protocol_js_1$2.Network.EventNames).map((specificEvent) => this.subscribe(specificEvent, contextId, channel));
+        if (event === protocol_js_1$1.Network.AllEvents) {
+            Object.values(protocol_js_1$1.Network.EventNames).map((specificEvent) => this.subscribe(specificEvent, contextId, channel));
             return;
         }
-        if (event === protocol_js_1$2.Script.AllEvents) {
-            Object.values(protocol_js_1$2.Script.EventNames).map((specificEvent) => this.subscribe(specificEvent, contextId, channel));
+        if (event === protocol_js_1$1.Script.AllEvents) {
+            Object.values(protocol_js_1$1.Script.EventNames).map((specificEvent) => this.subscribe(specificEvent, contextId, channel));
             return;
         }
         if (!this.#channelToContextToEventMap.has(channel)) {
@@ -4067,7 +3906,7 @@ class SubscriptionManager {
         // Assert all contexts are known.
         for (const contextId of contextIds) {
             if (contextId !== null) {
-                this.#browsingContextStorage.getContext(contextId);
+                this.#browsingContextStorage.getKnownContext(contextId);
             }
         }
         const eventContextPairs = cartesianProduct(unrollEvents(events), contextIds);
@@ -4086,17 +3925,17 @@ class SubscriptionManager {
     }
     #checkUnsubscribe(event, contextId, channel) {
         // All the subscriptions are handled on the top-level contexts.
-        contextId = this.#browsingContextStorage.findTopLevelContextId(contextId);
+        contextId = this.#findTopLevelContextId(contextId);
         if (!this.#channelToContextToEventMap.has(channel)) {
-            throw new protocol_js_1$2.Message.InvalidArgumentException(`Cannot unsubscribe from ${event}, ${contextId === null ? 'null' : contextId}. No subscription found.`);
+            throw new InvalidArgumentException(`Cannot unsubscribe from ${event}, ${contextId}. No subscription found.`);
         }
         const contextToEventMap = this.#channelToContextToEventMap.get(channel);
         if (!contextToEventMap.has(contextId)) {
-            throw new protocol_js_1$2.Message.InvalidArgumentException(`Cannot unsubscribe from ${event}, ${contextId === null ? 'null' : contextId}. No subscription found.`);
+            throw new InvalidArgumentException(`Cannot unsubscribe from ${event}, ${contextId}. No subscription found.`);
         }
         const eventMap = contextToEventMap.get(contextId);
         if (!eventMap.has(event)) {
-            throw new protocol_js_1$2.Message.InvalidArgumentException(`Cannot unsubscribe from ${event}, ${contextId === null ? 'null' : contextId}. No subscription found.`);
+            throw new InvalidArgumentException(`Cannot unsubscribe from ${event}, ${contextId}. No subscription found.`);
         }
         return () => {
             eventMap.delete(event);
@@ -4130,11 +3969,9 @@ SubscriptionManager$1.SubscriptionManager = SubscriptionManager;
  */
 Object.defineProperty(EventManager$1, "__esModule", { value: true });
 EventManager$1.EventManager = void 0;
-const protocol_js_1$1 = protocol;
 const buffer_js_1 = buffer;
 const idWrapper_js_1 = idWrapper;
 const OutgoingBidiMessage_js_1 = OutgoingBidiMessage$1;
-const DefaultMap_js_1 = DefaultMap$1;
 const SubscriptionManager_js_1 = SubscriptionManager$1;
 class EventWrapper {
     #idWrapper;
@@ -4159,7 +3996,7 @@ class EventWrapper {
  * Maps event name to a desired buffer length.
  */
 const eventBufferLength = new Map([
-    [protocol_js_1$1.Log.EventNames.LogEntryAddedEvent, 100],
+    ['log.entryAdded', 100],
 ]);
 class EventManager {
     static #NETWORK_DOMAIN_PREFIX = 'network';
@@ -4168,7 +4005,7 @@ class EventManager {
      * Needed for getting buffered events from all the contexts in case of
      * subscripting to all contexts.
      */
-    #eventToContextsMap = new DefaultMap_js_1.DefaultMap(() => new Set());
+    #eventToContextsMap = new Map();
     /**
      * Maps `eventName` + `browsingContext` to buffer. Used to get buffered events
      * during subscription. Channel-agnostic.
@@ -4215,7 +4052,7 @@ class EventManager {
         for (const contextId of contextIds) {
             if (contextId !== null) {
                 // Assert the context is known. Throw exception otherwise.
-                this.#bidiServer.getBrowsingContextStorage().getContext(contextId);
+                this.#bidiServer.getBrowsingContextStorage().getKnownContext(contextId);
             }
         }
         for (const eventName of eventNames) {
@@ -4248,12 +4085,12 @@ class EventManager {
             else {
                 await this.#bidiServer
                     .getBrowsingContextStorage()
-                    .getContext(contextId)
+                    .getKnownContext(contextId)
                     .cdpTarget.enableNetworkDomain();
             }
         }
     }
-    unsubscribe(eventNames, contextIds, channel) {
+    async unsubscribe(eventNames, contextIds, channel) {
         this.#subscriptionManager.unsubscribeAll(eventNames, contextIds, channel);
     }
     /**
@@ -4270,6 +4107,9 @@ class EventManager {
         }
         this.#eventBuffers.get(bufferMapKey).add(eventWrapper);
         // Add the context to the list of contexts having `eventName` events.
+        if (!this.#eventToContextsMap.has(eventName)) {
+            this.#eventToContextsMap.set(eventName, new Set());
+        }
         this.#eventToContextsMap.get(eventName).add(eventWrapper.contextId);
     }
     /**
@@ -4296,12 +4136,14 @@ class EventManager {
             .filter((wrapper) => wrapper.id > lastSentMessageId) ?? [];
         if (contextId === null) {
             // For global subscriptions, events buffered in each context should be sent back.
-            Array.from(this.#eventToContextsMap.get(eventName).keys())
+            Array.from(this.#eventToContextsMap.get(eventName)?.keys() ?? [])
                 .filter((_contextId) => 
             // Events without context are already in the result.
             _contextId !== null &&
                 // Events from deleted contexts should not be sent.
-                this.#bidiServer.getBrowsingContextStorage().hasContext(_contextId))
+                this.#bidiServer
+                    .getBrowsingContextStorage()
+                    .hasKnownContext(_contextId))
                 .map((_contextId) => this.#getBufferedEvents(eventName, _contextId, channel))
                 .forEach((events) => result.push(...events));
         }
@@ -4318,7 +4160,6 @@ const protocol_js_1 = protocol;
 class RealmStorage {
     /** Tracks handles and their realms sent to the client. */
     #knownHandlesToRealm = new Map();
-    /** Map from realm ID to Realm. */
     #realmMap = new Map();
     get knownHandlesToRealm() {
         return this.#knownHandlesToRealm;
@@ -4415,7 +4256,7 @@ class BidiServer extends EventEmitter_js_1.EventEmitter {
     #browsingContextStorage;
     #realmStorage;
     #logger;
-    #handleIncomingMessage = (message) => {
+    #handleIncomingMessage = async (message) => {
         this.#commandProcessor.processCommand(message);
     };
     #processOutgoingMessage = async (messageEntry) => {
@@ -4430,7 +4271,7 @@ class BidiServer extends EventEmitter_js_1.EventEmitter {
         this.#logger = logger;
         this.#browsingContextStorage = new browsingContextStorage_js_1.BrowsingContextStorage();
         this.#realmStorage = new realmStorage_js_1.RealmStorage();
-        this.#messageQueue = new processingQueue_js_1.ProcessingQueue(this.#processOutgoingMessage, () => Promise.resolve(), this.#logger);
+        this.#messageQueue = new processingQueue_js_1.ProcessingQueue(this.#processOutgoingMessage, undefined, this.#logger);
         this.#transport = bidiTransport;
         this.#transport.setOnMessage(this.#handleIncomingMessage);
         this.#commandProcessor = new CommandProcessor_js_1.CommandProcessor(this.#realmStorage, cdpConnection, new EventManager_js_1.EventManager(this), selfTargetId, parser, this.#browsingContextStorage, this.#logger);

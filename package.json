@@ -94,5 +94,8 @@
     "arrowParens": "avoid",
     "bracketSameLine": false,
     "proseWrap": "never"
+  },
+  "resolutions": {
+    "puppeteer": "19.8.5"
   }
 }

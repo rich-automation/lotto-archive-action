@@ -394,10 +394,10 @@
     unbzip2-stream "1.4.3"
     yargs "17.7.1"
 
-"@rich-automation/lotto@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@rich-automation/lotto/-/lotto-0.1.6.tgz#61beb1a92bb0948438cd79b0cc4e11b3787231c0"
-  integrity sha512-DORSW2EARByOt6irE39k4Fa/G2Ts6ORm5sklU2mRcML57NLg26TfGvmgdFtKbkIysWXknnR1YkoKyag1jCY4iA==
+"@rich-automation/lotto@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@rich-automation/lotto/-/lotto-0.1.7.tgz#ec7e900f888bac39857a7aee3db715cb690f7bc7"
+  integrity sha512-9rfwDjCfNK2KspzYS4M3qvtHm0MYueLYbR6au7O0YRZgbLJErGz0BlKTUmitzo17G+wjKunMmPnyGPhAIHopvw==
   dependencies:
     axios "^1.3.5"
     dayjs "^1.11.7"

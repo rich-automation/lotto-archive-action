@@ -163819,7 +163819,9 @@ var __awaiter$4 = (undefined && undefined.__awaiter) || function (thisArg, _argu
     });
 };
 class PuppeteerPage {
-    constructor(page) {
+    constructor(page, logger) {
+        this.page = page;
+        this.logger = logger;
         this.page = page;
     }
     url() {
@@ -163838,9 +163840,11 @@ class PuppeteerPage {
         });
     }
     click(selector, useWaitForSelector = false) {
+        var _a;
         return __awaiter$4(this, void 0, void 0, function* () {
             if (useWaitForSelector) {
                 const handle = yield this.page.waitForSelector(selector, { timeout: 15000 });
+                (_a = this.logger) === null || _a === void 0 ? void 0 : _a.debug('[PuppeteerPage]', '[click]', 'handle', handle);
                 handle === null || handle === void 0 ? void 0 : handle.click();
             }
             else {
@@ -164001,14 +164005,14 @@ class PuppeteerController {
             const pages = yield browser.pages();
             if (pages.length === 0) {
                 const page = yield browser.newPage();
-                return new PuppeteerPage(page);
+                return new PuppeteerPage(page, this.logger);
             }
             else {
                 const isWithinRange = Math.max(0, Math.min(pageIndex, pages.length - 1)) === pageIndex;
                 const page = pages.at(isWithinRange ? pageIndex : -1);
                 if (!page)
                     throw new Error('Page is not found');
-                return new PuppeteerPage(page);
+                return new PuppeteerPage(page, this.logger);
             }
         });
         this.close = () => __awaiter$3(this, void 0, void 0, function* () {
@@ -181219,7 +181223,7 @@ class LottoService {
             yield page.click(SELECTORS.PURCHASE_TYPE_RANDOM_BTN);
             // set and confirm amount
             const amountString = String(Math.max(1, Math.min(5, amount)));
-            this.logger.debug('[purchase]', `select purchase amount${amountString} -> amount confirm`);
+            this.logger.debug('[purchase]', `select purchase amount(${amountString}) -> amount confirm`);
             yield page.select(SELECTORS.PURCHASE_AMOUNT_SELECT, amountString);
             yield page.click(SELECTORS.PURCHASE_AMOUNT_CONFIRM_BTN);
             // click purchase button

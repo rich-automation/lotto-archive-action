@@ -106,8 +106,6 @@ async function runPurchase(service: LottoServiceInterface) {
     await createWaitingIssue(date, issueBody);
     core.info('💸 이슈 생성 완료.');
   } catch (e) {
-    await service.destroy();
-
     if (e instanceof Error) {
       core.info(`💸 로또 구매에 실패했습니다. ${e}`);
       core.setFailed(e.message);

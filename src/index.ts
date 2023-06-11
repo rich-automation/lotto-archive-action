@@ -60,7 +60,7 @@ async function runWinningCheck(service: LottoServiceInterface) {
 
   const waitingIssues = await getWaitingIssues();
   if (waitingIssues.length > 0) {
-    core.info(`💸 총 ${waitingIssues.length}개의 티켓에 대해서 구매내역을 확인합니다.`);
+    core.info(`💸 총 ${waitingIssues.length}개의 티켓에 대해서 당첨 내역을 확인합니다.`);
 
     const promises = waitingIssues.map(async issue => {
       if (issue.body) {

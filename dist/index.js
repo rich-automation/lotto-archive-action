@@ -163822,7 +163822,6 @@ class PuppeteerPage {
     constructor(page, logger) {
         this.page = page;
         this.logger = logger;
-        this.page = page;
     }
     url() {
         return __awaiter$4(this, void 0, void 0, function* () {
@@ -163839,13 +163838,12 @@ class PuppeteerPage {
             yield this.page.type(selector, value.toString());
         });
     }
-    click(selector, useWaitForSelector = false) {
-        var _a;
+    click(selector, domDirect = false) {
         return __awaiter$4(this, void 0, void 0, function* () {
-            if (useWaitForSelector) {
-                const handle = yield this.page.waitForSelector(selector, { timeout: 15000 });
-                (_a = this.logger) === null || _a === void 0 ? void 0 : _a.debug('[PuppeteerPage]', '[click]', 'handle', handle);
-                handle === null || handle === void 0 ? void 0 : handle.click();
+            if (domDirect) {
+                // @ts-ignore
+                yield this.page.evaluate(s => document.querySelector(s).click(), selector);
+                yield this.wait(250);
             }
             else {
                 yield this.page.click(selector);
@@ -181228,19 +181226,9 @@ class LottoService {
             yield page.click(SELECTORS.PURCHASE_AMOUNT_CONFIRM_BTN);
             // click purchase button
             this.logger.debug('[purchase]', 'click purchase button');
-            yield page.click(SELECTORS.PURCHASE_BTN);
+            yield page.click(SELECTORS.PURCHASE_BTN, true);
             this.logger.debug('[purchase]', 'click purchase confirm button');
-            try {
-                yield page.click(SELECTORS.PURCHASE_CONFIRM_BTN, true);
-            }
-            catch (e) {
-                this.logger.debug('[purchase]', 'purchase confirm failure', e);
-                this.logger.debug('[purchase]', 'print node');
-                yield page.querySelectorAll(SELECTORS.PURCHASE_CONFIRM_BTN, elems => {
-                    this.logger.debug('[purchase]', elems);
-                });
-                throw e;
-            }
+            yield page.click(SELECTORS.PURCHASE_CONFIRM_BTN, true);
             yield page.wait(1000);
             // game result
             this.logger.debug('[purchase]', 'print result');

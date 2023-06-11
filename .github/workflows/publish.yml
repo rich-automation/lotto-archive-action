@@ -26,3 +26,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn release-it ${{ github.event.inputs.version }} --ci
+      - name: Tag new target
+        run: git tag -f latest ${{ github.event.inputs.version }}
+      - name: Push new tag
+        run: git push origin latest --force

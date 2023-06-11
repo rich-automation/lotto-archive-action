@@ -163837,9 +163837,15 @@ class PuppeteerPage {
             yield this.page.type(selector, value.toString());
         });
     }
-    click(selector) {
+    click(selector, useWaitForSelector = false) {
         return __awaiter$4(this, void 0, void 0, function* () {
-            yield this.page.click(selector);
+            if (useWaitForSelector) {
+                const handle = yield this.page.waitForSelector(selector, { timeout: 15000 });
+                handle === null || handle === void 0 ? void 0 : handle.click();
+            }
+            else {
+                yield this.page.click(selector);
+            }
         });
     }
     select(selector, value) {
@@ -181219,9 +181225,18 @@ class LottoService {
             // click purchase button
             this.logger.debug('[purchase]', 'click purchase button');
             yield page.click(SELECTORS.PURCHASE_BTN);
-            yield page.wait(500);
             this.logger.debug('[purchase]', 'click purchase confirm button');
-            yield page.click(SELECTORS.PURCHASE_CONFIRM_BTN);
+            try {
+                yield page.click(SELECTORS.PURCHASE_CONFIRM_BTN, true);
+            }
+            catch (e) {
+                this.logger.debug('[purchase]', 'purchase confirm failure', e);
+                this.logger.debug('[purchase]', 'print node');
+                yield page.querySelectorAll(SELECTORS.PURCHASE_CONFIRM_BTN, elems => {
+                    this.logger.debug('[purchase]', elems);
+                });
+                throw e;
+            }
             yield page.wait(1000);
             // game result
             this.logger.debug('[purchase]', 'print result');
@@ -181413,7 +181428,7 @@ function runActionsEnvironments() {
         yield downloadBrowser();
         const id = coreExports.getInput(inputKeys.lottoId);
         const pwd = coreExports.getInput(inputKeys.lottoPassword);
-        const lottoService = new LottoService({ headless: true, logLevel: LogLevel.DEBUG });
+        const lottoService = new LottoService({ headless: false, logLevel: LogLevel.DEBUG, args: ['--no-sandbox'] });
         if (id !== '' && pwd !== '') {
             yield lottoService.signIn(id, pwd);
         }

@@ -60,7 +60,7 @@ async function runWinningCheck(service: LottoServiceInterface) {
 
   const waitingIssues = await getWaitingIssues();
   if (waitingIssues.length > 0) {
-    core.info(`💸 총 ${waitingIssues.length}개의 구매 내역에 대해서 확인합니다.`);
+    core.info(`💸 총 ${waitingIssues.length}개의 티켓에 대해서 구매내역을 확인합니다.`);
 
     const promises = waitingIssues.map(async issue => {
       if (issue.body) {
@@ -80,7 +80,7 @@ async function runWinningCheck(service: LottoServiceInterface) {
     const result = await Promise.allSettled(promises);
     const rejectedIssues = result.filter(it => it.status === 'rejected');
     if (rejectedIssues.length > 0) {
-      core.info(`💸 ${rejectedIssues.length}개의 당첨 발표를 확인하는 중 오류가 발생했습니다.`);
+      core.info(`💸 ${rejectedIssues.length}개의 티켓을 처리하는 중 오류가 발생했습니다.`);
     }
   } else {
     core.info('💸 확인 할 구매 내역이 없습니다.');
@@ -96,15 +96,19 @@ async function runPurchase(service: LottoServiceInterface) {
 
     const date = dayjs.tz(dayjs(), 'Asia/Seoul').format('YYYY-MM-DD');
     const numbers = await service.purchase(amount);
-    core.info('💸 로또 구매 완료!');
+    if (numbers.length > 0) {
+      core.info('💸 로또 구매 완료!');
 
-    const round = getCurrentLottoRound() + 1;
-    const link = service.getCheckWinningLink(round, numbers);
+      const round = getCurrentLottoRound() + 1;
+      const link = service.getCheckWinningLink(round, numbers);
 
-    core.info('💸 구매 내역에 대한 이슈를 생성합니다.');
-    const issueBody = bodyBuilder({ date, round, numbers, link });
-    await createWaitingIssue(date, issueBody);
-    core.info('💸 이슈 생성 완료.');
+      core.info('💸 구매 내역에 대한 이슈를 생성합니다.');
+      const issueBody = bodyBuilder({ date, round, numbers, link });
+      await createWaitingIssue(date, issueBody);
+      core.info('💸 이슈 생성 완료.');
+    } else {
+      core.info('💸 구매가 정상적으로 이루어지지 않은것 같네요, 구매한 번호 조회에 실패했어요!');
+    }
   } catch (e) {
     if (e instanceof Error) {
       core.info(`💸 로또 구매에 실패했습니다. ${e}`);

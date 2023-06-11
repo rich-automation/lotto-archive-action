@@ -18,7 +18,7 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
-    "@rich-automation/lotto": "^0.0.4",
+    "@rich-automation/lotto": "^0.1.0",
     "dayjs": "^1.11.8"
   },
   "devDependencies": {
@@ -94,8 +94,5 @@
     "arrowParens": "avoid",
     "bracketSameLine": false,
     "proseWrap": "never"
-  },
-  "resolutions": {
-    "puppeteer": "19.8.5"
   }
 }

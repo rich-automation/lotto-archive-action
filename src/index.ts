@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 import { createWaitingIssue, getWaitingIssues, initLabels, markIssueAsChecked, rankToLabel } from './internal/issues';
-import { getCurrentLottoRound, LottoService } from '@rich-automation/lotto';
+import { getCurrentLottoRound, LogLevel, LottoService } from '@rich-automation/lotto';
 import { inputKeys } from './internal/constants';
 import type { LottoServiceInterface } from '@rich-automation/lotto/lib/typescript/types';
 import { bodyBuilder, bodyParser } from './internal/bodyHandlers';
@@ -35,7 +35,7 @@ async function runActionsEnvironments() {
   const id = core.getInput(inputKeys.lottoId);
   const pwd = core.getInput(inputKeys.lottoPassword);
 
-  const lottoService = new LottoService({ headless: true, logLevel: 3 });
+  const lottoService = new LottoService({ headless: true, logLevel: LogLevel.DEBUG });
 
   if (id !== '' && pwd !== '') {
     await lottoService.signIn(id, pwd);

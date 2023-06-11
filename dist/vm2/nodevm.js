@@ -1,8 +1,8 @@
 'use strict';
 
 var require$$2 = require('vm');
-var fs$1 = require('fs');
-var path = require('path');
+var require$$0 = require('fs');
+var require$$1 = require('path');
 var vm2_bridge = require('./bridge.js');
 var vm2_script = require('./script.js');
 var vm2_transformer = require('./transformer.js');
@@ -40,8 +40,8 @@ var nodevm = {};
  * @return {("host"|"sandbox")} The context for this module.
  */
 
-const fs = fs$1;
-const pa = path;
+const fs = require$$0;
+const pa = require$$1;
 const {
 	Script
 } = require$$2;

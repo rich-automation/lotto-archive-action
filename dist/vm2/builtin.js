@@ -1,8 +1,8 @@
 'use strict';
 
-var fs$1 = require('fs');
+var require$$0$1 = require('fs');
 var require$$0 = require('events');
-var require$$0$1 = require('util');
+var require$$1$1 = require('util');
 var require$$1 = require('module');
 var require$$6 = require('async_hooks');
 var vm2_script = require('./script.js');
@@ -10,10 +10,10 @@ var vm2_vm = require('./vm.js');
 
 var builtin = {};
 
-const fs = fs$1;
+const fs = require$$0$1;
 const nmod = require$$1;
 const {EventEmitter} = require$$0;
-const util = require$$0$1;
+const util = require$$1$1;
 const {VMScript} = vm2_script.script;
 const {VM} = vm2_vm.vm;
 

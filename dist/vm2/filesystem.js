@@ -1,12 +1,12 @@
 'use strict';
 
-var path = require('path');
-var fs$1 = require('fs');
+var require$$1 = require('path');
+var require$$0 = require('fs');
 
 var filesystem = {};
 
-const pa = path;
-const fs = fs$1;
+const pa = require$$1;
+const fs = require$$0;
 
 class DefaultFileSystem {
 

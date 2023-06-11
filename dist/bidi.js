@@ -40,6 +40,7 @@ require('module');
 require('async_hooks');
 require('string_decoder');
 require('process');
+require('inspector');
 
 /**
  * Copyright 2023 Google Inc. All rights reserved.

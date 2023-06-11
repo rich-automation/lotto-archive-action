@@ -7,10 +7,7 @@ import { bodyBuilder, bodyParser } from './internal/bodyHandlers';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { downloadBrowser } from 'puppeteer/internal/node/install.js';
+import { installBrowser } from './internal/installBrowser';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -22,6 +19,8 @@ async function run() {
     const lottoService = await runActionsEnvironments();
     await runWinningCheck(lottoService);
     await runPurchase(lottoService);
+
+    core.setOutput('time', new Date().toTimeString());
   } catch (e) {
     if (e instanceof Error) {
       core.info(`GitHub Actions 실행에 실패했습니다. ${e}`);
@@ -30,12 +29,18 @@ async function run() {
   }
 }
 async function runActionsEnvironments() {
-  await downloadBrowser();
+  const controller = 'playwright';
+  await installBrowser(controller);
 
   const id = core.getInput(inputKeys.lottoId);
   const pwd = core.getInput(inputKeys.lottoPassword);
 
-  const lottoService = new LottoService({ headless: true, logLevel: LogLevel.DEBUG, args: ['--no-sandbox'] });
+  const lottoService = new LottoService({
+    controller,
+    headless: true,
+    logLevel: LogLevel.DEBUG,
+    args: ['--no-sandbox']
+  });
 
   if (id !== '' && pwd !== '') {
     await lottoService.signIn(id, pwd);

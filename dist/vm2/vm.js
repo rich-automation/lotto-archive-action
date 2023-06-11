@@ -1,15 +1,15 @@
 'use strict';
 
-var require$$0 = require('buffer');
-var fs$1 = require('fs');
-var path = require('path');
+var require$$0$1 = require('buffer');
+var require$$0 = require('fs');
+var require$$1 = require('path');
 var require$$2 = require('vm');
-var require$$0$1 = require('events');
+var require$$0$2 = require('events');
 var vm2_bridge = require('./bridge.js');
 var vm2_transformer = require('./transformer.js');
 var vm2_compiler = require('./compiler.js');
 var vm2_script = require('./script.js');
-var require$$0$2 = require('util');
+var require$$1$1 = require('util');
 
 var vm = {};
 
@@ -31,18 +31,18 @@ var vm = {};
  * @return {(string|undefined)} The file or directory to use to load the requested module.
  */
 
-const fs = fs$1;
-const pa = path;
+const fs = require$$0;
+const pa = require$$1;
 const {
 	Script,
 	createContext
 } = require$$2;
 const {
 	EventEmitter
-} = require$$0$1;
+} = require$$0$2;
 const {
 	INSPECT_MAX_BYTES
-} = require$$0;
+} = require$$0$1;
 const {
 	createBridge,
 	VMError
@@ -59,7 +59,7 @@ const {
 } = vm2_script.script;
 const {
 	inspect
-} = require$$0$2;
+} = require$$1$1;
 
 const objectDefineProperties = Object.defineProperties;
 

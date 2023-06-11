@@ -6,7 +6,7 @@
   "author": "bang9 <gusrn1423@naver.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist/*.js && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "build": "rm -rf dist/**/**.js && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "fix": "yarn fix:eslint && yarn fix:prettier",
     "fix:eslint": "eslint --fix src --ext js,jsx,ts,tsx ",
     "fix:prettier": "prettier --write \"src/**/*.{ts,tsx,js}\"",
@@ -34,6 +34,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8",
     "rollup": "^3.24.1",
+    "rollup-plugin-copy": "^3.4.0",
     "typescript": "^5.1.3"
   },
   "eslintConfig": {

@@ -1,6 +1,7 @@
 'use strict';
 
 var index = require('./index.js');
+var vm2_bridge = require('./vm2/bridge.js');
 var require$$2 = require('crypto');
 require('os');
 require('fs');
@@ -23,7 +24,18 @@ require('readline');
 require('tty');
 require('dns');
 require('constants');
+require('./vm2/index.js');
+require('./vm2/main.js');
+require('./vm2/script.js');
 require('vm');
+require('./vm2/compiler.js');
+require('./vm2/transformer.js');
+require('./vm2/vm.js');
+require('./vm2/nodevm.js');
+require('./vm2/resolver-compat.js');
+require('./vm2/resolver.js');
+require('./vm2/filesystem.js');
+require('./vm2/builtin.js');
 require('module');
 require('async_hooks');
 require('string_decoder');
@@ -1675,7 +1687,7 @@ var EventEmitter$1 = {};
 
 var mitt=function(n){return {all:n=n||new Map,on:function(e,t){var i=n.get(e);i?i.push(t):n.set(e,[t]);},off:function(e,t){var i=n.get(e);i&&(t?i.splice(i.indexOf(t)>>>0,1):n.set(e,[]));},emit:function(e,t){var i=n.get(e);i&&i.slice().map(function(n){n(t);}),(i=n.get("*"))&&i.slice().map(function(n){n(e,t);});}}};
 
-var __importDefault = (index.commonjsGlobal && index.commonjsGlobal.__importDefault) || function (mod) {
+var __importDefault = (vm2_bridge.commonjsGlobal && vm2_bridge.commonjsGlobal.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(EventEmitter$1, "__esModule", { value: true });

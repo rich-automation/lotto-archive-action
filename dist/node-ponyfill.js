@@ -1,6 +1,7 @@
 'use strict';
 
 var index = require('./index.js');
+var vm2_bridge = require('./vm2/bridge.js');
 
 function _mergeNamespaces(n, m) {
   m.forEach(function (e) {
@@ -19,7 +20,7 @@ function _mergeNamespaces(n, m) {
 
 var nodePonyfill$1 = {exports: {}};
 
-var require$$0 = /*@__PURE__*/index.getAugmentedNamespace(index.lib);
+var require$$0 = /*@__PURE__*/vm2_bridge.getAugmentedNamespace(index.lib);
 
 (function (module, exports) {
 	const nodeFetch = require$$0;

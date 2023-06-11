@@ -181428,7 +181428,7 @@ function runActionsEnvironments() {
         yield downloadBrowser();
         const id = coreExports.getInput(inputKeys.lottoId);
         const pwd = coreExports.getInput(inputKeys.lottoPassword);
-        const lottoService = new LottoService({ headless: false, logLevel: LogLevel.DEBUG, args: ['--no-sandbox'] });
+        const lottoService = new LottoService({ headless: true, logLevel: LogLevel.DEBUG, args: ['--no-sandbox'] });
         if (id !== '' && pwd !== '') {
             yield lottoService.signIn(id, pwd);
         }

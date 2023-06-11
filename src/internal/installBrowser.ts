@@ -2,9 +2,12 @@
 // @ts-ignore
 import { downloadBrowser } from 'puppeteer/internal/node/install.js';
 
+import * as core from '@actions/core';
 import { execSync } from 'child_process';
 
 export const installBrowser = (controller: 'puppeteer' | 'playwright') => {
+  core.info(`Installing browser for ${controller}`);
+
   switch (controller) {
     case 'playwright': {
       return installByPlaywright();
@@ -20,5 +23,5 @@ const installByPuppeteer = async () => {
 };
 
 const installByPlaywright = async () => {
-  execSync('npx playwright install --with-deps', { stdio: 'inherit' });
+  execSync('npx playwright install chromium --with-deps', { stdio: 'inherit' });
 };

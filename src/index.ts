@@ -35,7 +35,7 @@ async function runActionsEnvironments() {
   const id = core.getInput(inputKeys.lottoId);
   const pwd = core.getInput(inputKeys.lottoPassword);
 
-  const lottoService = new LottoService({ headless: true });
+  const lottoService = new LottoService({ headless: true, logLevel: 3 });
 
   if (id !== '' && pwd !== '') {
     await lottoService.signIn(id, pwd);

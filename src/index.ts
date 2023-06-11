@@ -26,6 +26,8 @@ async function run() {
       core.info(`GitHub Actions 실행에 실패했습니다. ${e}`);
       core.setFailed(e.message);
     }
+  } finally {
+    process.exit(0);
   }
 }
 async function runActionsEnvironments() {

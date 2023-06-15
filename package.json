@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "author": "bang9 <gusrn1423@naver.com>",
   "license": "MIT",
+  "packageManager": "yarn@1.22.19",
   "scripts": {
     "build": "rm -rf dist/**/**.js && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "fix": "yarn fix:eslint && yarn fix:prettier",
@@ -18,7 +19,7 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
-    "@rich-automation/lotto": "^0.1.7",
+    "@rich-automation/lotto": "1.0.0",
     "dayjs": "^1.11.8"
   },
   "devDependencies": {

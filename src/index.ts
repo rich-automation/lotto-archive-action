@@ -1,6 +1,6 @@
 import * as core from '@actions/core';
 import { createWaitingIssue, getWaitingIssues, initLabels, markIssueAsChecked, rankToLabel } from './internal/issues';
-import { getCurrentLottoRound, LogLevel, LottoService } from '@rich-automation/lotto';
+import { getNextLottoRound, LogLevel, LottoService } from '@rich-automation/lotto';
 import { inputKeys } from './internal/constants';
 import type { LottoServiceInterface } from '@rich-automation/lotto/lib/typescript/types';
 import { bodyBuilder, bodyParser } from './internal/bodyHandlers';
@@ -16,7 +16,7 @@ async function run() {
   try {
     await runInitRepo();
 
-    const lottoService = await runActionsEnvironments();
+    const { lottoService } = await runSetupEnvironment();
     await runWinningCheck(lottoService);
     await runPurchase(lottoService);
   } catch (e) {
@@ -28,7 +28,7 @@ async function run() {
     process.exit(0);
   }
 }
-async function runActionsEnvironments() {
+async function runSetupEnvironment() {
   core.info(`💸 기본 환경을 설정하고 로그인을 진행합니다.`);
 
   const controller = 'playwright';
@@ -48,7 +48,7 @@ async function runActionsEnvironments() {
     await lottoService.signIn(id, pwd);
   }
 
-  return lottoService;
+  return { lottoService };
 }
 
 async function runInitRepo() {
@@ -66,11 +66,8 @@ async function runWinningCheck(service: LottoServiceInterface) {
       if (issue.body) {
         const { numbers, round } = bodyParser(issue.body);
 
-        const checkPromises = numbers.map(async number => {
-          const { rank } = await service.check(number, round);
-          return rank;
-        });
-        const ranks = await Promise.all(checkPromises);
+        const result = await service.check(numbers, round);
+        const ranks = result.map(it => it.rank);
 
         const rankLabels = [...new Set(ranks.map(it => rankToLabel(it)))];
         await markIssueAsChecked(issue.number, rankLabels);
@@ -99,8 +96,8 @@ async function runPurchase(service: LottoServiceInterface) {
     if (numbers.length > 0) {
       core.info('💸 로또 구매 완료!');
 
-      const round = getCurrentLottoRound() + 1;
-      const link = service.getCheckWinningLink(round, numbers);
+      const round = getNextLottoRound();
+      const link = service.getCheckWinningLink(numbers, round);
 
       core.info('💸 구매 내역에 대한 이슈를 생성합니다.');
       const issueBody = bodyBuilder({ date, round, numbers, link });

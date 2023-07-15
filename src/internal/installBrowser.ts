@@ -23,5 +23,6 @@ const installByPuppeteer = async () => {
 };
 
 const installByPlaywright = async () => {
+  execSync('npm install -g playwright', { stdio: 'inherit' });
   execSync('npx playwright install chromium --with-deps', { stdio: 'inherit' });
 };

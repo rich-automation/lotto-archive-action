@@ -2,7 +2,8 @@ export const inputKeys = {
   lottoId: 'id',
   lottoPassword: 'pwd',
   githubToken: 'token',
-  lottoPurchaseAmount: 'amount'
+  lottoPurchaseAmount: 'amount',
+  debug: 'debug'
 };
 export const emojis = {
   // waiting

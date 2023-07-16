@@ -39,6 +39,7 @@ jobs:
 | `id`     | 동행복권 사이트의 아이디.                                               | Yes      |
 | `pwd`    | 동행복권 사이트의 비밀번호.                                             | Yes      |
 | `amount` | 구매할 게임의 수량 (최대 5게임).                                        | No       |
+| `debug`  | GitHub Actions 에 디버그 로그를 출력합니다                              | No       |
 
 ## 설명
 

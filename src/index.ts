@@ -12,6 +12,8 @@ import { installBrowser } from './internal/installBrowser';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+const debugFlag = core.getBooleanInput(inputKeys.debug) ?? false;
+
 async function run() {
   try {
     await runInitRepo();
@@ -32,7 +34,7 @@ async function runSetupEnvironment() {
   core.info(`💸 기본 환경을 설정하고 로그인을 진행합니다.`);
 
   const controller = 'playwright';
-  await installBrowser(controller);
+  await installBrowser(controller, debugFlag);
 
   const id = core.getInput(inputKeys.lottoId);
   const pwd = core.getInput(inputKeys.lottoPassword);
@@ -40,7 +42,7 @@ async function runSetupEnvironment() {
   const lottoService = new LottoService({
     controller,
     headless: true,
-    logLevel: LogLevel.DEBUG,
+    logLevel: debugFlag ? LogLevel.DEBUG : LogLevel.NONE,
     args: ['--no-sandbox']
   });
 

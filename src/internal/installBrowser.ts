@@ -2,6 +2,8 @@
 // @ts-ignore
 import { downloadBrowser } from 'puppeteer/internal/node/install.js';
 
+import { version as playwrightVersion } from 'playwright/package.json';
+
 import * as core from '@actions/core';
 import { execSync } from 'child_process';
 
@@ -23,6 +25,5 @@ const installByPuppeteer = async () => {
 };
 
 const installByPlaywright = async () => {
-  execSync('npm install -g playwright', { stdio: 'inherit' });
-  execSync('npx playwright install chromium --with-deps', { stdio: 'inherit' });
+  execSync(`npx playwright@${playwrightVersion} install chromium --with-deps`, { stdio: 'inherit' });
 };

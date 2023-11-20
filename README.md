@@ -56,6 +56,7 @@ jobs:
   > 추첨일(토요일)에는 오후 8시에 판매 마감합니다. 추첨일 오후 8시부터 다음날(일요일) 오전 6시까지는 판매가 정지됩니다.
 - 레포는 Public/Private 모두 가능하지만, Public 의 경우 무료로 사용할 수 있습니다. Private 레포의 경우 일정량의 무료 사용량에서 차감됩니다.
   > https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions
+- GitHub Action 의 경우 퍼블릭 레포에 60일간 활동이 없으면 워크플로우가 자동으로 정지가 되니, 이메일을 잘 확인하거나 워크플로우가 비활성화 되지 않도록 주의하세요! ([링크](https://docs.github.com/ko/actions/using-workflows/disabling-and-enabling-a-workflow))
 
 ## 예제
 

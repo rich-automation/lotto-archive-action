@@ -1,63 +1,35 @@
 import * as core from '@actions/core';
 import { createWaitingIssue, getWaitingIssues, initLabels, markIssueAsChecked, rankToLabel } from './internal/issues';
-import { getNextLottoRound, LogLevel, LottoService } from '@rich-automation/lotto';
+import { getNextLottoRound } from '@rich-automation/lotto';
 import { inputKeys } from './internal/constants';
-import type { LottoServiceInterface } from '@rich-automation/lotto/lib/typescript/types';
 import { bodyBuilder, bodyParser } from './internal/bodyHandlers';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import { installBrowser } from './internal/installBrowser';
+import { LottoRunner } from './LottoRunner';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+const controller = 'playwright';
 const debugFlag = core.getBooleanInput(inputKeys.debug) ?? false;
 
-async function run() {
-  try {
-    await runInitRepo();
+const runner = new LottoRunner({ controller, debug: debugFlag });
 
-    const { lottoService } = await runSetupEnvironment();
-    await runWinningCheck(lottoService);
-    await runPurchase(lottoService);
-  } catch (e) {
-    if (e instanceof Error) {
-      core.info(`💸 GitHub Actions 실행에 실패했습니다. ${e}`);
-      core.setFailed(e.message);
-    }
-  } finally {
-    process.exit(0);
-  }
-}
-async function runSetupEnvironment() {
+runner.prepare = async function (service) {
+  await initLabels();
+
   core.info(`💸 기본 환경을 설정하고 로그인을 진행합니다.`);
-
-  const controller = 'playwright';
-  await installBrowser(controller, debugFlag);
 
   const id = core.getInput(inputKeys.lottoId);
   const pwd = core.getInput(inputKeys.lottoPassword);
 
-  const lottoService = new LottoService({
-    controller,
-    headless: true,
-    logLevel: debugFlag ? LogLevel.DEBUG : LogLevel.NONE,
-    args: ['--no-sandbox']
-  });
-
   if (id !== '' && pwd !== '') {
-    await lottoService.signIn(id, pwd);
+    await service.signIn(id, pwd);
   }
+};
 
-  return { lottoService };
-}
-
-async function runInitRepo() {
-  await initLabels();
-}
-
-async function runWinningCheck(service: LottoServiceInterface) {
+runner.postRun = async function (service) {
   core.info(`💸 당첨 발표를 확인합니다.`);
 
   const waitingIssues = await getWaitingIssues();
@@ -84,9 +56,9 @@ async function runWinningCheck(service: LottoServiceInterface) {
   } else {
     core.info('💸 확인 할 구매 내역이 없습니다.');
   }
-}
+};
 
-async function runPurchase(service: LottoServiceInterface) {
+runner.run = async function (service) {
   core.info('💸 로또를 구매합니다.');
 
   try {
@@ -114,6 +86,15 @@ async function runPurchase(service: LottoServiceInterface) {
       core.setFailed(e.message);
     }
   }
-}
+};
 
-run();
+runner.onError = function (error) {
+  if (error instanceof Error) {
+    core.info(`💸 GitHub Actions 실행에 실패했습니다. ${error}`);
+    core.setFailed(error.message);
+  }
+
+  process.exit(0);
+};
+
+runner.start();

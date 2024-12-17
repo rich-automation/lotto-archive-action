@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "author": "bang9 <gusrn1423@naver.com>",
   "license": "MIT",
-  "packageManager": "yarn@1.22.19",
+  "packageManager": "yarn@4.5.3",
   "scripts": {
     "build": "rm -rf dist/**/**.js && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "fix": "yarn fix:eslint && yarn fix:prettier",

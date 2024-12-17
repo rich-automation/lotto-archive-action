@@ -1,13 +1,22 @@
 name: Run actions (manual)
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      numbersArray:
+        description: '구매한 로또 번호 배열 (예: [[1,2,3,4,5,6],[7,8,9,10,11,12]])'
+        required: true
+        type: string
+      round:
+        description: '로또 회차 번호'
+        required: true
+        type: number
 jobs:
   run-actions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./
         with:
-          id: ${{ secrets.ID }}
-          pwd: ${{ secrets.PASSWORD }}
+          numbersArray: ${{ inputs.numbersArray }}
+          round: ${{ inputs.round }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          amount: 1

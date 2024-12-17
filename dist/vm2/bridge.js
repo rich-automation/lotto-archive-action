@@ -184,6 +184,7 @@ var bridge = {};
 	}
 
 	function thisThrowCallerCalleeArgumentsAccess(key) {
+		thisThrowCallerCalleeArgumentsAccess[key];
 		return thisUnexpected();
 	}
 
@@ -474,7 +475,7 @@ var bridge = {};
 					case 'caller':
 					case 'callee':
 						if (typeof object === 'function' && thisOtherHasOwnProperty(object, key)) {
-							throw thisThrowCallerCalleeArgumentsAccess();
+							throw thisThrowCallerCalleeArgumentsAccess(key);
 						}
 						break;
 				}

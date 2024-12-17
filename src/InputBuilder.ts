@@ -44,6 +44,8 @@ export class InputBuilder<T extends Record<string, InputConfig>> {
       const config = this.configs[key];
       if (config) {
         const rawValue = core.getInput(key, { required: config.required });
+        core.debug(`[InputBuilder] build() -> ${key}: ${rawValue}`);
+
         result[key] = this.validateAndParse(key, rawValue, config.type);
       }
     }
@@ -51,17 +53,14 @@ export class InputBuilder<T extends Record<string, InputConfig>> {
   }
 
   private validateAndParse(key: string, value: any, schema: SchemaType): any {
+    core.debug(`[InputBuilder] validateAndParse() -> ${key} / ${value} / ${JSON.stringify(schema)}`);
+    core.debug(`[InputBuilder] validateAndParse() -> actual type: ${typeof value}`);
     if (typeof schema === 'string') {
       return this.parsePrimitive(value, schema);
     } else if (schema.type === 'array') {
-      return JSON.parse(value).map((item: any) => this.validateAndParse(key, item, schema.value));
+      return JSON.parse(value);
     } else if (schema.type === 'object') {
-      const parsed = JSON.parse(value);
-      const result: any = {};
-      for (const prop in schema.properties) {
-        result[prop] = this.validateAndParse(`${key}.${prop}`, parsed[prop], schema.properties[prop] as SchemaType);
-      }
-      return result;
+      return JSON.parse(value);
     }
   }
 

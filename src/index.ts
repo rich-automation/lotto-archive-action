@@ -20,7 +20,7 @@ runner.prepare = async function () {
   await initLabels();
 };
 
-runner.postRun = async function (service) {
+runner.preRun = async function (service) {
   core.info(`💸 당첨 발표를 확인합니다.`);
 
   const waitingIssues = await getWaitingIssues();

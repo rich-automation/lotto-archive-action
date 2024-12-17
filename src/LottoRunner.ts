@@ -1,6 +1,5 @@
 import type { LottoServiceInterface } from '@rich-automation/lotto/lib/typescript/types';
 import { LogLevel, LottoService } from '@rich-automation/lotto';
-import { installBrowser } from './internal/installBrowser';
 
 async function noop(_: LottoServiceInterface) {
   // noop
@@ -31,10 +30,12 @@ export class LottoRunner {
   public preRun = noop;
   public run = noop;
   public postRun = noop;
-  public onError = (_: unknown) => process.exit(0);
+  public onError = (_: unknown) => {
+    // noop
+  };
 
   private internalPrepare = async () => {
-    await installBrowser(this.params.controller, this.params.debug);
+    // await installBrowser(this.params.controller, this.params.debug);
   };
 
   public async start() {
@@ -47,6 +48,9 @@ export class LottoRunner {
       await this.postRun(this.service);
     } catch (e) {
       this.onError(e);
+      process.exit(1);
+    } finally {
+      process.exit(0);
     }
   }
 }

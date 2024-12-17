@@ -20,3 +20,4 @@ jobs:
           numbersArray: ${{ inputs.numbersArray }}
           round: ${{ inputs.round }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          debug: true

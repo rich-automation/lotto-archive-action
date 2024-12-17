@@ -3,8 +3,8 @@
 var require$$0$1 = require('fs');
 var require$$0 = require('events');
 var require$$1$1 = require('util');
+var require$$4 = require('async_hooks');
 var require$$1 = require('module');
-var require$$6 = require('async_hooks');
 var vm2_script = require('./script.js');
 var vm2_vm = require('./vm.js');
 
@@ -53,7 +53,7 @@ const BUILTIN_MODULES = (nmod.builtinModules || Object.getOwnPropertyNames(proce
 let EventEmitterReferencingAsyncResourceClass = null;
 if (EventEmitter.EventEmitterAsyncResource) {
 	// eslint-disable-next-line global-require
-	const {AsyncResource} = require$$6;
+	const {AsyncResource} = require$$4;
 	const kEventEmitter = Symbol('kEventEmitter');
 	class EventEmitterReferencingAsyncResource extends AsyncResource {
 		constructor(ee, type, options) {

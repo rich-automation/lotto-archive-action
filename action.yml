@@ -5,25 +5,21 @@ branding:
   color: 'yellow'
 author: 'bang9<gusrn1423@naver.com>'
 inputs:
-  id:
+  numbersArray:
     required: true
-    description: 'Input dhlottery id'
-    default: ''
-  pwd:
+    description: '구매한 로또 번호의 배열 ("[[1,2,3,4,5,6],[1,2,3,4,5,6]]")'
+    default: '[]'
+  round:
     required: true
-    description: 'Input dhlottery password'
-    default: ''
+    description: '구매한 로또 번호의 회차'
+    default: '0'
   token:
     required: true
-    description: 'Input github token'
+    description: 'GitHub 토큰'
     default: ''
-  amount:
-    required: false
-    description: 'Input amount of lotto game(max: 5)'
-    default: '5'
   debug:
     required: false
-    description: 'Input debug mode enabled'
+    description: 'Debug mode 활성화'
     default: 'false'
 runs:
   using: 'node16'

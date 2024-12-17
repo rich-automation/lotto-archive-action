@@ -1,7 +1,7 @@
 {
-  "name": "lotto-action",
+  "name": "lotto-archive",
   "type": "module",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "author": "bang9 <gusrn1423@naver.com>",
   "license": "MIT",
@@ -17,10 +17,10 @@
     "lint:prettier": "prettier --check \"src/**/*.{ts,tsx,js}\""
   },
   "dependencies": {
-    "@actions/core": "^1.10.0",
-    "@actions/github": "^5.1.1",
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
     "@rich-automation/lotto": "1.0.0",
-    "dayjs": "^1.11.8"
+    "dayjs": "^1.11.13"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.1",
@@ -35,8 +35,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.8",
     "release-it": "^15.11.0",
-    "rollup": "^3.24.1",
-    "rollup-plugin-copy": "^3.4.0",
+    "rollup": "4.22.4",
+    "rollup-plugin-copy": "^3.5.0",
     "typescript": "^5.1.3"
   },
   "eslintConfig": {

@@ -1,12 +1,12 @@
 import * as core from '@actions/core';
 import { createWaitingIssue, getWaitingIssues, initLabels, markIssueAsChecked, rankToLabel } from './internal/issues';
-import { getNextLottoRound } from '@rich-automation/lotto';
 import { inputKeys } from './internal/constants';
 import { bodyBuilder, bodyParser } from './internal/bodyHandlers';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import { LottoRunner } from './LottoRunner';
+import { inputs } from './actions/inputs';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -16,17 +16,8 @@ const debugFlag = core.getBooleanInput(inputKeys.debug) ?? false;
 
 const runner = new LottoRunner({ controller, debug: debugFlag });
 
-runner.prepare = async function (service) {
+runner.prepare = async function () {
   await initLabels();
-
-  core.info(`💸 기본 환경을 설정하고 로그인을 진행합니다.`);
-
-  const id = core.getInput(inputKeys.lottoId);
-  const pwd = core.getInput(inputKeys.lottoPassword);
-
-  if (id !== '' && pwd !== '') {
-    await service.signIn(id, pwd);
-  }
 };
 
 runner.postRun = async function (service) {
@@ -59,18 +50,15 @@ runner.postRun = async function (service) {
 };
 
 runner.run = async function (service) {
-  core.info('💸 로또를 구매합니다.');
+  core.info('💸 구매 내역을 기록합니다.');
 
   try {
-    const amountInput = Number(core.getInput(inputKeys.lottoPurchaseAmount)) || 5;
-    const amount = Math.max(1, Math.min(amountInput, 5));
+    const numbers = inputs.numbersArray;
+    const round = inputs.round;
 
     const date = dayjs.tz(dayjs(), 'Asia/Seoul').format('YYYY-MM-DD');
-    const numbers = await service.purchase(amount);
-    if (numbers.length > 0) {
-      core.info('💸 로또 구매 완료!');
 
-      const round = getNextLottoRound();
+    if (numbers.length > 0) {
       const link = service.getCheckWinningLink(numbers, round);
 
       core.info('💸 구매 내역에 대한 이슈를 생성합니다.');
@@ -78,11 +66,11 @@ runner.run = async function (service) {
       await createWaitingIssue(date, issueBody);
       core.info('💸 이슈 생성 완료.');
     } else {
-      core.info('💸 구매가 정상적으로 이루어지지 않은것 같네요, 구매한 번호 조회에 실패했어요!');
+      core.info('💸 구매 내역이 없는 것 같아요! ' + inputs.numbersArray.toString());
     }
   } catch (e) {
     if (e instanceof Error) {
-      core.info(`💸 로또 구매에 실패했습니다. ${e}`);
+      core.info(`💸 구매 내역 기록에 실패했습니다. ${e}`);
       core.setFailed(e.message);
     }
   }

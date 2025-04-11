@@ -4,7 +4,7 @@
     "commitMessage": "chore: release v${version}"
   },
   "hooks": {
-    "before:bump": "yarn build",
+    "before:bump": "pnpm build",
     "after:bump": "npx auto-changelog -p"
   },
   "github": {

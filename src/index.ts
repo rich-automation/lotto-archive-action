@@ -11,10 +11,9 @@ import { inputs } from './actions/inputs';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const controller = 'playwright';
 const debugFlag = core.getBooleanInput(inputKeys.debug) ?? false;
 
-const runner = new LottoRunner({ controller, debug: debugFlag });
+const runner = new LottoRunner({ debug: debugFlag });
 
 runner.prepare = async function () {
   await initLabels();

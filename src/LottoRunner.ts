@@ -6,23 +6,18 @@ async function noop(_: LottoServiceInterface) {
 }
 
 interface Params {
-  controller: 'playwright' | 'puppeteer';
-  headless?: boolean;
   debug?: boolean;
-  args?: string[];
 }
 
 export class LottoRunner {
   private readonly params: Params;
   private readonly service: LottoServiceInterface;
 
-  constructor({ controller, headless = true, debug, args = ['--no-sandbox'] }: Params) {
-    this.params = { controller, headless, debug, args };
+  constructor({ debug }: Params) {
+    this.params = { debug };
     this.service = new LottoService({
-      controller: this.params.controller,
-      headless: this.params.headless,
-      logLevel: this.params.debug ? LogLevel.DEBUG : LogLevel.NONE,
-      args: this.params.args
+      controller: 'api',
+      logLevel: this.params.debug ? LogLevel.DEBUG : LogLevel.NONE
     });
   }
 

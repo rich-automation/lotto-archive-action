@@ -5,13 +5,13 @@
   "main": "dist/index.js",
   "author": "bang9 <gusrn1423@naver.com>",
   "license": "MIT",
-  "packageManager": "yarn@4.5.3",
+  "packageManager": "pnpm@10.8.0",
   "scripts": {
     "build": "rm -rf dist/**/**.js && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
-    "fix": "yarn fix:eslint && yarn fix:prettier",
+    "fix": "pnpm fix:eslint && pnpm fix:prettier",
     "fix:eslint": "eslint --fix src --ext js,jsx,ts,tsx ",
     "fix:prettier": "prettier --write \"src/**/*.{ts,tsx,js}\"",
-    "lint": "yarn lint:ts && yarn lint:eslint && yarn lint:prettier",
+    "lint": "pnpm lint:ts && pnpm lint:eslint && pnpm lint:prettier",
     "lint:ts": "tsc --noEmit",
     "lint:eslint": "eslint src --ext js,jsx,ts,tsx ",
     "lint:prettier": "prettier --check \"src/**/*.{ts,tsx,js}\""
@@ -19,7 +19,7 @@
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
-    "@rich-automation/lotto": "1.0.0",
+    "@rich-automation/lotto": "^2.0.0",
     "dayjs": "^1.11.13"
   },
   "devDependencies": {
@@ -97,8 +97,5 @@
     "arrowParens": "avoid",
     "bracketSameLine": false,
     "proseWrap": "never"
-  },
-  "resolutions": {
-    "playwright": "1.35.0"
   }
 }

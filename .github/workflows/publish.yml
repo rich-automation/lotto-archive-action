@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 23.7
-      - run: PUPPETEER_SKIP_DOWNLOAD=true pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
       - name: 'set environments'
         run: |
           git config --global user.name "github-actions[bot]"
@@ -29,7 +29,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn release-it ${{ github.event.inputs.version }} --ci
+          pnpm release-it ${{ github.event.inputs.version }} --ci
       - name: Tag new target
         run: git tag -f latest ${{ github.event.inputs.version }}
       - name: Push new tag

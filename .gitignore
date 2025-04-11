@@ -1,12 +1,3 @@
 node_modules
 lib
-yarn-error.log
 .idea
-
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions

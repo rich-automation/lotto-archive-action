@@ -21,10 +21,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 23
+          cache: 'pnpm'
 
       - name: Get lockfile hash
         id: lockfile_hash
-        run: echo "hash=${{ hashFiles('**/pnpm-lock.lock') }}" >> $GITHUB_OUTPUT
+        run: echo "hash=${{ hashFiles('**/pnpm-lock.yaml') }}" >> $GITHUB_OUTPUT
 
       - name: Check cached node_modules
         id: check_cache
@@ -50,6 +51,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 23
+          cache: 'pnpm'
 
       - name: Check cached node_modules
         uses: actions/cache@v4
@@ -71,6 +73,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 23
+          cache: 'pnpm'
 
       - name: Check cached node_modules
         uses: actions/cache@v4

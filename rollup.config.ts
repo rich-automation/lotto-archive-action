@@ -17,10 +17,6 @@ export default {
         const file = path.basename(id).replace(path.extname(id), '');
         return `vm2/${file}`;
       }
-      if (id.includes('chromium-bidi')) {
-        const file = path.basename(id).replace(path.extname(id), '');
-        return `chromium-bidi/${file}`;
-      }
     }
   },
   plugins: [

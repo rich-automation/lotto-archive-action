@@ -99,6 +99,6 @@
     "proseWrap": "never"
   },
   "resolutions": {
-    "playwright": "1.51.1"
+    "playwright": "1.35.0"
   }
 }

@@ -18,7 +18,7 @@ jobs:
       - name: Enable corepack
         run: corepack enable
       - uses: actions/setup-node@v4
-      - run: yarn install
+      - run: PUPPETEER_SKIP_DOWNLOAD=true yarn install --immutable
       - name: 'set environments'
         run: |
           git config --global user.name "github-actions[bot]"

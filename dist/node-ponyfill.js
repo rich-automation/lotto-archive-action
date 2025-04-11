@@ -2,11 +2,11 @@
 
 var require$$0$2 = require('stream');
 var require$$0$3 = require('http');
-var require$$6 = require('url');
+var require$$3 = require('url');
 var require$$0$1 = require('punycode');
 var require$$1$1 = require('https');
 var zlib = require('zlib');
-var chromiumBidi_ActionDispatcher = require('./chromium-bidi/ActionDispatcher.js');
+var vm2_bridge = require('./vm2/bridge.js');
 
 function _mergeNamespaces(n, m) {
     m.forEach(function (e) {
@@ -80931,11 +80931,11 @@ Object.defineProperty(Response.prototype, Symbol.toStringTag, {
 });
 
 const INTERNALS$2 = Symbol('Request internals');
-const URL = require$$6.URL || publicApi.URL;
+const URL = require$$3.URL || publicApi.URL;
 
 // fix an issue where "format", "parse" aren't a named export for node <10
-const parse_url = require$$6.parse;
-const format_url = require$$6.format;
+const parse_url = require$$3.parse;
+const format_url = require$$3.format;
 
 /**
  * Wrapper around `new URL` to handle arbitrary URLs
@@ -81194,7 +81194,7 @@ AbortError.prototype = Object.create(Error.prototype);
 AbortError.prototype.constructor = AbortError;
 AbortError.prototype.name = 'AbortError';
 
-const URL$1 = require$$6.URL || publicApi.URL;
+const URL$1 = require$$3.URL || publicApi.URL;
 
 // fix an issue where "PassThrough", "resolve" aren't a named export for node <10
 const PassThrough$1 = require$$0$2.PassThrough;
@@ -81576,7 +81576,7 @@ var lib = /*#__PURE__*/Object.freeze({
     default: fetch
 });
 
-var require$$0 = /*@__PURE__*/chromiumBidi_ActionDispatcher.getAugmentedNamespace(lib);
+var require$$0 = /*@__PURE__*/vm2_bridge.getAugmentedNamespace(lib);
 
 (function (module, exports) {
 	const nodeFetch = require$$0;

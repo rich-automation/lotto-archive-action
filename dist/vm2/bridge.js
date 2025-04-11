@@ -1,6 +1,38 @@
 'use strict';
 
-var chromiumBidi_ActionDispatcher = require('../chromium-bidi/ActionDispatcher.js');
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
+function getAugmentedNamespace(n) {
+  if (n.__esModule) return n;
+  var f = n.default;
+	if (typeof f == "function") {
+		var a = function a () {
+			if (this instanceof a) {
+				var args = [null];
+				args.push.apply(args, arguments);
+				var Ctor = Function.bind.apply(f, args);
+				return new Ctor();
+			}
+			return f.apply(this, arguments);
+		};
+		a.prototype = f.prototype;
+  } else a = {};
+  Object.defineProperty(a, '__esModule', {value: true});
+	Object.keys(n).forEach(function (k) {
+		var d = Object.getOwnPropertyDescriptor(n, k);
+		Object.defineProperty(a, k, d.get ? d : {
+			enumerable: true,
+			get: function () {
+				return n[k];
+			}
+		});
+	});
+	return a;
+}
 
 var bridge = {};
 
@@ -59,13 +91,13 @@ var bridge = {};
 
 	for (let i = 0; i < globalsList.length; i++) {
 		const key = globalsList[i];
-		const g = chromiumBidi_ActionDispatcher.commonjsGlobal[key];
+		const g = commonjsGlobal[key];
 		if (g) thisGlobalPrototypes[key] = g.prototype;
 	}
 
 	for (let i = 0; i < errorsList.length; i++) {
 		const key = errorsList[i];
-		const g = chromiumBidi_ActionDispatcher.commonjsGlobal[key];
+		const g = commonjsGlobal[key];
 		if (g) thisGlobalPrototypes[key] = g.prototype;
 	}
 
@@ -1016,3 +1048,6 @@ var bridge = {};
 } (bridge));
 
 exports.bridge = bridge;
+exports.commonjsGlobal = commonjsGlobal;
+exports.getAugmentedNamespace = getAugmentedNamespace;
+exports.getDefaultExportFromCjs = getDefaultExportFromCjs;

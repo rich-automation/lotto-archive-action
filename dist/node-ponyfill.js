@@ -6,7 +6,7 @@ var require$$6 = require('url');
 var require$$0$1 = require('punycode');
 var require$$1$1 = require('https');
 var zlib = require('zlib');
-var vm2_bridge = require('./vm2/bridge.js');
+var chromiumBidi_ActionDispatcher = require('./chromium-bidi/ActionDispatcher.js');
 
 function _mergeNamespaces(n, m) {
     m.forEach(function (e) {
@@ -81576,7 +81576,7 @@ var lib = /*#__PURE__*/Object.freeze({
     default: fetch
 });
 
-var require$$0 = /*@__PURE__*/vm2_bridge.getAugmentedNamespace(lib);
+var require$$0 = /*@__PURE__*/chromiumBidi_ActionDispatcher.getAugmentedNamespace(lib);
 
 (function (module, exports) {
 	const nodeFetch = require$$0;

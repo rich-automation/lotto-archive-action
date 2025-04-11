@@ -2,7 +2,6 @@ import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
-import copy from 'rollup-plugin-copy';
 import * as path from 'path';
 // import terser from '@rollup/plugin-terser';
 
@@ -12,6 +11,7 @@ export default {
     dir: 'dist',
     format: 'cjs',
     chunkFileNames: '[name].js',
+
     manualChunks: (id: string): string | void => {
       if (id.includes('vm2')) {
         const file = path.basename(id).replace(path.extname(id), '');
@@ -19,14 +19,12 @@ export default {
       }
     }
   },
+  external: ['puppeteer', 'playwright'],
   plugins: [
     json(),
     commonjs(),
     resolve(),
-    typescript({ outDir: 'dist' }),
-    copy({
-      targets: [{ src: 'node_modules/vm2/lib/setup-sandbox.js', dest: 'dist/vm2' }]
-    })
+    typescript({ outDir: 'dist' })
     //terser({ compress: true })
     // ____
   ]

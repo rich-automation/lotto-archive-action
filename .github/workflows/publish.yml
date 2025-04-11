@@ -18,6 +18,8 @@ jobs:
       - name: Enable corepack
         run: corepack enable
       - uses: actions/setup-node@v4
+        with:
+          node-version: 23.7
       - run: PUPPETEER_SKIP_DOWNLOAD=true yarn install --immutable
       - name: 'set environments'
         run: |

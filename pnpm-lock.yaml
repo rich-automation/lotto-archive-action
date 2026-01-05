@@ -15,8 +15,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0
       '@rich-automation/lotto':
-        specifier: ^2.0.2
-        version: 2.0.2
+        specifier: ^2.0.3
+        version: 2.0.3
       dayjs:
         specifier: ^1.11.13
         version: 1.11.13
@@ -280,8 +280,8 @@ packages:
     resolution: {integrity: sha512-c83qWb22rNRuB0UaVCI0uRPNRr8Z0FWnEIvT47jiHAmOIUHbBOg5XvV7pM5x+rKn9HRpjxquDbXYSXr3fAKFcw==}
     engines: {node: '>=12'}
 
-  '@rich-automation/lotto@2.0.2':
-    resolution: {integrity: sha512-zZdHzdj/cwL6BPWou5Qdb2TYDrKW0gonJHloUjAlwArwMpEPbN3dDh60NIT+AtuPzRsx2jK+U+sQ3UDYyRzn1g==}
+  '@rich-automation/lotto@2.0.3':
+    resolution: {integrity: sha512-1vqnJ+s3jGEc2LxV9PyNFjeYRiNnkoopQR3FbsK5NADnQA78r6SZ+qhbyxDEVineMTwKNgyUJtrQzkKOzxVlpQ==}
     peerDependencies:
       playwright: ^1.35.0
       puppeteer: ^20.5.0
@@ -2627,7 +2627,7 @@ snapshots:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
-  '@rich-automation/lotto@2.0.2':
+  '@rich-automation/lotto@2.0.3':
     dependencies:
       axios: 1.8.4
       dayjs: 1.11.13

@@ -30915,7 +30915,8 @@ const LottoErrorCode = {
     INVALID_ROUND: 300001,
     INVALID_LOTTO_NUMBER: 300002,
     NOT_AUTHENTICATED: 300003,
-    PURCHASE_UNAVAILABLE: 300004
+    PURCHASE_UNAVAILABLE: 300004,
+    PURCHASE_FAILED: 300005
 };
 const ErrorCode = Object.assign(Object.assign(Object.assign({}, BaseErrorCode), LoginErrorCode), LottoErrorCode);
 const ErrorName = invertObject(ErrorCode);
@@ -30928,6 +30929,7 @@ const ErrorMessage = {
     [ErrorCode.INVALID_LOTTO_NUMBER]: '로또 번호가 올바르지 않습니다.',
     [ErrorCode.NOT_AUTHENTICATED]: '인증되지 않았습니다.',
     [ErrorCode.PURCHASE_UNAVAILABLE]: '현재는 로또 구매가 불가능합니다.',
+    [ErrorCode.PURCHASE_FAILED]: '로또 구매에 실패했습니다.',
     [ErrorCode.NOT_SUPPORTED]: '지원되지 않는 기능입니다.'
 };
 class LottoError extends Error {
@@ -30954,6 +30956,9 @@ class LottoError extends Error {
     }
     static PurchaseUnavailable() {
         return new LottoError(ErrorCode.PURCHASE_UNAVAILABLE);
+    }
+    static PurchaseFailed(message) {
+        return new LottoError(ErrorCode.PURCHASE_FAILED, message);
     }
     static NotSupported(message) {
         return new LottoError(ErrorCode.NOT_SUPPORTED, message);
@@ -31133,6 +31138,11 @@ class PuppeteerPage {
     on(event, callback) {
         this.page.on(event, callback);
         return () => this.page.off(event, callback);
+    }
+    waitForSelector(selector, timeout = 10000) {
+        return __awaiter$6(this, void 0, void 0, function* () {
+            yield this.page.waitForSelector(selector, { timeout });
+        });
     }
 }
 
@@ -31346,6 +31356,11 @@ class PlaywrightPage {
     on(event, callback) {
         this.page.on(event, callback);
         return () => this.page.off(event, callback);
+    }
+    waitForSelector(selector, timeout = 10000) {
+        return __awaiter$4(this, void 0, void 0, function* () {
+            yield this.page.waitForSelector(selector, { timeout });
+        });
     }
 }
 
@@ -51445,12 +51460,27 @@ class LottoService {
             yield page.click(SELECTORS.PURCHASE_BTN);
             this.logger.debug('[purchase]', 'click purchase confirm button');
             yield page.click(SELECTORS.PURCHASE_CONFIRM_BTN);
-            yield page.wait(1000);
+            this.logger.debug('[purchase]', 'wait for purchase result');
+            try {
+                yield page.waitForSelector(SELECTORS.PURCHASE_NUMBER_LIST, 5000);
+            }
+            catch (e) {
+                this.logger.error('[purchase]', 'failed to wait for purchase result selector', SELECTORS.PURCHASE_NUMBER_LIST, e);
+                throw LottoError.PurchaseFailed('구매 결과 로딩 타임아웃');
+            }
             // game result
-            this.logger.debug('[purchase]', 'print result');
-            return page.querySelectorAll(SELECTORS.PURCHASE_NUMBER_LIST, elems => {
+            const result = yield page.querySelectorAll(SELECTORS.PURCHASE_NUMBER_LIST, elems => {
                 return elems.map(it => Array.from(it.children).map(child => Number(child.innerHTML)));
             });
+            this.logger.debug('[purchase]', 'print result', result);
+            if (result.length === 0 || result.some(nums => nums.length === 0)) {
+                this.logger.error('[purchase]', 'failed to parse purchase result', {
+                    selector: SELECTORS.PURCHASE_NUMBER_LIST,
+                    result
+                });
+                throw LottoError.PurchaseFailed('구매 결과 파싱 실패');
+            }
+            return result;
         });
         this.check = (numbers, round = getLastLottoRound()) => __awaiter(this, void 0, void 0, function* () {
             numbers.forEach(number => validateLottoNumber(number));

@@ -30976,14 +30976,15 @@ class LottoError extends Error {
 }
 
 const SELECTORS = {
-    ID_INPUT: '#userId',
-    PWD_INPUT: '#article > div:nth-child(2) > div > form > div > div.inner > fieldset > div.form > input[type=password]:nth-child(2)',
-    LOGIN_BUTTON: '#article > div:nth-child(2) > div > form > div > div.inner > fieldset > div.form > a',
+    ID_INPUT: '#inpUserId',
+    PWD_INPUT: '#inpUserPswdEncn',
+    LOGIN_BUTTON: '#btnLogin',
+    LOGIN_ERROR_POPUP: '.msgPop[role="alertdialog"]',
     ENVIRONMENT_ALERT_CONFIRM: 'input[value="확인"][onclick="javascript:closepopupLayerAlert();"]',
     PURCHASE_TYPE_RANDOM_BTN: 'a[href="#divWay2Buy1"]#num2',
     PURCHASE_AMOUNT_SELECT: 'select#amoundApply',
     PURCHASE_AMOUNT_CONFIRM_BTN: 'input[value="확인"]#btnSelectNum',
-    PURCHASE_BTN: 'input[value="구매하기"]#btnBuy',
+    PURCHASE_BTN: 'button#btnBuy',
     PURCHASE_CONFIRM_BTN: 'input[value="확인"][onclick="javascript:closepopupLayerConfirm(true);"]',
     PURCHASE_NUMBER_LIST: '#reportRow .nums'
 };
@@ -31019,8 +31020,10 @@ const CONST = {
     BROWSER_DESTROY_SAFE_TIMEOUT: 1000,
     BROWSER_PAGE_POPUP_WAIT: 1500,
     BROWSER_PAGE_DIALOG_WAIT: 10000,
+    BROWSER_LOGIN_WAIT: 5000,
     WEEK_TO_MILLISECOND: 604800000,
-    THOUSAND_ROUND_DATE: '2022-01-29T11:50:00Z'
+    THOUSAND_ROUND_DATE: '2022-01-29T11:50:00Z',
+    LOGIN_ERROR_MESSAGE: '아이디 또는 비밀번호가 일치하지 않습니다'
 };
 
 function lazyRun(callback, timeout = CONST.LAZY_RUN_DEFAULT) {
@@ -31082,6 +31085,21 @@ class PuppeteerPage {
     }
     querySelectorAll(selector, callback) {
         return this.page.$$eval(selector, callback);
+    }
+    exists(selector, containsText) {
+        return __awaiter$6(this, void 0, void 0, function* () {
+            if (containsText) {
+                const elements = yield this.page.$$(selector);
+                for (const el of elements) {
+                    const text = yield el.evaluate(node => node.textContent);
+                    if (text === null || text === void 0 ? void 0 : text.includes(containsText))
+                        return true;
+                }
+                return false;
+            }
+            const element = yield this.page.$(selector);
+            return element !== null;
+        });
     }
     getCookies() {
         return __awaiter$6(this, void 0, void 0, function* () {
@@ -31286,6 +31304,16 @@ class PlaywrightPage {
     querySelectorAll(selector, callback) {
         return this.page.$$eval(selector, callback);
     }
+    exists(selector, containsText) {
+        return __awaiter$4(this, void 0, void 0, function* () {
+            if (containsText) {
+                const count = yield this.page.locator(selector).filter({ hasText: containsText }).count();
+                return count > 0;
+            }
+            const count = yield this.page.locator(selector).count();
+            return count > 0;
+        });
+    }
     getCookies() {
         return __awaiter$4(this, void 0, void 0, function* () {
             const cookies = yield this.context.cookies();
@@ -31440,8 +31468,8 @@ function isPuppeteer(configs) {
 }
 
 const URLS = {
-    MAIN: 'https://dhlottery.co.kr/common.do?method=main',
-    LOGIN: 'https://dhlottery.co.kr/user.do?method=login&returnUrl=',
+    MAIN: 'https://dhlottery.co.kr/main',
+    LOGIN: 'https://dhlottery.co.kr/login',
     LOTTO_645: 'https://ol.dhlottery.co.kr/olotto/game/game645.do',
     CHECK_WINNING: 'https://dhlottery.co.kr/qr.do'
 };
@@ -51233,23 +51261,25 @@ var __awaiter$1 = (undefined && undefined.__awaiter) || function (thisArg, _argu
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const getWinningNumbers = (volume) => __awaiter$1(void 0, void 0, void 0, function* () {
+const getWinningNumbers = (round) => __awaiter$1(void 0, void 0, void 0, function* () {
+    var _a, _b;
     let res;
     try {
-        res = yield axios.get(`https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=${volume}`);
+        res = yield axios.get(`https://dhlottery.co.kr/lt645/selectPstLt645Info.do?srchStrLtEpsd=${round}&srchEndLtEpsd=${round}`);
     }
-    catch (_a) {
+    catch (_c) {
         throw LottoError.NetworkError();
     }
-    if (res.data.returnValue == 'success') {
-        return toOrderedWinningNumbers(res.data);
+    const item = (_b = (_a = res.data.data) === null || _a === void 0 ? void 0 : _a.list) === null || _b === void 0 ? void 0 : _b[0];
+    if (item) {
+        return toOrderedWinningNumbers(item);
     }
     else {
         throw LottoError.InvalidRound();
     }
 });
 function toOrderedWinningNumbers(data) {
-    return [data.drwtNo1, data.drwtNo2, data.drwtNo3, data.drwtNo4, data.drwtNo5, data.drwtNo6, data.bnusNo];
+    return [data.tm1WnNo, data.tm2WnNo, data.tm3WnNo, data.tm4WnNo, data.tm5WnNo, data.tm6WnNo, data.bnsWnNo];
 }
 
 const checkWinning = (myNumber, winningNumbers) => {
@@ -51353,44 +51383,37 @@ class LottoService {
             if (this.browserController.configs.controller === 'api') {
                 throw LottoError.NotSupported('API mode does not support signIn.');
             }
-            const p = deferred();
-            queueMicrotask(() => __awaiter(this, void 0, void 0, function* () {
-                // 페이지 이동
-                const page = yield this.browserController.focus(0);
-                this.logger.debug('[signIn]', 'goto', 'login page');
-                yield page.goto(URLS.LOGIN);
-                this.logger.debug('[signIn]', 'page url', yield page.url());
-                const unsubscribe = page.on('response', (response) => __awaiter(this, void 0, void 0, function* () {
-                    const url = response.url();
-                    switch (true) {
-                        // 로그인 실패
-                        case url.includes(URLS.LOGIN.replace('https://', '')): {
-                            this.logger.info('[signIn]', 'fallback to login page', 'failure');
-                            unsubscribe();
-                            p.reject(LottoError.CredentialsIncorrect());
-                            break;
-                        }
-                        // 로그인 성공
-                        case url.includes(URLS.MAIN.replace('https://', '')): {
-                            this.logger.info('[signIn]', 'fallback to main page', 'success');
-                            this.context.authenticated = true;
-                            unsubscribe();
-                            this.logger.debug('[signIn]', 'clear popups');
-                            yield page.wait(CONST.BROWSER_PAGE_POPUP_WAIT);
-                            yield this.browserController.cleanPages([0]);
-                            const cookies = yield page.getCookies();
-                            p.resolve(cookies);
-                            break;
-                        }
-                    }
-                }));
-                // 로그인 시도
-                this.logger.debug('[signIn]', 'try login');
-                yield page.fill(SELECTORS.ID_INPUT, id);
-                yield page.fill(SELECTORS.PWD_INPUT, password);
-                yield page.click(SELECTORS.LOGIN_BUTTON);
-            }));
-            return p.promise;
+            // 페이지 이동
+            const page = yield this.browserController.focus(0);
+            this.logger.debug('[signIn]', 'goto', 'login page');
+            yield page.goto(URLS.LOGIN);
+            this.logger.debug('[signIn]', 'page url', yield page.url());
+            // 로그인 시도
+            this.logger.debug('[signIn]', 'try login');
+            yield page.fill(SELECTORS.ID_INPUT, id);
+            yield page.fill(SELECTORS.PWD_INPUT, password);
+            yield page.click(SELECTORS.LOGIN_BUTTON);
+            // 결과 대기
+            yield page.wait(CONST.BROWSER_LOGIN_WAIT);
+            // 결과 확인
+            const currentUrl = yield page.url();
+            // 성공: MAIN URL로 이동됨
+            if (currentUrl.includes(URLS.MAIN)) {
+                this.logger.info('[signIn]', 'success');
+                this.context.authenticated = true;
+                this.logger.debug('[signIn]', 'clear popups');
+                yield page.wait(CONST.BROWSER_PAGE_POPUP_WAIT);
+                yield this.browserController.cleanPages([0]);
+                return page.getCookies();
+            }
+            // 실패: 로그인 에러 팝업 확인
+            if (yield page.exists(SELECTORS.LOGIN_ERROR_POPUP, CONST.LOGIN_ERROR_MESSAGE)) {
+                this.logger.info('[signIn]', 'failed', 'credentials incorrect');
+                throw LottoError.CredentialsIncorrect();
+            }
+            // 기타 실패
+            this.logger.info('[signIn]', 'failed', 'unknown');
+            throw LottoError.CredentialsIncorrect();
         });
         this.purchase = (amount = 5) => __awaiter(this, void 0, void 0, function* () {
             if (this.browserController.configs.controller === 'api') {

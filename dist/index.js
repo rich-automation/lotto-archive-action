@@ -31060,9 +31060,10 @@ class PuppeteerPage {
             return this.page.url();
         });
     }
-    goto(url) {
+    goto(url, options) {
         return __awaiter$6(this, void 0, void 0, function* () {
-            yield this.page.goto(url, { waitUntil: 'load' });
+            const waitUntil = (options === null || options === void 0 ? void 0 : options.waitUntil) === 'idle' ? 'networkidle0' : 'load';
+            yield this.page.goto(url, { waitUntil });
         });
     }
     fill(selector, value) {
@@ -31283,9 +31284,10 @@ class PlaywrightPage {
             return this.page.url();
         });
     }
-    goto(url) {
+    goto(url, options) {
         return __awaiter$4(this, void 0, void 0, function* () {
-            yield this.page.goto(url, { waitUntil: 'load' });
+            const waitUntil = (options === null || options === void 0 ? void 0 : options.waitUntil) === 'idle' ? 'networkidle' : 'load';
+            yield this.page.goto(url, { waitUntil });
         });
     }
     fill(selector, value) {
@@ -31483,10 +31485,10 @@ function isPuppeteer(configs) {
 }
 
 const URLS = {
-    MAIN: 'https://dhlottery.co.kr/main',
-    LOGIN: 'https://dhlottery.co.kr/login',
+    MAIN: 'https://www.dhlottery.co.kr/main',
+    LOGIN: 'https://www.dhlottery.co.kr/login',
     LOTTO_645: 'https://ol.dhlottery.co.kr/olotto/game/game645.do',
-    CHECK_WINNING: 'https://dhlottery.co.kr/qr.do'
+    CHECK_WINNING: 'https://www.dhlottery.co.kr/qr.do'
 };
 
 const getLastLottoRound = () => {
@@ -51398,10 +51400,10 @@ class LottoService {
             if (this.browserController.configs.controller === 'api') {
                 throw LottoError.NotSupported('API mode does not support signIn.');
             }
-            // 페이지 이동
+            // 페이지 이동 (RSA 키 로딩 등 비동기 스크립트 완료까지 대기)
             const page = yield this.browserController.focus(0);
             this.logger.debug('[signIn]', 'goto', 'login page');
-            yield page.goto(URLS.LOGIN);
+            yield page.goto(URLS.LOGIN, { waitUntil: 'idle' });
             this.logger.debug('[signIn]', 'page url', yield page.url());
             // 로그인 시도
             this.logger.debug('[signIn]', 'try login');
@@ -51421,13 +51423,32 @@ class LottoService {
                 yield this.browserController.cleanPages([0]);
                 return page.getCookies();
             }
+            // 디버깅 정보 수집
+            const debugInfo = {
+                currentUrl,
+                isStillOnLoginPage: currentUrl.includes(URLS.LOGIN),
+                hasErrorPopup: yield page.exists(SELECTORS.LOGIN_ERROR_POPUP),
+                hasLoginButton: yield page.exists(SELECTORS.LOGIN_BUTTON),
+                hasIdInput: yield page.exists(SELECTORS.ID_INPUT),
+                errorPopupMessage: null
+            };
+            // 에러 팝업 메시지 추출 시도
+            if (debugInfo.hasErrorPopup) {
+                try {
+                    const messages = yield page.querySelectorAll(SELECTORS.LOGIN_ERROR_POPUP, elems => elems.map(el => el.innerHTML.replace(/<[^>]*>/g, ' ').trim()));
+                    debugInfo.errorPopupMessage = messages.join(' | ');
+                }
+                catch (_a) {
+                    debugInfo.errorPopupMessage = '[failed to extract]';
+                }
+            }
             // 실패: 로그인 에러 팝업 확인
             if (yield page.exists(SELECTORS.LOGIN_ERROR_POPUP, CONST.LOGIN_ERROR_MESSAGE)) {
-                this.logger.info('[signIn]', 'failed', 'credentials incorrect');
+                this.logger.info('[signIn]', 'failed', 'credentials incorrect', debugInfo);
                 throw LottoError.CredentialsIncorrect();
             }
             // 기타 실패
-            this.logger.info('[signIn]', 'failed', 'unknown');
+            this.logger.warn('[signIn]', 'failed', 'unknown reason', debugInfo);
             throw LottoError.CredentialsIncorrect();
         });
         this.purchase = (amount = 5) => __awaiter(this, void 0, void 0, function* () {
